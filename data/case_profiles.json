@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "profiles": {
+    "TT20-PLI-0362-R440": {
+      "ingredient": "Doxorubicin",
+      "note_sha256": "746160e047225f9899f5dffc522b1026a5778a2c9e37e9ced2e49a2ddca55d1b",
+      "fields": [
+        {
+          "key": "formulation",
+          "label": "Dạng thuốc đang sử dụng",
+          "choices": [
+            {
+              "value": "liposome",
+              "label": "Dạng liposome"
+            },
+            {
+              "value": "other",
+              "label": "Dạng khác đã xác định"
+            }
+          ]
+        }
+      ],
+      "review_status": "prototype_extraction_not_hospital_validated"
+    },
+    "TT20-PLI-0381-R459": {
+      "ingredient": "Paclitaxel",
+      "note_sha256": "96beb2bea53f947ec2c9cc9047071db0120f7fb1be1925c9801482163a1bdac2",
+      "fields": [
+        {
+          "key": "formulation",
+          "label": "Dạng thuốc đang sử dụng",
+          "choices": [
+            {
+              "value": "liposome",
+              "label": "Dạng liposome"
+            },
+            {
+              "value": "polymeric",
+              "label": "Dạng polymeric micelle"
+            },
+            {
+              "value": "other",
+              "label": "Dạng khác đã xác định"
+            }
+          ]
+        }
+      ],
+      "review_status": "prototype_extraction_not_hospital_validated"
+    },
+    "TT20-PLI-0394-R473": {
+      "ingredient": "Erlotinib",
+      "note_sha256": "015cdf4e55c4025259b91519a72a4a79ea1378a70b16dc4fc97632302a5cec2f",
+      "fields": [
+        {
+          "key": "indication",
+          "label": "Chỉ định đang đối chiếu",
+          "choices": [
+            {
+              "value": "nsclc",
+              "label": "Ung thư phổi không phải tế bào nhỏ"
+            },
+            {
+              "value": "other",
+              "label": "Chỉ định khác"
+            }
+          ]
+        },
+        {
+          "key": "egfr",
+          "label": "Kết quả EGFR",
+          "choices": [
+            {
+              "value": "positive",
+              "label": "Dương tính"
+            },
+            {
+              "value": "negative",
+              "label": "Âm tính"
+            }
+          ]
+        }
+      ],
+      "review_status": "prototype_extraction_not_hospital_validated"
+    },
+    "TT20-PLI-0395-R474": {
+      "ingredient": "Gefitinib",
+      "note_sha256": "17164b86aec062dca5937061b1b2e820987944de70356f13876f50aa1e07b19f",
+      "fields": [
+        {
+          "key": "indication",
+          "label": "Chỉ định đang đối chiếu",
+          "choices": [
+            {
+              "value": "nsclc",
+              "label": "Ung thư phổi không phải tế bào nhỏ"
+            },
+            {
+              "value": "other",
+              "label": "Chỉ định khác"
+            }
+          ]
+        },
+        {
+          "key": "egfr",
+          "label": "Kết quả EGFR",
+          "choices": [
+            {
+              "value": "positive",
+              "label": "Dương tính"
+            },
+            {
+              "value": "negative",
+              "label": "Âm tính"
+            }
+          ]
+        }
+      ],
+      "review_status": "prototype_extraction_not_hospital_validated"
+    },
+    "TT20-PLI-0402-R481": {
+      "ingredient": "Trastuzumab",
+      "note_sha256": "14a96297e74ff73f0dfb2874fe037c9b2fe015e6002301f29e3a38ffbad2c1a9",
+      "fields": [
+        {
+          "key": "indication",
+          "label": "Chỉ định đang đối chiếu",
+          "choices": [
+            {
+              "value": "breast",
+              "label": "Ung thư vú"
+            },
+            {
+              "value": "gastric",
+              "label": "Ung thư dạ dày"
+            },
+            {
+              "value": "other",
+              "label": "Chỉ định khác"
+            }
+          ]
+        },
+        {
+          "key": "her2",
+          "label": "Kết quả HER2",
+          "choices": [
+            {
+              "value": "positive",
+              "label": "Dương tính"
+            },
+            {
+              "value": "negative",
+              "label": "Âm tính"
+            }
+          ]
+        },
+        {
+          "key": "extent",
+          "label": "Mức độ bệnh dạ dày",
+          "choices": [
+            {
+              "value": "advanced",
+              "label": "Tiến xa hoặc di căn"
+            },
+            {
+              "value": "other",
+              "label": "Trường hợp khác"
+            }
+          ],
+          "show_when": {
+            "indication": "gastric"
+          }
+        }
+      ],
+      "review_status": "prototype_extraction_not_hospital_validated"
+    }
+  },
+  "review_status": "prototype_extraction_not_hospital_validated"
+}

@@ -1,0 +1,60 @@
+[
+  {
+    "id": "GAP-01",
+    "priority": "high",
+    "status": "article8_ingested_historical_rate_dependency_pending",
+    "finding": "Đã bổ sung đầy đủ Điều 8 TT20/2022 và khoản 1 Điều 7; nhánh dẫn chiếu TT40/2014 còn thiếu bảng tỷ lệ lịch sử.",
+    "evidence": "15-vbhn-byt-2024.pdf trang 4–5",
+    "action": "Tra cứu đầy đủ hai trang, liên kết 7 hoạt chất; chưa tự kết luận đủ điều kiện hoặc tính tỷ lệ nhánh TT40/2014. Xem audit/transition-review/BAO-CAO-CHUYEN-TIEP.md.",
+    "resolved_on": "2026-11-07"
+  },
+  {
+    "id": "SOURCE-02",
+    "priority": "high",
+    "status": "pending",
+    "finding": "PDF CV5079 từ trang bệnh viện để trống số/ngày, không có chữ ký.",
+    "action": "Giữ dữ liệu hiện có với trạng thái bản gốc ký chưa xác minh; cần bản ký từ cơ quan ban hành."
+  },
+  {
+    "id": "SOURCE-03",
+    "priority": "medium",
+    "status": "pending",
+    "finding": "CV3293 là ảnh có dấu/chữ ký nhưng tải từ máy chủ bên thứ ba.",
+    "action": "Dùng đối chiếu lỗi OCR có ghi rõ nguồn; cần đối chiếu bản phát hành chính thức."
+  },
+  {
+    "id": "OCR-04",
+    "priority": "medium",
+    "status": "pending",
+    "finding": "Bảng biểu TT37 trang 18/21 và nhãn annex_wastage còn vấn đề cấu trúc/khả năng trùng nội dung.",
+    "action": "Chưa coi bảng là dữ liệu tính toán; cần tái trích xuất theo ô/bảng."
+  },
+  {
+    "id": "NAME-05",
+    "priority": "medium",
+    "status": "pending",
+    "finding": "STT 697: bản hợp nhất nhìn như Alverin cifrat; dữ liệu là Alverin citrat. STT 430 chữ trong tên nguồn khó đọc.",
+    "action": "Giữ nguyên dữ liệu, không sửa tên thuốc theo suy đoán; chuyển Dược xác minh."
+  },
+  {
+    "id": "TEXT-06",
+    "priority": "medium",
+    "status": "pending",
+    "finding": "Bản gốc TT37 trang 9 ghi cấp có thẩm phê duyệt; CV3293 trang 3 ghi điểm b khoản Điều 14 thiếu số khoản.",
+    "action": "Không tự thêm chữ/số không có trên ảnh; cần nguồn đính chính hoặc thẩm định."
+  },
+  {
+    "id": "CURRENCY-07",
+    "priority": "high",
+    "status": "pending",
+    "finding": "Chưa kiểm tra toàn bộ chuỗi sửa đổi/thay thế và văn bản liên quan tới 06/11/2026.",
+    "action": "Không coi ngày snapshot là chứng nhận hiện hành. Tin/bản dự thảo 2026 chỉ dùng tìm đầu mối, không nhập làm quy định."
+  },
+  {
+    "id": "LOCAL-08",
+    "priority": "high",
+    "status": "pending",
+    "finding": "Chưa có thẩm định Dược/BHYT, danh mục hợp đồng và điều kiện áp dụng tại bệnh viện.",
+    "action": "Duy trì kết quả cần đối chiếu; chưa xác nhận quyền lợi người bệnh."
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "source_snapshot": "2026-11-06",
+  "input_zip_sha256": "b16587f4eca2e4e6c970de8b1e76451b5b263853dec613e4309fc6e034a63dd4",
+  "primary_chunks_after_repair": 1243,
+  "unit_and_http_tests": {
+    "passed": 25,
+    "failed": 0,
+    "command": "python -m unittest discover -s tests -v"
+  },
+  "javascript_syntax": "passed (node --check)",
+  "python_syntax": "passed",
+  "html_id_checks": "passed",
+  "real_provider_api": "not run; no API key/model supplied",
+  "embeddings_build": "implemented but not executed against a paid API",
+  "ui_visual_test": "not completed: cloud browser cannot reach the development localhost; file preview navigation was blocked by browser policy",
+  "ui_preview": "preview.html uses explicitly labelled sample fixtures, not a live backend",
+  "medical_validation": "not performed; hospital review pending"
+}

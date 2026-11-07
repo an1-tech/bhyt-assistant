@@ -1,0 +1,1026 @@
+[
+  {
+    "record_id": "TT20-PLI-0055-R67",
+    "stt": 55,
+    "ingredient": "Oxycodone",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      8
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "b50eefd112669641e22ad6402b716d88f899f9b299e499dfda1f025be2a2cdbd"
+  },
+  {
+    "record_id": "TT20-PLI-0081-R99",
+    "stt": 81,
+    "ingredient": "Adalimumab",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      10
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0086-R104",
+    "stt": 86,
+    "ingredient": "Etanercept",
+    "expected_percentages": [
+      30
+    ],
+    "actual_percentages": [
+      30
+    ],
+    "pdf_pages": [
+      11
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "3aad6d95c5c371b290b22018b223aeda3498b96bdaad79c51285fa4beabc88fe"
+  },
+  {
+    "record_id": "TT20-PLI-0087-R105",
+    "stt": 87,
+    "ingredient": "Golimumab",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      11
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0088-R106",
+    "stt": 88,
+    "ingredient": "Infliximab",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      11
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0092-R110",
+    "stt": 92,
+    "ingredient": "Tocilizumab",
+    "expected_percentages": [
+      60
+    ],
+    "actual_percentages": [
+      60
+    ],
+    "pdf_pages": [
+      11
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "ee0bd9f085ede7db9ce1e7c3815977b56b3fd91f31cccaf59fe22bac0cda4793"
+  },
+  {
+    "record_id": "TT20-PLI-0126-R148",
+    "stt": 126,
+    "ingredient": "Glutathion",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      13
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "80f8f57f061eacedd415ab97fecfd6264d519536dbc561f62064b0a411202e70"
+  },
+  {
+    "record_id": "TT20-PLI-0275-R333",
+    "stt": 275,
+    "ingredient": "Daclatasvir",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      22
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0276-R334",
+    "stt": 276,
+    "ingredient": "Sofosbuvir",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      22
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0277-R335",
+    "stt": 277,
+    "ingredient": "Sofosbuvir + ledipasvir",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      22
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0278-R336",
+    "stt": 278,
+    "ingredient": "Sofosbuvir + velpatasvir",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      22
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0279-R337",
+    "stt": 279,
+    "ingredient": "Pegylated interferon (peginterferon) alpha (2a hoặc 2b)",
+    "expected_percentages": [
+      30
+    ],
+    "actual_percentages": [
+      30
+    ],
+    "pdf_pages": [
+      22,
+      23
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "91da8772b5e92f9497591205a5d0dd28c68959bb49e13be53d5530a152b1e5b3"
+  },
+  {
+    "record_id": "TT20-PLI-0285-R345",
+    "stt": 285,
+    "ingredient": "Valganciclovir*",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      23
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "768dcf142b8a4b5286805d126fde06928a14c492be7ad1ecf6af6baaac98580c"
+  },
+  {
+    "record_id": "TT20-PLI-0307-R373",
+    "stt": 307,
+    "ingredient": "Posaconazol*",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      25,
+      26
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "03b560761c60f9d6f709e248a161e1d236a92d6bf1b516be1203fd8418a1eb05"
+  },
+  {
+    "record_id": "TT20-PLI-0309-R375",
+    "stt": 309,
+    "ingredient": "Voriconazol*",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      26
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "e674018859ae99e188c089511f7ceba4712721f3237d1f79d54d5471f3e0efb6"
+  },
+  {
+    "record_id": "TT20-PLI-0347-R425",
+    "stt": 347,
+    "ingredient": "Bendamustine",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      30
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "6c9ef8f64e354c4e63386b15f329c8b0dc93e4d047930d50f8b800549b65b116"
+  },
+  {
+    "record_id": "TT20-PLI-0353-R431",
+    "stt": 353,
+    "ingredient": "Carmustin",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      30
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0360-R438",
+    "stt": 360,
+    "ingredient": "Decitabin",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      30
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0362-R440",
+    "stt": 362,
+    "ingredient": "Doxorubicin",
+    "expected_percentages": [
+      50,
+      100
+    ],
+    "actual_percentages": [
+      50,
+      100
+    ],
+    "pdf_pages": [
+      30,
+      31
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "746160e047225f9899f5dffc522b1026a5778a2c9e37e9ced2e49a2ddca55d1b"
+  },
+  {
+    "record_id": "TT20-PLI-0365-R443",
+    "stt": 365,
+    "ingredient": "Everolimus",
+    "expected_percentages": [
+      50,
+      100
+    ],
+    "actual_percentages": [
+      50,
+      100
+    ],
+    "pdf_pages": [
+      31
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "fb8f46c8832d329de5c630dc16a89fe578563db421afd60c09e054a91aed94f1"
+  },
+  {
+    "record_id": "TT20-PLI-0373-R451",
+    "stt": 373,
+    "ingredient": "L-asparaginase",
+    "expected_percentages": [
+      50,
+      100
+    ],
+    "actual_percentages": [
+      50,
+      100
+    ],
+    "pdf_pages": [
+      31
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "3def9db8f33f6b51013c5b5f3c7e30d52a1b90286f91f43ca0f7df696b263456"
+  },
+  {
+    "record_id": "TT20-PLI-0381-R459",
+    "stt": 381,
+    "ingredient": "Paclitaxel",
+    "expected_percentages": [
+      50,
+      100
+    ],
+    "actual_percentages": [
+      50,
+      100
+    ],
+    "pdf_pages": [
+      31
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "96beb2bea53f947ec2c9cc9047071db0120f7fb1be1925c9801482163a1bdac2"
+  },
+  {
+    "record_id": "TT20-PLI-0382-R460",
+    "stt": 382,
+    "ingredient": "Pemetrexed",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      31,
+      32
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "0d7b1faf83984d131eb2af4ec6a68826d6a1c3a25b9196fa9e08ddc602d61f5b"
+  },
+  {
+    "record_id": "TT20-PLI-0385-R463",
+    "stt": 385,
+    "ingredient": "Tegafur + gimeracil + oteracil kali",
+    "expected_percentages": [
+      70
+    ],
+    "actual_percentages": [
+      70
+    ],
+    "pdf_pages": [
+      32
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "43a53f3cf2fa88a0caa16be7cc9225d82754cc7ffa14f33d474bb2439e08876d"
+  },
+  {
+    "record_id": "TT20-PLI-0391-R470",
+    "stt": 391,
+    "ingredient": "Afatinib dimaleate",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      32
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0392-R471",
+    "stt": 392,
+    "ingredient": "Bevacizumab",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      32
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "4dcb8dd7133e75f326ee1e4515f7d107db546aa8b0950cd7fbbd8e1d10569581"
+  },
+  {
+    "record_id": "TT20-PLI-0393-R472",
+    "stt": 393,
+    "ingredient": "Cetuximab",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      32
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "2839bf7f41d29a3ef625885b6bddb84d329995cd4330a7af8b456d5af2b66bc6"
+  },
+  {
+    "record_id": "TT20-PLI-0394-R473",
+    "stt": 394,
+    "ingredient": "Erlotinib",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      32,
+      33
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "015cdf4e55c4025259b91519a72a4a79ea1378a70b16dc4fc97632302a5cec2f"
+  },
+  {
+    "record_id": "TT20-PLI-0395-R474",
+    "stt": 395,
+    "ingredient": "Gefitinib",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      33
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "17164b86aec062dca5937061b1b2e820987944de70356f13876f50aa1e07b19f"
+  },
+  {
+    "record_id": "TT20-PLI-0396-R475",
+    "stt": 396,
+    "ingredient": "Imatinib",
+    "expected_percentages": [
+      80
+    ],
+    "actual_percentages": [
+      80
+    ],
+    "pdf_pages": [
+      33
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "939f663facdea3669dd3e2d8c3496feec95cc12dcf22fc1cfb9bc4c94e566b1a"
+  },
+  {
+    "record_id": "TT20-PLI-0397-R476",
+    "stt": 397,
+    "ingredient": "Nilotinib",
+    "expected_percentages": [
+      80
+    ],
+    "actual_percentages": [
+      80
+    ],
+    "pdf_pages": [
+      33
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "06122f685b7d35c9db8df70ef0a806ea63f52855fc0fa0a6924b56845b9c0fdf"
+  },
+  {
+    "record_id": "TT20-PLI-0398-R477",
+    "stt": 398,
+    "ingredient": "Nimotuzumab",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      33
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0399-R478",
+    "stt": 399,
+    "ingredient": "Pazopanib",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      33
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0401-R480",
+    "stt": 401,
+    "ingredient": "Sorafenib",
+    "expected_percentages": [
+      50,
+      30
+    ],
+    "actual_percentages": [
+      50,
+      30
+    ],
+    "pdf_pages": [
+      33
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "360167e8d895ce147dfd097d2178f79530ae2ec75921a18ab1644e6d0a9b34ee"
+  },
+  {
+    "record_id": "TT20-PLI-0402-R481",
+    "stt": 402,
+    "ingredient": "Trastuzumab",
+    "expected_percentages": [
+      60,
+      50
+    ],
+    "actual_percentages": [
+      60,
+      50
+    ],
+    "pdf_pages": [
+      34
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "14a96297e74ff73f0dfb2874fe037c9b2fe015e6002301f29e3a38ffbad2c1a9"
+  },
+  {
+    "record_id": "TT20-PLI-0403-R483",
+    "stt": 403,
+    "ingredient": "Abiraterone acetate",
+    "expected_percentages": [
+      30
+    ],
+    "actual_percentages": [
+      30
+    ],
+    "pdf_pages": [
+      34
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "4d9d8935679247cabe9afa7e7a643b2d1e8bda0e5e8ef5eea3663d7de060ab1b"
+  },
+  {
+    "record_id": "TT20-PLI-0409-R489",
+    "stt": 409,
+    "ingredient": "Fulvestrant",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      34
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0419-R500",
+    "stt": 419,
+    "ingredient": "Basiliximab",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      35
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0421-R502",
+    "stt": 421,
+    "ingredient": "Lenalidomid",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      35
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0432-R515",
+    "stt": 432,
+    "ingredient": "Solifenacin succinate",
+    "expected_percentages": [
+      70
+    ],
+    "actual_percentages": [
+      70
+    ],
+    "pdf_pages": [
+      36
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "8bce08164055011c6dd30e2abde667f587bb70507ca37494992fc7ce8c6f1671"
+  },
+  {
+    "record_id": "TT20-PLI-0440-R524",
+    "stt": 440,
+    "ingredient": "Rotigotine",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      36
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0463-R554",
+    "stt": 463,
+    "ingredient": "Albumin",
+    "expected_percentages": [
+      70
+    ],
+    "actual_percentages": [
+      70
+    ],
+    "pdf_pages": [
+      37
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "bb7176b8f17e59b9a6cffb7d4e1d9ec64775cb325ea01c62440c76bf77682c0e"
+  },
+  {
+    "record_id": "TT20-PLI-0571-R680",
+    "stt": 571,
+    "ingredient": "Ticagrelor",
+    "expected_percentages": [
+      70
+    ],
+    "actual_percentages": [
+      70
+    ],
+    "pdf_pages": [
+      43
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "8bce08164055011c6dd30e2abde667f587bb70507ca37494992fc7ce8c6f1671"
+  },
+  {
+    "record_id": "TT20-PLI-0586-R697",
+    "stt": 586,
+    "ingredient": "Bosentan",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      44
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "6ba0f700c823a156a0c5b7b3f29ae2b3866594baca4a59333ffc165393c52db2"
+  },
+  {
+    "record_id": "TT20-PLI-0638-R750",
+    "stt": 638,
+    "ingredient": "Secukinumab",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      46
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0644-R756",
+    "stt": 644,
+    "ingredient": "Ustekinumab",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      47
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0654-R769",
+    "stt": 654,
+    "ingredient": "Iodixanol",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      47
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719"
+  },
+  {
+    "record_id": "TT20-PLI-0762-R908",
+    "stt": 762,
+    "ingredient": "Somatropin",
+    "expected_percentages": [
+      70,
+      50
+    ],
+    "actual_percentages": [
+      70,
+      50
+    ],
+    "pdf_pages": [
+      53
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "959f52f66ebaf00a0ee6a1d546242946ac2022b1a0ef2f5d6dd25c35217a16ea"
+  },
+  {
+    "record_id": "TT20-PLI-0778-R927",
+    "stt": 778,
+    "ingredient": "Dapagliflozin",
+    "expected_percentages": [
+      70
+    ],
+    "actual_percentages": [
+      70
+    ],
+    "pdf_pages": [
+      54
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "8bce08164055011c6dd30e2abde667f587bb70507ca37494992fc7ce8c6f1671"
+  },
+  {
+    "record_id": "TT20-PLI-0779-R928",
+    "stt": 779,
+    "ingredient": "Empagliflozin",
+    "expected_percentages": [
+      70
+    ],
+    "actual_percentages": [
+      70
+    ],
+    "pdf_pages": [
+      54
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "8bce08164055011c6dd30e2abde667f587bb70507ca37494992fc7ce8c6f1671"
+  },
+  {
+    "record_id": "TT20-PLI-0788-R937",
+    "stt": 788,
+    "ingredient": "Insulin analog trộn, hỗn hợp",
+    "expected_percentages": [
+      50,
+      100
+    ],
+    "actual_percentages": [
+      50,
+      100
+    ],
+    "pdf_pages": [
+      54
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "ab1ad047bbf584515f9dbbc570fa39a2fc9f3209ec539db20b2717fa570bc0bd"
+  },
+  {
+    "record_id": "TT20-PLI-0794-R943",
+    "stt": 794,
+    "ingredient": "Liraglutide",
+    "expected_percentages": [
+      30
+    ],
+    "actual_percentages": [
+      30
+    ],
+    "pdf_pages": [
+      55
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "5cc36fe16bd690a1e5bec4cf7d4076be8e6ba84942ee0371b13625dd44695313"
+  },
+  {
+    "record_id": "TT20-PLI-0809-R961",
+    "stt": 809,
+    "ingredient": "Alglucosidase alfa",
+    "expected_percentages": [
+      30
+    ],
+    "actual_percentages": [
+      30
+    ],
+    "pdf_pages": [
+      56
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "3aad6d95c5c371b290b22018b223aeda3498b96bdaad79c51285fa4beabc88fe"
+  },
+  {
+    "record_id": "TT20-PLI-0940-R1118",
+    "stt": 940,
+    "ingredient": "Peptid (Cerebrolysin concentrate)",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      64
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "82e44dfeb00c55cb73bc558103946e6ca96957e8e5afd6b5b1fcda5a701f1c4c"
+  },
+  {
+    "record_id": "TT20-PLI-0941-R1119",
+    "stt": 941,
+    "ingredient": "Choline alfoscerat",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      64
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "82e44dfeb00c55cb73bc558103946e6ca96957e8e5afd6b5b1fcda5a701f1c4c"
+  },
+  {
+    "record_id": "TT20-PLI-0942-R1120",
+    "stt": 942,
+    "ingredient": "Citicolin",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      64
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "82e44dfeb00c55cb73bc558103946e6ca96957e8e5afd6b5b1fcda5a701f1c4c"
+  },
+  {
+    "record_id": "TT20-PLI-0943-R1121",
+    "stt": 943,
+    "ingredient": "Panax notoginseng saponins",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      64
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "82e44dfeb00c55cb73bc558103946e6ca96957e8e5afd6b5b1fcda5a701f1c4c"
+  },
+  {
+    "record_id": "TT20-PLI-0961-R1146",
+    "stt": 961,
+    "ingredient": "Omalizumab",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      66
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "5fdd36ec35a74f37735f2c127ff33447d4af0bb0c0bd98467845b66fadd9c1e1"
+  },
+  {
+    "record_id": "TT20-PLI-0990-R1182",
+    "stt": 990,
+    "ingredient": "Acid amin + glucose + lipid (*)",
+    "expected_percentages": [
+      50
+    ],
+    "actual_percentages": [
+      50
+    ],
+    "pdf_pages": [
+      68
+    ],
+    "status": "matches_visual_check",
+    "scope": "percentage_tokens_and_associated_note_reviewed; not_individual_eligibility",
+    "note_sha256": "cb444735c4fd3264eed9e094def81dbb1c594d0f4e44abe302364dcddf7849df"
+  }
+]

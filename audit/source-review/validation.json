@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-11-06T16:50:24.901845+00:00",
+  "unit_tests": {
+    "total": 69,
+    "passed": 69,
+    "failed": 0,
+    "command": "python -B -m unittest discover -s tests -q"
+  },
+  "live_health": {
+    "ok": true,
+    "app_id": "bhyt-toan-vien",
+    "version": "1.4",
+    "retrieval_version": "parent-context-v1",
+    "snapshot": "2026-11-06",
+    "drug_entries": 1037,
+    "radio_entries": 59,
+    "chunks": 1243,
+    "ai_configured": false,
+    "embeddings": false
+  },
+  "live_checks": [
+    "star_symbol_and_evidence_page",
+    "transition_gap_notice",
+    "CV3293_reference_year_and_pending_flags"
+  ],
+  "paid_api_calls": 0,
+  "visual_ui_check": "not_run_no_ui_changes",
+  "original_jsonl_unchanged": true
+}

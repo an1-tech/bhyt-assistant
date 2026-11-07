@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "checked_as_of": "2026-11-07",
+  "scope": "Bổ sung bốn chủ đề lâm sàng cho prototype; chưa phủ toàn bộ chuyên khoa, nhãn sản phẩm hoặc Dược thư.",
+  "documents": [
+    {
+      "id": "QD3128_2020",
+      "title": "Hướng dẫn chẩn đoán và điều trị ung thư vú",
+      "decision": "3128/QĐ-BYT",
+      "published_at": "2020-07-17",
+      "topic": "breast",
+      "status": "reference_only",
+      "host": "Cục Quản lý Khám, chữa bệnh",
+      "source_type": "clinical_guideline",
+      "issuer": "Bộ Y tế",
+      "source_url": "https://kcb.vn/upload/2005611/20210723/3128_QD-BYT_Huong-dan-chan-doan-va-dieu-tri-ung-thu-vu.pdf",
+      "official_url": "https://kcb.vn/upload/2005611/20210723/3128_QD-BYT_Huong-dan-chan-doan-va-dieu-tri-ung-thu-vu.pdf",
+      "local_file": "sources/clinical/qd3128-2020-breast.pdf",
+      "local_url": "/sources/clinical/qd3128-2020-breast.pdf",
+      "pdf_sha256": "3e917ddf7f8bd6db9ca98ffea1f8f9b1f8ec60997a0433e2cf4768a016016020",
+      "pages": 60,
+      "checked_as_of": "2026-11-07",
+      "retrieved_at": "2026-11-07T03:32:54.262945+00:00",
+      "related_documents": [],
+      "anchors": {
+        "Trastuzumab": [
+          18,
+          19,
+          20
+        ],
+        "Paclitaxel": [
+          46,
+          47,
+          48
+        ],
+        "Doxorubicin": [
+          46,
+          47,
+          48
+        ]
+      },
+      "limitations": "Đã tìm kiếm nguồn đến 07/11/2026; chưa chứng minh đã rà soát đầy đủ mọi văn bản thay thế. Tài liệu tham khảo lâm sàng, không phải căn cứ tự xác nhận thanh toán BHYT.",
+      "latest_version_verified": false,
+      "payment_authority": false
+    },
+    {
+      "id": "QD3127_2020",
+      "title": "Hướng dẫn chẩn đoán và điều trị ung thư dạ dày",
+      "decision": "3127/QĐ-BYT",
+      "published_at": "2020-07-17",
+      "topic": "gastric",
+      "status": "reference_only",
+      "host": "Website bệnh viện Quy Nhơn (bản đăng lại)",
+      "source_type": "clinical_guideline",
+      "issuer": "Bộ Y tế",
+      "source_url": "https://benhvienquynhon.gov.vn/wp-content/uploads/2023/05/copy-of-21-qd.3127.pdf",
+      "official_url": "https://benhvienquynhon.gov.vn/wp-content/uploads/2023/05/copy-of-21-qd.3127.pdf",
+      "local_file": "sources/clinical/qd3127-2020-gastric.pdf",
+      "local_url": "/sources/clinical/qd3127-2020-gastric.pdf",
+      "pdf_sha256": "978e3cca71e1645462c32b35e058825948010a3bdff7c9c24db6d5c9aceb54f6",
+      "pages": 39,
+      "checked_as_of": "2026-11-07",
+      "retrieved_at": "2026-11-07T03:32:54.264950+00:00",
+      "related_documents": [],
+      "anchors": {
+        "Trastuzumab": [
+          20,
+          21,
+          22,
+          34,
+          35,
+          36
+        ],
+        "Paclitaxel": [
+          19,
+          20,
+          21
+        ],
+        "Doxorubicin": [
+          18,
+          19,
+          20
+        ]
+      },
+      "limitations": "Đã tìm kiếm nguồn đến 07/11/2026; chưa chứng minh đã rà soát đầy đủ mọi văn bản thay thế. Tài liệu tham khảo lâm sàng, không phải căn cứ tự xác nhận thanh toán BHYT.",
+      "latest_version_verified": false,
+      "payment_authority": false
+    },
+    {
+      "id": "QD4825_2018",
+      "title": "Hướng dẫn chẩn đoán và điều trị ung thư phổi không tế bào nhỏ",
+      "decision": "4825/QĐ-BYT",
+      "published_at": "2018-08-06",
+      "topic": "nsclc",
+      "status": "pdf_only",
+      "host": "Sở Y tế Đồng Nai",
+      "source_type": "clinical_guideline",
+      "issuer": "Bộ Y tế",
+      "source_url": "https://syt.dongnai.gov.vn/vi/van-ban/detail/V-v-trien-khai-Quyet-dinh-so-4825-QD-BYT-ngay-06-8-2018-cua-Bo-Y-te-ve-viec-ban-hanh-tai-lieu-chuye-1527/?download=1&id=0",
+      "official_url": "https://syt.dongnai.gov.vn/vi/van-ban/detail/V-v-trien-khai-Quyet-dinh-so-4825-QD-BYT-ngay-06-8-2018-cua-Bo-Y-te-ve-viec-ban-hanh-tai-lieu-chuye-1527/?download=1&id=0",
+      "local_file": "sources/clinical/qd4825-2018-lung.pdf",
+      "local_url": "/sources/clinical/qd4825-2018-lung.pdf",
+      "pdf_sha256": "f94ce22b7a9f61a80a7718af57cb716ad4e00e2aeeafc3aea9e48f07968eecc1",
+      "pages": 25,
+      "checked_as_of": "2026-11-07",
+      "retrieved_at": "2026-11-07T03:32:54.266955+00:00",
+      "related_documents": [
+        "QD1248_2019"
+      ],
+      "anchors": {
+        "Erlotinib": [
+          19
+        ],
+        "Gefitinib": [
+          19
+        ]
+      },
+      "limitations": "Đã tìm kiếm nguồn đến 07/11/2026; chưa chứng minh đã rà soát đầy đủ mọi văn bản thay thế. Tài liệu tham khảo lâm sàng, không phải căn cứ tự xác nhận thanh toán BHYT. Bản scan/sơ đồ có lớp chữ thiếu hoặc sai; chỉ mở PDF, không dùng văn bản trích xuất để suy luận.",
+      "latest_version_verified": false,
+      "payment_authority": false
+    },
+    {
+      "id": "QD1248_2019",
+      "title": "Sửa đổi sơ đồ xét nghiệm T790M của hướng dẫn ung thư phổi",
+      "decision": "1248/QĐ-BYT",
+      "published_at": "2019-04-04",
+      "topic": "nsclc",
+      "status": "pdf_only",
+      "host": "Bệnh viện đa khoa huyện Hà Trung",
+      "source_type": "clinical_amendment",
+      "issuer": "Bộ Y tế",
+      "source_url": "https://benhvienhatrung.vn/wp-content/uploads/2022/06/1248-2019-sua-doi-4825-ung-thu-phoi-te-bao-nho.pdf",
+      "official_url": "https://benhvienhatrung.vn/wp-content/uploads/2022/06/1248-2019-sua-doi-4825-ung-thu-phoi-te-bao-nho.pdf",
+      "local_file": "sources/clinical/qd1248-2019-lung-amendment.pdf",
+      "local_url": "/sources/clinical/qd1248-2019-lung-amendment.pdf",
+      "pdf_sha256": "9d910099a0f9f43602dedec72a3898e280fca4f77453ea5baeb6953c735c6f5a",
+      "pages": 2,
+      "checked_as_of": "2026-11-07",
+      "retrieved_at": "2026-11-07T03:32:54.266955+00:00",
+      "related_documents": [],
+      "anchors": {},
+      "limitations": "Đã tìm kiếm nguồn đến 07/11/2026; chưa chứng minh đã rà soát đầy đủ mọi văn bản thay thế. Tài liệu tham khảo lâm sàng, không phải căn cứ tự xác nhận thanh toán BHYT. Bản scan/sơ đồ có lớp chữ thiếu hoặc sai; chỉ mở PDF, không dùng văn bản trích xuất để suy luận.",
+      "latest_version_verified": false,
+      "payment_authority": false
+    },
+    {
+      "id": "QD5481_2020",
+      "title": "Hướng dẫn chẩn đoán và điều trị đái tháo đường típ 2",
+      "decision": "5481/QĐ-BYT",
+      "published_at": "2020-12-30",
+      "topic": "t2d",
+      "status": "pending_identity",
+      "host": "Sở Y tế Đồng Nai",
+      "source_type": "clinical_guideline",
+      "issuer": "Bộ Y tế",
+      "source_url": "https://syt.dongnai.gov.vn/vi/van-ban/detail/V-v-trien-khai-thuc-hien-Quyet-dinh-so-5481-QD-BYT-ngay-30-12-2020-cua-Bo-truong-Bo-Y-te-4905/?download=1&id=0",
+      "official_url": "https://syt.dongnai.gov.vn/vi/van-ban/detail/V-v-trien-khai-thuc-hien-Quyet-dinh-so-5481-QD-BYT-ngay-30-12-2020-cua-Bo-truong-Bo-Y-te-4905/?download=1&id=0",
+      "local_file": "sources/clinical/qd5481-2020-diabetes.pdf",
+      "local_url": "/sources/clinical/qd5481-2020-diabetes.pdf",
+      "pdf_sha256": "305fc9c51d54418f5798e7691d59f94d24545e0dd728945e2225794730694486",
+      "pages": 77,
+      "checked_as_of": "2026-11-07",
+      "retrieved_at": "2026-11-07T03:32:54.266955+00:00",
+      "related_documents": [
+        "QD1353_2021"
+      ],
+      "anchors": {
+        "Metformin": [
+          24,
+          61
+        ]
+      },
+      "limitations": "Đã tìm kiếm nguồn đến 07/11/2026; chưa chứng minh đã rà soát đầy đủ mọi văn bản thay thế. Tài liệu tham khảo lâm sàng, không phải căn cứ tự xác nhận thanh toán BHYT. Bản PDF tải từ cơ quan y tế còn trống số/ngày ký. Số và ngày quyết định theo trang công bố; chưa xác minh được bản ký, chưa đưa nội dung vào đối chiếu.",
+      "latest_version_verified": false,
+      "payment_authority": false
+    },
+    {
+      "id": "QD1353_2021",
+      "title": "Sửa đổi hướng dẫn chẩn đoán và điều trị đái tháo đường típ 2",
+      "decision": "1353/QĐ-BYT",
+      "published_at": "2021-02-23",
+      "topic": "t2d",
+      "status": "pending_identity",
+      "host": "Sở Y tế Gia Lai",
+      "source_type": "clinical_amendment",
+      "issuer": "Bộ Y tế",
+      "source_url": "https://syt.gialai.gov.vn/vi/van-ban-chi-dao-dieu-hanh/detail/Quyet-dinh-so-1353-QD-BYT-23-02-2021-cua-Bo-Y-te-Ve-viec-sua-doi-bo-sung-mot-so-noi-dung-cua-Huong-dan-chan-doan-va-dieu-tri-dai-thao-duong-tip-2-1188/?download=1&id=0",
+      "official_url": "https://syt.gialai.gov.vn/vi/van-ban-chi-dao-dieu-hanh/detail/Quyet-dinh-so-1353-QD-BYT-23-02-2021-cua-Bo-Y-te-Ve-viec-sua-doi-bo-sung-mot-so-noi-dung-cua-Huong-dan-chan-doan-va-dieu-tri-dai-thao-duong-tip-2-1188/?download=1&id=0",
+      "local_file": "sources/clinical/qd1353-2021-diabetes-amendment.pdf",
+      "local_url": "/sources/clinical/qd1353-2021-diabetes-amendment.pdf",
+      "pdf_sha256": "404beba5811b8894b0164ef4a926989b26d84d2c4099dc82d688a8fcf70595ae",
+      "pages": 1,
+      "checked_as_of": "2026-11-07",
+      "retrieved_at": "2026-11-07T03:32:54.268960+00:00",
+      "related_documents": [],
+      "anchors": {},
+      "limitations": "Đã tìm kiếm nguồn đến 07/11/2026; chưa chứng minh đã rà soát đầy đủ mọi văn bản thay thế. Tài liệu tham khảo lâm sàng, không phải căn cứ tự xác nhận thanh toán BHYT. Bản PDF tải từ cơ quan y tế còn trống số/ngày ký. Số và ngày quyết định theo trang công bố; chưa xác minh được bản ký, chưa đưa nội dung vào đối chiếu.",
+      "latest_version_verified": false,
+      "payment_authority": false
+    }
+  ],
+  "chunks_file": "clinical_pages.jsonl",
+  "chunks_sha256": "785537cd8e34dcd571b1eb14daea66d90ec561327879d8d6541b0bcc069f22d7",
+  "topics": {
+    "breast": "Ung thư vú",
+    "gastric": "Ung thư dạ dày",
+    "nsclc": "Ung thư phổi không tế bào nhỏ",
+    "t2d": "Đái tháo đường típ 2"
+  },
+  "limitations": "Đã tìm kiếm nguồn đến 07/11/2026; chưa chứng minh đã rà soát đầy đủ mọi văn bản thay thế. Tài liệu tham khảo lâm sàng, không phải căn cứ tự xác nhận thanh toán BHYT."
+}

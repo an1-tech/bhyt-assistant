@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+data/embeddings.sqlite
+.venv/
+
+.python-path.txt
+.server-pid
+.taste-skill/
+audit/server*.log

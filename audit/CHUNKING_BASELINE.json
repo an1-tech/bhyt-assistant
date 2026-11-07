@@ -1,0 +1,53 @@
+{
+  "raw_sha256": "f3e702030b10568e18589162501b43aace7fc00a0efcc1c6fb1d2f91f421d403",
+  "queries": {
+    "Trastuzumab": {
+      "ids": [
+        "TT20-PLI-0402-R481",
+        "TT37_2024-P5-S1754-1",
+        "TT37_2024-P7-S1670-1",
+        "TT37_2024-P9-S41-1",
+        "TT37_2024-P16-S868-1",
+        "CV3293_2025-UTF8-C3"
+      ],
+      "characters": 7194
+    },
+    "Paracetamol": {
+      "ids": [
+        "TT20-PLI-0056-R68",
+        "TT20-PLI-0056-R69",
+        "TT37_2024-P5-S1754-1",
+        "TT37_2024-P7-S1670-1",
+        "TT37_2024-P16-S868-1"
+      ],
+      "characters": 3674
+    },
+    "thuốc sử dụng khám chữa bệnh từ xa": {
+      "ids": [
+        "TT37_2024-P5-S1754-1",
+        "TT37_2024-P11-S43-1",
+        "TT37_2024-P13-S0-1",
+        "TT37_2024-P8-S1792-1"
+      ],
+      "characters": 4156
+    },
+    "thanh toán thuốc vượt hạng bệnh viện": {
+      "ids": [
+        "CV5079_2025-UTF8-C2",
+        "CV5079_2025-UTF8-C3",
+        "CV3293_2025-UTF8-C3",
+        "CV3293_2025-UTF8-C4"
+      ],
+      "characters": 9349
+    },
+    "thuốc bị đình chỉ lưu hành thu hồi": {
+      "ids": [
+        "TT37_2024-P6-S0-1",
+        "TT37_2024-P9-S41-1",
+        "TT37_2024-P17-S0-1",
+        "TT37_2024-P3-S0-1"
+      ],
+      "characters": 4958
+    }
+  }
+}

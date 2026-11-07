@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-11-06T17:24:56.060816+00:00",
+  "health": {
+    "ok": true,
+    "app_id": "bhyt-toan-vien",
+    "version": "1.5",
+    "retrieval_version": "parent-context-v1",
+    "snapshot": "2026-11-06",
+    "drug_entries": 1037,
+    "radio_entries": 59,
+    "chunks": 1246,
+    "ai_configured": false,
+    "embeddings": false
+  },
+  "checks": [
+    {
+      "query": "Điều 8 TT20/2022",
+      "status": "policy_lookup",
+      "full_article_and_date": true
+    },
+    {
+      "query": "Quy định chuyển tiếp",
+      "status": "policy_lookup",
+      "full_article_and_date": true
+    },
+    {
+      "query": "Doxorubicin",
+      "status": "needs_info",
+      "full_article_and_date": true
+    },
+    {
+      "query": "Everolimus",
+      "status": "needs_info",
+      "full_article_and_date": true
+    },
+    {
+      "query": "L-asparaginase",
+      "status": "needs_info",
+      "full_article_and_date": true
+    },
+    {
+      "query": "Paclitaxel",
+      "status": "needs_info",
+      "full_article_and_date": true
+    },
+    {
+      "query": "Erlotinib",
+      "status": "needs_info",
+      "full_article_and_date": true
+    },
+    {
+      "query": "Gefitinib",
+      "status": "needs_info",
+      "full_article_and_date": true
+    },
+    {
+      "query": "Sorafenib",
+      "status": "needs_info",
+      "full_article_and_date": true
+    },
+    {
+      "query": "Follow-up: từ năm 2014",
+      "passed": true
+    },
+    {
+      "query": "Unrelated drugs do not inherit transition links",
+      "passed": true
+    }
+  ],
+  "local_pdf_accessible": true,
+  "paid_api_calls": 0,
+  "visual_browser_check": "not_run"
+}

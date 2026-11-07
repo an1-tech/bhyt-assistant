@@ -1,0 +1,22 @@
+{
+  "version": "1.7",
+  "date": "2026-11-07",
+  "documents": 6,
+  "pdf_pages": 204,
+  "eligible_reference_pages": 99,
+  "core_raw_unchanged": {
+    "drugs_appendix_I.jsonl": true,
+    "radiopharmaceuticals_appendix_II.jsonl": true,
+    "rag_current.jsonl": true
+  },
+  "backend_tests_passed": 116,
+  "case_browser_checks": 43,
+  "source_browser_checks": 36,
+  "visual_inspector": {
+    "fail": 0,
+    "warn": 0
+  },
+  "clinical_or_legal_validation": false,
+  "new_payment_rules": false,
+  "openai_api_used": false
+}

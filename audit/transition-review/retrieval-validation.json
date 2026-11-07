@@ -1,0 +1,569 @@
+{
+  "retrieval_version": "parent-context-v1",
+  "scope": "Completeness within supplied corpus; not clinical accuracy or source freshness validation",
+  "raw_sha256": "f3e702030b10568e18589162501b43aace7fc00a0efcc1c6fb1d2f91f421d403",
+  "effective_sha256": "8432038433232dddfb2ea5adceeed9bd521c1f21524b50ef9926c22db6be8c6d",
+  "raw_unchanged_from_baseline": true,
+  "source_chunks": 1243,
+  "active_chunks": 1246,
+  "active_kinds": {
+    "drug_row": 1133,
+    "radiopharmaceutical_row": 61,
+    "legal_policy": 37,
+    "legal_annex": 5,
+    "annex_wastage": 3,
+    "ministry_guidance": 7
+  },
+  "parent_groups": 1222,
+  "all_original_text_preserved": false,
+  "only_reviewed_text_changes": true,
+  "supplemental_chunks": 3,
+  "all_drug_chunks_unchanged": true,
+  "metadata_corrections": [
+    {
+      "id": "TT37_2024-P18-S0-1",
+      "source_locator": "Trang PDF 18, Điều 21",
+      "locator": "Trang PDF 18, Phụ lục 1",
+      "page": 18,
+      "article": null,
+      "appendix": 1
+    },
+    {
+      "id": "TT37_2024-P18-S0-2",
+      "source_locator": "Trang PDF 18, Điều 21",
+      "locator": "Trang PDF 18, Phụ lục 1",
+      "page": 18,
+      "article": null,
+      "appendix": 1
+    },
+    {
+      "id": "TT37_2024-P19-S0-1",
+      "source_locator": "Trang PDF 19, Điều 21",
+      "locator": "Trang PDF 19, Phụ lục 1",
+      "page": 19,
+      "article": null,
+      "appendix": 1
+    },
+    {
+      "id": "TT37_2024-P20-S0-1",
+      "source_locator": "Trang PDF 20, Điều 21",
+      "locator": "Trang PDF 20, Phụ lục 1",
+      "page": 20,
+      "article": null,
+      "appendix": 1
+    },
+    {
+      "id": "TT37_2024-P21-S0-1",
+      "source_locator": "Trang PDF 21, Điều 21",
+      "locator": "Trang PDF 21, Phụ lục 2",
+      "page": 21,
+      "article": null,
+      "appendix": 2
+    }
+  ],
+  "evaluation": {
+    "Trastuzumab": {
+      "before": {
+        "ids": [
+          "TT20-PLI-0402-R481",
+          "TT37_2024-P5-S1754-1",
+          "TT37_2024-P7-S1670-1",
+          "TT37_2024-P9-S41-1",
+          "TT37_2024-P16-S868-1",
+          "CV3293_2025-UTF8-C3"
+        ],
+        "characters": 7194
+      },
+      "after": {
+        "ids": [
+          "TT20-PLI-0402-R481",
+          "TT37_2024-P5-S1754-1",
+          "TT37_2024-P6-S0-1",
+          "TT37_2024-P7-S0-1",
+          "TT37_2024-P7-S1670-1",
+          "TT37_2024-P8-S0-1",
+          "TT37_2024-P9-S41-1",
+          "TT37_2024-P16-S868-1",
+          "CV3293_2025-UTF8-C1",
+          "CV3293_2025-UTF8-C2",
+          "CV3293_2025-UTF8-C3",
+          "CV3293_2025-UTF8-C4"
+        ],
+        "characters": 19403,
+        "unique_citations": true,
+        "all_selected_parents_complete": true
+      },
+      "mandatory_article_parts": {
+        "required": 7,
+        "before": 4,
+        "after": 7
+      }
+    },
+    "Paracetamol": {
+      "before": {
+        "ids": [
+          "TT20-PLI-0056-R68",
+          "TT20-PLI-0056-R69",
+          "TT37_2024-P5-S1754-1",
+          "TT37_2024-P7-S1670-1",
+          "TT37_2024-P16-S868-1"
+        ],
+        "characters": 3674
+      },
+      "after": {
+        "ids": [
+          "TT20-PLI-0056-R68",
+          "TT20-PLI-0056-R69",
+          "TT37_2024-P5-S1754-1",
+          "TT37_2024-P6-S0-1",
+          "TT37_2024-P7-S0-1",
+          "TT37_2024-P7-S1670-1",
+          "TT37_2024-P8-S0-1",
+          "TT37_2024-P16-S868-1"
+        ],
+        "characters": 8258,
+        "unique_citations": true,
+        "all_selected_parents_complete": true
+      },
+      "mandatory_article_parts": {
+        "required": 6,
+        "before": 3,
+        "after": 6
+      }
+    },
+    "thuốc sử dụng khám chữa bệnh từ xa": {
+      "before": {
+        "ids": [
+          "TT37_2024-P5-S1754-1",
+          "TT37_2024-P11-S43-1",
+          "TT37_2024-P13-S0-1",
+          "TT37_2024-P8-S1792-1"
+        ],
+        "characters": 4156
+      },
+      "after": {
+        "ids": [
+          "TT37_2024-P5-S1754-1",
+          "TT37_2024-P6-S0-1",
+          "TT37_2024-P7-S0-1",
+          "TT37_2024-P11-S43-1",
+          "TT37_2024-P12-S2224-1",
+          "TT37_2024-P13-S0-1",
+          "TT37_2024-P8-S1792-1"
+        ],
+        "characters": 7418,
+        "unique_citations": true,
+        "all_selected_parents_complete": true
+      }
+    },
+    "thanh toán thuốc vượt hạng bệnh viện": {
+      "before": {
+        "ids": [
+          "CV5079_2025-UTF8-C2",
+          "CV5079_2025-UTF8-C3",
+          "CV3293_2025-UTF8-C3",
+          "CV3293_2025-UTF8-C4"
+        ],
+        "characters": 9349
+      },
+      "after": {
+        "ids": [
+          "CV5079_2025-UTF8-C1",
+          "CV5079_2025-UTF8-C2",
+          "CV5079_2025-UTF8-C3",
+          "CV3293_2025-UTF8-C1",
+          "CV3293_2025-UTF8-C2",
+          "CV3293_2025-UTF8-C3",
+          "CV3293_2025-UTF8-C4",
+          "TT37_2024-P3-S452-1",
+          "TT37_2024-P3-S2240-1",
+          "TT37_2024-P4-S0-1"
+        ],
+        "characters": 20009,
+        "unique_citations": true,
+        "all_selected_parents_complete": true
+      }
+    },
+    "thuốc bị đình chỉ lưu hành thu hồi": {
+      "before": {
+        "ids": [
+          "TT37_2024-P6-S0-1",
+          "TT37_2024-P9-S41-1",
+          "TT37_2024-P17-S0-1",
+          "TT37_2024-P3-S0-1"
+        ],
+        "characters": 4958
+      },
+      "after": {
+        "ids": [
+          "TT37_2024-P5-S1754-1",
+          "TT37_2024-P6-S0-1",
+          "TT37_2024-P7-S0-1",
+          "TT37_2024-P9-S41-1",
+          "TT37_2024-P16-S2187-1",
+          "TT37_2024-P17-S0-1",
+          "TT37_2024-P2-S413-1",
+          "TT37_2024-P3-S0-1"
+        ],
+        "characters": 8214,
+        "unique_citations": true,
+        "all_selected_parents_complete": true
+      }
+    }
+  },
+  "policy_parents": [
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        1
+      ],
+      "child_ids": [
+        "TT37_2024-P1-S1486-1"
+      ],
+      "characters": 304
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        2
+      ],
+      "child_ids": [
+        "TT37_2024-P1-S1797-1",
+        "TT37_2024-P2-S0-1"
+      ],
+      "characters": 742
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        3
+      ],
+      "child_ids": [
+        "TT37_2024-P2-S413-1",
+        "TT37_2024-P3-S0-1"
+      ],
+      "characters": 2468
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        4
+      ],
+      "child_ids": [
+        "TT37_2024-P3-S452-1"
+      ],
+      "characters": 1781
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        5
+      ],
+      "child_ids": [
+        "TT37_2024-P3-S2240-1",
+        "TT37_2024-P4-S0-1"
+      ],
+      "characters": 1194
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        6
+      ],
+      "child_ids": [
+        "TT37_2024-P4-S629-1"
+      ],
+      "characters": 1772
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        8
+      ],
+      "child_ids": [
+        "TT37_2024-P5-S1754-1",
+        "TT37_2024-P6-S0-1",
+        "TT37_2024-P7-S0-1"
+      ],
+      "characters": 3308
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        9
+      ],
+      "child_ids": [
+        "TT37_2024-P7-S552-1"
+      ],
+      "characters": 1111
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        10
+      ],
+      "child_ids": [
+        "TT37_2024-P7-S1670-1",
+        "TT37_2024-P8-S0-1"
+      ],
+      "characters": 2693
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        11
+      ],
+      "child_ids": [
+        "TT37_2024-P8-S1792-1"
+      ],
+      "characters": 1069
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        12
+      ],
+      "child_ids": [
+        "TT37_2024-P9-S41-1"
+      ],
+      "characters": 1356
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        13
+      ],
+      "child_ids": [
+        "TT37_2024-P9-S1407-1",
+        "TT37_2024-P10-S0-1"
+      ],
+      "characters": 3771
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        14
+      ],
+      "child_ids": [
+        "TT37_2024-P11-S43-1"
+      ],
+      "characters": 1822
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        15
+      ],
+      "child_ids": [
+        "TT37_2024-P11-S1875-1",
+        "TT37_2024-P12-S0-1"
+      ],
+      "characters": 3200
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        16
+      ],
+      "child_ids": [
+        "TT37_2024-P12-S2224-1",
+        "TT37_2024-P13-S0-1"
+      ],
+      "characters": 1219
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        17
+      ],
+      "child_ids": [
+        "TT37_2024-P13-S833-1",
+        "TT37_2024-P14-S0-1"
+      ],
+      "characters": 2617
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        18
+      ],
+      "child_ids": [
+        "TT37_2024-P14-S704-1"
+      ],
+      "characters": 571
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        19
+      ],
+      "child_ids": [
+        "TT37_2024-P14-S1283-1",
+        "TT37_2024-P15-S0-1",
+        "TT37_2024-P16-S0-1"
+      ],
+      "characters": 4409
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        20
+      ],
+      "child_ids": [
+        "TT37_2024-P16-S868-1"
+      ],
+      "characters": 1312
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "article",
+        21
+      ],
+      "child_ids": [
+        "TT37_2024-P16-S2187-1",
+        "TT37_2024-P17-S0-1"
+      ],
+      "characters": 1082
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "annex",
+        1
+      ],
+      "child_ids": [
+        "TT37_2024-P18-S0-1",
+        "TT37_2024-P18-S0-2",
+        "TT37_2024-P19-S0-1",
+        "TT37_2024-P20-S0-1"
+      ],
+      "characters": 7195
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+        "annex",
+        2
+      ],
+      "child_ids": [
+        "TT37_2024-P21-S0-1"
+      ],
+      "characters": 1045
+    },
+    {
+      "parent": [
+        "TT37_2024",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt-kem.pdf",
+        "annex_wastage"
+      ],
+      "child_ids": [
+        "TT37-ANNEX-1",
+        "TT37-ANNEX-2",
+        "TT37-ANNEX-3"
+      ],
+      "characters": 6806
+    },
+    {
+      "parent": [
+        "CV3293_2025",
+        "https://thuvienphapluat.vn/cong-van/bao-hiem/cong-van-3293-byt-bh-2025-huong-dan-thanh-toan-thuoc-bao-hiem-y-te-theo-thong-tu-37-2024-tt-byt-667153.aspx",
+        "ministry_guidance"
+      ],
+      "child_ids": [
+        "CV3293_2025-UTF8-C1",
+        "CV3293_2025-UTF8-C2",
+        "CV3293_2025-UTF8-C3",
+        "CV3293_2025-UTF8-C4"
+      ],
+      "characters": 10172
+    },
+    {
+      "parent": [
+        "CV5079_2025",
+        "https://thuvienphapluat.vn/cong-van/bao-hiem/cong-van-5079-byt-bh-2025-giai-quyet-vuong-mac-thanh-toan-chi-phi-kham-chua-benh-bao-hiem-y-te-667570.aspx",
+        "ministry_guidance"
+      ],
+      "child_ids": [
+        "CV5079_2025-UTF8-C1",
+        "CV5079_2025-UTF8-C2",
+        "CV5079_2025-UTF8-C3"
+      ],
+      "characters": 6862
+    },
+    {
+      "parent": [
+        "TT20_2022",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/12/15-vbhn-byt.pdf",
+        "article",
+        8
+      ],
+      "child_ids": [
+        "TT20_2022-VBHN15-A8-P4",
+        "TT20_2022-VBHN15-A8-P5"
+      ],
+      "characters": 2273
+    },
+    {
+      "parent": [
+        "TT20_2022",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/12/15-vbhn-byt.pdf",
+        "article",
+        7
+      ],
+      "child_ids": [
+        "TT20_2022-VBHN15-A7-K1-P4"
+      ],
+      "characters": 91
+    }
+  ],
+  "limitations": [
+    "No source re-OCR or full rebuild of original chunks",
+    "Inherited OCR errors and legal content remain unvalidated by hospital",
+    "Guidance without section metadata expands to full document and may include historical context",
+    "TF-IDF ranking unchanged; no semantic ranking quality claim",
+    "All tests of AI use mocks; no paid API calls",
+    "Article 8 was manually supplemented from the official PDF; other gaps remain"
+  ]
+}

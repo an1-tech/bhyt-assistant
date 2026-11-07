@@ -1,0 +1,70 @@
+{
+  "version": "1.1-toan-vien",
+  "checked_on": "2026-11-06",
+  "scope": "local lookup for all hospital departments; not a hospital-wide network deployment",
+  "original_archive": {
+    "manifest_files_matched": 24,
+    "failed": 0,
+    "backup": "D:/Vinmec/backups/bhyt-chatbot-v1-original.zip"
+  },
+  "corpus": {
+    "appendix_I_unique_stt": 1037,
+    "appendix_II_unique_stt": 59,
+    "row_variants": 1194,
+    "retrieval_chunks": 1243,
+    "source_data_unchanged": true,
+    "snapshot_supplied_by_archive": "2026-11-06",
+    "hospital_validation": "pending"
+  },
+  "tests": {
+    "passed": 45,
+    "failed": 0,
+    "command": "python -m unittest discover -s tests -q",
+    "paid_api_calls": 0
+  },
+  "visual": {
+    "inspector_failures": 0,
+    "inspector_warnings": 0,
+    "viewports": [
+      1440,
+      768,
+      390
+    ],
+    "extra_checks": [
+      "375px reduced motion: transitions zero; auto scroll; no overflow",
+      "844x390 landscape: no overflow",
+      "390px catalogue: 20 rows loaded; no overflow",
+      "390px sources: no overflow"
+    ],
+    "screenshots_reviewed": true,
+    "style": "Achromatic ledger",
+    "seed": 1920156577
+  },
+  "browser_interactions": [
+    "select Nhi khoa and lookup Paracetamol",
+    "follow up with suppository route",
+    "catalog search metformin: 8 results",
+    "catalog to Metformin lookup",
+    "empty search result at 390px",
+    "Tab from catalogue search to group select with visible focus",
+    "keyboard Enter lookup Amlodipin",
+    "expand source citation",
+    "copy result successfully",
+    "reset conversation"
+  ],
+  "local_service": {
+    "url": "http://127.0.0.1:8765",
+    "verified_app_id": "bhyt-toan-vien",
+    "bind": "127.0.0.1"
+  },
+  "not_verified": [
+    "Real provider AI API or embedding calls (no key/model provided; not enabled)",
+    "Hospital drug formulary, local insurance contract, patient entitlement and clinical validation",
+    "Completeness of all legal amendments after or up to the supplied snapshot",
+    "Screen-reader audio, native mobile hardware and OS-level large text settings"
+  ],
+  "style_limits": [
+    "Single light theme; no dark-mode option supplied"
+  ],
+  "latest_interface_report": "audit/VALIDATION_UI.json"
+}

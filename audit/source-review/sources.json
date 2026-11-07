@@ -1,0 +1,42 @@
+[
+  {
+    "path": "data/sources/15-vbhn-byt-2024.pdf",
+    "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/12/15-vbhn-byt.pdf",
+    "provenance": "official_government_pdf",
+    "scope": "75 pages; selected drug pages, article 8 and complete appendix II inspected",
+    "sha256": "24edc424707ca6caee317560499a704b1549913e2d91df8844d1d214fb242e61",
+    "review_date": "2026-11-06"
+  },
+  {
+    "path": "data/sources/37-2024-tt-byt.pdf",
+    "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+    "provenance": "official_government_pdf",
+    "scope": "selected pages visually inspected; only logged corrections approved",
+    "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+    "review_date": "2026-11-06"
+  },
+  {
+    "path": "audit/source-review/cv3293-signed-copy.pdf",
+    "url": "https://cdn.thuviennhadat.vn/upload/hinh-anh-bai-viet/NHDT/thang-8-2025/ngay-01/3293.pdf",
+    "provenance": "signed_scan_secondary_host",
+    "scope": "4 pages inspected; signature appearance not cryptographically authenticated",
+    "sha256": "96e7eed8529556dfb4ace995b941373647d6240d1fca6cd6ef836dfe686ddaab",
+    "review_date": "2026-11-06"
+  },
+  {
+    "path": "audit/source-review/cv5079-official.pdf",
+    "url": "https://bvdkbaclieu.gov.vn/upload/1000079/20250904/612_Cong_van-5079-BYT-BH_46197e7d23.pdf",
+    "provenance": "hospital_published_unsigned_copy",
+    "scope": "3 pages inspected; number/date/signature blank; filename official does not certify signed original",
+    "sha256": "03ab3736957617fb6ed58366cc39f577b7619453374ed93f087187d3149f1f1e",
+    "review_date": "2026-11-06"
+  },
+  {
+    "path": "audit/source-review/tt20-hospital-copy.pdf",
+    "url": "https://quangtrihospital.vn/uploads/news/2023_02/20_2022_tt-byt_ban-hanh-danh-muc-va-ty-le-dieu-kien-thanh-toan-doi-voi-thuoc-hoa.pdf",
+    "provenance": "secondary_hospital_transcription",
+    "scope": "screening only; not equivalent to signed original",
+    "sha256": "bba72659713e633f87221575915fae2726a05a11d2db1391b7444008838b688b",
+    "review_date": "2026-11-06"
+  }
+]

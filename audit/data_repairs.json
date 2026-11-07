@@ -1,0 +1,12 @@
+{
+  "input_chunks": 1251,
+  "output_chunks": 1243,
+  "repairs": [
+    "Refetched CV3293 and CV5079 with explicit UTF-8 decoder; re-chunked after decoding.",
+    "Default metadata normalized at index time; missing default_retrieve is permitted for existing drug rows."
+  ],
+  "source_hashes": {
+    "CV3293_2025": "7c8ec6416cc43710a89f82bccc1c1db2e250485b1a8321cb5ea38c4c212e18d2",
+    "CV5079_2025": "c290c6bad0e5c45210fcb98f50bf8d0c00a7e450b1802661c32046f2674e5621"
+  }
+}

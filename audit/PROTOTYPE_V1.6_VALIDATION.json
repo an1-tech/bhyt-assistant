@@ -1,0 +1,122 @@
+{
+  "version": "1.6",
+  "checked_at": "2026-11-07T03:21:41.592336+00:00",
+  "backend_tests": {
+    "total": 105,
+    "passed": 105,
+    "failed": 0,
+    "method": "python -B -m unittest discover -s tests -q; actual output reviewed"
+  },
+  "browser_checks": {
+    "passed": 43,
+    "checks": [
+      "Case view is default at 1440",
+      "No initial horizontal overflow 1440",
+      "Keyboard Tab follows form order 1440",
+      "Missing HER2 is visible 1440",
+      "Unknown HER2 does not display a rate 1440",
+      "Example case clearly labelled 1440",
+      "Edited form invalidates prior result 1440",
+      "Breast/HER2 positive shows source branch 60% 1440",
+      "Gastric extent missing never inherits breast rate 1440",
+      "Gastric advanced/HER2 branch shows 50% 1440",
+      "Copy contains source, limitations and missing evidence 1440",
+      "No result horizontal overflow 1440",
+      "No JavaScript exceptions 1440",
+      "Case view is default at 768",
+      "No initial horizontal overflow 768",
+      "Keyboard Tab follows form order 768",
+      "Missing HER2 is visible 768",
+      "Unknown HER2 does not display a rate 768",
+      "Example case clearly labelled 768",
+      "Edited form invalidates prior result 768",
+      "Breast/HER2 positive shows source branch 60% 768",
+      "Gastric extent missing never inherits breast rate 768",
+      "Gastric advanced/HER2 branch shows 50% 768",
+      "Copy contains source, limitations and missing evidence 768",
+      "No result horizontal overflow 768",
+      "No JavaScript exceptions 768",
+      "Case view is default at 390",
+      "No initial horizontal overflow 390",
+      "Keyboard Tab follows form order 390",
+      "Missing HER2 is visible 390",
+      "Unknown HER2 does not display a rate 390",
+      "Example case clearly labelled 390",
+      "Edited form invalidates prior result 390",
+      "Breast/HER2 positive shows source branch 60% 390",
+      "Gastric extent missing never inherits breast rate 390",
+      "Gastric advanced/HER2 branch shows 50% 390",
+      "Copy contains source, limitations and missing evidence 390",
+      "No result horizontal overflow 390",
+      "Reduced motion honored",
+      "No JavaScript exceptions 390",
+      "Autocomplete ArrowDown enters results",
+      "Autocomplete Enter selects exact drug",
+      "Validation error is focused"
+    ]
+  },
+  "additional_browser_checks": {
+    "checks": [
+      "paclitaxel sample passed",
+      "metformin sample passed",
+      "lookup navigation passed",
+      "catalog navigation passed",
+      "sources navigation passed",
+      "case navigation passed"
+    ]
+  },
+  "inspector": {
+    "widths": [
+      1440,
+      768,
+      390
+    ],
+    "fail": 0,
+    "warn": 0,
+    "allow": []
+  },
+  "screenshots_visually_reviewed": true,
+  "physical_device_and_screenreader_audio": "not_tested",
+  "original_data_unchanged": {
+    "data/drugs_appendix_I.jsonl": true,
+    "data/radiopharmaceuticals_appendix_II.jsonl": true,
+    "data/rag_current.jsonl": true
+  },
+  "live_health": {
+    "ok": true,
+    "app_id": "bhyt-toan-vien",
+    "version": "1.6",
+    "instance_id": "38933f74a631c0100853",
+    "retrieval_version": "parent-context-v1",
+    "snapshot": "2026-11-06",
+    "drug_entries": 1037,
+    "radio_entries": 59,
+    "chunks": 1246,
+    "ai_configured": false,
+    "embeddings": false
+  },
+  "live_case_smoke": {
+    "unknown_her2": "missing",
+    "candidate_rate": null,
+    "payment_eligibility": null
+  },
+  "clinical_validation": "pending",
+  "sample_data": "3 explicitly fictional case inputs; real source drug records",
+  "preliminary_profiles": [
+    "Trastuzumab",
+    "Erlotinib",
+    "Gefitinib",
+    "Doxorubicin",
+    "Paclitaxel"
+  ],
+  "paid_api_calls": 0,
+  "remaining_sources": [
+    "verified product labels",
+    "indication-linked ministry guidelines",
+    "national formulary entries",
+    "hospital list and agreement",
+    "TT40 historical rates"
+  ],
+  "ui_direction": "existing Achromatic ledger/Geist; no redraw; source-linked criteria",
+  "backup": "D:/Vinmec/backups/prototype-before-v1.6-2026-11-07.zip"
+}

@@ -1,0 +1,28 @@
+{
+  "version": "1.8",
+  "date": "2026-11-07",
+  "backend_tests_passed": 137,
+  "new_chat_tests": 21,
+  "browser_checks": 67,
+  "widths": [
+    1440,
+    768,
+    390
+  ],
+  "one_question_input": true,
+  "no_patient_form": true,
+  "live_api_verified": true,
+  "source_datasets_unchanged": {
+    "data/drugs_appendix_I.jsonl": true,
+    "data/radiopharmaceuticals_appendix_II.jsonl": true,
+    "data/rag_current.jsonl": true
+  },
+  "external_ai_called": false,
+  "clinical_legal_hospital_validation": false,
+  "visual_inspector": {
+    "fail": 0,
+    "warn": 1,
+    "warning": "unused-canvas",
+    "reason": "840px centered conversation column with equal margins, chosen for the user's single-chat requirement; horizontal top navigation misidentified as sidebar."
+  }
+}

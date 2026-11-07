@@ -1,0 +1,425 @@
+{
+  "version": 1,
+  "review_date": "2026-11-06",
+  "hospital_validation": "pending",
+  "patches": [
+    {
+      "id": "TT37_2024-P3-S0-1",
+      "expected_text_sha256": "28f20bf48039671c6f46a1748c921e39b122c464bb40e13802d3c0310fbd4841",
+      "edits": [
+        {
+          "old": "Thuốc hiếm thuốc Danh mua",
+          "new": "Thuốc hiếm thuộc Danh mục",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 3,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P7-S0-1",
+      "expected_text_sha256": "4577f90ae802a0654703f892e70c85c421de830771dbe0f50b0cb052925dfc62",
+      "edits": [
+        {
+          "old": "20/2022/TT-BVT",
+          "new": "20/2022/TT-BYT",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 7,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P7-S552-1",
+      "expected_text_sha256": "869c32d7f7a8aca4d0100b63ae294d5e9c36b21142264a2a17dcca1f748ebe12",
+      "edits": [
+        {
+          "old": "55/2017/TT-BVT",
+          "new": "55/2017/TT-BYT",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 7,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P8-S0-1",
+      "expected_text_sha256": "020bd3f7659a1ca6229ad2e521f1f3762638e8b214cecee101b91453de2990c0",
+      "edits": [
+        {
+          "old": "dấu sao ($)",
+          "new": "dấu sao (*)",
+          "count": 1
+        },
+        {
+          "old": "dấu sao (#)",
+          "new": "dấu sao (*)",
+          "count": 1
+        },
+        {
+          "old": "y tế chí thanh toán",
+          "new": "y tế chỉ thanh toán",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 8,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P9-S41-1",
+      "expected_text_sha256": "d050b56de1cedb39e1c7e56c807bfaca31b67353bdf9001a81a798f70fbf379b",
+      "edits": [
+        {
+          "old": "kiên như sau:",
+          "new": "kiện như sau:",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 9,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P10-S0-1",
+      "expected_text_sha256": "17636b06423cd0911c1c7ef100c07b7e82bd3eb89e0818e8eb873889fbc146a0",
+      "edits": [
+        {
+          "old": "quy didI tại",
+          "new": "quy định tại",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 10,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P11-S43-1",
+      "expected_text_sha256": "4301a9fa97ddc21b5e3a520d38f4cd82d6dd59289a425e9a2e5b27d66ca3c9ca",
+      "edits": [
+        {
+          "old": "TT-BVT",
+          "new": "TT-BYT",
+          "count": 4
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 11,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P12-S0-1",
+      "expected_text_sha256": "dd4c06e5b5f8166432599a01c47f89eb26115a315884846865a28ca1280977e9",
+      "edits": [
+        {
+          "old": "TT-BVT",
+          "new": "TT-BYT",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 12,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P13-S833-1",
+      "expected_text_sha256": "ad9f20fffa8bc004ab7d683db12824b817156ac5c34676f30eaa980c2c166517",
+      "edits": [
+        {
+          "old": "điều tri thì hôi chẩn với bác sĩ đủ điều kiên",
+          "new": "điều trị thì hội chẩn với bác sĩ đủ điều kiện",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 13,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P14-S704-1",
+      "expected_text_sha256": "71e075b080299d4a78e63105bc1dff4d4f697716fa99c7e0f9d6d7ad1533f789",
+      "edits": [
+        {
+          "old": "ĐIỂU KHOẢN THI HÀ NH",
+          "new": "ĐIỀU KHOẢN THI HÀNH",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 14,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P14-S1283-1",
+      "expected_text_sha256": "de00d9951903c480c2322e3337eff36d420e893b3fc096f5a1e1ab5275bf002c",
+      "edits": [
+        {
+          "old": "khám bênh, chữa bênh",
+          "new": "khám bệnh, chữa bệnh",
+          "count": 1
+        },
+        {
+          "old": "cơ sở kinh doanh dươc",
+          "new": "cơ sở kinh doanh dược",
+          "count": 1
+        },
+        {
+          "old": "kinh tế được",
+          "new": "kinh tế dược",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 14,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P15-S0-1",
+      "expected_text_sha256": "daf18866288fe90753024a8c182657d70e3bc9dc0e1dd31e5a06cebdea1fecf6",
+      "edits": [
+        {
+          "old": "TIung tâm Quốc",
+          "new": "Trung tâm Quốc",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 15,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P16-S868-1",
+      "expected_text_sha256": "e8da97a7d953b83b1e379bf21af8e0634390bcf95a6ba2eac8bd8ddf2d8a99d1",
+      "edits": [
+        {
+          "old": "TT-BVT",
+          "new": "TT-BYT",
+          "count": 2
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 16,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P19-S0-1",
+      "expected_text_sha256": "de045b57709496c9389e5ee02495a4934c7dd4bd8b488733ad163af6903c5bbe",
+      "edits": [
+        {
+          "old": "(MInI)",
+          "new": "(MIBI)",
+          "count": 1
+        },
+        {
+          "old": "1 kit MIDI",
+          "new": "1 kít MIBI",
+          "count": 1
+        },
+        {
+          "old": "HCĐD là 1/â",
+          "new": "HCĐD là ¼",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 19,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "TT37_2024-P20-S0-1",
+      "expected_text_sha256": "32d9b862c4bcf25925837334f7249ebe84df27a8da84b3aeee5459dd6bcb9728",
+      "edits": [
+        {
+          "old": "1-131",
+          "new": "I-131",
+          "count": 3
+        },
+        {
+          "old": "TI/2",
+          "new": "T1/2",
+          "count": 1
+        },
+        {
+          "old": "1009,Ủ",
+          "new": "100%",
+          "count": 1
+        },
+        {
+          "old": "509’b",
+          "new": "50%",
+          "count": 2
+        },
+        {
+          "old": "509/,",
+          "new": "50%",
+          "count": 1
+        },
+        {
+          "old": "5€)t%",
+          "new": "50%",
+          "count": 1
+        },
+        {
+          "old": "Với I-131",
+          "new": "với I-131",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "data/sources/37-2024-tt-byt.pdf",
+        "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb",
+        "page": 20,
+        "method": "visual_pdf_comparison",
+        "provenance": "official_government_pdf"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "CV3293_2025-UTF8-C2",
+      "expected_text_sha256": "c877d36394b5a14c29bb7e623b98d77493b938586b91562acc69535bd3962e64",
+      "edits": [
+        {
+          "old": "hướng dẫn lại Thông tư",
+          "new": "hướng dẫn tại Thông tư",
+          "count": 1
+        },
+        {
+          "old": "từ xa lại Thông tư",
+          "new": "từ xa tại Thông tư",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "audit/source-review/cv3293-signed-copy.pdf",
+        "sha256": "96e7eed8529556dfb4ace995b941373647d6240d1fca6cd6ef836dfe686ddaab",
+        "page": 2,
+        "method": "visual_pdf_comparison",
+        "provenance": "signed_scan_on_third_party_host"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    },
+    {
+      "id": "CV3293_2025-UTF8-C3",
+      "expected_text_sha256": "b0442d3073978e4b13870ab2702586f4a5b33cccbd06b7bafc9b609ca6602856",
+      "edits": [
+        {
+          "old": "sử dụng thuốc phát đáp ứng",
+          "new": "sử dụng thuốc phải đáp ứng",
+          "count": 1
+        },
+        {
+          "old": "được hướng của",
+          "new": "được hưởng của",
+          "count": 1
+        },
+        {
+          "old": "20/2021/TT-BYT",
+          "new": "20/2022/TT-BYT",
+          "count": 1
+        }
+      ],
+      "evidence": {
+        "file": "audit/source-review/cv3293-signed-copy.pdf",
+        "sha256": "96e7eed8529556dfb4ace995b941373647d6240d1fca6cd6ef836dfe686ddaab",
+        "page": 3,
+        "method": "visual_pdf_comparison",
+        "provenance": "signed_scan_on_third_party_host"
+      },
+      "scope": "only_listed_corrections; not_whole_document_certification"
+    }
+  ],
+  "document_flags": {
+    "CV5079_2025": {
+      "status": "signed_original_pending",
+      "note": "Bản PDF đối chiếu do bệnh viện công bố chưa có số, ngày hoặc chữ ký trên văn bản; chưa xác thực bản ký."
+    },
+    "CV3293_2025": {
+      "status": "official_host_confirmation_pending",
+      "note": "Đối chiếu ảnh có chữ ký/dấu từ máy chủ bên thứ ba; chưa xác minh chữ ký số."
+    }
+  },
+  "chunk_flags": {
+    "TT37_2024-P9-S41-1": {
+      "status": "source_wording_issue",
+      "note": "Ảnh PDF ghi cấp có thẩm phê duyệt; chưa có cơ sở tự thêm từ."
+    },
+    "CV3293_2025-UTF8-C3": {
+      "status": "source_wording_issue",
+      "note": "Ảnh PDF có cụm điểm b khoản Điều 14 thiếu số khoản; không tự điền số."
+    }
+  }
+}

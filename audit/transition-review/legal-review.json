@@ -1,0 +1,86 @@
+{
+  "review_date": "2026-11-07",
+  "scope": "Article 8 TT20/2022, effective date and identified amendment chain only",
+  "finding": "No promulgated amendment/repeal of Article 8 identified in bounded searches and reviewed provisions.",
+  "exhaustive": false,
+  "all_legislation_current_certified": false,
+  "source_snapshot_unchanged": "2026-11-06",
+  "evidence": [
+    {
+      "document": "TT20/2022 via 15/VBHN-BYT",
+      "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/12/15-vbhn-byt.pdf",
+      "file": "data/sources/15-vbhn-byt-2024.pdf",
+      "pages": [
+        4,
+        5
+      ],
+      "method": "visual_pdf_review",
+      "finding": "Article 8 complete; Article 7(1) effective date 2023-03-01. Article 8 paragraph 2 cross-references TT40/2014.",
+      "use": "retrievable_supplement",
+      "sha256": "24edc424707ca6caee317560499a704b1549913e2d91df8844d1d214fb242e61"
+    },
+    {
+      "document": "TT37/2024",
+      "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/37-byt.pdf",
+      "file": "data/sources/37-2024-tt-byt.pdf",
+      "pages": [
+        16
+      ],
+      "method": "previous_visual_review_and_consolidated_footnote_page4",
+      "finding": "Article 20(3) amends Article 2(1)(d) TT20; Article 20(4) repeals Articles 3-6 TT20, not Article 8.",
+      "use": "limited_effect_chain_check",
+      "sha256": "45eb8d74de376f36c6231dcd04057709c90e36a98ecf995ec731343a6c7eb3bb"
+    },
+    {
+      "document": "TT01/2025",
+      "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/01-byt.pdf",
+      "file": "audit/transition-review/01-2025-tt-byt.pdf",
+      "pages": [
+        15,
+        16
+      ],
+      "method": "visual_pdf_review",
+      "finding": "Article 13(4) supplements Article 2(1)(d) TT20, not Article 8. Official portal published copy; signature not authenticated.",
+      "use": "limited_effect_chain_check",
+      "sha256": "c373b92801a70651b9b45234cd324cf640b2936b361872c8dd7cae6f617f58b8"
+    },
+    {
+      "document": "TT18/2025",
+      "url": "https://vbpl.moj.gov.vn/TW/Pages/vbpq-toanvan.aspx?ItemID=179250&Keyword=",
+      "method": "indexed_primary_database_excerpt_only",
+      "finding": "Indexed Article 4(4) concerns Article 2(1)(d) TT20 and reorganized medical centers. Direct PDF download failed HTTP403; not a full fresh-text verification.",
+      "use": "lead_with_limitation_not_ingested"
+    },
+    {
+      "document": "TT06/2026",
+      "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2026/4/06-byt.pdf",
+      "file": "audit/transition-review/06-2026-tt-byt.pdf",
+      "pages": [
+        3
+      ],
+      "method": "visual_pdf_review_of_article5_2_3_and_text_screening",
+      "finding": "Reviewed Article 5(2),(3) concerns electronic form signature and ICD code in TT01/2025; no Article 8 TT20 amendment identified in reviewed material.",
+      "use": "limited_effect_chain_check",
+      "sha256": "1216d8a2f980c56c5c300a7ab00e8cbb063d0ff0b0cfb404cf195eae6dbc5c92"
+    },
+    {
+      "document": "TT20 database metadata",
+      "url": "https://vbpl.moj.gov.vn/boyte/Pages/vbpq-thuoctinh.aspx?ItemID=159368",
+      "method": "indexed_primary_database_metadata",
+      "finding": "Indexed as partly expired; effective date 2023-03-01. Direct history page unavailable; indexed metadata is not a complete fresh legal history.",
+      "use": "lead_with_limitation"
+    },
+    {
+      "document": "2026 replacement drafts",
+      "url": "https://adminmoh.moh.gov.vn/documents/20182/212437/2705.%20Thong%20tu%20ban%20hanh%20DM%20thuoc_21.01.2026.pdf/b56c1959-ba7b-4555-bbaa-f17fe3eeabf5",
+      "method": "search_result_draft_screening",
+      "finding": "Draft/revision materials are not a promulgated replacement and were excluded.",
+      "use": "excluded_not_ingested"
+    }
+  ],
+  "remaining": [
+    "TT40/2014 historical rates not ingested",
+    "Hospital pharmacy/BHYT validation pending",
+    "Comprehensive current legal chain review remains open"
+  ]
+}

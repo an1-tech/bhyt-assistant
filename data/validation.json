@@ -1,0 +1,19 @@
+{
+  "drug_unique_stt": 1037,
+  "drug_route_rows": 1133,
+  "radiopharmaceuticals_unique_stt": 59,
+  "radiopharmaceutical_route_rows": 61,
+  "oncology_unique_stt": 81,
+  "oncology_route_rows": 81,
+  "primary_chunks": 1243,
+  "supporting_chunks": 533,
+  "archive_chunks": 15,
+  "sample_official_name_matches": {
+    "Trastuzumab": true,
+    "Abiraterone acetate": true,
+    "Atropin sulfat": true,
+    "Vitamin PP": true
+  },
+  "full_row_by_row_clinical_validation": false,
+  "source_repair": "CV3293/CV5079 re-fetched with explicit UTF-8"
+}

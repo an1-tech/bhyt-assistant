@@ -1,0 +1,65 @@
+{
+  "interface_version": "1.2",
+  "date": "2026-11-06",
+  "scope": "UI and client interactions only; engine and medical source rows unchanged",
+  "design_contract": "DESIGN.md",
+  "direction": {
+    "style": "Achromatic ledger",
+    "seed": 1920156577,
+    "redraws": 0
+  },
+  "checks": {
+    "existing_tests_passed": 45,
+    "existing_tests_failed": 0,
+    "javascript_syntax": "passed",
+    "source_lint_failures": 0,
+    "source_lint_warnings": 0,
+    "inspector_before": {
+      "fail": 0,
+      "warn": 0
+    },
+    "inspector_after": {
+      "fail": 0,
+      "warn": 0
+    },
+    "widths": [
+      1440,
+      768,
+      390
+    ],
+    "extra_widths": [
+      375,
+      844
+    ],
+    "reduced_motion": "passed in real browser; transition 0s and auto scroll",
+    "screenshots_visually_reviewed": true
+  },
+  "interaction_checks": [
+    "department inside form",
+    "direct source links visible, excerpts expandable",
+    "Paracetamol to oral followup",
+    "Metformin new lookup resets context",
+    "reopen Paracetamol history and choose injection returns Paracetamol, not Metformin",
+    "phone filter expands/collapses with aria-expanded",
+    "filter badge count reflects actual selected criteria",
+    "zero results reset returns all 1096 items",
+    "Metfo ArrowDown selects Metformin first",
+    "Escape hides suggestions and returns focus to question",
+    "new lookup clears only current session"
+  ],
+  "privacy": {
+    "api_calls": 0,
+    "api_key_required": false,
+    "question_history_persisted_to_disk": false,
+    "original_visible_queries_restored_in_updated_tab": 5
+  },
+  "unverified": [
+    "Real OpenAI API and embeddings not enabled or called",
+    "Native screen-reader speech, physical mobile devices, OS-level largest text size",
+    "Clinical and hospital insurance validation remain pending"
+  ],
+  "artifacts": {
+    "backup": "D:/Vinmec/backups/ui-before-2026-11-06.zip",
+    "archive": "D:/Vinmec/bhyt-chatbot-toan-vien-ui-v1.2.zip"
+  }
+}

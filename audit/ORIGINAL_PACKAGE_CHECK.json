@@ -1,0 +1,29 @@
+{
+  "all_match": true,
+  "files": {
+    ".env.example": true,
+    ".gitignore": true,
+    "README.md": true,
+    "audit/CV3293_2025.txt": true,
+    "audit/CV5079_2025.txt": true,
+    "audit/VALIDATION_REPORT.json": true,
+    "audit/data_repairs.json": true,
+    "data/RAG_INSTRUCTIONS.md": true,
+    "data/aliases.json": true,
+    "data/drugs_appendix_I.jsonl": true,
+    "data/policy_rules.json": true,
+    "data/radiopharmaceuticals_appendix_II.jsonl": true,
+    "data/rag_current.jsonl": true,
+    "data/validation.json": true,
+    "engine.py": true,
+    "preview.html": true,
+    "server.py": true,
+    "start-windows.bat": true,
+    "start.sh": true,
+    "tests/test_app.py": true,
+    "tools/build_embeddings.py": true,
+    "web/app.js": true,
+    "web/index.html": true,
+    "web/style.css": true
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "review_date": "2026-11-07",
+  "source_file": "sources/15-vbhn-byt-2024.pdf",
+  "source_pdf_sha256": "24edc424707ca6caee317560499a704b1549913e2d91df8844d1d214fb242e61",
+  "chunks_file": "rag_transition.jsonl",
+  "chunks_sha256": "6ad0a02e2d2244517e8e932f9341c90e48020aaebe110b458fb87830f0027558",
+  "chunk_ids": [
+    "TT20_2022-VBHN15-A8-P4",
+    "TT20_2022-VBHN15-A8-P5",
+    "TT20_2022-VBHN15-A7-K1-P4"
+  ],
+  "article8_ids": [
+    "TT20_2022-VBHN15-A8-P4",
+    "TT20_2022-VBHN15-A8-P5"
+  ],
+  "effective_date_id": "TT20_2022-VBHN15-A7-K1-P4",
+  "mapping": {
+    "TT20-PLI-0362-R440": {
+      "ingredient": "Doxorubicin",
+      "route": "Tiêm",
+      "scope": "Tiêm, dạng liposome.",
+      "branches": [
+        {
+          "used_before": "2015-01-01",
+          "rate_reference": "article_8_explicit_100_percent"
+        }
+      ],
+      "continued_after": "2023-03-01",
+      "note": "Xác định có phải dạng liposome, đã sử dụng trước 01/01/2015 và còn sử dụng sau 01/03/2023 hay không.",
+      "eligibility": "not_evaluated",
+      "source_ids": [
+        "TT20_2022-VBHN15-A8-P4",
+        "TT20_2022-VBHN15-A8-P5",
+        "TT20_2022-VBHN15-A7-K1-P4"
+      ]
+    },
+    "TT20-PLI-0365-R443": {
+      "ingredient": "Everolimus",
+      "route": "Tiêm, uống",
+      "scope": "Tiêm hoặc uống, điều trị ung thư.",
+      "branches": [
+        {
+          "used_before": "2019-01-01",
+          "rate_reference": "TT40_2014_external_reference"
+        }
+      ],
+      "continued_after": "2023-03-01",
+      "note": "Đối chiếu việc dùng điều trị ung thư trước 01/01/2019 và còn dùng sau 01/03/2023; tỷ lệ chuyển tiếp dẫn chiếu TT40/2014.",
+      "eligibility": "not_evaluated",
+      "source_ids": [
+        "TT20_2022-VBHN15-A8-P4",
+        "TT20_2022-VBHN15-A8-P5",
+        "TT20_2022-VBHN15-A7-K1-P4"
+      ]
+    },
+    "TT20-PLI-0373-R451": {
+      "ingredient": "L-asparaginase",
+      "route": "Tiêm",
+      "scope": "Chỉ dạng L-asparaginase erwinia, đường tiêm.",
+      "branches": [
+        {
+          "used_before": "2019-01-01",
+          "rate_reference": "TT40_2014_external_reference"
+        }
+      ],
+      "continued_after": "2023-03-01",
+      "note": "Xác định đúng dạng erwinia, dùng trước 01/01/2019 và còn dùng sau 01/03/2023; không mở rộng sang mọi dạng L-asparaginase.",
+      "eligibility": "not_evaluated",
+      "source_ids": [
+        "TT20_2022-VBHN15-A8-P4",
+        "TT20_2022-VBHN15-A8-P5",
+        "TT20_2022-VBHN15-A7-K1-P4"
+      ]
+    },
+    "TT20-PLI-0381-R459": {
+      "ingredient": "Paclitaxel",
+      "route": "Tiêm",
+      "scope": "Tiêm, dạng liposome hoặc polymeric micelle.",
+      "branches": [
+        {
+          "used_before": "2019-01-01",
+          "rate_reference": "TT40_2014_external_reference"
+        }
+      ],
+      "continued_after": "2023-03-01",
+      "note": "Xác định dạng liposome/polymeric micelle, dùng trước 01/01/2019 và còn dùng sau 01/03/2023.",
+      "eligibility": "not_evaluated",
+      "source_ids": [
+        "TT20_2022-VBHN15-A8-P4",
+        "TT20_2022-VBHN15-A8-P5",
+        "TT20_2022-VBHN15-A7-K1-P4"
+      ]
+    },
+    "TT20-PLI-0394-R473": {
+      "ingredient": "Erlotinib",
+      "route": "Uống",
+      "scope": "Uống, điều trị ung thư.",
+      "branches": [
+        {
+          "used_before": "2015-01-01",
+          "rate_reference": "article_8_explicit_100_percent"
+        }
+      ],
+      "continued_after": "2023-03-01",
+      "note": "Đối chiếu việc dùng trước 01/01/2015 và còn dùng sau 01/03/2023; đọc cả trường hợp đổi sang/từ Gefitinib.",
+      "eligibility": "not_evaluated",
+      "source_ids": [
+        "TT20_2022-VBHN15-A8-P4",
+        "TT20_2022-VBHN15-A8-P5",
+        "TT20_2022-VBHN15-A7-K1-P4"
+      ]
+    },
+    "TT20-PLI-0395-R474": {
+      "ingredient": "Gefitinib",
+      "route": "Uống",
+      "scope": "Uống, điều trị ung thư.",
+      "branches": [
+        {
+          "used_before": "2015-01-01",
+          "rate_reference": "article_8_explicit_100_percent"
+        }
+      ],
+      "continued_after": "2023-03-01",
+      "note": "Đối chiếu việc dùng trước 01/01/2015 và còn dùng sau 01/03/2023; đọc cả trường hợp đổi sang/từ Erlotinib.",
+      "eligibility": "not_evaluated",
+      "source_ids": [
+        "TT20_2022-VBHN15-A8-P4",
+        "TT20_2022-VBHN15-A8-P5",
+        "TT20_2022-VBHN15-A7-K1-P4"
+      ]
+    },
+    "TT20-PLI-0401-R480": {
+      "ingredient": "Sorafenib",
+      "route": "Uống",
+      "scope": "Uống; phân biệt chỉ định ung thư gan/thận tiến triển với chỉ định khác.",
+      "branches": [
+        {
+          "used_before": "2015-01-01",
+          "indication": "ung thư tế bào biểu mô gan, thận tiến triển",
+          "rate_reference": "article_8_explicit_100_percent"
+        },
+        {
+          "used_after": "2015-01-01",
+          "indication": "ung thư tế bào biểu mô thận tiến triển",
+          "rate_reference": "TT40_2014_external_reference"
+        }
+      ],
+      "continued_after": "2023-03-01",
+      "note": "Phân biệt gan/thận tiến triển, mốc trước hoặc sau 01/01/2015 và việc còn dùng sau 01/03/2023; không áp nhánh này chỉ vì tên thuốc hoặc chỉ định tuyến giáp.",
+      "eligibility": "not_evaluated",
+      "source_ids": [
+        "TT20_2022-VBHN15-A8-P4",
+        "TT20_2022-VBHN15-A8-P5",
+        "TT20_2022-VBHN15-A7-K1-P4"
+      ]
+    }
+  },
+  "hospital_validation": "pending",
+  "historical_rate_dependency": {
+    "document": "40/2014/TT-BYT",
+    "status": "not_ingested",
+    "use": "Only via Article 8 reference; do not activate a repealed document as general current policy"
+  },
+  "legal_review": {
+    "date": "2026-11-07",
+    "status": "bounded_search_no_article8_change_found",
+    "exhaustive": false
+  }
+}

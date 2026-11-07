@@ -1,0 +1,58 @@
+{
+  "as_of": "2026-11-06",
+  "scope": "Imported drug appendices and selected legal chunks, with a verified Article 8 TT20/2022 supplement; not all Vietnamese health-insurance legislation.",
+  "latest_search_result": "No promulgated replacement of TT20 drug list found in searches as of this date; official Sep/Oct 2026 reports still describe revision. This is a bounded search finding, not proof of absence.",
+  "exclusion_rules": [
+    {
+      "document": "TT20_2022",
+      "articles": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "valid_to": "2025-01-01",
+      "basis": "TT37 Article 20(4)"
+    },
+    {
+      "document": "TT20_2022",
+      "article": 2,
+      "note": "Original wording amended by TT37 Article 20(3); use consolidated source and CV3293."
+    },
+    {
+      "document": "TT37_2024",
+      "article": 7,
+      "note": "Do not apply in reimbursement until condition under Article 20(2) is met; not a wholesale immediate replacement of TT20 hospital columns."
+    }
+  ],
+  "supporting_rules": [
+    {
+      "document": "TT01_2025",
+      "note": "Read together with TT18_2025 and TT06_2026. Default off to avoid partial-version errors."
+    },
+    {
+      "document": "TT06_2026",
+      "note": "General effective date 2026-07-01; Article 5(2),(3) effective 2026-06-01."
+    }
+  ],
+  "retrieval_policy": {
+    "primary": "rag_current.jsonl",
+    "background": "Additional supporting sources remain inactive; no rag_supporting.jsonl exists in this installation.",
+    "never_index": "rag_archive_do_not_index.jsonl; drafts; news articles; raw duplicate files",
+    "supplement": "rag_transition.jsonl; complete Article 8 TT20/2022 plus Article 7(1) only; validated against transition_rules.json"
+  },
+  "not_included": [
+    "Vinmec local drug list and claim agreement",
+    "brand-to-ingredient product registry",
+    "patient entitlement and referral verification",
+    "hospital clinical validation",
+    "embeddings/vector database/LLM deployment"
+  ],
+  "transition_review": {
+    "date": "2026-11-07",
+    "report": "audit/transition-review/BAO-CAO-CHUYEN-TIEP.md",
+    "status": "complete_article_ingested_bounded_legal_review",
+    "historical_rates_tt40": "not_ingested",
+    "snapshot_unchanged": "2026-11-06"
+  }
+}

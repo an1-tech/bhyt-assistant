@@ -1,0 +1,55 @@
+{
+  "checked_as_of": "2026-11-07",
+  "method": "Tìm kiếm web công khai; ưu tiên Bộ Y tế, Cục KCB, Cục Quản lý Dược, BHXH, Sở Y tế và bản PDF Bộ Y tế đăng lại tại bệnh viện công; đọc PDF và kết xuất trang mẫu. Ngày crawler và ngày đăng lại không dùng làm ngày ban hành.",
+  "scope": "Nguồn BHYT và bốn chủ đề lâm sàng phục vụ prototype; chưa là rà soát pháp lý/lâm sàng toàn diện cho toàn viện.",
+  "queries": [
+    "20/2022/TT-BYT 37/2024/TT-BYT 2026 thay thế dự thảo",
+    "site:kcb.vn Hướng dẫn chẩn đoán và điều trị ung thư vú 2026 3128",
+    "Hướng dẫn chẩn đoán và điều trị ung thư dạ dày 2026 Quyết định",
+    "Hướng dẫn chẩn đoán và điều trị ung thư phổi không tế bào nhỏ 2025 2026 4825 1248",
+    "Hướng dẫn chẩn đoán và điều trị đái tháo đường típ 2 2026 5481 1353",
+    "site:moh.gov.vn Dược thư quốc gia 2026 3445",
+    "site:dav.gov.vn Trastuzumab hướng dẫn sử dụng 2026",
+    "Herceptin tờ hướng dẫn site:roche.com.vn"
+  ],
+  "included_documents": [
+    "QD3128_2020",
+    "QD3127_2020",
+    "QD4825_2018",
+    "QD1248_2019",
+    "QD5481_2020",
+    "QD1353_2021"
+  ],
+  "rejected_or_deferred": [
+    {
+      "source": "https://adminmoh.moh.gov.vn/documents/20182/212437/2705.%20Thong%20tu%20ban%20hanh%20DM%20thuoc_21.01.2026.pdf/b56c1959-ba7b-4555-bbaa-f17fe3eeabf5",
+      "reason": "Dự thảo danh mục BHYT; không đưa vào corpus trả lời."
+    },
+    {
+      "source": "https://moh.gov.vn/documents/20182/212437/2348.%2BBao%2Bcao%2Btong%2Bket%2Bthi%2Bhanh%2BTT20%2C%2BTT%2B37_06.01.2026.signed.pdf/8140625b-f964-4c97-9d5d-d23762543ae0?version=1.0",
+      "reason": "Báo cáo tổng kết, không phải thông tư thay thế; không tạo quy tắc thanh toán mới."
+    },
+    {
+      "source": "https://www2.en.baochinhphu.vn/muc-huong-bhyt-100-van-co-the-phat-sinh-chi-phi-khi-kham-chua-benh-102261103104557976.htm",
+      "reason": "Tin giải thích 03/11/2026 dùng tham khảo khi tìm kiếm; không thay văn bản gốc hoặc nhập quy tắc từ báo chí."
+    },
+    {
+      "source": "https://daithaoduong.kcb.vn/huong-dan-chan-doan-va-dieu-tri-dai-thao-duong-tip-2&p=4",
+      "reason": "Trang Cục KCB xác định cặp 5481/2020 và 1353/2021; host tải PDF không phân giải DNS trong môi trường. Bản thay thế từ Sở Y tế còn trống số/ngày, lưu chờ xác minh."
+    },
+    {
+      "source": "https://dav.gov.vn/upload_images/files/153_QD_QLD%202025_signed.pdf",
+      "reason": "Quyết định đăng ký không đồng nghĩa toàn văn nhãn/HDSD của đúng sản phẩm; không nhập làm nhãn và không sinh alias biệt dược."
+    },
+    {
+      "source": "https://cms.baochinhphu.vn/giai-phap-truy-xuat-thong-tin-xuat-ban-pham-chong-sach-gia-sach-lau-102230515174154458.htm",
+      "reason": "Thông tin xuất bản Dược thư; không phải toàn văn chuyên luận. Không nhập từ bản sao thương mại chưa xác minh."
+    },
+    {
+      "source": "Tài liệu ung thư vú 2026 trên Scribd, số/công văn còn trống",
+      "reason": "Chưa có văn bản ban hành chính thức đã xác minh; loại khỏi bộ trả lời."
+    }
+  ],
+  "new_bhyt_rules_ingested": [],
+  "freshness_conclusion": "Không tìm được bản thay thế đã ký đủ điều kiện để thay toàn bộ bộ nguồn BHYT trong phạm vi lượt tìm kiếm này. Không suy ra rằng không tồn tại văn bản mới. Các nguồn lâm sàng đã lưu cũng chưa được chứng nhận là bản mới nhất/hiện hành bởi bệnh viện."
+}
