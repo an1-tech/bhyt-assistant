@@ -2,6 +2,7 @@
 import hashlib
 import json
 import re
+from indication_rules import load_indication_rules, branch_for, formulation_for
 
 FIELD_LABELS={"diagnosis":"Chẩn đoán / chỉ định điều trị","stage":"Giai đoạn / mức độ bệnh",
     "biomarkers":"Xét nghiệm / dấu ấn liên quan","treatment":"Bối cảnh điều trị",
@@ -19,6 +20,10 @@ class CaseWorkbench:
             row=corpus.by_id.get(id)
             if not row or row["ingredient"]!=profile["ingredient"] or hashlib.sha256(row.get("conditions_verbatim","").encode()).hexdigest()!=profile["note_sha256"]:
                 raise ValueError("Case profile is stale: "+id)
+        from indication_chat import TOPICS
+        _,self.rules=load_indication_rules(corpus.data,corpus.by_id,TOPICS)
+        if set(self.profiles)-set(self.rules):
+            raise ValueError("Case profile has no source-bound rule")
 
     def drugs(self,query):
         from engine import normalize
@@ -87,24 +92,28 @@ class CaseWorkbench:
             add(key,label,status,display,
                 "Đối chiếu sơ bộ với ghi chú danh mục; cần đọc đầy đủ nguyên văn và quy định chung.",source_ids)
         candidate=None
-        if schema["has_preliminary_profile"]:
-            stt=row["stt"]
-            if stt==402:
-                check("indication","Chỉ định trong ghi chú",{"breast","gastric"})
-                check("her2","Điều kiện HER2",{"positive"})
-                if answers.get("indication")=="gastric":check("extent","Mức độ ung thư dạ dày",{"advanced"})
-                if all(s=="matched" for s in checks):
-                    candidate={"percentage":60 if answers["indication"]=="breast" else 50,
-                        "scope":"Ung thư vú có HER2 dương tính" if answers["indication"]=="breast" else "Ung thư dạ dày tiến xa hoặc di căn có HER2 dương tính","source_id":id}
-                add("facility","Phạm vi áp dụng tại cơ sở","needs_review","Chưa xác minh",
-                    "Ghi chú có điều kiện cơ sở. Phải đọc cùng TT37 và hướng dẫn áp dụng, không dùng riêng cột hạng cũ.",source_ids)
-            elif stt in (394,395):
-                check("indication","Chỉ định trong ghi chú",{"nsclc"});check("egfr","Điều kiện EGFR",{"positive"})
-                if all(s=="matched" for s in checks):candidate={"percentage":50,"scope":"Ung thư phổi không phải tế bào nhỏ có EGFR dương tính","source_id":id}
+        rule=self.rules.get(id)
+        if schema["has_preliminary_profile"] and rule:
+            # Rates come from data/indication_rules.json, validated against the note.
+            if rule["kind"]=="indication_branches":
+                topics={b["topic"] for b in rule["branches"]}
+                check("indication","Chỉ định trong ghi chú",topics)
+                markers=list(dict.fromkeys(r["marker"] for b in rule["branches"] for r in b.get("requirements",[])))
+                for marker in markers:
+                    label=next(r["label"] for b in rule["branches"] for r in b.get("requirements",[]) if r["marker"]==marker)
+                    check(marker,"Điều kiện "+label,{"positive"})
+                if answers.get("indication")=="gastric" and any(f["key"]=="extent" for f in schema["fields"]):
+                    check("extent","Mức độ ung thư dạ dày",{"advanced"})
+                branch=branch_for(rule,answers.get("indication",""))
+                if branch and all(s=="matched" for s in checks):
+                    candidate={"percentage":branch["rate"],"scope":branch["scope"][:1].upper()+branch["scope"][1:],"source_id":id}
+                if rule.get("common_verbatim"):
+                    add("facility","Phạm vi áp dụng tại cơ sở","needs_review","Chưa xác minh",
+                        "Ghi chú có điều kiện cơ sở. Phải đọc cùng TT37 và hướng dẫn áp dụng, không dùng riêng cột hạng cũ.",source_ids)
             else:
                 check("formulation","Dạng thuốc trong ghi chú",set(allowed["formulation"])-{""})
-                value=answers.get("formulation")
-                if value:candidate={"percentage":100 if value=="other" else 50,"scope":next(x["label"] for x in schema["fields"][0]["choices"] if x["value"]==value),"source_id":id}
+                form=formulation_for(rule,answers.get("formulation",""))
+                if form:candidate={"percentage":form["rate"],"scope":form["label"],"source_id":id}
         else:
             add("source_note","Điều kiện riêng trong danh mục","needs_review","Có ghi chú" if row.get("conditions_verbatim") else "Ô ghi chú trống",
                 "Điều kiện của dòng này cần đối chiếu trực tiếp theo nguyên văn cùng quy định chung. Ô trống không suy ra thanh toán 100%.",source_ids)

@@ -7,7 +7,7 @@ from engine import Corpus,load_env,ROOT,SNAPSHOT,RETRIEVAL_VERSION
 from catalog import metadata,catalog,DEPARTMENTS
 from case_workbench import CaseWorkbench
 
-APP_VERSION="1.8"
+APP_VERSION="1.9"
 INSTANCE_ID=hashlib.sha256(str(ROOT.resolve()).casefold().encode()).hexdigest()[:20]
 load_env()
 

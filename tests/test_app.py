@@ -24,7 +24,24 @@ class EngineTests(unittest.TestCase):
         r=self.c.chat('Trastuzmab');self.assertEqual(r['status'],'ambiguous')
         self.assertIn('Trastuzumab',r['suggestions']);self.assertFalse(r['results'])
     def test_brand_without_verified_mapping(self):
-        self.assertEqual(self.c.chat('Herceptin')['status'],'unknown')
+        self.assertEqual(self.c.chat('Kadcyla')['status'],'unknown')
+    def test_verified_brand_mapping_resolves_with_source(self):
+        r=self.c.converse('Herceptin điều trị ung thư vú có BHYT?')
+        self.assertEqual(r['results'][0]['ingredient'],'Trastuzumab')
+        self.assertTrue(any('ema.europa.eu' in n and 'Việt Nam' in n for n in r['brand_notes']))
+        self.assertEqual(r['status'],'answered');self.assertEqual(r['lookup_status'],'needs_info')
+    def test_unverified_alias_entries_are_ignored(self):
+        import json,tempfile,shutil
+        from pathlib import Path
+        with tempfile.TemporaryDirectory(dir=self.c.data.parent/'audit') as tmp:
+            data=Path(tmp)
+            for f in self.c.data.iterdir():
+                if f.is_file():shutil.copy2(f,data/f.name)
+            shutil.copytree(self.c.data/'sources',data/'sources')
+            (data/'aliases.json').write_text(json.dumps([{'brand':'Fakebrand','ingredient':'Trastuzumab','verified':False,'source_url':'https://example.org'},{'brand':'Nosource','ingredient':'Trastuzumab','verified':True}]),encoding='utf-8')
+            c=Corpus(data)
+            self.assertEqual(c.aliases,{})
+            self.assertFalse(c.resolve('Fakebrand Nosource'))
     def test_route_followup(self):
         r=self.c.chat('Lidocain hydroclodrid');self.assertIn('Khí dung',r['followups'])
         next=self.c.chat('Khí dung',r['state']);self.assertEqual(next['results'][0]['routes'],['Khí dung'])

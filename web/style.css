@@ -6,3 +6,4 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 
 .assistant button,.assistant summary,.assistant a{scroll-margin-top:140px;scroll-margin-bottom:280px}
+.followup-chips{margin-top:16px}.followup-chips strong{display:block;font-size:13px;color:var(--muted);margin-bottom:8px}

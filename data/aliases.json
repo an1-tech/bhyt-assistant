@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "brand": "Herceptin",
+    "ingredient": "Trastuzumab",
+    "verified": true,
+    "source_url": "https://www.ema.europa.eu/en/medicines/human/EPAR/herceptin",
+    "source_title": "EMA EPAR Herceptin — INN: trastuzumab",
+    "checked_as_of": "2026-11-07",
+    "verification_scope": "Tên biệt dược gốc ↔ hoạt chất theo EMA; chưa xác minh số đăng ký, hàm lượng hay nhãn lưu hành tại Việt Nam."
+  },
+  {
+    "brand": "Tarceva",
+    "ingredient": "Erlotinib",
+    "verified": true,
+    "source_url": "https://www.ema.europa.eu/en/medicines/human/EPAR/tarceva",
+    "source_title": "EMA EPAR Tarceva — INN: erlotinib",
+    "checked_as_of": "2026-11-07",
+    "verification_scope": "Tên biệt dược gốc ↔ hoạt chất theo EMA; chưa xác minh số đăng ký, hàm lượng hay nhãn lưu hành tại Việt Nam."
+  },
+  {
+    "brand": "Iressa",
+    "ingredient": "Gefitinib",
+    "verified": true,
+    "source_url": "https://www.ema.europa.eu/en/medicines/human/EPAR/iressa",
+    "source_title": "EMA EPAR Iressa — active substance: gefitinib",
+    "checked_as_of": "2026-11-07",
+    "verification_scope": "Tên biệt dược gốc ↔ hoạt chất theo EMA; chưa xác minh số đăng ký, hàm lượng hay nhãn lưu hành tại Việt Nam."
+  }
+]

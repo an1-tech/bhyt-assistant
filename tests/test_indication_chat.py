@@ -129,7 +129,7 @@ class IndicationChatTests(unittest.TestCase):
         a=self.qa(self.ask("Trastuzumab uống điều trị ung thư vú có BHYT?"))
         self.assertEqual(a["status"],"insufficient_evidence")
         self.assertIsNone(a["source_rate"])
-        self.assertFalse(self.ask("Herceptin điều trị ung thư vú có BHYT?")["results"])
+        self.assertFalse(self.ask("Kadcyla điều trị ung thư vú có BHYT?")["results"])
         self.assertEqual(self.c.converse("Trastuzumab",as_of="2027-01-01")["status"],"unsupported_date")
 
     def test_source_links_are_real_and_legal_core_stays_separate(self):

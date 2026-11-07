@@ -46,3 +46,7 @@ Keep the existing tokens and case layout. Put newly added clinical references fi
 
 ## Chat-only workflow v1.8 · 07/11/2026
 This section replaces the v1.6 case-form route as the primary experience. One question: does the source provide BHYT payment for this medicine in this disease/indication? The user's requirement is one chatbot with no patient-detail form. Keep Achromatic ledger, local Geist and the existing palette. Main chat column is capped at 840px and centred; sources retain the wider two-panel desktop layout. One textarea, visible label, Enter to send, Shift+Enter to add a line. Show source conditions in the reply, never require them as patient inputs. Preserve chat order, new-chat reset and copy with provenance. Sources are secondary reference material. No disease-matched conclusion from an unrelated earlier topic. The inspector's unused-canvas warning reflects a horizontal-nav/sidebar heuristic; the capped conversation has equal margins and is intentional.
+
+
+## Follow-up chips v1.9 · 07/11/2026
+Keep tokens, layout and the single chat input. Optional "Hỏi tiếp" chips under an answer reuse the existing .actions button style (>=44px); they send a question, never open a form. Brand-conversion notes use the existing notice style. Drug branches/rates come from data/indication_rules.json.

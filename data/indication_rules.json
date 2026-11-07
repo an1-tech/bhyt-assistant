@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "snapshot": "2026-11-06",
+  "review_status": "prototype_extraction_not_hospital_validated",
+  "scope": "Nhánh chỉ định/dạng thuốc tách từ ô ghi chú danh mục TT20/2022 (bản hợp nhất). Mỗi tỷ lệ và điều kiện phải xuất hiện nguyên văn trong ghi chú nguồn; bộ nạp từ chối nếu ghi chú đổi hoặc trích đoạn không khớp. Chưa được Dược/BHYT bệnh viện thẩm định.",
+  "how_to_add": "Thêm một mục cho record_id, sao chép note_sha256 = SHA-256 của conditions_verbatim, mỗi nhánh có verbatim là các đoạn chép nguyên văn từ ghi chú (chứa đúng tỷ lệ), topic phải có trong TOPICS của indication_chat.py. Ghi reviewed_by khi Dược/BHYT duyệt.",
+  "rules": [
+    {
+      "record_id": "TT20-PLI-0402-R481",
+      "ingredient": "Trastuzumab",
+      "note_sha256": "14a96297e74ff73f0dfb2874fe037c9b2fe015e6002301f29e3a38ffbad2c1a9",
+      "kind": "indication_branches",
+      "reviewed_by": null,
+      "branches": [
+        {
+          "topic": "breast",
+          "disease": "ung thư vú",
+          "scope": "ung thư vú có HER2 dương tính",
+          "rate": 60,
+          "requirements": [{"marker": "her2", "label": "HER2"}],
+          "conditions": ["HER2 dương tính."],
+          "verbatim": ["Thanh toán 60% đối với ung thư vú có HER2 dương tính"]
+        },
+        {
+          "topic": "gastric",
+          "disease": "ung thư dạ dày",
+          "scope": "ung thư dạ dày tiến xa hoặc di căn có HER2 dương tính",
+          "rate": 50,
+          "requirements": [{"marker": "her2", "label": "HER2"}],
+          "conditions": ["HER2 dương tính.", "Ung thư dạ dày tiến xa hoặc di căn."],
+          "verbatim": ["thanh toán 50% đối với ung thư dạ dày tiến xa hoặc di căn có HER2 dương tính"]
+        }
+      ],
+      "common_conditions": ["Phạm vi cơ sở và các quy định thanh toán chung phải đọc cùng TT37/2024 và hướng dẫn liên quan; không dùng riêng cột hạng bệnh viện cũ."],
+      "common_verbatim": ["Quỹ bảo hiểm y tế thanh toán tại bệnh viện hạng đặc biệt, hạng I và bệnh viện chuyên khoa ung bướu hạng II."],
+      "parent_topics": {}
+    },
+    {
+      "record_id": "TT20-PLI-0394-R473",
+      "ingredient": "Erlotinib",
+      "note_sha256": "015cdf4e55c4025259b91519a72a4a79ea1378a70b16dc4fc97632302a5cec2f",
+      "kind": "indication_branches",
+      "reviewed_by": null,
+      "branches": [
+        {
+          "topic": "nsclc",
+          "disease": "ung thư phổi không phải tế bào nhỏ",
+          "scope": "ung thư phổi không phải tế bào nhỏ có EGFR dương tính",
+          "rate": 50,
+          "requirements": [{"marker": "egfr", "label": "EGFR"}],
+          "conditions": ["Đúng thể ung thư phổi không phải tế bào nhỏ; EGFR dương tính."],
+          "verbatim": ["ung thư phổi thể không phải tế bào nhỏ", "có EGFR dương tính", "thanh toán 50%"]
+        }
+      ],
+      "common_conditions": ["Đọc cùng các quy định thanh toán chung và điều kiện chuyển tiếp nếu có."],
+      "common_verbatim": [],
+      "parent_topics": {"lung": "Quy định này có giới hạn về thể bệnh và EGFR; không áp dụng chung cho mọi ung thư phổi."}
+    },
+    {
+      "record_id": "TT20-PLI-0395-R474",
+      "ingredient": "Gefitinib",
+      "note_sha256": "17164b86aec062dca5937061b1b2e820987944de70356f13876f50aa1e07b19f",
+      "kind": "indication_branches",
+      "reviewed_by": null,
+      "branches": [
+        {
+          "topic": "nsclc",
+          "disease": "ung thư phổi không phải tế bào nhỏ",
+          "scope": "ung thư phổi không phải tế bào nhỏ có EGFR dương tính",
+          "rate": 50,
+          "requirements": [{"marker": "egfr", "label": "EGFR"}],
+          "conditions": ["Đúng thể ung thư phổi không phải tế bào nhỏ; EGFR dương tính."],
+          "verbatim": ["ung thư phổi thể không phải tế bào nhỏ", "có EGFR dương tính", "thanh toán 50%"]
+        }
+      ],
+      "common_conditions": ["Đọc cùng các quy định thanh toán chung và điều kiện chuyển tiếp nếu có."],
+      "common_verbatim": [],
+      "parent_topics": {"lung": "Quy định này có giới hạn về thể bệnh và EGFR; không áp dụng chung cho mọi ung thư phổi."}
+    },
+    {
+      "record_id": "TT20-PLI-0362-R440",
+      "ingredient": "Doxorubicin",
+      "note_sha256": "746160e047225f9899f5dffc522b1026a5778a2c9e37e9ced2e49a2ddca55d1b",
+      "kind": "formulation_note",
+      "reviewed_by": null,
+      "formulations": [
+        {"value": "liposome", "label": "Dạng liposome", "rate": 50, "verbatim": ["thanh toán 50% đối với dạng liposome"]},
+        {"value": "other", "label": "Dạng khác đã xác định", "rate": 100, "verbatim": ["thanh toán 100% đối với các dạng khác"]}
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0381-R459",
+      "ingredient": "Paclitaxel",
+      "note_sha256": "96beb2bea53f947ec2c9cc9047071db0120f7fb1be1925c9801482163a1bdac2",
+      "kind": "formulation_note",
+      "reviewed_by": null,
+      "formulations": [
+        {"value": "liposome", "label": "Dạng liposome", "rate": 50, "verbatim": ["thanh toán 50% đối với dạng liposome và dạng polymeric micelle"]},
+        {"value": "polymeric", "label": "Dạng polymeric micelle", "rate": 50, "verbatim": ["thanh toán 50% đối với dạng liposome và dạng polymeric micelle"]},
+        {"value": "other", "label": "Dạng khác đã xác định", "rate": 100, "verbatim": ["thanh toán 100% đối với các dạng khác"]}
+      ]
+    }
+  ]
+}
