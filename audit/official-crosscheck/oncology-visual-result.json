@@ -1,0 +1,155 @@
+{
+ "summary": {
+  "checked": 18,
+  "match": 18,
+  "mismatch": 0,
+  "checked_as_of": "2026-11-07",
+  "method": "Đọc bằng mắt ảnh trang PDF bản hợp nhất chính thức 15/VBHN-BYT (data/sources/15-vbhn-byt-2024.pdf, trang 30–34, render 1,6x), chép lại đường dùng, 4 cột hạng bệnh viện và nguyên văn ghi chú; sau đó tools/verify_visual_check.py so tự động với data/drugs_appendix_I.jsonl. Người đọc: Claude (AI). Cần Dược/BHYT xác nhận lại."
+ },
+ "rows": [
+  {
+   "stt": 347,
+   "ingredient": "Bendamustine",
+   "page": 30,
+   "record_id": "TT20-PLI-0347-R425",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 362,
+   "ingredient": "Doxorubicin",
+   "page": "30–31",
+   "record_id": "TT20-PLI-0362-R440",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 365,
+   "ingredient": "Everolimus",
+   "page": 31,
+   "record_id": "TT20-PLI-0365-R443",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 381,
+   "ingredient": "Paclitaxel",
+   "page": 31,
+   "record_id": "TT20-PLI-0381-R459",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 382,
+   "ingredient": "Pemetrexed",
+   "page": "31–32",
+   "record_id": "TT20-PLI-0382-R460",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 385,
+   "ingredient": "Tegafur + gimeracil + oteracil kali",
+   "page": 32,
+   "record_id": "TT20-PLI-0385-R463",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 391,
+   "ingredient": "Afatinib dimaleate",
+   "page": 32,
+   "record_id": "TT20-PLI-0391-R470",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 392,
+   "ingredient": "Bevacizumab",
+   "page": 32,
+   "record_id": "TT20-PLI-0392-R471",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 393,
+   "ingredient": "Cetuximab",
+   "page": 32,
+   "record_id": "TT20-PLI-0393-R472",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 394,
+   "ingredient": "Erlotinib",
+   "page": "32–33",
+   "record_id": "TT20-PLI-0394-R473",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 395,
+   "ingredient": "Gefitinib",
+   "page": 33,
+   "record_id": "TT20-PLI-0395-R474",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 396,
+   "ingredient": "Imatinib",
+   "page": 33,
+   "record_id": "TT20-PLI-0396-R475",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 397,
+   "ingredient": "Nilotinib",
+   "page": 33,
+   "record_id": "TT20-PLI-0397-R476",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 400,
+   "ingredient": "Rituximab",
+   "page": 33,
+   "record_id": "TT20-PLI-0400-R479",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 401,
+   "ingredient": "Sorafenib",
+   "page": 33,
+   "record_id": "TT20-PLI-0401-R480",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 402,
+   "ingredient": "Trastuzumab",
+   "page": 34,
+   "record_id": "TT20-PLI-0402-R481",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 403,
+   "ingredient": "Abiraterone acetate",
+   "page": 34,
+   "record_id": "TT20-PLI-0403-R483",
+   "status": "match",
+   "differences": []
+  },
+  {
+   "stt": 409,
+   "ingredient": "Fulvestrant",
+   "page": 34,
+   "record_id": "TT20-PLI-0409-R489",
+   "status": "match",
+   "differences": []
+  }
+ ]
+}
