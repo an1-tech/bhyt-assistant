@@ -16,6 +16,14 @@ function renderReply(data,question){
  if(!rows.length)box.append(node('p',data.answer,'conclusion'));
  for(const r of rows){const a=r.question_answer;const section=node('section',undefined,'drug-result');section.append(node('h3',r.ingredient,'drug-heading'),node('p',a?.conclusion||data.answer,'conclusion'));
   if(a?.conditions?.length){const conditions=node('div',undefined,'answer-block');conditions.append(node('strong','Điều kiện trong nguồn'));const list=node('ul');for(const text of a.conditions)list.append(node('li',text));conditions.append(list);section.append(conditions);}
+  if(a?.confirm?.length){
+   // Unclear conditions are confirmed with buttons; the bot never guesses them from free text.
+   const block=node('div',undefined,'confirm-block');block.append(node('strong','Xác nhận để đối chiếu'),node('p','Bấm đúng tình trạng; chọn “Chưa rõ” nếu chưa có kết quả.','hint'));
+   const snap=JSON.parse(JSON.stringify(data.state||{}));
+   for(const item of a.confirm){const group=node('div',undefined,'confirm-item');group.setAttribute('role','group');group.setAttribute('aria-label',item.label);group.append(node('span',item.label,'confirm-label'));const opts=node('div',undefined,'actions');
+    for(const opt of item.options){const b=node('button',opt.label);b.type='button';b.addEventListener('click',()=>send(item.label+': '+opt.label,snap,{key:item.key,value:opt.value}));opts.append(b);}
+    group.append(opts);block.append(group);}
+   section.append(block);}
   const sources=(data.citations||[]).filter(c=>r.record_ids?.includes(c.id));evidenceGroup(section,'Căn cứ của thuốc',sources);if(a?.scope)section.append(node('p',a.scope,'scope-note'));box.append(section);
  }
  if(data.suggestions?.length){const choices=node('div',undefined,'actions');for(const name of data.suggestions){const b=node('button',name);b.type='button';b.addEventListener('click',()=>send(data.suggestion_mode==='replace'?name:name+' — '+question));choices.append(b);}box.append(choices);}
@@ -25,17 +33,20 @@ function renderReply(data,question){
  if(data.notice)box.append(node('p',data.notice,'notice'));
  const foot=node('div',undefined,'answer-foot');const copy=node('button','Sao chép câu trả lời');copy.type='button';const text=reportText(data,question);copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(text);copy.textContent='Đã sao chép kèm nguồn';}catch{copy.textContent='Chưa sao chép được';}});foot.append(node('span','Theo bộ nguồn BHYT 06/11/2026'),copy);box.append(foot);return box;
 }
-async function send(text,ctx){
+async function send(text,ctx,confirm){
  // ctx: a follow-up chip sends the context of the answer it belongs to, not the latest one.
+ // confirm: {key,value} from a confirmation button — a structured fact, not text to parse.
  text=(text??$('#question').value).trim();if(!text||!ready||busy)return;
  busy=true;$('#send').disabled=true;$('#new-chat').disabled=true;$('#loading').hidden=false;$('#error').hidden=true;$('#question').value='';$('#messages').setAttribute('aria-busy','true');let reply;
  const turn=node('section',undefined,'turn');const user=node('div',undefined,'query-heading');user.append(node('small','Bạn'),node('span',text));turn.append(user);$('#messages').append(turn);$('#welcome').hidden=true;
- try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':token},body:JSON.stringify({message:text,state:ctx??state,department:'Tất cả các khoa'})});const data=await response.json();if(!response.ok)throw new Error(data.error||'Chưa xử lý được câu hỏi.');state=JSON.parse(JSON.stringify(data.state||{}));reply=renderReply(data,text);turn.append(reply);}
+ try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':token},body:JSON.stringify(Object.assign({message:text,state:ctx??state,department:'Tất cả các khoa'},confirm?{confirm}:{}))});const data=await response.json();if(!response.ok)throw new Error(data.error||'Chưa xử lý được câu hỏi.');state=JSON.parse(JSON.stringify(data.state||{}));reply=renderReply(data,text);turn.append(reply);}
  catch(e){turn.remove();$('#welcome').hidden=!!$('#messages').children.length;$('#error').textContent=e.message||'Không kết nối được ứng dụng.';$('#error').hidden=false;if(!$('#question').value)$('#question').value=text;}
  finally{busy=false;$('#send').disabled=!ready;$('#new-chat').disabled=false;$('#loading').hidden=true;$('#messages').setAttribute('aria-busy','false');if(reply){reply.focus({preventScroll:true});reply.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});}else $('#error').focus();}
 }
 function showView(name){name=name==='sources'?'sources':'lookup';const changed=currentView!==name;if(changed&&currentView)viewScroll[currentView]=scrollY;for(const n of document.querySelectorAll('.view'))n.hidden=n.id!=='view-'+name;for(const a of document.querySelectorAll('[data-view]')){if(a.dataset.view===name)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');}currentView=name;if(changed)requestAnimationFrame(()=>scrollTo({top:viewScroll[name]||0,behavior:'instant'}));}
 window.addEventListener('hashchange',()=>showView(location.hash.slice(1)));
+// Keyboard focus inside the conversation must never sit under the sticky header or composer.
+document.addEventListener('focusin',e=>{const t=e.target;if(!t.closest||!t.closest('#messages'))return;const r=t.getBoundingClientRect(),c=document.querySelector('.chat-composer')?.getBoundingClientRect(),h=document.querySelector('.topbar')?.getBoundingClientRect();if(c&&r.bottom>c.top)scrollBy({top:r.bottom-c.top+16,behavior:'instant'});else if(h&&r.top<h.bottom)scrollBy({top:r.top-h.bottom-16,behavior:'instant'});});
 $('#composer').addEventListener('submit',e=>{e.preventDefault();send();});
 $('#question').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();send();}});
 $('#new-chat').addEventListener('click',()=>{if(busy)return;state={};$('#messages').replaceChildren();$('#welcome').hidden=false;$('#question').value='';$('#error').hidden=true;$('#question').focus();});

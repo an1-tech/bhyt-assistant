@@ -27,7 +27,7 @@ class ReviewRegressionTests(unittest.TestCase):
                   "Cetuximab ung thư đại trực tràng di căn RAS tự nhiên"):
             a=self.qa(self.ask(q))
             self.assertEqual(a["status"],"conditional_coverage",q)
-            self.assertIn({"label":"RAS","requires":"RAS tự nhiên (không đột biến)","status":"met"},a["requirements"],q)
+            self.assertIn({"label":"RAS","requires":"RAS tự nhiên (không đột biến)","status":"met"},[{k:v for k,v in x.items() if k!="source"} for x in a["requirements"]],q)
         self.assertEqual(self.status("Cetuximab ung thư đại trực tràng di căn có đột biến KRAS"),"source_condition_not_met")
 
     # 2. Abiraterone: "nội tiết HOẶC hóa trị" failure.
@@ -44,7 +44,7 @@ class ReviewRegressionTests(unittest.TestCase):
         self.assertEqual(self.status("Cetuximab ung thư đại trực tràng chưa di căn, RAS chưa xác định"),"source_condition_not_met")
         a=self.qa(self.ask("Cetuximab ung thư đại trực tràng di căn, RAS chưa xác định"))
         self.assertEqual(a["status"],"conditional_coverage")
-        self.assertIn({"label":"RAS","requires":"RAS tự nhiên (không đột biến)","status":"unknown"},a["requirements"])
+        self.assertIn({"label":"RAS","requires":"RAS tự nhiên (không đột biến)","status":"unknown"},[{k:v for k,v in x.items() if k!="source"} for x in a["requirements"]])
 
     # 4. A new assumption replaces the old one for the same condition.
     def test_latest_assumption_wins(self):

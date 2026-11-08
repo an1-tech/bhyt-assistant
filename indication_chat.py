@@ -72,6 +72,20 @@ def rate_text(branch):
     return "không ghi tỷ lệ" if branch["rate"] is None else f"{branch['rate']}%"
 
 
+def valid_facts(raw):
+    """Confirmed facts from the client state: {record_id: {topic: {marker: value}}}, size-limited."""
+    out={}
+    if not isinstance(raw,dict):return out
+    for rid,topics in list(raw.items())[:20]:
+        if not isinstance(rid,str) or not isinstance(topics,dict):continue
+        for topic,marks in list(topics.items())[:10]:
+            if not isinstance(topic,str) or not isinstance(marks,dict):continue
+            for marker,value in list(marks.items())[:12]:
+                if isinstance(marker,str) and isinstance(value,str) and len(marker)<=40 and len(value)<=40:
+                    out.setdefault(rid,{}).setdefault(topic,{})[marker]=value
+    return out
+
+
 def previous_turns(previous):
     """Earlier question turns of the same conversation (validated, newest last)."""
     turns=previous.get("turns")
@@ -92,31 +106,41 @@ class IndicationChat:
                 raise ValueError("Stale source-linked chat profile: "+id)
         self.rules_meta,self.rules=load_indication_rules(corpus.data,corpus.by_id,TOPICS)
 
-    def enrich(self,result,message,previous=None,named_drug=None,carry_prior=False):
+    def enrich(self,result,message,previous=None,named_drug=None,carry_prior=False,confirm=None):
         from engine import normalize
         result["response_type"]="general_indication_chat"
         result["requires_patient_details"]=False
         result["payment_eligibility"]=None
         result["suggested_followups"]=[]
         if not result.get("results"):return result
-        previous=previous or {};current_topics=topics_in(message)
+        previous=previous or {}
         previous_ids=previous.get("selected_ids",[])
         now_ids=result.get("state",{}).get("selected_ids",[])
         same=bool(set(previous_ids)&set(now_ids))
         prior=previous_turns(previous) if (same or carry_prior) else []
-        # Explicitly named medicine or disease starts a new general question.
-        # Unknown diseases must not silently inherit a previous, covered cancer.
-        disease_signal=bool(re.search(DISEASE_SIGNAL,normalize(message)))
-        if named_drug is None:named_drug=bool(self.c.resolve(message))
-        # "Còn gefitinib?" after an NSCLC question keeps the disease for the new medicine.
-        reset_topic=bool(current_topics or (named_drug and not carry_prior) or disease_signal)
-        turns=[message] if reset_topic or not prior else (prior+[message])[-8:]
+        # Confirmed facts (buttons) belong to the case under discussion; a new medicine starts a new case.
+        facts=valid_facts(previous.get("facts")) if same else {}
+        self._new_turn=None
+        if confirm:
+            # A button click adds a fact; it is not a new question and adds no text turn.
+            rid,topic,marker=confirm["key"].split("|");facts.setdefault(rid,{}).setdefault(topic,{})[marker]=confirm["value"]
+            turns=prior or [message];topics=topics_in("; ".join(turns))
+        else:
+            current_topics=topics_in(message)
+            # Explicitly named medicine or disease starts a new general question.
+            # Unknown diseases must not silently inherit a previous, covered cancer.
+            disease_signal=bool(re.search(DISEASE_SIGNAL,normalize(message)))
+            if named_drug is None:named_drug=bool(self.c.resolve(message))
+            # "Còn gefitinib?" after an NSCLC question keeps the disease for the new medicine.
+            reset_topic=bool(current_topics or (named_drug and not carry_prior) or disease_signal)
+            turns=[message] if reset_topic or not prior else (prior+[message])[-8:]
+            topics=current_topics if reset_topic else topics_in("; ".join(prior))
+            self._new_turn=message
         context="; ".join(turns)[-1000:]
-        topics=current_topics if reset_topic else topics_in("; ".join(prior))
         has_disease=bool(topics or re.search(CONTEXT_DISEASE,normalize(context)))
         supplemental=[]
         for row in result["results"]:
-            row["question_answer"]=self.answer(row,topics,turns,has_disease)
+            row["question_answer"]=self.answer(row,topics,turns,has_disease,facts,confirmable=len(result["results"])==1)
             row["question_answer"]["source_ids"]=row.get("record_ids",[])
             for id in row.get("record_ids",[]):
                 source=self.c.by_id[id]
@@ -134,14 +158,16 @@ class IndicationChat:
         result["answer_status"]="conditional_coverage" if all(r["question_answer"]["status"]=="conditional_coverage" for r in result["results"]) else "source_answer"
         result["state"]["context"]=context[-1000:]
         result["state"]["turns"]=[t[-1000:] for t in turns]
+        result["state"]["facts"]=facts
         return result
 
-    def answer(self,row,topics,turns,has_disease):
+    def answer(self,row,topics,turns,has_disease,facts=None,confirmable=True):
         from engine import normalize
         context="; ".join(turns)
         name=row["ingredient"];ids=row.get("record_ids",[])
+        facts=facts or {}
         answer={"status":"insufficient_evidence","conclusion":"","conditions":[],"source_rate":None,
-            "indications":[TOPICS[t][0] for t in topics],"scope":SCOPE_NOTE,"_suggested":[]}
+            "indications":[TOPICS[t][0] for t in topics],"scope":SCOPE_NOTE,"_suggested":[],"confirm":[]}
         if row.get("status")=="route_unmatched":
             answer["conclusion"]="Chưa có căn cứ cho đường dùng nêu trong câu hỏi. Các đường dùng được ghi trong danh mục: "+", ".join(row.get("routes",[]))+"."
             return answer
@@ -151,18 +177,24 @@ class IndicationChat:
             if not rule.get("reviewed_by"):
                 answer["scope"]+=" Nhánh điều kiện của thuốc này là bản nháp tách từ nguyên văn, chưa được Dược/BHYT duyệt."
         if rule and rule["kind"]=="indication_branches":
-            self.branch_answer(answer,rule,name,ids[0],topics,turns,has_disease)
+            self.branch_answer(answer,rule,name,ids[0],topics,turns,has_disease,facts.get(ids[0],{}),confirmable)
         elif rule and rule["kind"]=="formulation_note":
             axis=rule.get("axis","dạng bào chế")
             answer["status"]="source_conditions"
             answer["conclusion"]=name+f" có trong danh mục BHYT; ghi chú phân biệt tỷ lệ theo {axis}. Ghi chú này chưa đủ để xác nhận chi trả cho một bệnh/chỉ định cụ thể."
-            chosen=choose_formulation(turns,rule["formulations"])
-            if len(chosen)==1:
+            fact=facts.get(ids[0],{}).get("formulation",{}).get("value")
+            chosen,state=choose_formulation(turns,rule["formulations"],fact)
+            if chosen:
                 f=chosen[0]
-                answer["conclusion"]+=f" Câu hỏi thuộc nhánh “{f['label']}”: tỷ lệ ghi trong nguồn {f['rate']}%."
+                source="Theo xác nhận" if state=="confirmed" else "Câu hỏi thuộc nhánh"
+                answer["conclusion"]+=f" {source} “{f['label']}”: tỷ lệ ghi trong nguồn {f['rate']}%."
                 answer["matched_branch"]=f["value"]
-            elif len(chosen)>1:
-                answer["conclusion"]+=f" Câu hỏi có thể thuộc nhiều nhánh ({', '.join(f['label'] for f in chosen)}); cần xác định rõ {axis}."
+            else:
+                if state=="unclear":
+                    answer["conclusion"]+=f" Câu hỏi chưa xác định rõ {axis}; chọn {axis} bên dưới để xem đúng nhánh."
+                if confirmable:
+                    answer["confirm"].append({"key":f"{ids[0]}|formulation|value","label":_capital(axis),"requires":"",
+                        "options":[{"value":f["value"],"label":f"{f['label']} ({f['rate']}%)"} for f in rule["formulations"]]})
             answer["conditions"]=list(row.get("conditions",[]))
         elif rule and rule["kind"]=="rate_only":
             facility=" và điều kiện cơ sở" if rule.get("common_verbatim") else ""
@@ -183,12 +215,13 @@ class IndicationChat:
         if len(row.get("routes",[]))>1:
             answer["conditions"].append("Danh mục có các đường dùng: "+" / ".join(row["routes"])+". Thông tin trên giữ phạm vi của từng dòng nguồn.")
         if re.search(r"\b(?:2014|2015|truoc nam|chuyen tiep)\b",normalize(context)) and any(id in self.c.transition_rules["mapping"] for id in ids):
-            answer["status"]="transition_requires_review";answer["source_rate"]=None;answer["_suggested"]=[]
+            answer["status"]="transition_requires_review";answer["source_rate"]=None;answer["_suggested"]=[];answer["confirm"]=[]
             answer.pop("matched_branch",None)
             answer["conclusion"]="Câu hỏi liên quan điều kiện chuyển tiếp. Bộ nguồn có Điều 8 TT20/2022 để đối chiếu, nhưng chưa đủ tỷ lệ lịch sử và chuỗi căn cứ để kết luận riêng trường hợp này. Không áp tỷ lệ của nhánh hiện tại cho thời kỳ khác."
         return answer
 
-    def branch_answer(self,answer,rule,name,source_id,topics,turns,has_disease):
+    def branch_answer(self,answer,rule,name,source_id,topics,turns,has_disease,facts=None,confirmable=True):
+        facts=facts or {}
         branches=rule["branches"];known={b["topic"] for b in branches}
         listing="; ".join(f"{b['scope']} ({rate_text(b)})" for b in branches)
         relevant=[t for t in topics if t in known]
@@ -206,26 +239,42 @@ class IndicationChat:
             answer["conditions"]=list(b["conditions"])+[rate_line]+list(rule.get("common_conditions",[]))
             answer["matched_branch"]=b["topic"]
             answer["requirements"]=[]
-            unmet=None
+            unmet=None;branch_facts=facts.get(b["topic"],{})
             for req in b.get("requirements",[]):
                 requires=req.get("requires",req["label"]+" dương tính")
-                status=requirement_status(turns,req)
-                answer["requirements"].append({"label":req["label"],"requires":requires,"status":status or "not_stated"})
+                fact=branch_facts.get(req["marker"])
+                # A new question that clearly restates this condition ("Nếu RAS tự nhiên thì sao?")
+                # replaces the earlier confirmation; otherwise the confirmed fact wins.
+                if fact and getattr(self,"_new_turn",None) and requirement_status([self._new_turn],req) in ("met","not_met"):
+                    branch_facts.pop(req["marker"],None);fact=None
+                status=requirement_status(turns,req,fact)
+                source="Theo xác nhận" if fact in ("met","not_met","unknown") else "Theo câu hỏi"
+                answer["requirements"].append({"label":req["label"],"requires":requires,"status":status or "not_stated",
+                                               "source":"confirmed" if source=="Theo xác nhận" else "question"})
                 if status=="not_met" and unmet is None:
-                    unmet=req
+                    unmet=req;unmet_source="Thông tin đã xác nhận" if source=="Theo xác nhận" else "Câu hỏi nêu"
                 elif status=="met":
-                    answer["conditions"].append(f"Theo câu hỏi: {requires} — khớp.")
+                    answer["conditions"].append(f"{source}: {requires} — khớp.")
                 elif status=="unknown":
-                    answer["conditions"].append(f"Theo câu hỏi: {req['label']} chưa rõ — cần xác nhận {requires}.")
-                if status is None:
-                    answer["_suggested"].append(req.get("ask",f"Nếu {req['label']} âm tính thì sao?"))
+                    answer["conditions"].append(f"{source}: {req['label']} chưa rõ — cần xác nhận {requires}.")
+                if (status in (None,"unknown") or source=="Theo xác nhận") and confirmable:
+                    # Unclear conditions get buttons; confirmed ones keep theirs so they can be changed.
+                    # Never guess an unclear condition: offer explicit confirmation buttons.
+                    options=req.get("options",{})
+                    answer["confirm"].append({"key":f"{source_id}|{b['topic']}|{req['marker']}","label":_capital(req["label"]),"requires":requires,
+                        "options":[{"value":"met","label":options.get("met",_capital(requires))},
+                                   {"value":"not_met","label":options.get("not_met",_capital(req.get("negative_desc","Không đáp ứng")))},
+                                   {"value":"unknown","label":"Chưa rõ"}]})
             unclear=[r for r in answer["requirements"] if r["status"]=="unknown"]
             if unclear and not unmet:
-                answer["conclusion"]+=" Câu hỏi chưa rõ: "+"; ".join(r["requires"] for r in unclear)+" — cần xác nhận trước khi áp dụng tỷ lệ này."
+                answer["conclusion"]+=" Chưa rõ: "+"; ".join(r["requires"] for r in unclear)+" — cần xác nhận trước khi áp dụng tỷ lệ này."
+            if answer["requirements"] and all(r["status"]=="met" for r in answer["requirements"]):
+                answer["all_requirements_met"]=True
+                answer["conclusion"]+=" Các điều kiện riêng của nhánh này đều khớp theo thông tin đã nêu/xác nhận; đây vẫn là đối chiếu với nguồn, không phải quyết định chi trả."
             if unmet:
                 answer["status"]="source_condition_not_met";answer["source_rate"]=None
                 answer["conclusion"]=(f"Nhánh thanh toán {name} cho {b['disease']} trong nguồn yêu cầu {unmet.get('requires',unmet['label']+' dương tính')}. "
-                    f"Câu hỏi nêu {unmet.get('negative_desc',unmet['label']+' âm tính/không dương tính')} nên không khớp điều kiện của nhánh này; chưa có căn cứ xác nhận chi trả cho tình huống được hỏi.")
+                    f"{unmet_source} {unmet.get('negative_desc',unmet['label']+' âm tính/không dương tính')} nên không khớp điều kiện của nhánh này; chưa có căn cứ xác nhận chi trả cho tình huống được hỏi.")
             answer["_suggested"]+=["Còn "+x["disease"]+" thì sao?" for x in branches if x is not b]
         elif (topics and not relevant and not parents) or (not topics and has_disease):
             answer["conclusion"]=(f"Chưa có căn cứ xác nhận BHYT chi trả {name} cho chỉ định được hỏi trong ghi chú hiện có. "

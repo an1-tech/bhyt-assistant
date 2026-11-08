@@ -113,7 +113,8 @@ class DrugIdentificationTests(Review2Base):
     def test_b17_tolerance_explanation(self):
         r=self.chain("Nilotinib CML dung nạp tốt Imatinib")
         a=r["results"][0]["question_answer"]
-        self.assertEqual(a["status"],"source_condition_not_met");self.assertNotIn("chưa dùng thuốc trước đó",a["conclusion"])
+        self.assertEqual(a["requirements"][0]["status"],"unknown");self.assertNotIn("chưa dùng thuốc trước đó",a["conclusion"])
+        self.assertTrue(any(c["label"]=="Imatinib" for c in a["confirm"]))
 
     def test_b19_switch_drug_keeps_disease(self):
         r=self.chain("Erlotinib ung thư phổi không tế bào nhỏ","Còn gefitinib?")
@@ -123,7 +124,9 @@ class DrugIdentificationTests(Review2Base):
 
 class ConditionReadingTests(Review2Base):
     def test_a1_missing_note_conditions_now_checked(self):
-        for q in ("Trastuzumab ung thư dạ dày chưa di căn, HER2 dương tính","Trastuzumab ung thư dạ dày giai đoạn sớm HER2 dương tính",
+        a=self.chain("Trastuzumab ung thư dạ dày chưa di căn, HER2 dương tính")["results"][0]["question_answer"]
+        self.assertEqual({x["label"]:x["status"] for x in a["requirements"]}["tiến xa hoặc di căn"],"unknown")
+        for q in ("Trastuzumab ung thư dạ dày giai đoạn sớm HER2 dương tính",
                   "Bendamustine CLL Binet A không phù hợp fludarabin","Bendamustine u lympho không Hodgkin tế bào B lớn lan tỏa tiến triển sau rituximab",
                   "Sorafenib ung thư tuyến giáp thể tủy kháng iod phóng xạ","Sorafenib ung thư tuyến giáp thể không biệt hóa kháng iod",
                   "Sorafenib ung thư thận giai đoạn sớm","Cetuximab ung thư đầu cổ không phải tế bào vảy","Rituximab u lympho không Hodgkin tế bào T CD20 dương tính"):
@@ -152,7 +155,9 @@ class ConditionReadingTests(Review2Base):
         for q in ("Nilotinib CML không thể dung nạp imatinib","Nilotinib CML không còn dung nạp imatinib"):
             self.assertEqual(self.rate(q),80,q)
         self.assertEqual(self.rate("Bendamustine CLL Binet C không còn phù hợp với fludarabin"),50)
-        self.assertEqual(self.status("Nilotinib CML không kháng Imatinib"),"source_condition_not_met")
+        a=self.chain("Nilotinib CML không kháng Imatinib")["results"][0]["question_answer"]
+        self.assertEqual(a["requirements"][0]["status"],"unknown")
+        self.assertEqual(self.status("Nilotinib CML dung nạp tốt Imatinib và không kháng Imatinib"),"source_condition_not_met")
 
     def test_a6_first_time_does_not_override_explicit_failure(self):
         self.assertEqual(self.rate("Nilotinib CML lần đầu dùng nilotinib sau khi kháng imatinib"),80)
@@ -175,7 +180,7 @@ class ConditionReadingTests(Review2Base):
         for q in ("không xét nghiệm HER2","không có kết quả HER2","HER2 đang chờ kết quả"):
             a=self.chain("Trastuzumab ung thư vú "+q)["results"][0]["question_answer"]
             self.assertEqual(a["requirements"][0]["status"],"unknown",q)
-            self.assertIn("chưa rõ",a["conclusion"],q)
+            self.assertIn("chưa rõ",a["conclusion"].lower(),q)
 
     def test_a10_benh_nhan_in_followup_keeps_context(self):
         self.assertEqual(self.status("Trastuzumab ung thư vú HER2 dương tính","Nếu bệnh nhân HER2 âm tính thì sao?"),"source_condition_not_met")

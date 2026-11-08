@@ -73,7 +73,7 @@ class SuggestedFollowupTests(unittest.TestCase):
 
     def test_missing_marker_is_offered_as_optional_question(self):
         r=self.c.converse("Trastuzumab điều trị ung thư vú có BHYT?")
-        self.assertIn("Nếu HER2 âm tính thì sao?",r["suggested_followups"])
+        self.assertIn("HER2",[c["label"] for c in r["results"][0]["question_answer"]["confirm"]])
         self.assertIn("Còn ung thư dạ dày thì sao?",r["suggested_followups"])
         self.assertEqual(r["followups"],[]);self.assertFalse(r["requires_patient_details"])
 

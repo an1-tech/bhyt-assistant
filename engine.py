@@ -202,6 +202,8 @@ class Corpus:
 
     def detect_route(self,message):
         q=' '+normalize(message)+' '
+        # "dùng ngoài ung thư" / "ngoài chỉ định" describe scope, not the external route.
+        q=re.sub(r' (?:dung )?ngoai (?=(?:ung thu|chi dinh|benh|pham vi|nhung|cac|truong hop|muc dich|dieu tri|nhan|huong dan) )',' pham vi khac ',q)
         for phrase in ("tiem truyen","truyen tinh mach","tiem tinh mach","tiem bap","tiem duoi da"):
             q=q.replace(" "+phrase+" "," tiem ")
         # Keep specific routes ahead of their parent route (e.g. intravitreal vs injection).
@@ -392,13 +394,15 @@ class Corpus:
         self.attach_transition_review(result,evidence)
         return result
 
-    def converse(self,message,state=None,as_of=None):
+    def converse(self,message,state=None,as_of=None,confirm=None):
         from indication_chat import IndicationChat, topics_in
         # Short conversational follow-ups can retain a single medicine, even with
         # prefixes such as "còn", "vậy" or "nếu". A newly named medicine resets it.
         answerer=getattr(self,"_indication_chat",None)
         if answerer is None:
             answerer=self._indication_chat=IndicationChat(self)
+        if confirm is not None:
+            return self.confirm_fact(message,state,as_of,confirm,answerer)
         lookup_message=message;named_drug=None;unrecognized=[]
         valid=isinstance(message,str) and 0<len(message.strip())<=3000 and not private_input(message)
         if valid:
@@ -454,6 +458,29 @@ class Corpus:
         if notices:result["notice"]=" ".join([result.get("notice","")]+notices).strip()
         return self.finalize_status(result)
 
+    def confirm_fact(self,message,state,as_of,confirm,answerer):
+        """A confirmation button: record one fact for the medicine under discussion and answer again.
+        The fact always wins over text reading; nothing is inferred from the button label."""
+        if not isinstance(confirm,dict) or not isinstance(confirm.get("key"),str) or not isinstance(confirm.get("value"),str):
+            raise ValueError("Xác nhận không hợp lệ.")
+        parts=confirm["key"].split("|")
+        if len(parts)!=3:raise ValueError("Xác nhận không hợp lệ.")
+        rid,topic,marker=parts;rule=answerer.rules.get(rid)
+        ids=state.get("selected_ids",[]) if isinstance(state,dict) else []
+        if not rule or not isinstance(ids,list) or rid not in ids:
+            raise ValueError("Xác nhận không thuộc thuốc đang trao đổi. Hãy hỏi lại.")
+        if topic=="formulation":
+            if rule["kind"]!="formulation_note" or marker!="value" or confirm["value"] not in {f["value"] for f in rule["formulations"]}:
+                raise ValueError("Xác nhận không hợp lệ.")
+        else:
+            branch=next((b for b in rule.get("branches",[]) if b["topic"]==topic),None)
+            if not branch or marker not in {r["marker"] for r in branch.get("requirements",[])} or confirm["value"] not in ("met","not_met","unknown"):
+                raise ValueError("Xác nhận không hợp lệ.")
+        name=self.by_id[rid]["ingredient"]
+        result=self.chat(name,state,as_of,allow_ai=False)
+        result=answerer.enrich(result,message if isinstance(message,str) else "",state,confirm={"key":confirm["key"],"value":confirm["value"]})
+        return self.finalize_status(result)
+
     def combination_notices(self,message,result):
         """Separately named ingredients that also exist as a listed combination."""
         q=' '+normalize(message)+' ';answered={r["ingredient"] for r in result["results"]};out=[]
@@ -504,8 +531,10 @@ class Corpus:
             t=t.strip("-+/")
             lw=t.lower()
             if not t or not t.isascii() or lw in vocab or normalize(t) in vocab or lw in NOT_DRUG_WORDS:continue
-            if normalize(t).replace(' ','') in vocab:continue
-            code=bool(re.fullmatch(r"[A-Za-z]{1,4}-?\d{1,3}[A-Za-z]?|[A-Za-z]-[A-Za-z]{1,3}\d|\d-[A-Za-z]{2,3}",t)) and not re.fullmatch(r"(?:her|cd|ki|ihc|egfr|pd|ca|ecog|t|n|m|g|v)\d+[a-z]?",lw)
+            compact=normalize(t).replace(' ','')
+            if compact in vocab or compact in NOT_DRUG_WORDS:continue
+            # Biomarkers and staging codes ("Ki-67", "PD-L1", "CA 15-3", "T3N1") are not medicines.
+            code=bool(re.fullmatch(r"[A-Za-z]{1,4}-?\d{1,3}[A-Za-z]?|[A-Za-z]-[A-Za-z]{1,3}\d|\d-[A-Za-z]{2,3}",t)) and not re.fullmatch(r"(?:her|cd|ki|ihc|egfr|pd|pdl|ca|cea|ecog|t|n|m|g|v|ps|brca|msi)\d+[a-z]?",lw.replace('-',''))
             if code:found.append(t);continue
             if len(t)<5 or not t.isalpha():continue
             stem=re.search(INN_STEM,lw)
@@ -517,7 +546,8 @@ class Corpus:
     def product_variant(message,hits):
         for g in hits:
             name=g[0]["ingredient"]
-            m=re.search(re.escape(name)+r"[\s-]+("+PRODUCT_MODIFIERS+r")\b",message,re.I)
+            # "Trastuzumab deruxtecan", "trastuzumab-deruxtecan", "Trastuzumab (deruxtecan)".
+            m=re.search(re.escape(name)+r"[\s\-(\[]+("+PRODUCT_MODIFIERS+r")\b",message,re.I)
             if m:return (message[m.start():m.end()],name)
         return None
 

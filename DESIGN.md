@@ -50,3 +50,7 @@ This section replaces the v1.6 case-form route as the primary experience. One qu
 
 ## Follow-up chips v1.9 · 07/11/2026
 Keep tokens, layout and the single chat input. Optional "Hỏi tiếp" chips under an answer reuse the existing .actions button style (>=44px); they send a question, never open a form. Brand-conversion notes use the existing notice style. Drug branches/rates come from data/indication_rules.json.
+
+
+## Confirmation buttons · 08/11/2026
+Unclear conditions are confirmed, not inferred. Each answer may carry a "Xác nhận để đối chiếu" block on the surface token with one labelled group per condition and existing .actions buttons (>=44px), options "met / not met / Chưa rõ". Buttons send structured facts; confirmed conditions stay changeable. Keyboard focus inside the conversation is scrolled clear of the sticky header and composer.

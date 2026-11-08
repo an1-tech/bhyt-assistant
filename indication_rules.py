@@ -43,6 +43,27 @@ def _check_requirement(rule_id, req):
             _check_requirement(rule_id, sub)
 
 
+# Concepts that, when quoted in a branch, must be checked by a requirement with one of these markers.
+CONCEPT_MARKERS = {
+    r"\bher2 duong tinh\b": {"her2"}, r"\begfr duong tinh\b": {"egfr"}, r"\bcd20 duong tinh\b": {"cd20"},
+    r"\bras tu nhien\b": {"ras"}, r"\bdi can\b": {"dican", "tienxa", "taicho"}, r"\btien xa\b": {"tienxa"},
+    r"\btien trien\b": {"tientrien", "taicho", "rituximab"}, r"\bbinet\b": {"binet"},
+    r"\bthat bai\b": {"iod", "dieutritruoc", "rituximab", "imatinib"}, r"\b(?:khang|khong dung nap)\b": {"imatinib"},
+    r"\bkhong phu hop\b": {"fludarabin"}, r"\bdien tien cham\b": {"dientiencham"}, r"\bbiet hoa\b": {"biethoa"},
+    r"\bte bao vay\b": {"tebaovay"}, r"\bte bao b\b": {"tebaob"},
+}
+
+
+def _check_branch_requirements(rule_id, branch):
+    """A quoted condition cannot silently lose its requirement (e.g. HER2 removed by mistake)."""
+    from engine import normalize
+    text = normalize(" ".join(branch["verbatim"]))
+    markers = {r["marker"] for r in branch.get("requirements", [])}
+    for pattern, allowed in CONCEPT_MARKERS.items():
+        if re.search(pattern, text) and not markers & allowed:
+            raise ValueError("Quoted condition has no requirement: " + rule_id + " / " + branch["topic"] + " / " + pattern)
+
+
 def _check_branch_topic(rule_id, note, branch, topics):
     """The quoted text must name the branch's own disease; with several rates in
     the note, disease and rate must sit in the same quoted fragment."""
@@ -90,6 +111,7 @@ def load_indication_rules(data, by_id, topics):
             _check_quotes(id, note, branches)
             for b in branches:
                 _check_branch_topic(id, note, b, topics)
+                _check_branch_requirements(id, b)
         elif rule["kind"] == "formulation_note":
             formulations = rule.get("formulations") or []
             if not formulations:

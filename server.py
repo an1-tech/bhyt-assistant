@@ -81,7 +81,7 @@ def make_server(port=8765,corpus=None):
                 if not isinstance(payload,dict) or not isinstance(payload.get('message'),str):raise ValueError('Câu hỏi không hợp lệ.')
                 department=payload.get('department','Tất cả các khoa')
                 if department not in DEPARTMENTS:raise ValueError('Khoa không hợp lệ.')
-                result=corpus.converse(payload['message'],payload.get('state'),payload.get('as_of'))
+                result=corpus.converse(payload['message'],payload.get('state'),payload.get('as_of'),payload.get('confirm'))
                 result['department']=department
                 self.send(200,result)
             except (ValueError,TypeError,KeyError) as e:self.send(400,{'error':str(e)[:180]})

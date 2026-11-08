@@ -20,7 +20,11 @@
           "requirements": [
             {
               "marker": "her2",
-              "label": "HER2"
+              "label": "HER2",
+              "options": {
+                "met": "HER2 dương tính",
+                "not_met": "HER2 âm tính"
+              }
             }
           ],
           "conditions": [
@@ -38,29 +42,66 @@
           "requirements": [
             {
               "marker": "her2",
-              "label": "HER2"
+              "label": "HER2",
+              "options": {
+                "met": "HER2 dương tính",
+                "not_met": "HER2 âm tính"
+              }
             },
             {
               "marker": "tienxa",
               "label": "tiến xa hoặc di căn",
               "requires": "ung thư dạ dày tiến xa hoặc di căn",
-              "negative_desc": "bệnh giai đoạn sớm, chưa tiến xa hoặc di căn",
-              "unknown_patterns": [
-                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,15}\\b(?:di can|giai doan)\\b"
-              ],
-              "negative_patterns": [
-                "^(?!.*\\btien xa\\b).*\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b",
-                "\\bgiai doan som\\b",
-                "\\bkhu tru\\b",
-                "\\bgiai doan (?:i|ii|1|2)\\b",
-                "\\bstage (?:i|ii|1|2)\\b"
-              ],
-              "positive_patterns": [
-                "\\btien xa\\b",
-                "\\bdi can\\b",
-                "\\bgiai doan (?:iv|4)\\b",
-                "\\bstage (?:iv|4)\\b",
-                "\\bm1\\b"
+              "negative_desc": "bệnh giai đoạn sớm, chưa tiến xa và chưa di căn",
+              "options": {
+                "met": "Tiến xa hoặc di căn",
+                "not_met": "Giai đoạn sớm, chưa tiến xa"
+              },
+              "any_of": [
+                {
+                  "marker": "tienxa",
+                  "label": "tiến xa",
+                  "negative_patterns": [
+                    "\\b(?:khong|chua) tien xa\\b",
+                    "\\bgiai doan som\\b",
+                    "\\bkhu tru\\b",
+                    "\\bgiai doan (?:i|ii|1|2)\\b",
+                    "\\bstage (?:i|ii|1|2)\\b"
+                  ],
+                  "positive_patterns": [
+                    "\\btien xa\\b",
+                    "\\bgiai doan (?:iii|3)\\b"
+                  ]
+                },
+                {
+                  "marker": "dican2",
+                  "label": "di căn",
+                  "requires": "giai đoạn di căn",
+                  "negative_desc": "bệnh chưa di căn (xa)",
+                  "options": {
+                    "met": "Đã di căn (xa)",
+                    "not_met": "Chưa di căn xa"
+                  },
+                  "unknown_patterns": [
+                    "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?) (?:co )?di can\\b",
+                    "\\bdi can (?:hay|hoac|chua ro|khong ro)\\b"
+                  ],
+                  "negative_patterns": [
+                    "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)\\b)",
+                    "\\bgiai doan som\\b",
+                    "\\bkhu tru\\b",
+                    "\\btien xa tai cho\\b",
+                    "\\btai cho tai vung\\b",
+                    "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)\\b|stage (?:i|ii|iii|1|2|3)\\b))"
+                  ],
+                  "positive_patterns": [
+                    "\\bdi can\\b(?! hach\\b)",
+                    "\\bgiai doan (?:iv|4)\\b",
+                    "\\bstage (?:iv|4)\\b",
+                    "\\bm1\\b"
+                  ],
+                  "ask": "Nếu chưa di căn thì sao?"
+                }
               ],
               "ask": "Nếu chưa di căn thì sao?"
             }
@@ -97,7 +138,11 @@
           "requirements": [
             {
               "marker": "egfr",
-              "label": "EGFR"
+              "label": "EGFR",
+              "options": {
+                "met": "EGFR dương tính (đột biến)",
+                "not_met": "EGFR âm tính / wild-type"
+              }
             }
           ],
           "conditions": [
@@ -133,7 +178,11 @@
           "requirements": [
             {
               "marker": "egfr",
-              "label": "EGFR"
+              "label": "EGFR",
+              "options": {
+                "met": "EGFR dương tính (đột biến)",
+                "not_met": "EGFR âm tính / wild-type"
+              }
             }
           ],
           "conditions": [
@@ -172,9 +221,7 @@
             "\\bliposom",
             "\\bpegylat"
           ],
-          "exclude_patterns": [
-            "\\bkhong (?:phai )?(?:dang )?(?:liposom|polymeric|micelle)"
-          ]
+          "exclude_patterns": []
         },
         {
           "value": "other",
@@ -184,10 +231,10 @@
             "thanh toán 100% đối với các dạng khác"
           ],
           "context_patterns": [
-            "\\bkhong (?:phai )?(?:dang )?(?:liposom|polymeric|micelle)",
             "\\bdang thuong\\b",
             "\\bquy uoc\\b",
-            "\\bthong thuong\\b"
+            "\\bthong thuong\\b",
+            "\\bdang khac\\b"
           ],
           "exclude_patterns": []
         }
@@ -211,9 +258,7 @@
             "\\bliposom",
             "\\bpegylat"
           ],
-          "exclude_patterns": [
-            "\\bkhong (?:phai )?(?:dang )?(?:liposom|polymeric|micelle)"
-          ]
+          "exclude_patterns": []
         },
         {
           "value": "polymeric",
@@ -227,9 +272,7 @@
             "\\bmicelle\\b",
             "\\bmixen\\b"
           ],
-          "exclude_patterns": [
-            "\\bkhong (?:phai )?(?:dang )?(?:liposom|polymeric|micelle)"
-          ]
+          "exclude_patterns": []
         },
         {
           "value": "other",
@@ -239,10 +282,10 @@
             "thanh toán 100% đối với các dạng khác"
           ],
           "context_patterns": [
-            "\\bkhong (?:phai )?(?:dang )?(?:liposom|polymeric|micelle)",
             "\\bdang thuong\\b",
             "\\bquy uoc\\b",
-            "\\bthong thuong\\b"
+            "\\bthong thuong\\b",
+            "\\bdang khac\\b"
           ],
           "exclude_patterns": []
         }
@@ -310,20 +353,24 @@
               "label": "di căn",
               "requires": "giai đoạn di căn",
               "negative_desc": "bệnh chưa di căn (xa)",
+              "options": {
+                "met": "Đã di căn (xa)",
+                "not_met": "Chưa di căn xa"
+              },
               "unknown_patterns": [
-                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,15}\\bdi can\\b",
-                "\\bdi can\\b[a-z ]{0,10}\\b(?:hay|hoac|chua ro|khong ro)\\b"
+                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?) (?:co )?di can\\b",
+                "\\bdi can (?:hay|hoac|chua ro|khong ro)\\b"
               ],
               "negative_patterns": [
-                "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b",
+                "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)\\b)",
                 "\\bgiai doan som\\b",
                 "\\bkhu tru\\b",
                 "\\btien xa tai cho\\b",
                 "\\btai cho tai vung\\b",
-                "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:gan|phoi|xuong|nao|phuc mac|tuy|da|buong trung)))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)\\b|stage (?:i|ii|iii|1|2|3)\\b))"
+                "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)\\b|stage (?:i|ii|iii|1|2|3)\\b))"
               ],
               "positive_patterns": [
-                "\\bdi can\\b",
+                "\\bdi can\\b(?! hach\\b)",
                 "\\bgiai doan (?:iv|4)\\b",
                 "\\bstage (?:iv|4)\\b",
                 "\\bm1\\b"
@@ -361,20 +408,24 @@
               "label": "di căn",
               "requires": "giai đoạn di căn",
               "negative_desc": "bệnh chưa di căn (xa)",
+              "options": {
+                "met": "Đã di căn (xa)",
+                "not_met": "Chưa di căn xa"
+              },
               "unknown_patterns": [
-                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,15}\\bdi can\\b",
-                "\\bdi can\\b[a-z ]{0,10}\\b(?:hay|hoac|chua ro|khong ro)\\b"
+                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?) (?:co )?di can\\b",
+                "\\bdi can (?:hay|hoac|chua ro|khong ro)\\b"
               ],
               "negative_patterns": [
-                "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b",
+                "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)\\b)",
                 "\\bgiai doan som\\b",
                 "\\bkhu tru\\b",
                 "\\btien xa tai cho\\b",
                 "\\btai cho tai vung\\b",
-                "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:gan|phoi|xuong|nao|phuc mac|tuy|da|buong trung)))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)\\b|stage (?:i|ii|iii|1|2|3)\\b))"
+                "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)\\b|stage (?:i|ii|iii|1|2|3)\\b))"
               ],
               "positive_patterns": [
-                "\\bdi can\\b",
+                "\\bdi can\\b(?! hach\\b)",
                 "\\bgiai doan (?:iv|4)\\b",
                 "\\bstage (?:iv|4)\\b",
                 "\\bm1\\b"
@@ -386,14 +437,19 @@
               "label": "RAS",
               "requires": "RAS tự nhiên (không đột biến)",
               "negative_desc": "RAS đột biến",
+              "options": {
+                "met": "RAS tự nhiên",
+                "not_met": "RAS đột biến"
+              },
+              "not_met_dominates": true,
               "unknown_patterns": [
-                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,20}\\b(?:k|n)?ras",
-                "\\b(?:k|n)?ras\\b[a-z ]{0,20}(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)",
+                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? (?:k|n)?ras\\b",
+                "\\b(?:k|n)?ras (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)",
                 "\\b(?:k|n)?ras (?:dot bien )?(?:hay|hoac) (?:khong|tu nhien|dot bien)\\b"
               ],
               "negative_patterns": [
-                "^(?!.*\\b(?:khong|chua)\\b[a-z ]{0,30}dot bien).*\\bdot bien (?:gen )?(?:k|n)?ras\\b",
-                "^(?!.*\\b(?:khong|chua)\\b[a-z ]{0,30}dot bien).*\\b(?:k|n)?ras (?:co )?dot bien\\b",
+                "(?<!khong )(?<!khong co )(?<!chua co )(?<!phat hien )(?<!thay )\\bdot bien (?:gen )?(?:k|n)?ras\\b",
+                "\\b(?:k|n)?ras (?:co )?dot bien\\b",
                 "\\b(?:k|n)?ras (?:g\\d+[a-z]?|codon \\d+|exon \\d+)\\b"
               ],
               "positive_patterns": [
@@ -423,6 +479,10 @@
               "label": "mô bệnh học",
               "requires": "ung thư tế bào vảy",
               "negative_desc": "ung thư không phải tế bào vảy",
+              "options": {
+                "met": "Tế bào vảy",
+                "not_met": "Không phải tế bào vảy"
+              },
               "negative_patterns": [
                 "\\bkhong (?:phai )?(?:la )?(?:ung thu )?(?:the )?(?:te bao |bieu mo )?vay\\b",
                 "\\bbieu mo tuyen\\b",
@@ -487,6 +547,10 @@
               "label": "thể mô bệnh học",
               "requires": "ung thư biểu mô tuyến giáp thể biệt hóa",
               "negative_desc": "thể không biệt hóa hoặc thể tủy",
+              "options": {
+                "met": "Thể biệt hóa",
+                "not_met": "Thể tủy / không biệt hóa"
+              },
               "negative_patterns": [
                 "\\b(?:khong|kem) biet hoa\\b",
                 "\\bthe tuy\\b",
@@ -504,17 +568,77 @@
               "ask": "Nếu thể tủy thì sao?"
             },
             {
+              "marker": "taicho",
+              "label": "tiến triển tại chỗ hoặc di căn",
+              "requires": "tiến triển tại chỗ hoặc di căn",
+              "negative_desc": "bệnh giai đoạn sớm, chưa tiến triển và chưa di căn",
+              "options": {
+                "met": "Tiến triển tại chỗ hoặc di căn",
+                "not_met": "Giai đoạn sớm, chưa tiến triển"
+              },
+              "any_of": [
+                {
+                  "marker": "tientrientaicho",
+                  "label": "tiến triển tại chỗ",
+                  "negative_patterns": [
+                    "\\b(?:khong|chua) (?:co )?tien trien\\b",
+                    "\\bgiai doan som\\b",
+                    "\\bkhu tru\\b"
+                  ],
+                  "positive_patterns": [
+                    "\\btien trien\\b",
+                    "\\btien xa\\b",
+                    "\\btai phat\\b"
+                  ]
+                },
+                {
+                  "marker": "dican3",
+                  "label": "di căn",
+                  "requires": "giai đoạn di căn",
+                  "negative_desc": "bệnh chưa di căn (xa)",
+                  "options": {
+                    "met": "Đã di căn (xa)",
+                    "not_met": "Chưa di căn xa"
+                  },
+                  "unknown_patterns": [
+                    "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?) (?:co )?di can\\b",
+                    "\\bdi can (?:hay|hoac|chua ro|khong ro)\\b"
+                  ],
+                  "negative_patterns": [
+                    "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)\\b)",
+                    "\\bgiai doan som\\b",
+                    "\\bkhu tru\\b",
+                    "\\btien xa tai cho\\b",
+                    "\\btai cho tai vung\\b",
+                    "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)\\b|stage (?:i|ii|iii|1|2|3)\\b))"
+                  ],
+                  "positive_patterns": [
+                    "\\bdi can\\b(?! hach\\b)",
+                    "\\bgiai doan (?:iv|4)\\b",
+                    "\\bstage (?:iv|4)\\b",
+                    "\\bm1\\b"
+                  ],
+                  "ask": "Nếu chưa di căn thì sao?"
+                }
+              ],
+              "ask": "Nếu giai đoạn sớm thì sao?"
+            },
+            {
               "marker": "iod",
               "label": "iod phóng xạ",
               "requires": "đã thất bại điều trị với iod phóng xạ",
               "negative_desc": "chưa dùng iod phóng xạ hoặc iod còn hiệu quả",
+              "options": {
+                "met": "Đã thất bại iod phóng xạ",
+                "not_met": "Chưa dùng / iod còn hiệu quả"
+              },
               "unknown_patterns": [
-                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,20}\\b(?:iod|i ot)",
-                "\\b(?:iod|i ot)\\b[a-z ]{0,20}(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
+                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? (?:iod|i ot)\\b",
+                "\\b(?:iod|i ot) (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
               ],
               "negative_patterns": [
                 "\\bchua (?:tung )?(?:(?:dung|su dung|lam|dieu tri|xa tri|uong) )?(?:voi |bang )?(?:iod|i ot)\\b",
-                "^(?!.*\\b(?:khong|kem)\\b).*\\b(?:iod|i ot)(?: phong xa)? (?:con |van )?(?:hieu qua|dap ung)\\b"
+                "\\b(?:iod|i ot)(?: phong xa)? (?:con |van )?(?:hieu qua|dap ung)\\b(?! kem)"
               ],
               "positive_patterns": [
                 "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:voi |bang )?(?:iod|i ot)\\b",
@@ -544,6 +668,10 @@
               "label": "giai đoạn",
               "requires": "ung thư biểu mô tế bào thận giai đoạn tiến triển",
               "negative_desc": "bệnh giai đoạn sớm hoặc khu trú",
+              "options": {
+                "met": "Giai đoạn tiến triển",
+                "not_met": "Giai đoạn sớm / khu trú"
+              },
               "negative_patterns": [
                 "\\bgiai doan som\\b",
                 "\\bkhu tru\\b",
@@ -632,27 +760,54 @@
               "marker": "imatinib",
               "label": "Imatinib",
               "requires": "không dung nạp hoặc kháng lại với Imatinib",
-              "negative_desc": "chưa có không dung nạp hoặc kháng Imatinib",
-              "unknown_patterns": [
-                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,20}\\b(?:imatinib|thuoc truoc)",
-                "\\b(?:imatinib|thuoc truoc)\\b[a-z ]{0,20}(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
-              ],
-              "negative_patterns": [
-                "\\bchua (?:tung )?(?:(?:dung|su dung|dieu tri) )?(?:qua )?(?:imatinib|thuoc truoc)\\b",
-                "\\bchua (?:tung )?(?:dung|su dung|dieu tri) (?:qua )?thuoc\\b",
-                "^(?!.*\\b(?:khong|kem)\\b).*\\b(?:imatinib|thuoc truoc) (?:con |van )?(?:hieu qua|dap ung)\\b",
-                "\\b(?:khong|chua) (?:con |bi )?khang (?:lai )?(?:voi )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b",
-                "^(?!.*\\bkhong\\b).*\\bdung nap (?:tot |duoc )?(?:voi )?(?:thuoc )?imatinib\\b"
-              ],
-              "positive_patterns": [
-                "\\bkhang (?:lai )?(?:voi )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b",
-                "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:voi |bang )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b",
-                "\\b(?:imatinib|thuoc truoc) (?:that bai|khong (?:con )?(?:hieu qua|dap ung)|dap ung kem|kem dap ung)\\b",
-                "\\b(?:khong (?:con )?dap ung|kem dap ung|dap ung kem) (?:voi )?(?:imatinib|thuoc truoc)\\b",
-                "\\bkhong (?:the |con |duoc )?dung nap (?:duoc )?(?:voi )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b"
-              ],
-              "weak_negative_patterns": [
-                "\\b(?:dau tay|lan dau)\\b"
+              "negative_desc": "dung nạp được và không kháng Imatinib (hoặc chưa dùng Imatinib)",
+              "options": {
+                "met": "Không dung nạp hoặc kháng Imatinib",
+                "not_met": "Dung nạp, còn đáp ứng / chưa dùng Imatinib"
+              },
+              "any_of": [
+                {
+                  "marker": "khongdungnap",
+                  "label": "không dung nạp Imatinib",
+                  "unknown_patterns": [
+                    "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? (?:imatinib|thuoc truoc)\\b",
+                    "\\b(?:imatinib|thuoc truoc) (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
+                  ],
+                  "negative_patterns": [
+                    "\\bchua (?:tung )?(?:(?:dung|su dung|dieu tri) )?(?:qua )?(?:imatinib|thuoc truoc)\\b",
+                    "\\bchua (?:tung )?(?:dung|su dung|dieu tri) (?:qua )?thuoc\\b",
+                    "\\bdung nap (?:tot |duoc )(?:voi )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b"
+                  ],
+                  "positive_patterns": [
+                    "\\bkhong (?:the |con |duoc )?dung nap (?:duoc )?(?:voi )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b"
+                  ],
+                  "weak_negative_patterns": [
+                    "\\b(?:dau tay|lan dau)\\b"
+                  ]
+                },
+                {
+                  "marker": "khang",
+                  "label": "kháng Imatinib",
+                  "unknown_patterns": [
+                    "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? (?:imatinib|thuoc truoc)\\b",
+                    "\\b(?:imatinib|thuoc truoc) (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
+                  ],
+                  "negative_patterns": [
+                    "\\bchua (?:tung )?(?:(?:dung|su dung|dieu tri) )?(?:qua )?(?:imatinib|thuoc truoc)\\b",
+                    "\\bchua (?:tung )?(?:dung|su dung|dieu tri) (?:qua )?thuoc\\b",
+                    "\\b(?:khong|chua) (?:con |bi )?khang (?:lai )?(?:voi )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b",
+                    "\\b(?:imatinib|thuoc truoc) (?:con |van )?(?:hieu qua|dap ung)\\b(?! kem)"
+                  ],
+                  "positive_patterns": [
+                    "\\bkhang (?:lai )?(?:voi )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b",
+                    "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b",
+                    "\\b(?:imatinib|thuoc truoc) (?:that bai|khong (?:con )?(?:hieu qua|dap ung)|dap ung kem|kem dap ung)\\b",
+                    "\\b(?:khong (?:con )?dap ung|kem dap ung|dap ung kem) (?:voi )?(?:imatinib|thuoc truoc)\\b"
+                  ],
+                  "weak_negative_patterns": [
+                    "\\b(?:dau tay|lan dau)\\b"
+                  ]
+                }
               ],
               "ask": "Nếu chưa dùng thuốc trước đó thì sao?"
             }
@@ -685,13 +840,21 @@
           "requirements": [
             {
               "marker": "cd20",
-              "label": "CD20"
+              "label": "CD20",
+              "options": {
+                "met": "CD20 dương tính",
+                "not_met": "CD20 âm tính"
+              }
             },
             {
               "marker": "tebaob",
               "label": "dòng tế bào",
               "requires": "u lympho không Hodgkin tế bào B",
               "negative_desc": "u lympho tế bào T/NK",
+              "options": {
+                "met": "Tế bào B",
+                "not_met": "Tế bào T / NK"
+              },
               "negative_patterns": [
                 "\\bte bao (?:t|nk)\\b",
                 "\\b(?:t|nk) cell\\b",
@@ -740,9 +903,13 @@
               "label": "giai đoạn Binet",
               "requires": "giai đoạn Binet B hoặc C",
               "negative_desc": "giai đoạn Binet A",
+              "options": {
+                "met": "Binet B hoặc C",
+                "not_met": "Binet A"
+              },
               "unknown_patterns": [
-                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,20}\\bbinet",
-                "\\bbinet\\b[a-z ]{0,20}(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
+                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? binet\\b",
+                "\\bbinet (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
               ],
               "negative_patterns": [
                 "\\bbinet a\\b",
@@ -758,14 +925,18 @@
               "marker": "fludarabin",
               "label": "Fludarabin",
               "requires": "không phù hợp hóa trị với Fludarabin",
-              "negative_desc": "vẫn phù hợp hóa trị thông thường (Fludarabin)",
+              "negative_desc": "vẫn phù hợp hóa trị với Fludarabin",
+              "options": {
+                "met": "Không phù hợp Fludarabin",
+                "not_met": "Vẫn phù hợp Fludarabin"
+              },
               "unknown_patterns": [
-                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,20}\\b(?:fludarabin|thuoc truoc)",
-                "\\b(?:fludarabin|thuoc truoc)\\b[a-z ]{0,20}(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
+                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? (?:fludarabin|thuoc truoc)\\b",
+                "\\b(?:fludarabin|thuoc truoc) (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
               ],
               "negative_patterns": [
-                "^(?!.*\\bkhong\\b).*\\bphu hop (?:voi )?(?:hoa tri )?(?:voi )?(?:fludarabin|thuoc truoc|hoa tri thong thuong)\\b",
-                "^(?!.*\\bkhong\\b).*\\bvan (?:dung duoc|phu hop)\\b"
+                "\\bphu hop (?:voi )?(?:hoa tri )?(?:voi )?(?:fludarabin|thuoc truoc|hoa tri thong thuong)\\b",
+                "\\bvan (?:dung duoc|phu hop)\\b"
               ],
               "positive_patterns": [
                 "\\bkhong (?:con |the |duoc )?(?:phu hop|dung duoc|the dung) (?:voi )?(?:hoa tri )?(?:voi )?(?:fludarabin|thuoc truoc|hoa tri)\\b",
@@ -796,6 +967,10 @@
               "label": "thể u lympho",
               "requires": "u lympho không Hodgkin diễn tiến chậm",
               "negative_desc": "u lympho độ ác tính cao hoặc lan tỏa",
+              "options": {
+                "met": "Diễn tiến chậm",
+                "not_met": "Độ ác tính cao / lan tỏa"
+              },
               "negative_patterns": [
                 "\\blan toa\\b",
                 "\\bdlbcl\\b",
@@ -821,23 +996,27 @@
               "marker": "rituximab",
               "label": "Rituximab",
               "requires": "tiến triển sau điều trị với Rituximab",
-              "negative_desc": "chưa tiến triển sau điều trị Rituximab",
+              "negative_desc": "chưa tiến triển sau điều trị Rituximab (hoặc chưa dùng Rituximab)",
+              "options": {
+                "met": "Tiến triển sau Rituximab",
+                "not_met": "Chưa dùng / còn đáp ứng Rituximab"
+              },
               "unknown_patterns": [
-                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,20}\\b(?:rituximab|thuoc truoc)",
-                "\\b(?:rituximab|thuoc truoc)\\b[a-z ]{0,20}(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
+                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? (?:rituximab|thuoc truoc)\\b",
+                "\\b(?:rituximab|thuoc truoc) (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
               ],
               "negative_patterns": [
                 "\\bchua (?:tung )?(?:(?:dung|su dung|dieu tri) )?(?:qua )?(?:rituximab|thuoc truoc)\\b",
                 "\\bchua (?:tung )?(?:dung|su dung|dieu tri) (?:qua )?thuoc\\b",
-                "^(?!.*\\b(?:khong|kem)\\b).*\\b(?:rituximab|thuoc truoc) (?:con |van )?(?:hieu qua|dap ung)\\b",
-                "\\b(?:khong|chua) (?:con |bi )?khang (?:lai )?(?:voi )?(?:thuoc )?(?:rituximab|thuoc truoc)\\b"
+                "\\b(?:rituximab|thuoc truoc) (?:con |van )?(?:hieu qua|dap ung)\\b(?! kem)",
+                "\\b(?:khong|chua) (?:co )?(?:tien trien|tai phat) (?:sau )?(?:dieu tri )?(?:voi |bang )?(?:rituximab|thuoc truoc)\\b"
               ],
               "positive_patterns": [
-                "\\bkhang (?:lai )?(?:voi )?(?:thuoc )?(?:rituximab|thuoc truoc)\\b",
-                "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:voi |bang )?(?:thuoc )?(?:rituximab|thuoc truoc)\\b",
+                "\\b(?:tien trien|tai phat) (?:sau|du) (?:khi )?(?:dieu tri )?(?:voi |bang )?(?:rituximab|thuoc truoc)\\b",
+                "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:voi |bang )?(?:rituximab|thuoc truoc)\\b",
+                "\\bkhang (?:voi )?(?:rituximab|thuoc truoc)\\b",
                 "\\b(?:rituximab|thuoc truoc) (?:that bai|khong (?:con )?(?:hieu qua|dap ung)|dap ung kem|kem dap ung)\\b",
-                "\\b(?:khong (?:con )?dap ung|kem dap ung|dap ung kem) (?:voi )?(?:rituximab|thuoc truoc)\\b",
-                "\\b(?:tien trien|tai phat) (?:sau|du) (?:khi )?(?:dieu tri )?(?:voi |bang )?(?:rituximab|thuoc truoc)\\b"
+                "\\b(?:khong (?:con )?dap ung|kem dap ung|dap ung kem) (?:voi )?(?:rituximab|thuoc truoc)\\b"
               ],
               "weak_negative_patterns": [
                 "\\b(?:dau tay|lan dau)\\b"
@@ -875,17 +1054,22 @@
               "marker": "dieutritruoc",
               "label": "điều trị trước",
               "requires": "thất bại với điều trị nội tiết hoặc hóa trị trước đó",
-              "negative_desc": "chưa dùng cả nội tiết lẫn hóa trị trước đó",
+              "negative_desc": "chưa thất bại cả nội tiết lẫn hóa trị",
+              "options": {
+                "met": "Đã thất bại nội tiết hoặc hóa trị",
+                "not_met": "Chưa thất bại cả hai"
+              },
               "any_of": [
                 {
                   "marker": "noitiet",
                   "label": "nội tiết",
                   "unknown_patterns": [
-                    "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,20}\\bnoi tiet",
-                    "\\bnoi tiet\\b[a-z ]{0,20}(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
+                    "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? noi tiet\\b",
+                    "\\bnoi tiet (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
                   ],
                   "negative_patterns": [
-                    "\\bchua (?:tung )?(?:(?:dung|su dung|co|dieu tri|qua) )?(?:dieu tri )?noi tiet\\b"
+                    "\\bchua (?:tung )?(?:(?:dung|su dung|co|dieu tri|qua) )?(?:dieu tri )?noi tiet\\b",
+                    "\\b(?:chua|khong) that bai (?:voi |sau )?(?:dieu tri )?noi tiet\\b"
                   ],
                   "positive_patterns": [
                     "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:noi tiet|adt|cat tinh hoan)\\b",
@@ -900,11 +1084,12 @@
                   "marker": "hoatri",
                   "label": "hóa trị",
                   "unknown_patterns": [
-                    "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)[a-z ]{0,20}\\bhoa tri",
-                    "\\bhoa tri\\b[a-z ]{0,20}(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
+                    "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? hoa tri\\b",
+                    "\\bhoa tri (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
                   ],
                   "negative_patterns": [
-                    "\\bchua (?:tung )?(?:(?:dung|su dung|co|dieu tri|qua) )?(?:dieu tri )?(?:(?:ca )?noi tiet (?:hoac|va|lan|hay) )?hoa tri\\b"
+                    "\\bchua (?:tung )?(?:(?:dung|su dung|co|dieu tri|qua) )?(?:dieu tri )?(?:(?:ca )?noi tiet (?:hoac|va|lan|hay) )?hoa tri\\b",
+                    "\\b(?:chua|khong) that bai (?:voi |sau )?(?:dieu tri )?hoa tri\\b"
                   ],
                   "positive_patterns": [
                     "\\bthat bai (?:voi |sau )?(?:dieu tri )?hoa tri\\b",
@@ -998,7 +1183,8 @@
           "exclude_patterns": [
             "\\b(?:chong )?thai ghep\\b",
             "\\bghep (?:than|gan|tim|phoi|tang)\\b",
-            "\\b(?:khong|chua) (?:co |phai |bi |mac |dung cho )*(?:dieu tri )?ung thu\\b"
+            "\\b(?:khong|chua) (?:co |phai |bi |mac |dung cho )*(?:dieu tri )?ung thu\\b",
+            "\\bngoai (?:pham vi |muc dich )?(?:dieu tri )?ung thu\\b"
           ]
         },
         {
@@ -1012,7 +1198,8 @@
             "\\b(?:chong )?thai ghep\\b",
             "\\bghep (?:than|gan|tim|phoi|tang)\\b",
             "\\b(?:khong|chua) (?:co |phai |bi |mac |dung cho )*(?:dieu tri )?ung thu\\b",
-            "\\bxo cung cu\\b"
+            "\\bxo cung cu\\b",
+            "\\bngoai (?:pham vi |muc dich )?(?:dieu tri )?ung thu\\b"
           ],
           "exclude_patterns": []
         }
