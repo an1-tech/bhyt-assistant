@@ -31,14 +31,14 @@ def _check_quotes(rule_id, note, items):
 def _check_requirement(rule_id, req):
     if not str(req.get("marker", "")).isalnum() or not req.get("label"):
         raise ValueError("Invalid requirement marker: " + rule_id)
-    for key in ("negative_patterns", "positive_patterns", "unknown_patterns"):
+    for key in ("negative_patterns", "positive_patterns", "unknown_patterns", "weak_negative_patterns"):
         for pattern in req.get(key, []):
             re.compile(pattern)
     if "any_of" in req:
         if len(req["any_of"]) < 2:
             raise ValueError("any_of needs at least two parts: " + rule_id)
         for sub in req["any_of"]:
-            if not (sub.get("negative_patterns") or sub.get("positive_patterns")):
+            if not (sub.get("negative_patterns") or sub.get("positive_patterns") or sub.get("weak_negative_patterns")):
                 raise ValueError("any_of part needs patterns: " + rule_id)
             _check_requirement(rule_id, sub)
 

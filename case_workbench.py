@@ -98,7 +98,9 @@ class CaseWorkbench:
             if rule["kind"]=="indication_branches":
                 topics={b["topic"] for b in rule["branches"]}
                 check("indication","Chỉ định trong ghi chú",topics)
-                markers=list(dict.fromkeys(r["marker"] for b in rule["branches"] for r in b.get("requirements",[])))
+                # Only markers this legacy form actually asks about (chat-only requirements are skipped).
+                fields={f["key"] for f in schema["fields"]}
+                markers=[m for m in dict.fromkeys(r["marker"] for b in rule["branches"] for r in b.get("requirements",[])) if m in fields]
                 for marker in markers:
                     label=next(r["label"] for b in rule["branches"] for r in b.get("requirements",[]) if r["marker"]==marker)
                     check(marker,"Điều kiện "+label,{"positive"})

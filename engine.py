@@ -15,15 +15,59 @@ def normalize(s):
     s = unicodedata.normalize('NFD', str(s).lower().replace('đ', 'd'))
     return ' '.join(re.sub(r'[^a-z0-9]+', ' ', ''.join(c for c in s if not unicodedata.combining(c))).split())
 
-FOLLOWUP_PREFIXES=("neu ","con ","vay ","the con ","truong hop ")
-CONDITION_CUE=r"(?:khang|dung nap|sau|that bai|phu hop|chua dung|da dung|tien trien)[a-z0-9 ]{0,25}\b"
+FOLLOWUP_PREFIXES=("neu ","con ","vay ","the con ","truong hop ","thuoc nay ","thuoc do ")
+# Words that make a short message a follow-up about the medicine already under discussion.
+FOLLOWUP_WORDS=r"\b(?:ty le|thanh toan|chi tra|dieu kien|xet nghiem|hoi chan|her ?2|egfr|k?ras|nras|cd20|binet|iod|fish|ihc|dot bien|di can|giai doan|tien trien|tai phat|khang|dung nap|that bai|lieu|duong dung)\b"
+CONDITION_CUE=r"(?:khang|dung nap|sau|that bai|phu hop|chua dung|da dung|tien trien|tai phat|dap ung|chong chi dinh)[a-z0-9 ]{0,25}\b"
 INN_STEM=r"(?:mab|tinib|rafenib|ciclib|parib|lisib|zomib|cept|platin|taxel|rubicin|mycin|vir|pril|sartan|olol|dipine|azole|gliptin|gliflozin|statin|cillin|floxacin)$"
-PRODUCT_MODIFIERS=r"emtansine|deruxtecan|vedotin|ozogamicin|govitecan|mafodotin|tesirine|pegol|duocarmazine"
+PRODUCT_MODIFIERS=r"emtansine?|deruxtecan|dxd|mcc|dm1|vedotin|ozogamicin|govitecan|mafodotin|tesirine|pegol|duocarmazine|sn-?38"
 VIET_SYLLABLE=re.compile(r"^(?:ngh|ng|nh|ch|gh|gi|kh|ph|qu|th|tr|[bcdghklmnprstvx])?[aeiouy]{1,3}(?:ch|ng|nh|[cmnpt])?$")
-PRIVATE_RE=(re.compile(r'\b(?:0[35789]\d{8}|\d{12})\b'),re.compile(r'(?i)(họ tên bệnh nhân|mã bệnh án|số thẻ bhyt)\s*[:=]'))
+SALT_WORDS={'acetat','acetate','dimaleat','dimaleate','maleat','maleate','mesylat','mesylate','mesilat','besylat','besylate',
+            'tosylat','tosylate','tartrat','fumarat','citrat','succinat','lactat','gluconat','carbonat','nitrat','sulfat','sulphat',
+            'hydroclorid','hydrochlorid','hydrobromid','bromid','clorid','phosphat','phosphate','natri','kali','calci','magnesi',
+            'meglumin','hydrat','dihydrat','trihydrat','base','peptid'}
+# English/clinical words that are never treated as an unrecognised medicine name.
+NOT_DRUG_WORDS=set("""stage grade score status type wild mutation mutant positive negative luminal triple please patient case
+dose first second third line therapy treatment adjuvant neoadjuvant metastatic advanced early late relapse relapsed refractory
+resistant resistance failure failed after before with without what about does insurance covered coverage price cost test result
+biopsy tumor tumour cancer breast lung gastric colon rectal liver kidney prostate thyroid lymphoma leukemia hormone receptor
+estrogen progesterone exon deletion insertion amplification express expression overexpression brca pdl1 ki67 msi mmr ecog
+alk ros1 braf ntrk ret met tnm node nodes lymph distant local regional squamous adeno adenocarcinoma small cell nonsmall
+non chemo chemotherapy radiotherapy surgery hospital doctor pharmacy question answer thanks hello""".split())
+
+def condition_mention(name,q):
+    """The drug name sits inside a condition: "kháng Imatinib" or "Imatinib đáp ứng kém"."""
+    return bool(re.search(CONDITION_CUE+re.escape(name)+r"\b",q) or re.search(
+        r"\b"+re.escape(name)+r"\b[a-z0-9 ]{0,15}\b(?:dap ung kem|kem dap ung|khong (?:con )?(?:hieu qua|dap ung|dung nap)|that bai|khang|tien trien)\b",q))
+
+def normalize_keep_plus(s):
+    s = unicodedata.normalize('NFD', str(s).lower().replace('đ', 'd'))
+    return ' '.join(re.sub(r'[^a-z0-9+/&]+', ' ', ''.join(c for c in s if not unicodedata.combining(c))).split())
+
+def has_diacritics(s):
+    return any(unicodedata.combining(c) for c in unicodedata.normalize('NFD', str(s))) or 'đ' in str(s).lower()
+
+PRIVATE_RE=(
+    re.compile(r'(?<![\w])(?:\+?84|0)(?:[\s.-]?\d){9}(?![\d])'),                       # phone, any spacing
+    re.compile(r'(?<![\w])\d{12}(?![\d])'),                                            # CCCD
+    re.compile(r'(?<![A-Za-z0-9])[A-Za-z]{2}\s?\d(?:\s?\d){12}(?![\d])'),              # BHYT card (2 letters + 13 digits)
+    re.compile(r'(?i)(?:họ tên|họ và tên|tên bệnh nhân|tên người bệnh|ho ten)\s*(?:bệnh nhân\s*)?(?:là\s*)?[:=]?\s*\S'),
+    re.compile(r'(?i)(?:mã bệnh án|mã bn|số bệnh án|mã người bệnh|mã hồ sơ|số thẻ bhyt|thẻ bhyt số|mã thẻ bhyt|ma benh an|so the bhyt)\s*(?:là\s*)?[:=]?\s*[A-Za-z0-9]'),
+    re.compile(r'(?i)(?:sinh ngày|ngày sinh|sinh năm|sinh|dob)\s*[:=]?\s*\d{1,2}[/.-]\d{1,2}[/.-]\d{2,4}'),
+)
+NAME_LEAD=re.compile(r'(?:[Bb]ệnh nhân|[Nn]gười bệnh|\bBN|\b[Ôô]ng|\b[Bb]à|\b[Cc]hị|\b[Aa]nh)\s+((?:\w+\s+){1,3}\w+)')
 
 def private_input(message):
-    return any(p.search(message) for p in PRIVATE_RE)
+    if any(p.search(message) for p in PRIVATE_RE):return True
+    # "bệnh nhân Nguyễn Văn An": two or more capitalised words after a person word.
+    for m in NAME_LEAD.finditer(message):
+        words=m.group(1).split()
+        lead=[w for w in words[:3] if w[:1].isupper() and not w.isupper() and w.isalpha()]
+        # Vietnamese personal names: accented or short syllables ("Nguyễn Văn An", "Tran Van An"),
+        # not a capitalised drug name ("Trastuzumab Ung thư").
+        if len(lead)>=2 and words[0] in lead and words[1] in lead and all(not w.isascii() or len(w)<=6 for w in lead[:2]):
+            return True
+    return False
 
 def read_jsonl(p):
     return [json.loads(s) for s in p.read_text(encoding='utf-8').splitlines() if s.strip()]
@@ -70,12 +114,20 @@ class Corpus:
             if '+' not in name:
                 plain=normalize(re.sub(r'\([^)]*\)', '', name))
                 if plain and plain != key:self.source_names.setdefault(plain,set()).add(key)
-                for part in re.findall(r'\(([^)]+)\)',name):
-                    if re.fullmatch(r'[A-Za-z][A-Za-z -]{3,}',part):
-                        self.source_names.setdefault(normalize(part),set()).add(key)
-                # Base name without a trailing salt word ("Afatinib dimaleate" -> "afatinib").
-                base=re.sub(r'(?:\s+(?:acetat|acetate|dimaleat|dimaleate|maleat|maleate|mesylat|mesylate|besylat|besylate|tartrat|fumarat|citrat|sulfat|hydroclorid|hydrochlorid|hydrobromid|natri|kali|calci))+$','',plain or key)
-                if base and base!=key and len(base)>=5 and base not in self.names:
+                for group in re.findall(r'\(([^)]+)\)',name):
+                    # "(folinic acid, leucovorin)", "(5-FU)"; never a bare salt/ion word like "(sulfat)".
+                    for part in group.split(','):
+                        p=normalize(part)
+                        if len(p)>=3 and re.search(r'[a-z]{2}',p) and not set(p.split())<=SALT_WORDS:
+                            self.source_names.setdefault(p,set()).add(key)
+                # Written without the space ("Methyl prednisolon" -> "methylprednisolon").
+                compact=(plain or key).replace(' ','')
+                if compact!=(plain or key) and compact not in self.names:
+                    self.source_names.setdefault(compact,set()).add(key)
+                # Base name without a trailing salt word ("Afatinib dimaleate" -> "afatinib");
+                # never an element/ion on its own ("calci", "magnesi").
+                base=re.sub(r'(?:\s+(?:'+'|'.join(sorted(SALT_WORDS))+r'))+$','',plain or key)
+                if base and base!=key and len(base)>=5 and base not in self.names and base not in SALT_WORDS:
                     self.source_names.setdefault(base,set()).add(key)
         self.aliases={};self.alias_sources={}
         alias_file=self.data/'aliases.json'
@@ -107,14 +159,41 @@ class Corpus:
         mag=math.sqrt(sum(x*x for x in v.values())) or 1
         return {t:x/mag for t,x in v.items()}
 
+    def name_present(self,key,message,q):
+        """Exact catalogue name in the message, with two guards: a combination needs
+        "+", "/" or "phối hợp" between its parts, and when the user types with
+        diacritics an accented name must match with its accents ("còn" ≠ "Cồn")."""
+        if ' '+key+' ' not in q:return False
+        name=self.names[key][0]['ingredient']
+        if '+' in name:
+            plus=normalize_keep_plus(message)
+            # The full printed name ("Natri clorid + dextrose/glucose", "... (LPV/r)") always counts.
+            if ' '+normalize_keep_plus(name)+' ' in ' '+plus+' ':return True
+            parts=[normalize_keep_plus(p) for p in re.sub(r'\([^)]*\)','',name).split('+')]
+            joiner=r'\s*(?:\+|/|&|phoi hop|ket hop)\s*'
+            return bool(re.search(r'(?<![a-z0-9])'+joiner.join(re.escape(p.strip()) for p in parts)+r'(?![a-z0-9])',plus))
+        if not name.isascii() and has_diacritics(message):
+            core=' '.join(re.sub(r'[^\w]+',' ',unicodedata.normalize('NFC',name.lower())).split())
+            text=' '+' '.join(re.sub(r'[^\w]+',' ',unicodedata.normalize('NFC',message.lower())).split())+' '
+            return ' '+core+' ' in text
+        return True
+
     def resolve(self, message):
         q=' '+normalize(message)+' '
-        direct=[k for k in self.names if ' '+k+' ' in q]
+        direct=[k for k in self.names if self.name_present(k,message,q)]
         hits=list(direct)
         hits.extend(self.aliases[k] for k in self.aliases if ' '+k+' ' in q)
         for short,keys in self.source_names.items():
             if ' '+short+' ' in q and len(keys)==1 and not any(' '+short+' ' in ' '+k+' ' for k in direct):hits.extend(keys)
         hits=list(dict.fromkeys(hits))
+        if not hits:
+            # "Tegafur gimeracil oteracil": every part of a listed combination, in order,
+            # without the salt word, and no single ingredient matched.
+            for key,rows in self.names.items():
+                name=rows[0]['ingredient']
+                if '+' not in name:continue
+                parts=[' '.join(w for w in normalize(p).split() if w not in SALT_WORDS) for p in re.sub(r'\([^)]*\)','',name).split('+')]
+                if all(parts) and len(parts)>=3 and re.search(r'\b'+r'\s+'.join(re.escape(p) for p in parts)+r'\b',q):hits.append(key)
         # A listed combination takes priority over the separately listed ingredients.
         def spans(key):
             return [key]+[short for short,keys in self.source_names.items() if key in keys]
@@ -160,7 +239,7 @@ class Corpus:
         q=re.sub(r'\b(thuoc|co|duoc|huong|bao|hiem|y|te|bhyt|khong|tra|cuu|chi|thanh|toan|la|gi)\b',' ',q)
         q=' '.join(q.split())
         if len(q)<4:return []
-        keys=difflib.get_close_matches(q,self.names.keys(),n=4,cutoff=.66)
+        keys=difflib.get_close_matches(q,self.names.keys(),n=4,cutoff=.75)
         return [self.names[k][0]['ingredient'] for k in keys]
 
     def search(self, query, limit=5, policies_only=False, distinct_parents=False):
@@ -227,8 +306,8 @@ class Corpus:
         base=dict(snapshot=SNAPSHOT,mode='local',citations=[],results=[],suggestions=[],followups=[],state={})
         if day!=SNAPSHOT:
             return base|dict(status='unsupported_date',answer=f'Bộ nguồn này được chốt ngày 06/11/2026. Chưa đủ dữ liệu phiên bản để trả lời cho ngày {day}. Hãy dùng ngày của bộ nguồn hoặc cập nhật dữ liệu tương ứng.')
-        if re.search(r'\b(?:0[35789]\d{8}|\d{12})\b',message) or re.search(r'(?i)(họ tên bệnh nhân|mã bệnh án|số thẻ bhyt)\s*[:=]',message):
-            return base|dict(status='private_input',answer='Bạn chỉ cần nhập tên thuốc, hoạt chất và bối cảnh không định danh. Vui lòng bỏ số điện thoại, mã bệnh án hoặc số thẻ BHYT trước khi tra cứu.')
+        if private_input(message):
+            return base|dict(status='private_input',answer='Bạn chỉ cần nhập tên thuốc, hoạt chất và bối cảnh không định danh. Vui lòng bỏ họ tên, ngày sinh, số điện thoại, mã bệnh án hoặc số thẻ BHYT trước khi tra cứu.')
         groups=self.resolve(message)
         if len(groups)>8:
             return base|dict(status='needs_info',answer='Bạn đang tra hơn 8 hoạt chất. Hãy chia thành từng nhóm tối đa 8 để đối chiếu riêng từng thuốc.')
@@ -239,6 +318,10 @@ class Corpus:
         q=normalize(message)
         detected_routes=self.detect_route(message)
         if len(detected_routes)>1 and groups:
+            if len(groups)==1:
+                # One medicine, several routes: each button is a complete one-route question, so it cannot loop.
+                return base|dict(status='needs_info',answer='Bạn đã nêu nhiều đường dùng. Hãy tra từng thuốc kèm một đường dùng để tránh áp nhầm điều kiện.',
+                                 suggestions=[f"{groups[0][0]['ingredient']} {r.lower()}" for r in detected_routes[:4]],suggestion_mode='replace',state={})
             return base|dict(status='needs_info',answer='Bạn đã nêu nhiều đường dùng. Hãy tra từng thuốc kèm một đường dùng để tránh áp nhầm điều kiện.',suggestions=[g[0]['ingredient'] for g in groups],state={})
         route=detected_routes[0] if detected_routes else None
         related_followup=(len({r["ingredient"] for r in previous})==1
@@ -331,34 +414,56 @@ class Corpus:
                 for name in related:lookup_message=re.sub(re.escape(name),"thuốc trước",lookup_message,flags=re.I)
                 hits=[g for g in hits if g[0]["ingredient"] not in related]
             previous=[self.by_id[x] for x in state.get("selected_ids",[])[:20] if isinstance(x,str) and x in self.by_id] if isinstance(state,dict) and isinstance(state.get("selected_ids"),list) else []
-            single=previous[0] if len({r["ingredient"] for r in previous})==1 else None
+            prev_names=list(dict.fromkeys(r["ingredient"] for r in previous))[:8]
+            single=previous[0] if len(prev_names)==1 else None
             related_followup=False
             if hits and single:
                 # Asked about Nilotinib, then "Nếu kháng Imatinib?": still Nilotinib.
+                # "Còn Imatinib thì sao?" (no condition word) switches to Imatinib.
                 names={g[0]["ingredient"] for g in hits}
                 rel=set(answerer.rules.get(single["record_id"],{}).get("related_drugs",[]))
-                if single["ingredient"] not in names and names<=rel and (q.startswith(FOLLOWUP_PREFIXES) or all(re.search(CONDITION_CUE+re.escape(normalize(n))+r"\b",q) for n in names)):
+                if single["ingredient"] not in names and names<=rel and all(condition_mention(normalize(n),q) for n in names):
                     for name in names:lookup_message=re.sub(re.escape(name),"thuốc trước",lookup_message,flags=re.I)
                     hits=[];related_followup=True
             unrecognized=self.unrecognized_names(message)
             if unrecognized and not hits:
                 # Never answer an unknown medicine with the previous medicine's rules.
-                return self.finalize_status(answerer.enrich(self.unrecognized_result(unrecognized),message,state))
-            if single and not hits and (related_followup or topics_in(message) or re.search(r"\b(?:her[ -]?2|egfr)\b",message,re.I)
+                # Suggest only near-identical spellings ("Paclitaxen"); "Pertuzumab" is not "Trastuzumab".
+                suggested=list(dict.fromkeys(self.names[k][0]["ingredient"] for t in unrecognized
+                                             for k in difflib.get_close_matches(normalize(t),self.names.keys(),n=3,cutoff=.85)))
+                return self.finalize_status(answerer.enrich(self.unrecognized_result(unrecognized,suggested=suggested),message,state))
+            if prev_names and not hits and (related_followup or topics_in(message) or re.search(r"\b(?:her[ -]?2|egfr)\b",message,re.I)
                     or re.search(r"\b(?:ung thu|benh|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|dieu tri)\b",q)
-                    or q.startswith(FOLLOWUP_PREFIXES)):
-                lookup_message=single["ingredient"]+" "+lookup_message
+                    or q.startswith(FOLLOWUP_PREFIXES) or re.search(FOLLOWUP_WORDS,q)):
+                # Applies to every medicine of the previous answer (one or several).
+                lookup_message=" ".join(prev_names)+" "+lookup_message
             named_drug=bool(hits)
+            # "Erlotinib NSCLC" → "Còn gefitinib?": keep the disease, change the medicine.
+            carry_prior=bool(hits and previous and q.startswith(("con ","vay ","the con ","con thuoc ")) and not topics_in(message))
         # General coverage answers use source-bound templates; no external AI call.
         result=self.chat(lookup_message,state,as_of,allow_ai=False)
-        result=answerer.enrich(result,message,state,named_drug=named_drug)
+        result=answerer.enrich(result,message,state,named_drug=named_drug,carry_prior=valid and carry_prior)
         notes=self.brand_notes(message)
         if notes and result.get("results"):result["brand_notes"]=notes
+        notices=[]
         if unrecognized and result.get("results"):
-            extra="Chưa nhận ra trong danh mục: "+", ".join(unrecognized)+"; câu trả lời chỉ áp dụng cho thuốc đã nhận diện."
             result["unrecognized"]=unrecognized
-            result["notice"]=(result.get("notice","")+" "+extra).strip()
+            notices.append("Chưa nhận ra trong danh mục: "+", ".join(unrecognized)+"; câu trả lời chỉ áp dụng cho thuốc đã nhận diện.")
+        if valid and result.get("results"):
+            notices+=self.combination_notices(message,result)
+        if notices:result["notice"]=" ".join([result.get("notice","")]+notices).strip()
         return self.finalize_status(result)
+
+    def combination_notices(self,message,result):
+        """Separately named ingredients that also exist as a listed combination."""
+        q=' '+normalize(message)+' ';answered={r["ingredient"] for r in result["results"]};out=[]
+        for key,rows in self.names.items():
+            name=rows[0]["ingredient"]
+            if '+' not in name or name in answered:continue
+            parts=[normalize(p) for p in name.split('+')]
+            if all(' '+p+' ' in q for p in parts):
+                out.append(f"Danh mục còn có dạng phối hợp “{name}”; nếu ý bạn là thuốc phối hợp, hỏi lại với dấu “+” (ví dụ “{name}”).")
+        return out[:2]
 
     @staticmethod
     def condition_drugs(message,hits,rules):
@@ -368,9 +473,13 @@ class Corpus:
         if re.search(r"\b(?:so sanh|khac nhau|khac gi|hay la|thay the|doi chieu|nen chon)\b",q):return set()
         names={g[0]["ingredient"] for g in hits};found=set()
         for g in hits:
+            main=normalize(g[0]["ingredient"])
             for row in g:
                 for name in rules.get(row["record_id"],{}).get("related_drugs",[]):
-                    if name in names and name!=g[0]["ingredient"] and re.search(CONDITION_CUE+re.escape(normalize(name))+r"\b",q):found.add(name)
+                    rel=normalize(name)
+                    # "Imatinib hay/hoặc/và Nilotinib": two medicines being compared.
+                    joined=re.search(r"\b"+re.escape(main)+r"\s+(?:hay|hoac|va|voi|hay la|so voi)\s+"+re.escape(rel)+r"\b|\b"+re.escape(rel)+r"\s+(?:hay|hoac|va|voi|hay la|so voi)\s+"+re.escape(main)+r"\b",q)
+                    if name in names and name!=g[0]["ingredient"] and not joined and condition_mention(rel,q):found.add(name)
         return found if names-found else set()
 
     def vocabulary(self):
@@ -387,14 +496,21 @@ class Corpus:
         return self._vocab
 
     def unrecognized_names(self,message):
-        """Drug-like words that match nothing in the catalogue (INN stems or brand-like names)."""
+        """Words that look like a medicine name but match nothing in the catalogue:
+        INN stems, brand-like words (any case) that are not Vietnamese syllables or
+        known clinical words, and codes such as "T-DM1" or "TS-1"."""
         vocab=self.vocabulary();found=[]
-        for t in re.findall(r"[A-Za-z][A-Za-z0-9-]*",message):
+        for t in re.findall(r"[^\s,.;:!?()\[\]\"'“”‘’]+",message):
+            t=t.strip("-+/")
             lw=t.lower()
-            if not t.isascii() or len(t)<5 or lw in vocab or normalize(t) in vocab:continue
+            if not t or not t.isascii() or lw in vocab or normalize(t) in vocab or lw in NOT_DRUG_WORDS:continue
+            if normalize(t).replace(' ','') in vocab:continue
+            code=bool(re.fullmatch(r"[A-Za-z]{1,4}-?\d{1,3}[A-Za-z]?|[A-Za-z]-[A-Za-z]{1,3}\d|\d-[A-Za-z]{2,3}",t)) and not re.fullmatch(r"(?:her|cd|ki|ihc|egfr|pd|ca|ecog|t|n|m|g|v)\d+[a-z]?",lw)
+            if code:found.append(t);continue
+            if len(t)<5 or not t.isalpha():continue
             stem=re.search(INN_STEM,lw)
-            brand=t[0].isupper() and any(ch.islower() for ch in t[1:]) and t.isalpha() and not VIET_SYLLABLE.match(lw)
-            if stem or brand:found.append(t)
+            wordlike=not VIET_SYLLABLE.match(lw)
+            if stem or wordlike:found.append(t)
         return list(dict.fromkeys(found))
 
     @staticmethod
@@ -405,7 +521,12 @@ class Corpus:
             if m:return (message[m.start():m.end()],name)
         return None
 
-    def unrecognized_result(self,names,base=None):
+    def unrecognized_result(self,names,base=None,suggested=None):
+        if suggested:
+            # A probable misspelling ("Paclitaxen"): offer the catalogue names, conclude nothing.
+            return dict(snapshot=SNAPSHOT,mode='local',citations=[],results=[],suggestions=list(suggested),followups=[],state={},
+                        status='ambiguous',unrecognized=list(names),
+                        answer="Chưa xác định chắc tên thuốc “"+", ".join(names)+"”. Bạn chọn đúng hoạt chất dưới đây để tiếp tục; mình chưa kết luận BHYT từ tên gần giống.")
         if base:
             answer=(f"“{names[0]}” là thuốc khác với “{base}” trong danh mục BHYT. Bộ nguồn chưa có dòng riêng cho thuốc này nên chưa kết luận, "
                     f"và không dùng điều kiện của {base} cho thuốc này. Không tìm thấy ở đây chưa đủ để kết luận thuốc không được BHYT thanh toán.")

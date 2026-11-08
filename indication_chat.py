@@ -18,7 +18,8 @@ TOPICS = {
     "liver":("Ung thư gan",r"(?:ung thu|ut) (?:(?:te bao|bieu mo) )*gan|hcc"),
     "t2d":("Đái tháo đường típ 2",r"(?:dai thao duong|tieu duong) (?:tip|type|typ|loai) 2"),
     # Oncology prototype topics (khoa Ung bướu, 07/11/2026).
-    "mesothelioma":("U trung biểu mô màng phổi",r"(?:u|ung thu) trung bieu mo|mesothelioma"),
+    # Only the pleural site named in the source note (not peritoneal mesothelioma).
+    "mesothelioma":("U trung biểu mô màng phổi",r"(?:u|ung thu) trung bieu mo (?:ac tinh )?(?:mang phoi|phoi)|mesothelioma(?! phuc mac)(?: mang phoi)?"),
     "head_neck":("Ung thư tế bào vảy vùng đầu cổ",r"(?:ung thu|ut) (?:te bao vay )?(?:vung )?dau(?: va)? co"),
     "thyroid":("Ung thư tuyến giáp",r"(?:ung thu|ut) (?:(?:bieu mo|te bao) )*tuyen giap"),
     "kidney":("Ung thư thận",r"(?:ung thu|ut) (?:(?:te bao|bieu mo) )*than|rcc"),
@@ -29,8 +30,10 @@ TOPICS = {
     "nhl":("U lympho không Hodgkin",r"u lympho(?: ac tinh)? khong (?:phai )?hodgkin|lymphoma khong hodgkin|non hodgkin|nhl"),
 }
 
-DISEASE_SIGNAL = r"\b(?:ung thu|benh|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|dieu tri)\b"
-CONTEXT_DISEASE = r"\b(?:ung thu|benh|dai thao duong|tang huyet ap|dau|sot|viem|nhiem khuan|suy tim|hen|copd)\b"
+# A new disease word resets the topic; "bệnh nhân" and "điều trị" are not diseases.
+DISEASE_SIGNAL = r"\b(?:ung thu|benh(?! nhan)|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|trung bieu mo|sarcom)\b"
+CONTEXT_DISEASE = r"\b(?:ung thu|benh(?! nhan)|dai thao duong|tang huyet ap|dau|sot|viem|nhiem khuan|suy tim|hen|copd|trung bieu mo|lympho|bach cau|sarcom)\b"
+TOPIC_NEGATION = r"(?:khong phai|khong phai la|khong bi|khong co|khong mac|chua co|chua mac|loai tru)\s*$"
 SCOPE_NOTE = ("Thông tin chung theo bộ nguồn BHYT chốt 06/11/2026; chưa được bệnh viện thẩm định. "
               "Tỷ lệ của thuốc không đồng nghĩa mức hưởng cá nhân hoặc số tiền quỹ chi trả.")
 
@@ -40,7 +43,7 @@ def topics_in(text):
     q=normalize(text);hits=[]
     for key,(_,pattern) in TOPICS.items():
         for m in re.finditer(r"\b(?:"+pattern+r")\b",q):
-            if re.search(r"(?:khong phai|khong bi|loai tru)\s*$",q[max(0,m.start()-24):m.start()]):continue
+            if re.search(TOPIC_NEGATION,q[max(0,m.start()-24):m.start()]):continue
             hits.append(key);break
     if "nsclc" in hits or "sclc" in hits:hits=[x for x in hits if x!="lung"]
     return hits
@@ -89,7 +92,7 @@ class IndicationChat:
                 raise ValueError("Stale source-linked chat profile: "+id)
         self.rules_meta,self.rules=load_indication_rules(corpus.data,corpus.by_id,TOPICS)
 
-    def enrich(self,result,message,previous=None,named_drug=None):
+    def enrich(self,result,message,previous=None,named_drug=None,carry_prior=False):
         from engine import normalize
         result["response_type"]="general_indication_chat"
         result["requires_patient_details"]=False
@@ -100,12 +103,13 @@ class IndicationChat:
         previous_ids=previous.get("selected_ids",[])
         now_ids=result.get("state",{}).get("selected_ids",[])
         same=bool(set(previous_ids)&set(now_ids))
-        prior=previous_turns(previous) if same else []
+        prior=previous_turns(previous) if (same or carry_prior) else []
         # Explicitly named medicine or disease starts a new general question.
         # Unknown diseases must not silently inherit a previous, covered cancer.
         disease_signal=bool(re.search(DISEASE_SIGNAL,normalize(message)))
         if named_drug is None:named_drug=bool(self.c.resolve(message))
-        reset_topic=bool(current_topics or named_drug or disease_signal)
+        # "Còn gefitinib?" after an NSCLC question keeps the disease for the new medicine.
+        reset_topic=bool(current_topics or (named_drug and not carry_prior) or disease_signal)
         turns=[message] if reset_topic or not prior else (prior+[message])[-8:]
         context="; ".join(turns)[-1000:]
         topics=current_topics if reset_topic else topics_in("; ".join(prior))
@@ -215,6 +219,9 @@ class IndicationChat:
                     answer["conditions"].append(f"Theo câu hỏi: {req['label']} chưa rõ — cần xác nhận {requires}.")
                 if status is None:
                     answer["_suggested"].append(req.get("ask",f"Nếu {req['label']} âm tính thì sao?"))
+            unclear=[r for r in answer["requirements"] if r["status"]=="unknown"]
+            if unclear and not unmet:
+                answer["conclusion"]+=" Câu hỏi chưa rõ: "+"; ".join(r["requires"] for r in unclear)+" — cần xác nhận trước khi áp dụng tỷ lệ này."
             if unmet:
                 answer["status"]="source_condition_not_met";answer["source_rate"]=None
                 answer["conclusion"]=(f"Nhánh thanh toán {name} cho {b['disease']} trong nguồn yêu cầu {unmet.get('requires',unmet['label']+' dương tính')}. "
