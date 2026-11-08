@@ -20,18 +20,19 @@ TOPICS = {
     # Oncology prototype topics (khoa Ung bướu, 07/11/2026).
     # Only the pleural site named in the source note (not peritoneal mesothelioma).
     "mesothelioma":("U trung biểu mô màng phổi",r"(?:u|ung thu) trung bieu mo (?:ac tinh )?(?:mang phoi|phoi)|mesothelioma(?! phuc mac)(?: mang phoi)?"),
-    "head_neck":("Ung thư tế bào vảy vùng đầu cổ",r"(?:ung thu|ut) (?:te bao vay )?(?:vung )?dau(?: va)? co"),
+    "head_neck":("Ung thư tế bào vảy vùng đầu cổ",r"(?:ung thu|ut) (?:te bao vay )?(?:vung )?dau(?: va)? co|(?:ung thu|ut|carcinom[a]?) (?:te bao vay )?(?:thanh quan|ha hong|hong|khoang mieng|luoi|san mieng|amidan|xoang le|xoang)"),
     "thyroid":("Ung thư tuyến giáp",r"(?:ung thu|ut) (?:(?:bieu mo|te bao) )*tuyen giap"),
     "kidney":("Ung thư thận",r"(?:ung thu|ut) (?:(?:te bao|bieu mo) )*than|rcc"),
     "prostate":("Ung thư tiền liệt tuyến",r"(?:ung thu|ut) (?:tien liet tuyen|tuyen tien liet)"),
     "cml":("Bạch cầu tủy mạn (CML)",r"bach cau (?:dong )?tuy man|cml"),
     "cll":("Bạch cầu lympho mạn (CLL)",r"bach cau lympho man|cll"),
     "gist":("U mô đệm đường tiêu hóa (GIST)",r"gist|u mo dem (?:duong )?(?:da day )?(?:ruot|tieu hoa)"),
-    "nhl":("U lympho không Hodgkin",r"u lympho(?: ac tinh)? khong (?:phai )?hodgkin|lymphoma khong hodgkin|non hodgkin|nhl"),
+    "nhl":("U lympho không Hodgkin",r"u lympho(?: ac tinh)? khong (?:phai )?hodgkin|lymphoma khong hodgkin|non hodgkin|nhl|dlbcl|"
+           r"u lympho (?:ac tinh )?(?:te bao b lon(?: lan toa)?|the nang|nang|vung ria|te bao ao|te bao nho|lympho bao nho)|follicular lymphoma|marginal zone lymphoma"),
 }
 
 # A new disease word resets the topic; "bệnh nhân" and "điều trị" are not diseases.
-DISEASE_SIGNAL = r"\b(?:ung thu|benh(?! nhan)|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|trung bieu mo|sarcom)\b"
+DISEASE_SIGNAL = r"\b(?:ung thu|benh(?! (?:nhan|da|dang|van|con|khong|chua|tien trien|tai phat|on dinh|di can|giai doan))|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|trung bieu mo|sarcom)\b"
 CONTEXT_DISEASE = r"\b(?:ung thu|benh(?! nhan)|dai thao duong|tang huyet ap|dau|sot|viem|nhiem khuan|suy tim|hen|copd|trung bieu mo|lympho|bach cau|sarcom)\b"
 TOPIC_NEGATION = r"(?:khong phai|khong phai la|khong bi|khong co|khong mac|chua co|chua mac|loai tru)\s*$"
 SCOPE_NOTE = ("Thông tin chung theo bộ nguồn BHYT chốt 06/11/2026; chưa được bệnh viện thẩm định. "
@@ -44,6 +45,8 @@ def topics_in(text):
     for key,(_,pattern) in TOPICS.items():
         for m in re.finditer(r"\b(?:"+pattern+r")\b",q):
             if re.search(TOPIC_NEGATION,q[max(0,m.start()-24):m.start()]):continue
+            # Secondary liver cancer (metastasis to the liver) is not hepatocellular carcinoma.
+            if key=="liver" and re.search(r"\bthu phat\b|\bdi can (?:tu|den|vao) |\bdi can gan\b",q):continue
             hits.append(key);break
     if "nsclc" in hits or "sclc" in hits:hits=[x for x in hits if x!="lung"]
     return hits
@@ -140,7 +143,8 @@ class IndicationChat:
         has_disease=bool(topics or re.search(CONTEXT_DISEASE,normalize(context)))
         supplemental=[]
         for row in result["results"]:
-            row["question_answer"]=self.answer(row,topics,turns,has_disease,facts,confirmable=len(result["results"])==1)
+            # Every answered medicine gets its own buttons; each key carries that medicine's record id.
+            row["question_answer"]=self.answer(row,topics,turns,has_disease,facts,confirmable=True)
             row["question_answer"]["source_ids"]=row.get("record_ids",[])
             for id in row.get("record_ids",[]):
                 source=self.c.by_id[id]
@@ -183,18 +187,23 @@ class IndicationChat:
             answer["status"]="source_conditions"
             answer["conclusion"]=name+f" có trong danh mục BHYT; ghi chú phân biệt tỷ lệ theo {axis}. Ghi chú này chưa đủ để xác nhận chi trả cho một bệnh/chỉ định cụ thể."
             fact=facts.get(ids[0],{}).get("formulation",{}).get("value")
+            if fact and getattr(self,"_new_turn",None):
+                # "Nếu dùng chống thải ghép thì sao?" replaces an earlier confirmed purpose.
+                _,new_state=choose_formulation([self._new_turn],rule["formulations"])
+                if new_state in ("chosen","unclear"):
+                    facts[ids[0]]["formulation"].pop("value",None);fact=None
             chosen,state=choose_formulation(turns,rule["formulations"],fact)
             if chosen:
                 f=chosen[0]
                 source="Theo xác nhận" if state=="confirmed" else "Câu hỏi thuộc nhánh"
                 answer["conclusion"]+=f" {source} “{f['label']}”: tỷ lệ ghi trong nguồn {f['rate']}%."
                 answer["matched_branch"]=f["value"]
-            else:
-                if state=="unclear":
-                    answer["conclusion"]+=f" Câu hỏi chưa xác định rõ {axis}; chọn {axis} bên dưới để xem đúng nhánh."
-                if confirmable:
-                    answer["confirm"].append({"key":f"{ids[0]}|formulation|value","label":_capital(axis),"requires":"",
-                        "options":[{"value":f["value"],"label":f"{f['label']} ({f['rate']}%)"} for f in rule["formulations"]]})
+            elif state=="unclear":
+                answer["conclusion"]+=f" Câu hỏi chưa xác định rõ {axis}; chọn {axis} bên dưới để xem đúng nhánh."
+            # Buttons when the choice is open, and after a confirmation so it can be changed.
+            if confirmable and (not chosen or state=="confirmed"):
+                answer["confirm"].append({"key":f"{ids[0]}|formulation|value","label":_capital(axis),"requires":"",
+                    "options":[{"value":f["value"],"label":f"{f['label']} ({f['rate']}%)"} for f in rule["formulations"]]})
             answer["conditions"]=list(row.get("conditions",[]))
         elif rule and rule["kind"]=="rate_only":
             facility=" và điều kiện cơ sở" if rule.get("common_verbatim") else ""
@@ -243,9 +252,10 @@ class IndicationChat:
             for req in b.get("requirements",[]):
                 requires=req.get("requires",req["label"]+" dương tính")
                 fact=branch_facts.get(req["marker"])
-                # A new question that clearly restates this condition ("Nếu RAS tự nhiên thì sao?")
-                # replaces the earlier confirmation; otherwise the confirmed fact wins.
-                if fact and getattr(self,"_new_turn",None) and requirement_status([self._new_turn],req) in ("met","not_met"):
+                # A new question that says anything about this condition — a clear restatement
+                # ("Nếu RAS tự nhiên thì sao?") or a doubt ("nếu chưa xét nghiệm EGFR", "nếu chưa
+                # di căn" for an either/or condition) — replaces the earlier confirmation.
+                if fact and getattr(self,"_new_turn",None) and requirement_status([self._new_turn],req) is not None:
                     branch_facts.pop(req["marker"],None);fact=None
                 status=requirement_status(turns,req,fact)
                 source="Theo xác nhận" if fact in ("met","not_met","unknown") else "Theo câu hỏi"

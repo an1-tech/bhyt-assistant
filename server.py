@@ -85,6 +85,7 @@ def make_server(port=8765,corpus=None):
                 result['department']=department
                 self.send(200,result)
             except (ValueError,TypeError,KeyError) as e:self.send(400,{'error':str(e)[:180]})
+            except RecursionError:self.send(400,{'error':'Dữ liệu gửi lên lồng quá sâu.'})
             except Exception:self.send(500,{'error':'Không xử lý được yêu cầu. Thử lại hoặc kiểm tra dữ liệu nguồn.'})
     return ThreadingHTTPServer(('127.0.0.1',port),Handler)
 

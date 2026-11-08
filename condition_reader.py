@@ -30,23 +30,70 @@ MUTATION_MARKERS = {"egfr"}
 CLAUSE_SPLIT = re.compile(r"[,;.!?\n]|\b(?:nhưng|tuy nhiên|song|nhung|tuy nhien|ma la|mà là)\b", re.I)
 NEGATION_WORDS = {"khong", "chua", "chang"}
 QUESTION_TAG = re.compile(r"\b(?:co )?(?:duoc )?(?:(?:bhyt|bhxh|bao|hiem|y|te|quy|tra|chi|thanh|toan|huong|duoc) ){1,6}(?:khong|chua)\b")
+# Strict mode: after removing the declared negation phrases themselves ("không có đột
+# biến RAS", "chưa di căn"), any of these left in a clause means the clause is not a
+# plain statement — negation outside a pattern, doubt, risk, prevention, a question.
+HEDGE = re.compile(r"\b(?:khong|chua|chang|nghi ngo|nghi|nguy co|du phong|phong ngua|kha nang|co the|xem co|hay khong|hoac khong|dang cho|cho ket qua|"
+                   r"phai khong|co phai|chua ro|khong ro|can xet nghiem|can lam|can kiem tra|theo doi|tam thoi|du kien|neu duoc)\b")
 VALID = ("met", "not_met", "unknown")
 
 
 def _norm(text):
     from engine import normalize
-    return normalize(text).replace("her 2", "her2")
+    return normalize(text).replace("her 2", "her2").replace("cd 20", "cd20")
 
 
 def _strip(q):
-    """Remove yes/no question tags and disease names that contain a negation word."""
+    """Remove the BHYT yes/no question tag and disease names that contain a negation word."""
     from indication_chat import TOPICS
     q = QUESTION_TAG.sub(" ", q)
-    if re.search(r"\bco\b", q):
-        q = re.sub(r"\s(?:khong|chua)$", "", q)
     for key in ("nsclc", "nhl"):
-        q = re.sub(r"\b(?:" + TOPICS[key][1] + r")\b", " benhx ", q)
+        # Only disease names that carry "không" ("không tế bào nhỏ", "không Hodgkin").
+        q = re.sub(r"\b(?:" + TOPICS[key][1] + r")\b", lambda m: " benhx " if "khong" in m.group(0).split() else m.group(0), q)
     return " ".join(q.split())
+
+
+ORGANS_AFTER = r"(?! (?:nao|gan|phoi|xuong|hach|phuc mac|mang bung|tuy|da|buong trung|mang phoi|thuong than|thuong don|vu|ruot)\b)"
+MARKER_WORDS = r"(?:her2|egfr|k?ras|nras|cd20|alk|ros1|pd l1|pdl1|braf|msi|ki67|ki 67|fish|ihc)"
+# Complete, self-contained negation phrases about a *specific* fact. Their "không/chưa"
+# is not a hedge for the other conditions in the same clause ("di căn, không thấy đột
+# biến KRAS", "Binet A, không phù hợp fludarabin"). Each requirement still reads its own
+# phrases with its own patterns first.
+GLOBAL_NEGATIONS = [re.compile(p) for p in (
+    r"\b(?:khong|chua) (?:co |phat hien |thay |ghi nhan )*dot bien(?: gen)?(?: [a-z0-9]+){1,2}",
+    r"\bkhong (?:the |con |duoc )?dung nap(?: duoc)?(?: voi)?(?: thuoc)? [a-z]+",
+    r"\b(?:khong|chua) (?:con |bi )?khang(?: lai)?(?: voi)?(?: thuoc)? [a-z]+",
+    r"\bkhong (?:con |the |duoc )?(?:phu hop|dung duoc|the dung)(?: voi)?(?: hoa tri)?(?: voi)? [a-z]+",
+    r"\b(?:khong|kem) biet hoa\b",
+    r"\bkhong (?:phai )?(?:la )?(?:ung thu )?(?:the )?(?:te bao |bieu mo )?vay\b",
+    r"\b(?:khong|chua) (?:co |bieu lo |bieu hien |thay |ghi nhan |phat hien )+" + MARKER_WORDS + r"\b",
+    # "chưa di căn", "không di căn phổi": a statement about metastasis. For the metastasis
+    # requirement itself the organ-specific form stays ambiguous (negated_before), so
+    # blanking it here only stops it from hedging *other* conditions.
+    r"\b(?:khong|chua) " + r"(?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\b(?: (?:nao|gan|phoi|xuong|hach|phuc mac|mang bung|tuy|da|buong trung|mang phoi|thuong than|thuong don|vu|ruot)\b)?",
+    r"\b(?:khong|chua) (?:co )?tien (?:xa|trien)\b",
+    r"\b(?:chua|khong) (?:tung )?(?:(?:that bai|dung|su dung|dieu tri|qua) )?(?:voi |sau )?(?:dieu tri )?(?:noi tiet|hoa tri|xa tri)\b",
+    r"\b(?:khong|chua) (?:con )?(?:hieu qua|dap ung)\b",
+    r"\bfish (?:la |ket qua )?khong khuech dai\b",
+    UNKNOWN + r"(?: tinh trang| ket qua| xet nghiem)?(?: gen)? " + MARKER_WORDS + r"\b",
+)]
+
+
+def hedged(q, spans):
+    """True when a hedge word remains after blanking the self-negating pattern matches
+    and the complete negation phrases about other facts."""
+    chars = list(q)
+    blank = list(spans)
+    for p in GLOBAL_NEGATIONS:
+        blank += [(m.start(), m.end()) for m in p.finditer(q)]
+    for a, b in blank:
+        for i in range(a, b):
+            chars[i] = " "
+    return bool(HEDGE.search("".join(chars)))
+
+
+def _self_negating(text):
+    return any(w in NEGATION_WORDS for w in text.split())
 
 
 def clauses(turns):
@@ -62,12 +109,15 @@ def negated_before(q, start, window=3):
     return any(w in NEGATION_WORDS for w in q[:start].split()[-window:])
 
 
-def _scan(q, negative, positive):
+def _scan(q, negative, positive, spans=None):
     """Statuses from negative/positive patterns in one clause.
     - A positive match lying inside a negative match ("không có dấu hiệu di căn")
       belongs to the negative and is ignored.
-    - A match negated just before it (not by its own pattern) is ambiguous."""
+    - A match negated just before it (not by its own pattern) is ambiguous.
+    - Matches that contain their own negation word are recorded in `spans` so the
+      strict hedge check does not count that negation twice."""
     out, neg_spans = set(), []
+    spans = spans if spans is not None else []
     for p in negative:
         for m in re.finditer(p, q):
             if negated_before(q, m.start()):
@@ -76,11 +126,25 @@ def _scan(q, negative, positive):
                 out.add("not_met")
                 if m.end() > m.start():
                     neg_spans.append((m.start(), m.end()))
+                    if _self_negating(m.group(0)):
+                        spans.append((m.start(), m.end()))
     for p in positive:
         for m in re.finditer(p, q):
             if any(a <= m.start() < b for a, b in neg_spans):
                 continue
-            out.add("ambiguous" if negated_before(q, m.start()) else "met")
+            if negated_before(q, m.start()):
+                out.add("ambiguous")
+            else:
+                out.add("met")
+                if _self_negating(m.group(0)):
+                    spans.append((m.start(), m.end()))
+    return out
+
+
+def _strict(q, out, spans):
+    """A definite status survives only in a plain clause (no hedge left over)."""
+    if out & {"met", "not_met", "weak"} and hedged(q, spans):
+        out = (out - {"met", "not_met", "weak"}) | {"unknown"}
     return out
 
 
@@ -96,13 +160,14 @@ def _marker_clause(q, raw, m):
     if m == "her2":
         # FISH decides an equivocal IHC 2+.
         if re.search(r"\bfish (?:la |co |ket qua )*(?:am tinh|am|negative|khong khuech dai)\b", q):
-            return {"not_met"}
+            return _strict(q, {"not_met"}, [])
         if re.search(r"\bfish (?:la |co |ket qua )*(?:duong tinh|positive|co khuech dai|khuech dai)\b", q):
-            return {"met"}
+            return _strict(q, {"met"}, [])
         if re.search(r"\b" + m + r" (?:ihc )?2\b", q):
             return {"unknown"}
+    NEG_RESULT = r"(?: (?:la |ket qua )?(?:am tinh|negative))"
     negative = [
-        r"\b" + m + r" (?:la |co |ket qua |xet nghiem |ihc |fish )*(?:am tinh|am|negative|khong duong tinh|0|1)\b",
+        r"\b" + m + r" (?:la |co |ket qua |xet nghiem |ihc |fish )*(?:am tinh|am|negative|neg|khong duong tinh|0|1)\b",
         r"\b(?:khong|chua) (?:co |bieu lo |bieu hien |thay |ghi nhan |phat hien )+(?:xet nghiem |ket qua )?" + m + r"\b",
         r"\b" + m + r" (?:khong|khong co) (?:duong tinh|bieu lo|bieu hien)\b",
     ]
@@ -110,12 +175,14 @@ def _marker_clause(q, raw, m):
         negative += [r"\bbo ba am tinh\b", r"\btam am\b", r"\btriple negative\b"]
     if m in MUTATION_MARKERS:
         negative += [r"\b" + m + r" (?:tu nhien|hoang da|wild ?type|khong (?:co )?dot bien|binh thuong)\b",
-                     r"\b(?:khong|chua) (?:co |phat hien |thay |ghi nhan )*dot bien (?:gen )?" + m + r"\b"]
-    positive = [r"\b" + m + r" (?:la |co |ket qua |xet nghiem |ihc |fish )*(?:duong tinh|positive|3)\b"]
+                     r"\b(?:khong|chua) (?:co |phat hien |thay |ghi nhan )*dot bien (?:gen )?" + m + r"\b",
+                     r"\bdot bien (?:gen )?" + m + NEG_RESULT + r"\b"]
+    positive = [r"\b" + m + r" (?:la |co |ket qua |xet nghiem |ihc |fish )*(?:duong tinh|positive|pos|3)\b"]
     if m in MUTATION_MARKERS:
-        positive += [r"\b(?:co )?dot bien (?:gen )?" + m + r"\b", r"\b" + m + r" (?:co )?dot bien\b",
+        positive += [r"\b(?:co )?dot bien (?:gen )?" + m + r"\b(?!" + NEG_RESULT + r")", r"\b" + m + r" (?:co )?dot bien\b",
                      r"\b" + m + r" (?:exon |ex )?(?:19|21|l858r|del ?19)\b", r"\b(?:l858r|del ?19|exon 19|exon 21)\b"]
-    out = _scan(q, negative, positive)
+    spans = []
+    out = _scan(q, negative, positive, spans)
     if re.search(m + r"\s*\(\s*-\s*\)|\b" + m + r"\s*-(?![\w-])", raw, re.I):
         out.add("not_met")
     if re.search(m + r"\s*\(\s*\+\s*\)|\b" + m + r"\s*\+", raw, re.I):
@@ -123,21 +190,22 @@ def _marker_clause(q, raw, m):
     # "không có đột biến EGFR" also contains the positive "đột biến EGFR": keep the negation.
     if "not_met" in out and "ambiguous" in out:
         out.discard("ambiguous")
-    return out
+    return _strict(q, out, spans)
 
 
 def _pattern_clause(q, req):
     out = set()
     if any(re.search(p, q) for p in req.get("unknown_patterns", [])):
         out.add("unknown")
-    out |= _scan(q, req.get("negative_patterns", []), req.get("positive_patterns", []))
+    spans = []
+    out |= _scan(q, req.get("negative_patterns", []), req.get("positive_patterns", []), spans)
     # A negative pattern that embeds the negation ("không di căn") also makes the
     # positive "di căn" inside it look ambiguous; the explicit negative wins.
     if "not_met" in out:
         out.discard("ambiguous")
     if not out and any(re.search(p, q) for p in req.get("weak_negative_patterns", [])):
         out.add("weak")
-    return out
+    return _strict(q, out, spans)
 
 
 def _is_pattern_req(req):
@@ -196,14 +264,22 @@ def choose_formulation(turns, formulations, fact=None):
         for q, _ in clauses([turn]):
             if re.search(UNKNOWN + r"|\bhay khong\b|\bhoac khong\b|\bco phai\b.*\bkhong\b", q):
                 unclear = True
+            clause_hits, spans = [], []
             for f in formulations:
                 if f in hits or any(re.search(p, q) for p in f.get("exclude_patterns", [])):
                     continue
                 for p in f.get("context_patterns", []):
                     m = re.search(p, q)
                     if m and not negated_before(q, m.start()):
-                        hits.append(f)
+                        clause_hits.append(f)
+                        if _self_negating(m.group(0)):
+                            spans.append((m.start(), m.end()))
                         break
+            # Strict: a formulation/purpose is only taken from a plain clause.
+            if clause_hits and hedged(q, spans):
+                unclear = True
+            else:
+                hits += clause_hits
         if hits or unclear:
             result, state = hits, ("unclear" if unclear or len(hits) > 1 else "chosen")
     return (result if state == "chosen" else []), state

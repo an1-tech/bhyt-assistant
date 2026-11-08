@@ -70,7 +70,7 @@
                   ],
                   "positive_patterns": [
                     "\\btien xa\\b",
-                    "\\bgiai doan (?:iii|3)\\b"
+                    "\\bgiai doan (?:iii|3)[abc]?\\b"
                   ]
                 },
                 {
@@ -87,18 +87,20 @@
                     "\\bdi can (?:hay|hoac|chua ro|khong ro)\\b"
                   ],
                   "negative_patterns": [
-                    "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)\\b)",
+                    "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|mang bung|mac noi|ruot|tuy|da|buong trung|mang phoi|thuong than|thuong don|vu)\\b)",
                     "\\bgiai doan som\\b",
                     "\\bkhu tru\\b",
                     "\\btien xa tai cho\\b",
                     "\\btai cho tai vung\\b",
-                    "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)\\b|stage (?:i|ii|iii|1|2|3)\\b))"
+                    "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|mang bung|mac noi|tuy|da|buong trung|mang phoi|thuong than|vu|hach (?:xa|canh dong mach chu|dong mach chu|thuong don))))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)[abc]?\\b|stage (?:i|ii|iii|1|2|3)[abc]?\\b|m0\\b))"
                   ],
                   "positive_patterns": [
                     "\\bdi can\\b(?! hach\\b)",
-                    "\\bgiai doan (?:iv|4)\\b",
-                    "\\bstage (?:iv|4)\\b",
-                    "\\bm1\\b"
+                    "\\bdi can hach (?:xa|canh dong mach chu|dong mach chu|thuong don)\\b",
+                    "\\bgiai doan (?:iv|4)[abc]?\\b",
+                    "\\bstage (?:iv|4)[abc]?\\b",
+                    "\\bm1[abc]?\\b",
+                    "\\b[cpy]?t[0-4x][a-d]?n[0-3x][a-c]?m1[a-c]?\\b"
                   ],
                   "ask": "Nếu chưa di căn thì sao?"
                 }
@@ -362,18 +364,20 @@
                 "\\bdi can (?:hay|hoac|chua ro|khong ro)\\b"
               ],
               "negative_patterns": [
-                "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)\\b)",
+                "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|mang bung|mac noi|ruot|tuy|da|buong trung|mang phoi|thuong than|thuong don|vu)\\b)",
                 "\\bgiai doan som\\b",
                 "\\bkhu tru\\b",
                 "\\btien xa tai cho\\b",
                 "\\btai cho tai vung\\b",
-                "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)\\b|stage (?:i|ii|iii|1|2|3)\\b))"
+                "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|mang bung|mac noi|tuy|da|buong trung|mang phoi|thuong than|vu|hach (?:xa|canh dong mach chu|dong mach chu|thuong don))))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)[abc]?\\b|stage (?:i|ii|iii|1|2|3)[abc]?\\b|m0\\b))"
               ],
               "positive_patterns": [
                 "\\bdi can\\b(?! hach\\b)",
-                "\\bgiai doan (?:iv|4)\\b",
-                "\\bstage (?:iv|4)\\b",
-                "\\bm1\\b"
+                "\\bdi can hach (?:xa|canh dong mach chu|dong mach chu|thuong don)\\b",
+                "\\bgiai doan (?:iv|4)[abc]?\\b",
+                "\\bstage (?:iv|4)[abc]?\\b",
+                "\\bm1[abc]?\\b",
+                "\\b[cpy]?t[0-4x][a-d]?n[0-3x][a-c]?m1[a-c]?\\b"
               ],
               "ask": "Nếu chưa di căn thì sao?"
             }
@@ -417,18 +421,20 @@
                 "\\bdi can (?:hay|hoac|chua ro|khong ro)\\b"
               ],
               "negative_patterns": [
-                "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)\\b)",
+                "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|mang bung|mac noi|ruot|tuy|da|buong trung|mang phoi|thuong than|thuong don|vu)\\b)",
                 "\\bgiai doan som\\b",
                 "\\bkhu tru\\b",
                 "\\btien xa tai cho\\b",
                 "\\btai cho tai vung\\b",
-                "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)\\b|stage (?:i|ii|iii|1|2|3)\\b))"
+                "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|mang bung|mac noi|tuy|da|buong trung|mang phoi|thuong than|vu|hach (?:xa|canh dong mach chu|dong mach chu|thuong don))))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)[abc]?\\b|stage (?:i|ii|iii|1|2|3)[abc]?\\b|m0\\b))"
               ],
               "positive_patterns": [
                 "\\bdi can\\b(?! hach\\b)",
-                "\\bgiai doan (?:iv|4)\\b",
-                "\\bstage (?:iv|4)\\b",
-                "\\bm1\\b"
+                "\\bdi can hach (?:xa|canh dong mach chu|dong mach chu|thuong don)\\b",
+                "\\bgiai doan (?:iv|4)[abc]?\\b",
+                "\\bstage (?:iv|4)[abc]?\\b",
+                "\\bm1[abc]?\\b",
+                "\\b[cpy]?t[0-4x][a-d]?n[0-3x][a-c]?m1[a-c]?\\b"
               ],
               "ask": "Nếu chưa di căn thì sao?"
             },
@@ -448,13 +454,15 @@
                 "\\b(?:k|n)?ras (?:dot bien )?(?:hay|hoac) (?:khong|tu nhien|dot bien)\\b"
               ],
               "negative_patterns": [
-                "(?<!khong )(?<!khong co )(?<!chua co )(?<!phat hien )(?<!thay )\\bdot bien (?:gen )?(?:k|n)?ras\\b",
-                "\\b(?:k|n)?ras (?:co )?dot bien\\b",
+                "(?<!khong )(?<!khong co )(?<!chua co )(?<!phat hien )(?<!thay )\\bdot bien (?:gen )?(?:k|n)?ras\\b(?! (?:la |ket qua )?(?:am tinh|negative)\\b)",
+                "\\b(?:k|n)?ras (?:co )?dot bien\\b(?! (?:la |ket qua )?(?:am tinh|negative)\\b)",
                 "\\b(?:k|n)?ras (?:g\\d+[a-z]?|codon \\d+|exon \\d+)\\b"
               ],
               "positive_patterns": [
                 "\\b(?:khong|chua) (?:co |phat hien |thay |ghi nhan )*dot bien (?:gen )?(?:k|n)?ras\\b",
-                "\\b(?:k|n)?ras (?:tu nhien|hoang da|wild ?type|khong (?:co |phat hien )?dot bien|binh thuong|am tinh)\\b"
+                "\\b(?:k|n)?ras (?:tu nhien|hoang da|wild ?type|khong (?:co |phat hien )?dot bien|binh thuong|am tinh)\\b",
+                "\\bdot bien (?:gen )?(?:k|n)?ras (?:la |ket qua )?(?:am tinh|negative)\\b",
+                "\\b(?:k|n)?ras (?:co )?dot bien (?:la |ket qua )?(?:am tinh|negative)\\b"
               ],
               "ask": "Nếu RAS đột biến thì sao?"
             }
@@ -553,13 +561,14 @@
               },
               "negative_patterns": [
                 "\\b(?:khong|kem) biet hoa\\b",
+                "\\bbiet hoa kem\\b",
                 "\\bthe tuy\\b",
                 "\\bmedullary\\b",
                 "\\banaplastic\\b",
                 "\\bthoai san\\b"
               ],
               "positive_patterns": [
-                "\\bbiet hoa\\b",
+                "\\bbiet hoa\\b(?! kem)",
                 "\\bthe nhu\\b",
                 "\\bthe nang\\b",
                 "\\bpapillary\\b",
@@ -605,18 +614,20 @@
                     "\\bdi can (?:hay|hoac|chua ro|khong ro)\\b"
                   ],
                   "negative_patterns": [
-                    "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)\\b)",
+                    "\\b(?:khong|chua) (?:co |thay |phat hien |ghi nhan |co dau hieu |co bang chung |thay dau hieu )*(?:dau hieu |bang chung )?di can\\b(?! (?:nao|gan|phoi|xuong|hach|phuc mac|mang bung|mac noi|ruot|tuy|da|buong trung|mang phoi|thuong than|thuong don|vu)\\b)",
                     "\\bgiai doan som\\b",
                     "\\bkhu tru\\b",
                     "\\btien xa tai cho\\b",
                     "\\btai cho tai vung\\b",
-                    "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|tuy|da|buong trung|mang phoi|thuong than|vu)))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)\\b|stage (?:i|ii|iii|1|2|3)\\b))"
+                    "^(?!.*\\b(?:di can xa|giai doan (?:iv|4)|stage (?:iv|4)|m1|di can (?:nao|gan|phoi|xuong|phuc mac|mang bung|mac noi|tuy|da|buong trung|mang phoi|thuong than|vu|hach (?:xa|canh dong mach chu|dong mach chu|thuong don))))(?=.*\\b(?:di can hach|giai doan (?:i|ii|iii|1|2|3)[abc]?\\b|stage (?:i|ii|iii|1|2|3)[abc]?\\b|m0\\b))"
                   ],
                   "positive_patterns": [
                     "\\bdi can\\b(?! hach\\b)",
-                    "\\bgiai doan (?:iv|4)\\b",
-                    "\\bstage (?:iv|4)\\b",
-                    "\\bm1\\b"
+                    "\\bdi can hach (?:xa|canh dong mach chu|dong mach chu|thuong don)\\b",
+                    "\\bgiai doan (?:iv|4)[abc]?\\b",
+                    "\\bstage (?:iv|4)[abc]?\\b",
+                    "\\bm1[abc]?\\b",
+                    "\\b[cpy]?t[0-4x][a-d]?n[0-3x][a-c]?m1[a-c]?\\b"
                   ],
                   "ask": "Nếu chưa di căn thì sao?"
                 }
@@ -641,6 +652,7 @@
                 "\\b(?:iod|i ot)(?: phong xa)? (?:con |van )?(?:hieu qua|dap ung)\\b(?! kem)"
               ],
               "positive_patterns": [
+                "\\b(?:khang|tro|that bai(?: voi| sau)?) (?:dieu tri )?(?:voi )?(?:i 131|i131|iod 131)\\b",
                 "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:voi |bang )?(?:iod|i ot)\\b",
                 "\\b(?:iod|i ot)(?: phong xa)? (?:that bai|khong (?:con )?(?:hieu qua|dap ung)|dap ung kem|kem dap ung)\\b",
                 "\\b(?:khang|tro) (?:voi )?(?:iod|i ot)\\b",
@@ -675,17 +687,17 @@
               "negative_patterns": [
                 "\\bgiai doan som\\b",
                 "\\bkhu tru\\b",
-                "\\b(?:khong|chua) (?:co )?(?:tien trien|di can)\\b",
-                "\\bgiai doan (?:i|ii|1|2)\\b",
-                "\\bstage (?:i|ii|1|2)\\b"
+                "\\b(?:khong|chua) (?:co )?tien trien\\b",
+                "\\bgiai doan (?:i|ii|1|2)[abc]?\\b",
+                "\\bstage (?:i|ii|1|2)[abc]?\\b"
               ],
               "positive_patterns": [
                 "\\btien trien\\b",
                 "\\bdi can\\b",
                 "\\btien xa\\b",
                 "\\btai phat\\b",
-                "\\bgiai doan (?:iii|iv|3|4)\\b",
-                "\\bstage (?:iii|iv|3|4)\\b"
+                "\\bgiai doan (?:iii|iv|3|4)[abc]?\\b",
+                "\\bstage (?:iii|iv|3|4)[abc]?\\b"
               ],
               "ask": "Nếu giai đoạn sớm thì sao?"
             }
@@ -782,7 +794,10 @@
                     "\\bkhong (?:the |con |duoc )?dung nap (?:duoc )?(?:voi )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b"
                   ],
                   "weak_negative_patterns": [
-                    "\\b(?:dau tay|lan dau)\\b"
+                    "\\b(?:dieu tri|dung|su dung|phac do) (?:dau tay|lan dau)\\b",
+                    "\\b(?:dau tay|lan dau) (?:dung|dieu tri|su dung)\\b",
+                    "\\btuyen (?:1|mot|dau)\\b",
+                    "\\bfirst line\\b"
                   ]
                 },
                 {
@@ -802,10 +817,15 @@
                     "\\bkhang (?:lai )?(?:voi )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b",
                     "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:thuoc )?(?:imatinib|thuoc truoc)\\b",
                     "\\b(?:imatinib|thuoc truoc) (?:that bai|khong (?:con )?(?:hieu qua|dap ung)|dap ung kem|kem dap ung)\\b",
-                    "\\b(?:khong (?:con )?dap ung|kem dap ung|dap ung kem) (?:voi )?(?:imatinib|thuoc truoc)\\b"
+                    "\\b(?:khong (?:con )?dap ung|kem dap ung|dap ung kem) (?:voi )?(?:imatinib|thuoc truoc)\\b",
+                    "\\b(?:imatinib|thuoc truoc) (?:\\w+ )?mat dap ung\\b",
+                    "\\bmat dap ung (?:voi )?(?:imatinib|thuoc truoc)\\b"
                   ],
                   "weak_negative_patterns": [
-                    "\\b(?:dau tay|lan dau)\\b"
+                    "\\b(?:dieu tri|dung|su dung|phac do) (?:dau tay|lan dau)\\b",
+                    "\\b(?:dau tay|lan dau) (?:dung|dieu tri|su dung)\\b",
+                    "\\btuyen (?:1|mot|dau)\\b",
+                    "\\bfirst line\\b"
                   ]
                 }
               ],
@@ -1002,24 +1022,27 @@
                 "not_met": "Chưa dùng / còn đáp ứng Rituximab"
               },
               "unknown_patterns": [
-                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? (?:rituximab|thuoc truoc)\\b",
-                "\\b(?:rituximab|thuoc truoc) (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
+                "(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)(?: tinh trang| ket qua| xet nghiem)?(?: gen)? (?:rituximab|thuoc truoc|r ?chop|r ?cvp|r ?benda(?:mustine)?)\\b",
+                "\\b(?:rituximab|thuoc truoc|r ?chop|r ?cvp|r ?benda(?:mustine)?) (?:la |co |ket qua )?(?:chua biet|khong ro|chua ro|chua xac dinh|chua lam|chua xet nghiem|chua co ket qua|dang cho(?: ket qua)?)"
               ],
               "negative_patterns": [
-                "\\bchua (?:tung )?(?:(?:dung|su dung|dieu tri) )?(?:qua )?(?:rituximab|thuoc truoc)\\b",
+                "\\bchua (?:tung )?(?:(?:dung|su dung|dieu tri) )?(?:qua )?(?:rituximab|thuoc truoc|r ?chop|r ?cvp|r ?benda(?:mustine)?)\\b",
                 "\\bchua (?:tung )?(?:dung|su dung|dieu tri) (?:qua )?thuoc\\b",
-                "\\b(?:rituximab|thuoc truoc) (?:con |van )?(?:hieu qua|dap ung)\\b(?! kem)",
-                "\\b(?:khong|chua) (?:co )?(?:tien trien|tai phat) (?:sau )?(?:dieu tri )?(?:voi |bang )?(?:rituximab|thuoc truoc)\\b"
+                "\\b(?:rituximab|thuoc truoc|r ?chop|r ?cvp|r ?benda(?:mustine)?) (?:con |van )?(?:hieu qua|dap ung)\\b(?! kem)",
+                "\\b(?:khong|chua) (?:co )?(?:tien trien|tai phat) (?:sau )?(?:dieu tri )?(?:voi |bang )?(?:rituximab|thuoc truoc|r ?chop|r ?cvp|r ?benda(?:mustine)?)\\b"
               ],
               "positive_patterns": [
-                "\\b(?:tien trien|tai phat) (?:sau|du) (?:khi )?(?:dieu tri )?(?:voi |bang )?(?:rituximab|thuoc truoc)\\b",
-                "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:voi |bang )?(?:rituximab|thuoc truoc)\\b",
-                "\\bkhang (?:voi )?(?:rituximab|thuoc truoc)\\b",
-                "\\b(?:rituximab|thuoc truoc) (?:that bai|khong (?:con )?(?:hieu qua|dap ung)|dap ung kem|kem dap ung)\\b",
-                "\\b(?:khong (?:con )?dap ung|kem dap ung|dap ung kem) (?:voi )?(?:rituximab|thuoc truoc)\\b"
+                "\\b(?:tien trien|tai phat) (?:sau|du) (?:khi )?(?:dieu tri )?(?:voi |bang )?(?:rituximab|thuoc truoc|r ?chop|r ?cvp|r ?benda(?:mustine)?)\\b",
+                "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:voi |bang )?(?:rituximab|thuoc truoc|r ?chop|r ?cvp|r ?benda(?:mustine)?)\\b",
+                "\\bkhang (?:voi )?(?:rituximab|thuoc truoc|r ?chop|r ?cvp|r ?benda(?:mustine)?)\\b",
+                "\\b(?:rituximab|thuoc truoc|r ?chop|r ?cvp|r ?benda(?:mustine)?) (?:that bai|khong (?:con )?(?:hieu qua|dap ung)|dap ung kem|kem dap ung)\\b",
+                "\\b(?:khong (?:con )?dap ung|kem dap ung|dap ung kem) (?:voi )?(?:rituximab|thuoc truoc|r ?chop|r ?cvp|r ?benda(?:mustine)?)\\b"
               ],
               "weak_negative_patterns": [
-                "\\b(?:dau tay|lan dau)\\b"
+                "\\b(?:dieu tri|dung|su dung|phac do) (?:dau tay|lan dau)\\b",
+                "\\b(?:dau tay|lan dau) (?:dung|dieu tri|su dung)\\b",
+                "\\btuyen (?:1|mot|dau)\\b",
+                "\\bfirst line\\b"
               ],
               "ask": "Nếu chưa dùng thuốc trước đó thì sao?"
             }
@@ -1077,7 +1100,10 @@
                     "\\b(?:noi tiet|adt) (?:that bai|khong (?:con )?(?:hieu qua|dap ung))\\b"
                   ],
                   "weak_negative_patterns": [
-                    "\\b(?:dau tay|lan dau)\\b"
+                    "\\b(?:dieu tri|dung|su dung|phac do) (?:dau tay|lan dau)\\b",
+                    "\\b(?:dau tay|lan dau) (?:dung|dieu tri|su dung)\\b",
+                    "\\btuyen (?:1|mot|dau)\\b",
+                    "\\bfirst line\\b"
                   ]
                 },
                 {
@@ -1092,11 +1118,15 @@
                     "\\b(?:chua|khong) that bai (?:voi |sau )?(?:dieu tri )?hoa tri\\b"
                   ],
                   "positive_patterns": [
-                    "\\bthat bai (?:voi |sau )?(?:dieu tri )?hoa tri\\b",
-                    "\\bhoa tri (?:that bai|khong (?:con )?(?:hieu qua|dap ung))\\b"
+                    "\\bthat bai (?:voi |sau )?(?:dieu tri )?(?:hoa tri|docetaxel|cabazitaxel)\\b",
+                    "\\b(?:hoa tri|docetaxel|cabazitaxel) (?:that bai|khong (?:con )?(?:hieu qua|dap ung))\\b",
+                    "\\b(?:khang|tien trien sau) (?:voi )?(?:docetaxel|cabazitaxel)\\b"
                   ],
                   "weak_negative_patterns": [
-                    "\\b(?:dau tay|lan dau)\\b"
+                    "\\b(?:dieu tri|dung|su dung|phac do) (?:dau tay|lan dau)\\b",
+                    "\\b(?:dau tay|lan dau) (?:dung|dieu tri|su dung)\\b",
+                    "\\btuyen (?:1|mot|dau)\\b",
+                    "\\bfirst line\\b"
                   ]
                 }
               ],

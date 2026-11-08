@@ -21,7 +21,7 @@ function renderReply(data,question){
    const block=node('div',undefined,'confirm-block');block.append(node('strong','Xác nhận để đối chiếu'),node('p','Bấm đúng tình trạng; chọn “Chưa rõ” nếu chưa có kết quả.','hint'));
    const snap=JSON.parse(JSON.stringify(data.state||{}));
    for(const item of a.confirm){const group=node('div',undefined,'confirm-item');group.setAttribute('role','group');group.setAttribute('aria-label',item.label);group.append(node('span',item.label,'confirm-label'));const opts=node('div',undefined,'actions');
-    for(const opt of item.options){const b=node('button',opt.label);b.type='button';b.addEventListener('click',()=>send(item.label+': '+opt.label,snap,{key:item.key,value:opt.value}));opts.append(b);}
+    for(const opt of item.options){const b=node('button',opt.label);b.type='button';b.addEventListener('click',()=>{const rid=item.key.split('|')[0];send(item.label+': '+opt.label,(state.selected_ids||[]).includes(rid)?state:snap,{key:item.key,value:opt.value});});opts.append(b);}
     group.append(opts);block.append(group);}
    section.append(block);}
   const sources=(data.citations||[]).filter(c=>r.record_ids?.includes(c.id));evidenceGroup(section,'Căn cứ của thuốc',sources);if(a?.scope)section.append(node('p',a.scope,'scope-note'));box.append(section);
@@ -37,10 +37,10 @@ async function send(text,ctx,confirm){
  // ctx: a follow-up chip sends the context of the answer it belongs to, not the latest one.
  // confirm: {key,value} from a confirmation button — a structured fact, not text to parse.
  text=(text??$('#question').value).trim();if(!text||!ready||busy)return;
- busy=true;$('#send').disabled=true;$('#new-chat').disabled=true;$('#loading').hidden=false;$('#error').hidden=true;$('#question').value='';$('#messages').setAttribute('aria-busy','true');let reply;
+ busy=true;$('#send').disabled=true;$('#new-chat').disabled=true;$('#loading').hidden=false;$('#error').hidden=true;if(!confirm)$('#question').value='';$('#messages').setAttribute('aria-busy','true');let reply;
  const turn=node('section',undefined,'turn');const user=node('div',undefined,'query-heading');user.append(node('small','Bạn'),node('span',text));turn.append(user);$('#messages').append(turn);$('#welcome').hidden=true;
  try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':token},body:JSON.stringify(Object.assign({message:text,state:ctx??state,department:'Tất cả các khoa'},confirm?{confirm}:{}))});const data=await response.json();if(!response.ok)throw new Error(data.error||'Chưa xử lý được câu hỏi.');state=JSON.parse(JSON.stringify(data.state||{}));reply=renderReply(data,text);turn.append(reply);}
- catch(e){turn.remove();$('#welcome').hidden=!!$('#messages').children.length;$('#error').textContent=e.message||'Không kết nối được ứng dụng.';$('#error').hidden=false;if(!$('#question').value)$('#question').value=text;}
+ catch(e){turn.remove();$('#welcome').hidden=!!$('#messages').children.length;$('#error').textContent=e.message||'Không kết nối được ứng dụng.';$('#error').hidden=false;if(!confirm&&!$('#question').value)$('#question').value=text;}
  finally{busy=false;$('#send').disabled=!ready;$('#new-chat').disabled=false;$('#loading').hidden=true;$('#messages').setAttribute('aria-busy','false');if(reply){reply.focus({preventScroll:true});reply.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});}else $('#error').focus();}
 }
 function showView(name){name=name==='sources'?'sources':'lookup';const changed=currentView!==name;if(changed&&currentView)viewScroll[currentView]=scrollY;for(const n of document.querySelectorAll('.view'))n.hidden=n.id!=='view-'+name;for(const a of document.querySelectorAll('[data-view]')){if(a.dataset.view===name)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');}currentView=name;if(changed)requestAnimationFrame(()=>scrollTo({top:viewScroll[name]||0,behavior:'instant'}));}

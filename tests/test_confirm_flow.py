@@ -82,9 +82,11 @@ class ConfirmFlowTests(Base):
         r=self.ask("Dạng liposome",r["state"],{"key":item["key"],"value":"liposome"})
         self.assertEqual(self.qa(r)["matched_branch"],"liposome");self.assertIn("Theo xác nhận",self.qa(r)["conclusion"])
 
-    def test_multi_drug_answers_offer_no_buttons(self):
+    def test_multi_drug_answers_offer_buttons_per_drug(self):
         r=self.ask("So sánh Imatinib và Nilotinib cho CML")
-        self.assertTrue(all(x["question_answer"]["confirm"]==[] for x in r["results"]))
+        nilo=next(x for x in r["results"] if x["ingredient"]=="Nilotinib")
+        self.assertTrue(all(c["key"].startswith(nilo["record_ids"][0]+"|") for c in nilo["question_answer"]["confirm"]))
+        self.assertTrue(nilo["question_answer"]["confirm"])
 
 
 class ConfirmHTTPTests(unittest.TestCase):

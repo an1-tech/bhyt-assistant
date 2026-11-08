@@ -1,6 +1,6 @@
 """Grounded drug lookup and retrieval. Python 3.10+, standard library only."""
 from __future__ import annotations
-import collections, datetime as dt, difflib, hashlib, json, math, os, re, unicodedata
+import collections, datetime as dt, difflib, hashlib, hmac, itertools, json, math, os, re, secrets, unicodedata
 from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
@@ -33,7 +33,13 @@ resistant resistance failure failed after before with without what about does in
 biopsy tumor tumour cancer breast lung gastric colon rectal liver kidney prostate thyroid lymphoma leukemia hormone receptor
 estrogen progesterone exon deletion insertion amplification express expression overexpression brca pdl1 ki67 msi mmr ecog
 alk ros1 braf ntrk ret met tnm node nodes lymph distant local regional squamous adeno adenocarcinoma small cell nonsmall
-non chemo chemotherapy radiotherapy surgery hospital doctor pharmacy question answer thanks hello""".split())
+non chemo chemotherapy radiotherapy surgery hospital doctor pharmacy question answer thanks hello
+patients mutations mutated testing tested required require philadelphia regimen protocol scheme
+folfox folfiri folfirinox xelox capox rchop chop abvd beacop cmf docetaxel-based platinum-based
+human analog recombinant""".split())
+# Chemistry words inside catalogue names that are not medicines by themselves.
+GENERIC_CHEM={'hydroxyd','oxyd','oxid','furoat','propionat','dipropionat','bicarbonat','valerat','methyl','ethyl','polymaltose',
+              'complex','sucrose','sucrat','trisilicat','phosphat','hydrogen','dinatri','monohydrat'}
 
 def condition_mention(name,q):
     """The drug name sits inside a condition: "kháng Imatinib" or "Imatinib đáp ứng kém"."""
@@ -50,19 +56,23 @@ def has_diacritics(s):
 PRIVATE_RE=(
     re.compile(r'(?<![\w])(?:\+?84|0)(?:[\s.-]?\d){9}(?![\d])'),                       # phone, any spacing
     re.compile(r'(?<![\w])\d{12}(?![\d])'),                                            # CCCD
+    re.compile(r'(?<![\w])\d{3}(?:[\s.-]\d{3}){3}(?![\d])'),                           # CCCD written in groups
     re.compile(r'(?<![A-Za-z0-9])[A-Za-z]{2}\s?\d(?:\s?\d){12}(?![\d])'),              # BHYT card (2 letters + 13 digits)
     re.compile(r'(?i)(?:họ tên|họ và tên|tên bệnh nhân|tên người bệnh|ho ten)\s*(?:bệnh nhân\s*)?(?:là\s*)?[:=]?\s*\S'),
     re.compile(r'(?i)(?:mã bệnh án|mã bn|số bệnh án|mã người bệnh|mã hồ sơ|số thẻ bhyt|thẻ bhyt số|mã thẻ bhyt|ma benh an|so the bhyt)\s*(?:là\s*)?[:=]?\s*[A-Za-z0-9]'),
     re.compile(r'(?i)(?:sinh ngày|ngày sinh|sinh năm|sinh|dob)\s*[:=]?\s*\d{1,2}[/.-]\d{1,2}[/.-]\d{2,4}'),
 )
-NAME_LEAD=re.compile(r'(?:[Bb]ệnh nhân|[Nn]gười bệnh|\bBN|\b[Ôô]ng|\b[Bb]à|\b[Cc]hị|\b[Aa]nh)\s+((?:\w+\s+){1,3}\w+)')
+NAME_LEAD=re.compile(r'(?:[Bb]ệnh nhân|[Nn]gười bệnh|\bBN|\b[Ôô]ng|\b[Bb]à|\b[Cc]hị|\b[Aa]nh)\s*[:\-–]?\s+((?:\w+\s+){1,3}\w+)')
+# Capitalised disease names after "Bệnh nhân" are not personal names.
+DISEASE_LEAD=re.compile(r'^(?:dai thao duong|ung thu|tang huyet ap|suy tim|viem|benh|hen|lao|nhiem|sot|u |dot quy|xo gan)')
 
 def private_input(message):
     if any(p.search(message) for p in PRIVATE_RE):return True
-    # "bệnh nhân Nguyễn Văn An": two or more capitalised words after a person word.
+    # "bệnh nhân Nguyễn Văn An", "BN: Nguyễn Văn An": two or more capitalised words after a person word.
     for m in NAME_LEAD.finditer(message):
         words=m.group(1).split()
         lead=[w for w in words[:3] if w[:1].isupper() and not w.isupper() and w.isalpha()]
+        if DISEASE_LEAD.match(normalize(" ".join(words[:3]))):continue
         # Vietnamese personal names: accented or short syllables ("Nguyễn Văn An", "Tran Van An"),
         # not a capitalised drug name ("Trastuzumab Ung thư").
         if len(lead)>=2 and words[0] in lead and words[1] in lead and all(not w.isascii() or len(w)<=6 for w in lead[:2]):
@@ -145,6 +155,7 @@ class Corpus:
         self.idf={t:math.log((len(self.chunks)+1)/(n+1))+1 for t,n in df.items()}
         self.vectors=[self.vector(x) for x in self.counts]
         self.semantic_path=self.data/'embeddings.sqlite'
+        self._state_key=secrets.token_bytes(32)
 
     @staticmethod
     def allowed(c):
@@ -163,24 +174,57 @@ class Corpus:
         """Exact catalogue name in the message, with two guards: a combination needs
         "+", "/" or "phối hợp" between its parts, and when the user types with
         diacritics an accented name must match with its accents ("còn" ≠ "Cồn")."""
-        if ' '+key+' ' not in q:return False
         name=self.names[key][0]['ingredient']
-        if '+' in name:
-            plus=normalize_keep_plus(message)
-            # The full printed name ("Natri clorid + dextrose/glucose", "... (LPV/r)") always counts.
-            if ' '+normalize_keep_plus(name)+' ' in ' '+plus+' ':return True
-            parts=[normalize_keep_plus(p) for p in re.sub(r'\([^)]*\)','',name).split('+')]
-            joiner=r'\s*(?:\+|/|&|phoi hop|ket hop)\s*'
-            return bool(re.search(r'(?<![a-z0-9])'+joiner.join(re.escape(p.strip()) for p in parts)+r'(?![a-z0-9])',plus))
+        if '+' in name:return False      # combinations are matched in resolve(), by level
+        if ' '+key+' ' not in q:return False
         if not name.isascii() and has_diacritics(message):
             core=' '.join(re.sub(r'[^\w]+',' ',unicodedata.normalize('NFC',name.lower())).split())
             text=' '+' '.join(re.sub(r'[^\w]+',' ',unicodedata.normalize('NFC',message.lower())).split())+' '
             return ' '+core+' ' in text
         return True
 
+    def combo_parts(self):
+        """Per combination: (printed name, parts as printed, parts without salt words)."""
+        if getattr(self,"_combos",None) is None:
+            self._combos={}
+            for key,rows in self.names.items():
+                name=rows[0]['ingredient']
+                if '+' not in name:continue
+                full=[normalize_keep_plus(p).strip() for p in re.sub(r'\([^)]*\)','',name).split('+')]
+                bare=[' '.join(w for w in p.split() if w not in SALT_WORDS) for p in full]
+                self._combos[key]=(normalize_keep_plus(name),[p for p in full if p],[p for p in bare if p])
+        return self._combos
+
+    def combo_matches(self,message):
+        """Listed combinations named in the message, strictest level first: the printed
+        name; its parts in printed order joined by "+", "/", "&" or "phối hợp"; the parts
+        in any order; the parts without salt words. A looser level is only used when no
+        combination matched at a stricter one, so "A + B + C" never also matches "C + A + B"
+        and "Sắt fumarat + acid folic" never matches "Sắt sulfat + acid folic"."""
+        plus=normalize_keep_plus(message);bare=' '.join(w for w in plus.split() if w not in SALT_WORDS)
+        words=set(plus.replace('+',' ').replace('/',' ').replace('&',' ').split())
+        joiner=r'\s*(?:\+|/|&|phoi hop|ket hop)\s*'
+        def joined(parts,text,orders):
+            return any(re.search(r'(?<![a-z0-9])'+joiner.join(re.escape(p) for p in o)+r'(?![a-z0-9])',text) for o in orders)
+        combos=self.combo_parts()
+        # Level 0: the printed name, whatever its shape (brackets, "/", many parts).
+        found=[key for key,(printed,_,_) in combos.items() if ' '+printed+' ' in ' '+plus+' ']
+        if found:return found
+        for level in range(1,4):
+            found=[]
+            for key,(printed,full,bare_parts) in combos.items():
+                parts=bare_parts if level==3 else full
+                if not 2<=len(parts)<=4 or not all(set(re.split(r'[\s/]+',p))<=words for p in parts):continue
+                if level==1:ok=joined(parts,plus,[parts])
+                elif level==2:ok=joined(parts,plus,itertools.permutations(parts))
+                else:ok=joined(parts,bare,itertools.permutations(parts))
+                if ok:found.append(key)
+            if found:return found
+        return []
+
     def resolve(self, message):
         q=' '+normalize(message)+' '
-        direct=[k for k in self.names if self.name_present(k,message,q)]
+        direct=[k for k in self.names if self.name_present(k,message,q)]+self.combo_matches(message)
         hits=list(direct)
         hits.extend(self.aliases[k] for k in self.aliases if ' '+k+' ' in q)
         for short,keys in self.source_names.items():
@@ -394,7 +438,39 @@ class Corpus:
         self.attach_transition_review(result,evidence)
         return result
 
+    # ---- Signed conversation state -------------------------------------------------
+    # The browser keeps the state, so it is signed with a per-process key. A state that
+    # is unsigned, tampered with or from an earlier server run is dropped (new chat):
+    # facts, turns and selected medicines can only come from this server's own answers.
+    def _state_sig(self,state):
+        payload=json.dumps(state,ensure_ascii=False,sort_keys=True,separators=(",",":"))
+        return hmac.new(self._state_key,payload.encode(),hashlib.sha256).hexdigest()
+
+    def verify_state(self,state):
+        if not isinstance(state,dict) or not state:return {}
+        body={k:v for k,v in state.items() if k!="sig"}
+        sig=state.get("sig")
+        if not isinstance(sig,str) or not hmac.compare_digest(sig,self._state_sig(body)):return {}
+        return body
+
+    def sign_state(self,state):
+        body={k:v for k,v in (state or {}).items() if k!="sig"}
+        return body|{"sig":self._state_sig(body)} if body else {}
+
     def converse(self,message,state=None,as_of=None,confirm=None):
+        """One chat turn: verify the signed state, block identifiers on every path,
+        answer, then sign the new state."""
+        trusted=self.verify_state(state)
+        if isinstance(message,str) and private_input(message):
+            result=self.chat(message,{},as_of,allow_ai=False)          # private_input reply, nothing stored
+        elif as_of is not None and as_of!=SNAPSHOT:
+            result=self.chat(message,{},as_of,allow_ai=False)          # unsupported_date on every path
+        else:
+            result=self._converse(message,trusted,as_of,confirm)
+        result["state"]=self.sign_state(result.get("state") or {})
+        return result
+
+    def _converse(self,message,state=None,as_of=None,confirm=None):
         from indication_chat import IndicationChat, topics_in
         # Short conversational follow-ups can retain a single medicine, even with
         # prefixes such as "còn", "vậy" or "nếu". A newly named medicine resets it.
@@ -408,6 +484,12 @@ class Corpus:
         if valid:
             hits=self.resolve(message)
             q=normalize(message)
+            # "Paclitaxel gắn albumin" (nab-paclitaxel) is a paclitaxel formulation, not Albumin infusion.
+            nab=bool(re.search(r"\b(?:gan|bound|nab)\s?albumin\b|\balbumin bound\b|\bnab paclitaxel\b",q))
+            if nab:
+                hits=[g for g in hits if normalize(g[0]["ingredient"])!="albumin"]
+                lookup_message=re.sub(r"(?i)albumin","(gắn protein)",lookup_message)
+            all_hits=list(hits)
             # "Trastuzumab emtansine" is another medicine, not Trastuzumab.
             variant=self.product_variant(message,hits)
             if variant:
@@ -429,13 +511,19 @@ class Corpus:
                 if single["ingredient"] not in names and names<=rel and all(condition_mention(normalize(n),q) for n in names):
                     for name in names:lookup_message=re.sub(re.escape(name),"thuốc trước",lookup_message,flags=re.I)
                     hits=[];related_followup=True
-            unrecognized=self.unrecognized_names(message)
+            unrecognized=[t for t in self.unrecognized_names(message,all_hits) if not (nab and normalize(t)=="albumin")]
             if unrecognized and not hits:
                 # Never answer an unknown medicine with the previous medicine's rules.
-                # Suggest only near-identical spellings ("Paclitaxen"); "Pertuzumab" is not "Trastuzumab".
-                suggested=list(dict.fromkeys(self.names[k][0]["ingredient"] for t in unrecognized
-                                             for k in difflib.get_close_matches(normalize(t),self.names.keys(),n=3,cutoff=.85)))
+                # Choices: catalogue names containing the word ("insulin" → insulin rows), then
+                # near-identical spellings ("Paclitaxen"); "Pertuzumab" is not "Trastuzumab".
+                suggested=[n for t in unrecognized for n in self.lexicon_matches(normalize(t))]
+                suggested+=[self.names[k][0]["ingredient"] for t in unrecognized
+                            for k in difflib.get_close_matches(normalize(t),self.names.keys(),n=3,cutoff=.85)]
+                suggested=list(dict.fromkeys(suggested))[:6]
                 return self.finalize_status(answerer.enrich(self.unrecognized_result(unrecognized,suggested=suggested),message,state))
+            if hits and prev_names and q.startswith(("thuoc nay ","thuoc do ")):
+                # "Thuốc này dùng phối hợp với docetaxel được không": keep the medicine under discussion too.
+                lookup_message=" ".join(n for n in prev_names if n not in {g[0]["ingredient"] for g in hits})+" "+lookup_message
             if prev_names and not hits and (related_followup or topics_in(message) or re.search(r"\b(?:her[ -]?2|egfr)\b",message,re.I)
                     or re.search(r"\b(?:ung thu|benh|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|dieu tri)\b",q)
                     or q.startswith(FOLLOWUP_PREFIXES) or re.search(FOLLOWUP_WORDS,q)):
@@ -487,8 +575,8 @@ class Corpus:
         for key,rows in self.names.items():
             name=rows[0]["ingredient"]
             if '+' not in name or name in answered:continue
-            parts=[normalize(p) for p in name.split('+')]
-            if all(' '+p+' ' in q for p in parts):
+            parts=[' '.join(w for w in normalize(p).split() if w not in SALT_WORDS) for p in re.sub(r'\([^)]*\)','',name).split('+')]
+            if all(parts) and all(' '+p+' ' in q for p in parts):
                 out.append(f"Danh mục còn có dạng phối hợp “{name}”; nếu ý bạn là thuốc phối hợp, hỏi lại với dấu “+” (ví dụ “{name}”).")
         return out[:2]
 
@@ -522,19 +610,45 @@ class Corpus:
             self._vocab=words
         return self._vocab
 
-    def unrecognized_names(self,message):
-        """Words that look like a medicine name but match nothing in the catalogue:
-        INN stems, brand-like words (any case) that are not Vietnamese syllables or
-        known clinical words, and codes such as "T-DM1" or "TS-1"."""
-        vocab=self.vocabulary();found=[]
+    def drug_lexicon(self):
+        """Words that occur in catalogue medicine names (e.g. "interferon", "insulin",
+        "lopinavir", "codein"). Seeing one that is not part of a recognised name means
+        the user is talking about another medicine — never answer with the previous one."""
+        if getattr(self,"_lexicon",None) is None:
+            words=set()
+            for r in self.rows:
+                for w in normalize(r["ingredient"]).split():
+                    if len(w)>=5 and w.isalpha() and not VIET_SYLLABLE.match(w) and w not in SALT_WORDS and w not in NOT_DRUG_WORDS and w not in GENERIC_CHEM:
+                        words.add(w)
+            self._lexicon=words
+        return self._lexicon
+
+    def lexicon_matches(self,word):
+        """Catalogue names that contain the word, as choices for the user."""
+        return [rows[0]["ingredient"] for key,rows in self.names.items() if ' '+word+' ' in ' '+key+' '][:6]
+
+    def unrecognized_names(self,message,hits=()):
+        """Words that look like a medicine name but match nothing recognised in this message:
+        catalogue name words not covered by a recognised name, INN stems, brand-like words
+        (any case) that are not Vietnamese syllables or known clinical words, and codes such
+        as "T-DM1" or "TS-1". Mutation codes, regimens and biomarkers are not medicines."""
+        vocab=self.vocabulary();lexicon=self.drug_lexicon();found=[]
+        covered=set()
+        for g in hits:
+            for r in g:
+                covered.update(normalize(r["ingredient"]).split())
         for t in re.findall(r"[^\s,.;:!?()\[\]\"'“”‘’]+",message):
             t=t.strip("-+/")
-            lw=t.lower()
-            if not t or not t.isascii() or lw in vocab or normalize(t) in vocab or lw in NOT_DRUG_WORDS:continue
-            compact=normalize(t).replace(' ','')
+            lw=t.lower();nt=normalize(t)
+            if not t or not t.isascii() or lw in NOT_DRUG_WORDS or lw in SALT_WORDS:continue
+            if nt and set(nt.split())<=covered:continue
+            if nt in lexicon:found.append(t);continue
+            if lw in vocab or nt in vocab:continue
+            compact=nt.replace(' ','')
             if compact in vocab or compact in NOT_DRUG_WORDS:continue
-            # Biomarkers and staging codes ("Ki-67", "PD-L1", "CA 15-3", "T3N1") are not medicines.
-            code=bool(re.fullmatch(r"[A-Za-z]{1,4}-?\d{1,3}[A-Za-z]?|[A-Za-z]-[A-Za-z]{1,3}\d|\d-[A-Za-z]{2,3}",t)) and not re.fullmatch(r"(?:her|cd|ki|ihc|egfr|pd|pdl|ca|cea|ecog|t|n|m|g|v|ps|brca|msi)\d+[a-z]?",lw.replace('-',''))
+            # Mutation codes (L858R, G12C, T790M), biomarkers and staging codes are not medicines.
+            if re.fullmatch(r"[a-z]\d{2,4}[a-z]|del\d{1,2}|ex(?:on)?\d{1,2}",lw.replace('-','')):continue
+            code=bool(re.fullmatch(r"[A-Za-z]{1,4}-?\d{1,3}[A-Za-z]?|[A-Za-z]-[A-Za-z]{1,3}\d|\d-[A-Za-z]{2,3}",t)) and not re.fullmatch(r"(?:her|cd|ki|ihc|egfr|pd|pdl|ca|cea|ecog|t|n|m|g|v|ps|brca|msi|ct|pt)\d+[a-z0-9]*",lw.replace('-',''))
             if code:found.append(t);continue
             if len(t)<5 or not t.isalpha():continue
             stem=re.search(INN_STEM,lw)
