@@ -19,17 +19,18 @@ function renderReply(data,question){
   const sources=(data.citations||[]).filter(c=>r.record_ids?.includes(c.id));evidenceGroup(section,'Căn cứ của thuốc',sources);if(a?.scope)section.append(node('p',a.scope,'scope-note'));box.append(section);
  }
  if(data.suggestions?.length){const choices=node('div',undefined,'actions');for(const name of data.suggestions){const b=node('button',name);b.type='button';b.addEventListener('click',()=>send(name+' — '+question));choices.append(b);}box.append(choices);}
- if(data.suggested_followups?.length){const wrap=node('div',undefined,'followup-chips');wrap.append(node('strong','Hỏi tiếp'));const choices=node('div',undefined,'actions');for(const q of data.suggested_followups){const b=node('button',q);b.type='button';b.addEventListener('click',()=>send(q));choices.append(b);}wrap.append(choices);box.append(wrap);}
+ if(data.suggested_followups?.length){const wrap=node('div',undefined,'followup-chips');wrap.append(node('strong','Hỏi tiếp'));const choices=node('div',undefined,'actions');const snap=JSON.parse(JSON.stringify(data.state||{}));for(const q of data.suggested_followups){const b=node('button',q);b.type='button';b.addEventListener('click',()=>send(q,snap));choices.append(b);}wrap.append(choices);box.append(wrap);}
  if(data.brand_notes?.length)for(const t of data.brand_notes)box.append(node('p',t,'notice'));
  const legal=(data.citations||[]).filter(c=>!rows.some(r=>r.record_ids?.includes(c.id)));evidenceGroup(box,'Quy định BHYT liên quan',legal);evidenceGroup(box,'Tài liệu điều trị tham khảo',data.clinical_references||[]);
  if(data.notice)box.append(node('p',data.notice,'notice'));
  const foot=node('div',undefined,'answer-foot');const copy=node('button','Sao chép câu trả lời');copy.type='button';const text=reportText(data,question);copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(text);copy.textContent='Đã sao chép kèm nguồn';}catch{copy.textContent='Chưa sao chép được';}});foot.append(node('span','Theo bộ nguồn BHYT 06/11/2026'),copy);box.append(foot);return box;
 }
-async function send(text){
+async function send(text,ctx){
+ // ctx: a follow-up chip sends the context of the answer it belongs to, not the latest one.
  text=(text??$('#question').value).trim();if(!text||!ready||busy)return;
  busy=true;$('#send').disabled=true;$('#new-chat').disabled=true;$('#loading').hidden=false;$('#error').hidden=true;$('#question').value='';$('#messages').setAttribute('aria-busy','true');let reply;
  const turn=node('section',undefined,'turn');const user=node('div',undefined,'query-heading');user.append(node('small','Bạn'),node('span',text));turn.append(user);$('#messages').append(turn);$('#welcome').hidden=true;
- try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':token},body:JSON.stringify({message:text,state,department:'Tất cả các khoa'})});const data=await response.json();if(!response.ok)throw new Error(data.error||'Chưa xử lý được câu hỏi.');state=JSON.parse(JSON.stringify(data.state||{}));reply=renderReply(data,text);turn.append(reply);}
+ try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':token},body:JSON.stringify({message:text,state:ctx??state,department:'Tất cả các khoa'})});const data=await response.json();if(!response.ok)throw new Error(data.error||'Chưa xử lý được câu hỏi.');state=JSON.parse(JSON.stringify(data.state||{}));reply=renderReply(data,text);turn.append(reply);}
  catch(e){turn.remove();$('#welcome').hidden=!!$('#messages').children.length;$('#error').textContent=e.message||'Không kết nối được ứng dụng.';$('#error').hidden=false;if(!$('#question').value)$('#question').value=text;}
  finally{busy=false;$('#send').disabled=!ready;$('#new-chat').disabled=false;$('#loading').hidden=true;$('#messages').setAttribute('aria-busy','false');if(reply){reply.focus({preventScroll:true});reply.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});}else $('#error').focus();}
 }

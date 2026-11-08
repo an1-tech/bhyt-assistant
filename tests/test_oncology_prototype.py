@@ -40,7 +40,7 @@ class OncologyPrototypeTests(unittest.TestCase):
                   "Tegafur + gimeracil + oteracil kali ung thư dạ dày chưa di căn",
                   "Rituximab u lympho không Hodgkin CD20 âm tính",
                   "Sorafenib ung thư tuyến giáp chưa dùng iod phóng xạ",
-                  "Abiraterone ung thư tiền liệt tuyến chưa dùng nội tiết"):
+                  "Abiraterone ung thư tiền liệt tuyến chưa dùng nội tiết hoặc hóa trị"):
             a=self.qa(self.ask(q))
             self.assertEqual(a["status"],"source_condition_not_met",q)
             self.assertIsNone(a["source_rate"],q)

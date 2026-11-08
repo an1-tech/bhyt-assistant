@@ -31,9 +31,30 @@ def _check_quotes(rule_id, note, items):
 def _check_requirement(rule_id, req):
     if not str(req.get("marker", "")).isalnum() or not req.get("label"):
         raise ValueError("Invalid requirement marker: " + rule_id)
-    for key in ("negative_patterns", "mention_patterns"):
+    for key in ("negative_patterns", "positive_patterns", "unknown_patterns"):
         for pattern in req.get(key, []):
             re.compile(pattern)
+    if "any_of" in req:
+        if len(req["any_of"]) < 2:
+            raise ValueError("any_of needs at least two parts: " + rule_id)
+        for sub in req["any_of"]:
+            if not (sub.get("negative_patterns") or sub.get("positive_patterns")):
+                raise ValueError("any_of part needs patterns: " + rule_id)
+            _check_requirement(rule_id, sub)
+
+
+def _check_branch_topic(rule_id, note, branch, topics):
+    """The quoted text must name the branch's own disease; with several rates in
+    the note, disease and rate must sit in the same quoted fragment."""
+    from engine import normalize
+    pattern = re.compile(r"\b(?:" + topics[branch["topic"]][1] + r")\b")
+    quotes = branch["verbatim"]
+    if not any(pattern.search(normalize(q)) for q in quotes):
+        raise ValueError("Quoted text does not name the branch disease: " + rule_id + " / " + branch["topic"])
+    rates = set(re.findall(r"\d+\s*%", note))
+    if branch.get("rate") is not None and len(rates) > 1:
+        if not any(f"{branch['rate']}%" in q and pattern.search(normalize(q)) for q in quotes):
+            raise ValueError("Rate and disease not quoted together: " + rule_id + " / " + branch["topic"])
 
 
 def load_indication_rules(data, by_id, topics):
@@ -67,6 +88,8 @@ def load_indication_rules(data, by_id, topics):
             if any(t not in topics for t in rule.get("parent_topics", {})):
                 raise ValueError("Unknown parent topic: " + id)
             _check_quotes(id, note, branches)
+            for b in branches:
+                _check_branch_topic(id, note, b, topics)
         elif rule["kind"] == "formulation_note":
             formulations = rule.get("formulations") or []
             if not formulations:

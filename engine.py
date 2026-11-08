@@ -15,6 +15,16 @@ def normalize(s):
     s = unicodedata.normalize('NFD', str(s).lower().replace('đ', 'd'))
     return ' '.join(re.sub(r'[^a-z0-9]+', ' ', ''.join(c for c in s if not unicodedata.combining(c))).split())
 
+FOLLOWUP_PREFIXES=("neu ","con ","vay ","the con ","truong hop ")
+CONDITION_CUE=r"(?:khang|dung nap|sau|that bai|phu hop|chua dung|da dung|tien trien)[a-z0-9 ]{0,25}\b"
+INN_STEM=r"(?:mab|tinib|rafenib|ciclib|parib|lisib|zomib|cept|platin|taxel|rubicin|mycin|vir|pril|sartan|olol|dipine|azole|gliptin|gliflozin|statin|cillin|floxacin)$"
+PRODUCT_MODIFIERS=r"emtansine|deruxtecan|vedotin|ozogamicin|govitecan|mafodotin|tesirine|pegol|duocarmazine"
+VIET_SYLLABLE=re.compile(r"^(?:ngh|ng|nh|ch|gh|gi|kh|ph|qu|th|tr|[bcdghklmnprstvx])?[aeiouy]{1,3}(?:ch|ng|nh|[cmnpt])?$")
+PRIVATE_RE=(re.compile(r'\b(?:0[35789]\d{8}|\d{12})\b'),re.compile(r'(?i)(họ tên bệnh nhân|mã bệnh án|số thẻ bhyt)\s*[:=]'))
+
+def private_input(message):
+    return any(p.search(message) for p in PRIVATE_RE)
+
 def read_jsonl(p):
     return [json.loads(s) for s in p.read_text(encoding='utf-8').splitlines() if s.strip()]
 
@@ -306,40 +316,104 @@ class Corpus:
         answerer=getattr(self,"_indication_chat",None)
         if answerer is None:
             answerer=self._indication_chat=IndicationChat(self)
-        lookup_message=message
-        if isinstance(message,str):
+        lookup_message=message;named_drug=None;unrecognized=[]
+        valid=isinstance(message,str) and 0<len(message.strip())<=3000 and not private_input(message)
+        if valid:
             hits=self.resolve(message)
+            q=normalize(message)
+            # "Trastuzumab emtansine" is another medicine, not Trastuzumab.
+            variant=self.product_variant(message,hits)
+            if variant:
+                return self.finalize_status(answerer.enrich(self.unrecognized_result([variant[0]],variant[1]),message,state))
             related=self.condition_drugs(message,hits,answerer.rules)
             if related:
                 # "Nilotinib ... kháng Imatinib": Imatinib is part of the condition, not a second medicine.
                 for name in related:lookup_message=re.sub(re.escape(name),"thuốc trước",lookup_message,flags=re.I)
                 hits=[g for g in hits if g[0]["ingredient"] not in related]
-            if isinstance(state,dict) and not hits:
-                previous=[self.by_id[x] for x in state.get("selected_ids",[])[:20] if isinstance(x,str) and x in self.by_id] if isinstance(state.get("selected_ids"),list) else []
-                q=normalize(message)
-                if len({r["ingredient"] for r in previous})==1 and (topics_in(message) or re.search(r"\b(?:her[ -]?2|egfr)\b",message,re.I)
-                        or re.search(r"\b(?:ung thu|benh|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|dieu tri)\b",q)
-                        or q.startswith(("neu ","con ","vay ","the con ","truong hop "))):
-                    lookup_message=previous[0]["ingredient"]+" "+message
+            previous=[self.by_id[x] for x in state.get("selected_ids",[])[:20] if isinstance(x,str) and x in self.by_id] if isinstance(state,dict) and isinstance(state.get("selected_ids"),list) else []
+            single=previous[0] if len({r["ingredient"] for r in previous})==1 else None
+            related_followup=False
+            if hits and single:
+                # Asked about Nilotinib, then "Nếu kháng Imatinib?": still Nilotinib.
+                names={g[0]["ingredient"] for g in hits}
+                rel=set(answerer.rules.get(single["record_id"],{}).get("related_drugs",[]))
+                if single["ingredient"] not in names and names<=rel and (q.startswith(FOLLOWUP_PREFIXES) or all(re.search(CONDITION_CUE+re.escape(normalize(n))+r"\b",q) for n in names)):
+                    for name in names:lookup_message=re.sub(re.escape(name),"thuốc trước",lookup_message,flags=re.I)
+                    hits=[];related_followup=True
+            unrecognized=self.unrecognized_names(message)
+            if unrecognized and not hits:
+                # Never answer an unknown medicine with the previous medicine's rules.
+                return self.finalize_status(answerer.enrich(self.unrecognized_result(unrecognized),message,state))
+            if single and not hits and (related_followup or topics_in(message) or re.search(r"\b(?:her[ -]?2|egfr)\b",message,re.I)
+                    or re.search(r"\b(?:ung thu|benh|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|dieu tri)\b",q)
+                    or q.startswith(FOLLOWUP_PREFIXES)):
+                lookup_message=single["ingredient"]+" "+lookup_message
+            named_drug=bool(hits)
         # General coverage answers use source-bound templates; no external AI call.
         result=self.chat(lookup_message,state,as_of,allow_ai=False)
-        result=answerer.enrich(result,message,state)
+        result=answerer.enrich(result,message,state,named_drug=named_drug)
         notes=self.brand_notes(message)
         if notes and result.get("results"):result["brand_notes"]=notes
+        if unrecognized and result.get("results"):
+            extra="Chưa nhận ra trong danh mục: "+", ".join(unrecognized)+"; câu trả lời chỉ áp dụng cho thuốc đã nhận diện."
+            result["unrecognized"]=unrecognized
+            result["notice"]=(result.get("notice","")+" "+extra).strip()
         return self.finalize_status(result)
 
     @staticmethod
     def condition_drugs(message,hits,rules):
         """Drugs named only as part of another drug's payment condition in this message."""
         if len(hits)<2:return set()
-        names={g[0]["ingredient"] for g in hits}
-        q=normalize(message);found=set()
+        q=normalize(message)
+        if re.search(r"\b(?:so sanh|khac nhau|khac gi|hay la|thay the|doi chieu|nen chon)\b",q):return set()
+        names={g[0]["ingredient"] for g in hits};found=set()
         for g in hits:
             for row in g:
                 for name in rules.get(row["record_id"],{}).get("related_drugs",[]):
-                    cue=r"(?:khang|dung nap|sau|that bai|voi|phu hop|chua dung|da dung|tien trien)[a-z0-9 ]{0,25}\b"+re.escape(normalize(name))+r"\b"
-                    if name in names and name!=g[0]["ingredient"] and re.search(cue,q):found.add(name)
+                    if name in names and name!=g[0]["ingredient"] and re.search(CONDITION_CUE+re.escape(normalize(name))+r"\b",q):found.add(name)
         return found if names-found else set()
+
+    def vocabulary(self):
+        """Words that are known not to be an unrecognised medicine name."""
+        if getattr(self,"_vocab",None) is None:
+            from indication_chat import TOPICS
+            words=set()
+            for r in self.rows:
+                words.update(normalize(r["ingredient"]).split());words.update(normalize(r.get("conditions_verbatim","")).split())
+            for k in list(self.aliases)+list(self.source_names):words.update(k.split())
+            for label,_ in TOPICS.values():words.update(normalize(label).split())
+            words.update("bhyt bhxh her2 egfr ras kras nras cd20 ihc fish cml cll gist nsclc sclc hcc rcc nhl icd type wild positive negative liposome micelle".split())
+            self._vocab=words
+        return self._vocab
+
+    def unrecognized_names(self,message):
+        """Drug-like words that match nothing in the catalogue (INN stems or brand-like names)."""
+        vocab=self.vocabulary();found=[]
+        for t in re.findall(r"[A-Za-z][A-Za-z0-9-]*",message):
+            lw=t.lower()
+            if not t.isascii() or len(t)<5 or lw in vocab or normalize(t) in vocab:continue
+            stem=re.search(INN_STEM,lw)
+            brand=t[0].isupper() and any(ch.islower() for ch in t[1:]) and t.isalpha() and not VIET_SYLLABLE.match(lw)
+            if stem or brand:found.append(t)
+        return list(dict.fromkeys(found))
+
+    @staticmethod
+    def product_variant(message,hits):
+        for g in hits:
+            name=g[0]["ingredient"]
+            m=re.search(re.escape(name)+r"[\s-]+("+PRODUCT_MODIFIERS+r")\b",message,re.I)
+            if m:return (message[m.start():m.end()],name)
+        return None
+
+    def unrecognized_result(self,names,base=None):
+        if base:
+            answer=(f"“{names[0]}” là thuốc khác với “{base}” trong danh mục BHYT. Bộ nguồn chưa có dòng riêng cho thuốc này nên chưa kết luận, "
+                    f"và không dùng điều kiện của {base} cho thuốc này. Không tìm thấy ở đây chưa đủ để kết luận thuốc không được BHYT thanh toán.")
+        else:
+            answer=("Chưa nhận ra thuốc “"+", ".join(names)+"” trong danh mục BHYT của bộ nguồn. Bot không dùng thuốc đang hỏi trước đó để trả lời. "
+                    "Hãy nhập tên hoạt chất; không tìm thấy ở đây chưa đủ để kết luận thuốc không được BHYT thanh toán.")
+        return dict(snapshot=SNAPSHOT,mode='local',citations=[],results=[],suggestions=[],followups=[],state={},
+                    status='unknown_drug',answer=answer,unrecognized=list(names))
 
     def brand_notes(self,message):
         q=' '+normalize(message)+' ';notes=[]
