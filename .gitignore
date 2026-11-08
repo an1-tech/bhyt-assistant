@@ -8,3 +8,6 @@ data/embeddings.sqlite
 .server-pid
 .taste-skill/
 audit/server*.log
+
+# Hospital list source screenshots (kept locally; derived JSON is committed)
+data/hospital/raw/

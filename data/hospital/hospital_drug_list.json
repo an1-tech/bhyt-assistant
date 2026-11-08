@@ -1,0 +1,2904 @@
+{
+ "version": 1,
+ "source": "Website bệnh viện, mục \"Danh sách thuốc\" (24 ảnh chụp màn hình trong Doc1.docx do người dùng cung cấp, 08/11/2026)",
+ "source_file_sha256": "4244036b14a6f107bf3f501fc6bcfd024ce3ac7315f38435dd5f39bd4572821d",
+ "transcription": "Chép tay từ ảnh (tài liệu chỉ có ảnh, không có chữ). Giữ nguyên chính tả và các dòng trùng.",
+ "limitations": [
+  "Danh sách tra cứu thông tin thuốc trên website, không phải danh mục trúng thầu: không có biệt dược, hàm lượng, số đăng ký.",
+  "Không có ảnh cho các chữ J, Q, U, Y; danh sách có thể chưa đầy đủ.",
+  "Không có tên trong danh sách này không có nghĩa bệnh viện không dùng thuốc đó."
+ ],
+ "entries": [
+  {
+   "id": "HL-01-01",
+   "text": "Abobotulinum Toxin A",
+   "name": "Abobotulinum Toxin A",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Abobotulinum Toxin A"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-02",
+   "text": "Abobotulinum Toxin A",
+   "name": "Abobotulinum Toxin A",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Abobotulinum Toxin A"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 2,
+   "duplicate_of": "HL-01-01"
+  },
+  {
+   "id": "HL-01-03",
+   "text": "Acarbose",
+   "name": "Acarbose",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Acarbose"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-04",
+   "text": "Acenocoumarol",
+   "name": "Acenocoumarol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Acenocoumarol"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-05",
+   "text": "Acetazolamide",
+   "name": "Acetazolamide",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Acetazolamide"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-06",
+   "text": "Acetyl-Dl-Leucine",
+   "name": "Acetyl-Dl-Leucine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Acetyl-Dl-Leucine"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-07",
+   "text": "Acetylcysteine",
+   "name": "Acetylcysteine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Acetylcysteine"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 7,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-08",
+   "text": "Acid Folic",
+   "name": "Acid Folic",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Acid Folic"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 8,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-09",
+   "text": "Acid Thioctic",
+   "name": "Acid Thioctic",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Acid Thioctic"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 9,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-10",
+   "text": "Acid Ursodeoxycholic",
+   "name": "Acid Ursodeoxycholic",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Acid Ursodeoxycholic"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 10,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-11",
+   "text": "Acyclovir (Tra mắt)",
+   "name": "Acyclovir",
+   "route_hint": "Tra mắt",
+   "note": null,
+   "components": [
+    "Acyclovir"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 11,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-12",
+   "text": "Acyclovir (Uống)",
+   "name": "Acyclovir",
+   "route_hint": "Uống",
+   "note": null,
+   "components": [
+    "Acyclovir"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 12,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-13",
+   "text": "Adalimumab",
+   "name": "Adalimumab",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Adalimumab"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 13,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-14",
+   "text": "Adapalene",
+   "name": "Adapalene",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Adapalene"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 14,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-15",
+   "text": "Adapalene/ Clindamycin",
+   "name": "Adapalene/ Clindamycin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Adapalene",
+    "Clindamycin"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 15,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-16",
+   "text": "Adenosine",
+   "name": "Adenosine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Adenosine"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 16,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-17",
+   "text": "Adrenaline",
+   "name": "Adrenaline",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Adrenaline"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 17,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-18",
+   "text": "Afatinib",
+   "name": "Afatinib",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Afatinib"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 18,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-19",
+   "text": "Albendazole",
+   "name": "Albendazole",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Albendazole"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 19,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-20",
+   "text": "Albumin",
+   "name": "Albumin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Albumin"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 20,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-21",
+   "text": "Alendronate",
+   "name": "Alendronate",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Alendronate"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 21,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-22",
+   "text": "Alendronate",
+   "name": "Alendronate",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Alendronate"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 22,
+   "duplicate_of": "HL-01-21"
+  },
+  {
+   "id": "HL-01-23",
+   "text": "Alfuzosin",
+   "name": "Alfuzosin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Alfuzosin"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 23,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-01-24",
+   "text": "Alimemazine",
+   "name": "Alimemazine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Alimemazine"
+   ],
+   "letter": "A",
+   "page": 1,
+   "image": "data/hospital/raw/images/01.png",
+   "position": 24,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-01",
+   "text": "Allopurinol",
+   "name": "Allopurinol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Allopurinol"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-02",
+   "text": "Alpha Chymotrypsine (Tiêm)",
+   "name": "Alpha Chymotrypsine",
+   "route_hint": "Tiêm",
+   "note": null,
+   "components": [
+    "Alpha Chymotrypsine"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-03",
+   "text": "Alpha Chymotrypsine (Uống)",
+   "name": "Alpha Chymotrypsine",
+   "route_hint": "Uống",
+   "note": null,
+   "components": [
+    "Alpha Chymotrypsine"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-04",
+   "text": "Alprostadil",
+   "name": "Alprostadil",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Alprostadil"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-05",
+   "text": "Alteplase",
+   "name": "Alteplase",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Alteplase"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-06",
+   "text": "Alverine",
+   "name": "Alverine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Alverine"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-07",
+   "text": "Alverine/ Simethicone",
+   "name": "Alverine/ Simethicone",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Alverine",
+    "Simethicone"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 7,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-08",
+   "text": "Alvesin",
+   "name": "Alvesin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Alvesin"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 8,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-09",
+   "text": "Ambroxol",
+   "name": "Ambroxol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Ambroxol"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 9,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-10",
+   "text": "Amikacin",
+   "name": "Amikacin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Amikacin"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 10,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-11",
+   "text": "Aminophyllin",
+   "name": "Aminophyllin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Aminophyllin"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 11,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-12",
+   "text": "Aminosteril N-Hepa 8%",
+   "name": "Aminosteril N-Hepa 8%",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Aminosteril N-Hepa 8%"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 12,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-13",
+   "text": "Amiodarone",
+   "name": "Amiodarone",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Amiodarone"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 13,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-14",
+   "text": "Amlodipine",
+   "name": "Amlodipine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Amlodipine"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 14,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-15",
+   "text": "Amoxicillin/ Clavulanic Acid (tiêm)",
+   "name": "Amoxicillin/ Clavulanic Acid",
+   "route_hint": "tiêm",
+   "note": null,
+   "components": [
+    "Amoxicillin",
+    "Clavulanic Acid"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 15,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-16",
+   "text": "Amphotericin B lipid complex",
+   "name": "Amphotericin B lipid complex",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Amphotericin B lipid complex"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 16,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-17",
+   "text": "Anastrozole",
+   "name": "Anastrozole",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Anastrozole"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 17,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-18",
+   "text": "Atorvastatin",
+   "name": "Atorvastatin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Atorvastatin"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 18,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-19",
+   "text": "Atosiban",
+   "name": "Atosiban",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Atosiban"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 19,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-02-20",
+   "text": "Azithromycin (Uống)",
+   "name": "Azithromycin",
+   "route_hint": "Uống",
+   "note": null,
+   "components": [
+    "Azithromycin"
+   ],
+   "letter": "A",
+   "page": 2,
+   "image": "data/hospital/raw/images/02.png",
+   "position": 20,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-03-01",
+   "text": "Bambuterol",
+   "name": "Bambuterol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Bambuterol"
+   ],
+   "letter": "B",
+   "page": 1,
+   "image": "data/hospital/raw/images/03.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-03-02",
+   "text": "Bernevit",
+   "name": "Bernevit",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Bernevit"
+   ],
+   "letter": "B",
+   "page": 1,
+   "image": "data/hospital/raw/images/03.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-03-03",
+   "text": "Betahistin",
+   "name": "Betahistin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Betahistin"
+   ],
+   "letter": "B",
+   "page": 1,
+   "image": "data/hospital/raw/images/03.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-03-04",
+   "text": "Bevacizumab",
+   "name": "Bevacizumab",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Bevacizumab"
+   ],
+   "letter": "B",
+   "page": 1,
+   "image": "data/hospital/raw/images/03.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-03-05",
+   "text": "Bisoprolol",
+   "name": "Bisoprolol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Bisoprolol"
+   ],
+   "letter": "B",
+   "page": 1,
+   "image": "data/hospital/raw/images/03.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-03-06",
+   "text": "Broncho Vacxom",
+   "name": "Broncho Vacxom",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Broncho Vacxom"
+   ],
+   "letter": "B",
+   "page": 1,
+   "image": "data/hospital/raw/images/03.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-03-07",
+   "text": "Budesonide (Khí dung)",
+   "name": "Budesonide",
+   "route_hint": "Khí dung",
+   "note": null,
+   "components": [
+    "Budesonide"
+   ],
+   "letter": "B",
+   "page": 1,
+   "image": "data/hospital/raw/images/03.png",
+   "position": 7,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-04-01",
+   "text": "Capecitabine",
+   "name": "Capecitabine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Capecitabine"
+   ],
+   "letter": "C",
+   "page": 1,
+   "image": "data/hospital/raw/images/04.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-04-02",
+   "text": "Carvedilol",
+   "name": "Carvedilol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Carvedilol"
+   ],
+   "letter": "C",
+   "page": 1,
+   "image": "data/hospital/raw/images/04.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-04-03",
+   "text": "Caspofungin",
+   "name": "Caspofungin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Caspofungin"
+   ],
+   "letter": "C",
+   "page": 1,
+   "image": "data/hospital/raw/images/04.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-04-04",
+   "text": "Ceftriaxone",
+   "name": "Ceftriaxone",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Ceftriaxone"
+   ],
+   "letter": "C",
+   "page": 1,
+   "image": "data/hospital/raw/images/04.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-04-05",
+   "text": "Celecoxib",
+   "name": "Celecoxib",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Celecoxib"
+   ],
+   "letter": "C",
+   "page": 1,
+   "image": "data/hospital/raw/images/04.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-04-06",
+   "text": "Cerebrolysin",
+   "name": "Cerebrolysin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Cerebrolysin"
+   ],
+   "letter": "C",
+   "page": 1,
+   "image": "data/hospital/raw/images/04.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-04-07",
+   "text": "Cilostazol",
+   "name": "Cilostazol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Cilostazol"
+   ],
+   "letter": "C",
+   "page": 1,
+   "image": "data/hospital/raw/images/04.png",
+   "position": 7,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-04-08",
+   "text": "Clopidogrel",
+   "name": "Clopidogrel",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Clopidogrel"
+   ],
+   "letter": "C",
+   "page": 1,
+   "image": "data/hospital/raw/images/04.png",
+   "position": 8,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-04-09",
+   "text": "Clotrimazole",
+   "name": "Clotrimazole",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Clotrimazole"
+   ],
+   "letter": "C",
+   "page": 1,
+   "image": "data/hospital/raw/images/04.png",
+   "position": 9,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-04-10",
+   "text": "Colchicine",
+   "name": "Colchicine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Colchicine"
+   ],
+   "letter": "C",
+   "page": 1,
+   "image": "data/hospital/raw/images/04.png",
+   "position": 10,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-05-01",
+   "text": "Dabigatran",
+   "name": "Dabigatran",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Dabigatran"
+   ],
+   "letter": "D",
+   "page": 1,
+   "image": "data/hospital/raw/images/05.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-05-02",
+   "text": "Dapagliflozin",
+   "name": "Dapagliflozin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Dapagliflozin"
+   ],
+   "letter": "D",
+   "page": 1,
+   "image": "data/hospital/raw/images/05.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-05-03",
+   "text": "Desloratadine",
+   "name": "Desloratadine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Desloratadine"
+   ],
+   "letter": "D",
+   "page": 1,
+   "image": "data/hospital/raw/images/05.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-05-04",
+   "text": "Diacerein",
+   "name": "Diacerein",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Diacerein"
+   ],
+   "letter": "D",
+   "page": 1,
+   "image": "data/hospital/raw/images/05.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-05-05",
+   "text": "Diclofenac (Tiêm)",
+   "name": "Diclofenac",
+   "route_hint": "Tiêm",
+   "note": null,
+   "components": [
+    "Diclofenac"
+   ],
+   "letter": "D",
+   "page": 1,
+   "image": "data/hospital/raw/images/05.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-05-06",
+   "text": "Diphenhydramine",
+   "name": "Diphenhydramine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Diphenhydramine"
+   ],
+   "letter": "D",
+   "page": 1,
+   "image": "data/hospital/raw/images/05.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-06-01",
+   "text": "Enoxaparin",
+   "name": "Enoxaparin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Enoxaparin"
+   ],
+   "letter": "E",
+   "page": 1,
+   "image": "data/hospital/raw/images/06.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-06-02",
+   "text": "Entecavir",
+   "name": "Entecavir",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Entecavir"
+   ],
+   "letter": "E",
+   "page": 1,
+   "image": "data/hospital/raw/images/06.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-06-03",
+   "text": "Ertapenem",
+   "name": "Ertapenem",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Ertapenem"
+   ],
+   "letter": "E",
+   "page": 1,
+   "image": "data/hospital/raw/images/06.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-06-04",
+   "text": "Esomeprazole",
+   "name": "Esomeprazole",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Esomeprazole"
+   ],
+   "letter": "E",
+   "page": 1,
+   "image": "data/hospital/raw/images/06.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-06-05",
+   "text": "Etoricoxib",
+   "name": "Etoricoxib",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Etoricoxib"
+   ],
+   "letter": "E",
+   "page": 1,
+   "image": "data/hospital/raw/images/06.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-06-06",
+   "text": "Ezetimibe",
+   "name": "Ezetimibe",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Ezetimibe"
+   ],
+   "letter": "E",
+   "page": 1,
+   "image": "data/hospital/raw/images/06.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-07-01",
+   "text": "Febuxostat",
+   "name": "Febuxostat",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Febuxostat"
+   ],
+   "letter": "F",
+   "page": 1,
+   "image": "data/hospital/raw/images/07.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-07-02",
+   "text": "Felodipine",
+   "name": "Felodipine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Felodipine"
+   ],
+   "letter": "F",
+   "page": 1,
+   "image": "data/hospital/raw/images/07.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-07-03",
+   "text": "Fenofibrate",
+   "name": "Fenofibrate",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Fenofibrate"
+   ],
+   "letter": "F",
+   "page": 1,
+   "image": "data/hospital/raw/images/07.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-07-04",
+   "text": "Fentanyl (Miếng dán)",
+   "name": "Fentanyl",
+   "route_hint": "Miếng dán",
+   "note": null,
+   "components": [
+    "Fentanyl"
+   ],
+   "letter": "F",
+   "page": 1,
+   "image": "data/hospital/raw/images/07.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-07-05",
+   "text": "Fexofenadin",
+   "name": "Fexofenadin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Fexofenadin"
+   ],
+   "letter": "F",
+   "page": 1,
+   "image": "data/hospital/raw/images/07.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-07-06",
+   "text": "Fleet Enema",
+   "name": "Fleet Enema",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Fleet Enema"
+   ],
+   "letter": "F",
+   "page": 1,
+   "image": "data/hospital/raw/images/07.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-07-07",
+   "text": "Fluconazole",
+   "name": "Fluconazole",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Fluconazole"
+   ],
+   "letter": "F",
+   "page": 1,
+   "image": "data/hospital/raw/images/07.png",
+   "position": 7,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-07-08",
+   "text": "Fluconazole",
+   "name": "Fluconazole",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Fluconazole"
+   ],
+   "letter": "F",
+   "page": 1,
+   "image": "data/hospital/raw/images/07.png",
+   "position": 8,
+   "duplicate_of": "HL-07-07"
+  },
+  {
+   "id": "HL-08-01",
+   "text": "Gabapentin",
+   "name": "Gabapentin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Gabapentin"
+   ],
+   "letter": "G",
+   "page": 1,
+   "image": "data/hospital/raw/images/08.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-08-02",
+   "text": "Ganciclovir",
+   "name": "Ganciclovir",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Ganciclovir"
+   ],
+   "letter": "G",
+   "page": 1,
+   "image": "data/hospital/raw/images/08.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-08-03",
+   "text": "Gaviscon",
+   "name": "Gaviscon",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Gaviscon"
+   ],
+   "letter": "G",
+   "page": 1,
+   "image": "data/hospital/raw/images/08.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-08-04",
+   "text": "Gliclazide",
+   "name": "Gliclazide",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Gliclazide"
+   ],
+   "letter": "G",
+   "page": 1,
+   "image": "data/hospital/raw/images/08.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-08-05",
+   "text": "Glyceryl Trinitrate (Uống)",
+   "name": "Glyceryl Trinitrate",
+   "route_hint": "Uống",
+   "note": null,
+   "components": [
+    "Glyceryl Trinitrate"
+   ],
+   "letter": "G",
+   "page": 1,
+   "image": "data/hospital/raw/images/08.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-08-06",
+   "text": "Goserelin",
+   "name": "Goserelin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Goserelin"
+   ],
+   "letter": "G",
+   "page": 1,
+   "image": "data/hospital/raw/images/08.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-09-01",
+   "text": "Haloperidol",
+   "name": "Haloperidol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Haloperidol"
+   ],
+   "letter": "H",
+   "page": 1,
+   "image": "data/hospital/raw/images/09.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-09-02",
+   "text": "Hydroxychloroquine",
+   "name": "Hydroxychloroquine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Hydroxychloroquine"
+   ],
+   "letter": "H",
+   "page": 1,
+   "image": "data/hospital/raw/images/09.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-09-03",
+   "text": "Hyoscin-N-Butylbromide",
+   "name": "Hyoscin-N-Butylbromide",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Hyoscin-N-Butylbromide"
+   ],
+   "letter": "H",
+   "page": 1,
+   "image": "data/hospital/raw/images/09.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-10-01",
+   "text": "Ibuprofen",
+   "name": "Ibuprofen",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Ibuprofen"
+   ],
+   "letter": "I",
+   "page": 1,
+   "image": "data/hospital/raw/images/10.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-10-02",
+   "text": "Indapamide",
+   "name": "Indapamide",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Indapamide"
+   ],
+   "letter": "I",
+   "page": 1,
+   "image": "data/hospital/raw/images/10.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-10-03",
+   "text": "Irbesartan",
+   "name": "Irbesartan",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Irbesartan"
+   ],
+   "letter": "I",
+   "page": 1,
+   "image": "data/hospital/raw/images/10.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-10-04",
+   "text": "Ivabradine",
+   "name": "Ivabradine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Ivabradine"
+   ],
+   "letter": "I",
+   "page": 1,
+   "image": "data/hospital/raw/images/10.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-11-01",
+   "text": "Ketorolac (Tiêm)",
+   "name": "Ketorolac",
+   "route_hint": "Tiêm",
+   "note": null,
+   "components": [
+    "Ketorolac"
+   ],
+   "letter": "K",
+   "page": 1,
+   "image": "data/hospital/raw/images/11.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-12-01",
+   "text": "Lactulose",
+   "name": "Lactulose",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Lactulose"
+   ],
+   "letter": "L",
+   "page": 1,
+   "image": "data/hospital/raw/images/12.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-12-02",
+   "text": "Levetiracetam",
+   "name": "Levetiracetam",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Levetiracetam"
+   ],
+   "letter": "L",
+   "page": 1,
+   "image": "data/hospital/raw/images/12.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-12-03",
+   "text": "Levodopa/Benserazide",
+   "name": "Levodopa/Benserazide",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Levodopa",
+    "Benserazide"
+   ],
+   "letter": "L",
+   "page": 1,
+   "image": "data/hospital/raw/images/12.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-12-04",
+   "text": "Levothyroxine",
+   "name": "Levothyroxine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Levothyroxine"
+   ],
+   "letter": "L",
+   "page": 1,
+   "image": "data/hospital/raw/images/12.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-12-05",
+   "text": "Linezolid",
+   "name": "Linezolid",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Linezolid"
+   ],
+   "letter": "L",
+   "page": 1,
+   "image": "data/hospital/raw/images/12.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-12-06",
+   "text": "Lipofundin MCT/LCT",
+   "name": "Lipofundin MCT/LCT",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Lipofundin MCT",
+    "LCT"
+   ],
+   "letter": "L",
+   "page": 1,
+   "image": "data/hospital/raw/images/12.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-12-07",
+   "text": "Lisinopril",
+   "name": "Lisinopril",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Lisinopril"
+   ],
+   "letter": "L",
+   "page": 1,
+   "image": "data/hospital/raw/images/12.png",
+   "position": 7,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-12-08",
+   "text": "Loperamide",
+   "name": "Loperamide",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Loperamide"
+   ],
+   "letter": "L",
+   "page": 1,
+   "image": "data/hospital/raw/images/12.png",
+   "position": 8,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-12-09",
+   "text": "Loratadine",
+   "name": "Loratadine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Loratadine"
+   ],
+   "letter": "L",
+   "page": 1,
+   "image": "data/hospital/raw/images/12.png",
+   "position": 9,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-12-10",
+   "text": "Losartan",
+   "name": "Losartan",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Losartan"
+   ],
+   "letter": "L",
+   "page": 1,
+   "image": "data/hospital/raw/images/12.png",
+   "position": 10,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-01",
+   "text": "Magnesi Lactate/ Vitamin B6",
+   "name": "Magnesi Lactate/ Vitamin B6",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Magnesi Lactate",
+    "Vitamin B6"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-02",
+   "text": "Magnesi Sulfate",
+   "name": "Magnesi Sulfate",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Magnesi Sulfate"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-03",
+   "text": "Magnesi Sulfate/ Saccharomyces Cerevisiae",
+   "name": "Magnesi Sulfate/ Saccharomyces Cerevisiae",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Magnesi Sulfate",
+    "Saccharomyces Cerevisiae"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-04",
+   "text": "Mannitol",
+   "name": "Mannitol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mannitol"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-05",
+   "text": "Maxitrol",
+   "name": "Maxitrol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Maxitrol"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-06",
+   "text": "Mebendazole",
+   "name": "Mebendazole",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mebendazole"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-07",
+   "text": "Mebeverine",
+   "name": "Mebeverine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mebeverine"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 7,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-08",
+   "text": "Meloxicam",
+   "name": "Meloxicam",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Meloxicam"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 8,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-09",
+   "text": "Menotrophin",
+   "name": "Menotrophin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Menotrophin"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 9,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-10",
+   "text": "Mephenesin",
+   "name": "Mephenesin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mephenesin"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 10,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-11",
+   "text": "Mepivacaine",
+   "name": "Mepivacaine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mepivacaine"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 11,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-12",
+   "text": "Mercaptopurine",
+   "name": "Mercaptopurine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mercaptopurine"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 12,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-13",
+   "text": "Meropenem",
+   "name": "Meropenem",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Meropenem"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 13,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-14",
+   "text": "Mesalazine",
+   "name": "Mesalazine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mesalazine"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 14,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-15",
+   "text": "Mesna",
+   "name": "Mesna",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mesna"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 15,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-16",
+   "text": "Metformin",
+   "name": "Metformin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Metformin"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 16,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-17",
+   "text": "Methotrexate",
+   "name": "Methotrexate",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Methotrexate"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 17,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-18",
+   "text": "Methycobalamin",
+   "name": "Methycobalamin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Methycobalamin"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 18,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-19",
+   "text": "Methyldopa",
+   "name": "Methyldopa",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Methyldopa"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 19,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-20",
+   "text": "Methylergometrine Maleate",
+   "name": "Methylergometrine Maleate",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Methylergometrine Maleate"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 20,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-21",
+   "text": "Methylprednisolone",
+   "name": "Methylprednisolone",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Methylprednisolone"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 21,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-22",
+   "text": "Metoclopramide",
+   "name": "Metoclopramide",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Metoclopramide"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 22,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-23",
+   "text": "Metoprolol",
+   "name": "Metoprolol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Metoprolol"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 23,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-13-24",
+   "text": "Metronidazole (Tiêm)",
+   "name": "Metronidazole",
+   "route_hint": "Tiêm",
+   "note": null,
+   "components": [
+    "Metronidazole"
+   ],
+   "letter": "M",
+   "page": 1,
+   "image": "data/hospital/raw/images/13.png",
+   "position": 24,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-01",
+   "text": "Metronidazole/ Chlorhexidine",
+   "name": "Metronidazole/ Chlorhexidine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Metronidazole",
+    "Chlorhexidine"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-02",
+   "text": "Metronidazole/ Spiramycin",
+   "name": "Metronidazole/ Spiramycin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Metronidazole",
+    "Spiramycin"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-03",
+   "text": "Midazolam",
+   "name": "Midazolam",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Midazolam"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-04",
+   "text": "Mifepristone",
+   "name": "Mifepristone",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mifepristone"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-05",
+   "text": "Mildagliptin/Metformin",
+   "name": "Mildagliptin/Metformin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mildagliptin",
+    "Metformin"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-06",
+   "text": "Milrinone",
+   "name": "Milrinone",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Milrinone"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-07",
+   "text": "Minagliptin",
+   "name": "Minagliptin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Minagliptin"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 7,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-08",
+   "text": "Minoxidil",
+   "name": "Minoxidil",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Minoxidil"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 8,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-09",
+   "text": "Mirtazapine",
+   "name": "Mirtazapine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mirtazapine"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 9,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-10",
+   "text": "Misoprostol",
+   "name": "Misoprostol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Misoprostol"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 10,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-11",
+   "text": "Mometasone (bôi)",
+   "name": "Mometasone",
+   "route_hint": "bôi",
+   "note": null,
+   "components": [
+    "Mometasone"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 11,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-12",
+   "text": "Montelukast",
+   "name": "Montelukast",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Montelukast"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 12,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-13",
+   "text": "Moriamin Forte",
+   "name": "Moriamin Forte",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Moriamin Forte"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 13,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-14",
+   "text": "Morihepamin",
+   "name": "Morihepamin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Morihepamin"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 14,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-15",
+   "text": "Morphine",
+   "name": "Morphine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Morphine"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 15,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-16",
+   "text": "Morphine Sulfate (Tiêm Tủy Sống)",
+   "name": "Morphine Sulfate",
+   "route_hint": "Tiêm Tủy Sống",
+   "note": null,
+   "components": [
+    "Morphine Sulfate"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 16,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-17",
+   "text": "Moxifloxacin (Nhỏ Mắt)",
+   "name": "Moxifloxacin",
+   "route_hint": "Nhỏ Mắt",
+   "note": null,
+   "components": [
+    "Moxifloxacin"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 17,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-18",
+   "text": "Moxifloxacin (Uống, Tiêm)",
+   "name": "Moxifloxacin",
+   "route_hint": "Uống, Tiêm",
+   "note": null,
+   "components": [
+    "Moxifloxacin"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 18,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-19",
+   "text": "Moxifloxacin/ Dexamethasone",
+   "name": "Moxifloxacin/ Dexamethasone",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Moxifloxacin",
+    "Dexamethasone"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 19,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-20",
+   "text": "Mucopolysaccharide Polysulfate",
+   "name": "Mucopolysaccharide Polysulfate",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mucopolysaccharide Polysulfate"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 20,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-21",
+   "text": "Mupirocin",
+   "name": "Mupirocin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mupirocin"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 21,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-22",
+   "text": "Mycophenolate Mofetil",
+   "name": "Mycophenolate Mofetil",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mycophenolate Mofetil"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 22,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-14-23",
+   "text": "Mytomycin C",
+   "name": "Mytomycin C",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Mytomycin C"
+   ],
+   "letter": "M",
+   "page": 2,
+   "image": "data/hospital/raw/images/14.png",
+   "position": 23,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-01",
+   "text": "Naproxen",
+   "name": "Naproxen",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Naproxen"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-02",
+   "text": "Natri chloride 0,45%",
+   "name": "Natri chloride 0,45%",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Natri chloride 0,45%"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-03",
+   "text": "Natri chloride 10%",
+   "name": "Natri chloride 10%",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Natri chloride 10%"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-04",
+   "text": "Natri Hyaluronate",
+   "name": "Natri Hyaluronate",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Natri Hyaluronate"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-05",
+   "text": "Natri hypochloride",
+   "name": "Natri hypochloride",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Natri hypochloride"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-06",
+   "text": "Natri polystyrene sulfonate",
+   "name": "Natri polystyrene sulfonate",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Natri polystyrene sulfonate"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-07",
+   "text": "Natri sulphacetamide",
+   "name": "Natri sulphacetamide",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Natri sulphacetamide"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 7,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-08",
+   "text": "Neoamyu",
+   "name": "Neoamyu",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Neoamyu"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 8,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-09",
+   "text": "Neopeptin",
+   "name": "Neopeptin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Neopeptin"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 9,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-10",
+   "text": "Neopeptin syrup",
+   "name": "Neopeptin syrup",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Neopeptin syrup"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 10,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-11",
+   "text": "Nepafenac",
+   "name": "Nepafenac",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Nepafenac"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 11,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-12",
+   "text": "Nepidermin (rhEGF)",
+   "name": "Nepidermin (rhEGF)",
+   "route_hint": null,
+   "note": "rhEGF",
+   "components": [
+    "Nepidermin (rhEGF)"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 12,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-15-13",
+   "text": "Neuroaid",
+   "name": "Neuroaid",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Neuroaid"
+   ],
+   "letter": "N",
+   "page": 1,
+   "image": "data/hospital/raw/images/15.png",
+   "position": 13,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-16-01",
+   "text": "Ondansetron",
+   "name": "Ondansetron",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Ondansetron"
+   ],
+   "letter": "O",
+   "page": 1,
+   "image": "data/hospital/raw/images/16.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-16-02",
+   "text": "Oseltamivir",
+   "name": "Oseltamivir",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Oseltamivir"
+   ],
+   "letter": "O",
+   "page": 1,
+   "image": "data/hospital/raw/images/16.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-16-03",
+   "text": "Oxycodone",
+   "name": "Oxycodone",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Oxycodone"
+   ],
+   "letter": "O",
+   "page": 1,
+   "image": "data/hospital/raw/images/16.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-17-01",
+   "text": "Pantoprazole",
+   "name": "Pantoprazole",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Pantoprazole"
+   ],
+   "letter": "P",
+   "page": 1,
+   "image": "data/hospital/raw/images/17.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-17-02",
+   "text": "Paracetamol",
+   "name": "Paracetamol",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Paracetamol"
+   ],
+   "letter": "P",
+   "page": 1,
+   "image": "data/hospital/raw/images/17.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-17-03",
+   "text": "Perindorpil",
+   "name": "Perindorpil",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Perindorpil"
+   ],
+   "letter": "P",
+   "page": 1,
+   "image": "data/hospital/raw/images/17.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-17-04",
+   "text": "Piracetam (Tiêm)",
+   "name": "Piracetam",
+   "route_hint": "Tiêm",
+   "note": null,
+   "components": [
+    "Piracetam"
+   ],
+   "letter": "P",
+   "page": 1,
+   "image": "data/hospital/raw/images/17.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-17-05",
+   "text": "Pregabalin",
+   "name": "Pregabalin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Pregabalin"
+   ],
+   "letter": "P",
+   "page": 1,
+   "image": "data/hospital/raw/images/17.png",
+   "position": 5,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-17-06",
+   "text": "Protamine",
+   "name": "Protamine",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Protamine"
+   ],
+   "letter": "P",
+   "page": 1,
+   "image": "data/hospital/raw/images/17.png",
+   "position": 6,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-18-01",
+   "text": "Rabeprazole",
+   "name": "Rabeprazole",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Rabeprazole"
+   ],
+   "letter": "R",
+   "page": 1,
+   "image": "data/hospital/raw/images/18.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-18-02",
+   "text": "Racecadotril",
+   "name": "Racecadotril",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Racecadotril"
+   ],
+   "letter": "R",
+   "page": 1,
+   "image": "data/hospital/raw/images/18.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-18-03",
+   "text": "Rivaroxaban",
+   "name": "Rivaroxaban",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Rivaroxaban"
+   ],
+   "letter": "R",
+   "page": 1,
+   "image": "data/hospital/raw/images/18.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-18-04",
+   "text": "Rosuvastatin",
+   "name": "Rosuvastatin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Rosuvastatin"
+   ],
+   "letter": "R",
+   "page": 1,
+   "image": "data/hospital/raw/images/18.png",
+   "position": 4,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-19-01",
+   "text": "Sildenafil",
+   "name": "Sildenafil",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Sildenafil"
+   ],
+   "letter": "S",
+   "page": 1,
+   "image": "data/hospital/raw/images/19.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-19-02",
+   "text": "Sitagliptin",
+   "name": "Sitagliptin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Sitagliptin"
+   ],
+   "letter": "S",
+   "page": 1,
+   "image": "data/hospital/raw/images/19.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-20-01",
+   "text": "Ticagrelor",
+   "name": "Ticagrelor",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Ticagrelor"
+   ],
+   "letter": "T",
+   "page": 1,
+   "image": "data/hospital/raw/images/20.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-20-02",
+   "text": "Tiotropium",
+   "name": "Tiotropium",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Tiotropium"
+   ],
+   "letter": "T",
+   "page": 1,
+   "image": "data/hospital/raw/images/20.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-21-01",
+   "text": "Valsartan",
+   "name": "Valsartan",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Valsartan"
+   ],
+   "letter": "V",
+   "page": 1,
+   "image": "data/hospital/raw/images/21.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-21-02",
+   "text": "Vitamin K1 (Phytonadione)",
+   "name": "Vitamin K1 (Phytonadione)",
+   "route_hint": null,
+   "note": "Phytonadione",
+   "components": [
+    "Vitamin K1 (Phytonadione)"
+   ],
+   "letter": "V",
+   "page": 1,
+   "image": "data/hospital/raw/images/21.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-21-03",
+   "text": "Vitamin K2 (Menatetrenone)",
+   "name": "Vitamin K2 (Menatetrenone)",
+   "route_hint": null,
+   "note": "Menatetrenone",
+   "components": [
+    "Vitamin K2 (Menatetrenone)"
+   ],
+   "letter": "V",
+   "page": 1,
+   "image": "data/hospital/raw/images/21.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-22-01",
+   "text": "Warfarin",
+   "name": "Warfarin",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Warfarin"
+   ],
+   "letter": "W",
+   "page": 1,
+   "image": "data/hospital/raw/images/22.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-23-01",
+   "text": "Xanh methylen",
+   "name": "Xanh methylen",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Xanh methylen"
+   ],
+   "letter": "X",
+   "page": 1,
+   "image": "data/hospital/raw/images/23.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-23-02",
+   "text": "Xylometazoline",
+   "name": "Xylometazoline",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Xylometazoline"
+   ],
+   "letter": "X",
+   "page": 1,
+   "image": "data/hospital/raw/images/23.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-24-01",
+   "text": "Zoledronic Acid",
+   "name": "Zoledronic Acid",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Zoledronic Acid"
+   ],
+   "letter": "Z",
+   "page": 1,
+   "image": "data/hospital/raw/images/24.png",
+   "position": 1,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-24-02",
+   "text": "Zolpidem",
+   "name": "Zolpidem",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Zolpidem"
+   ],
+   "letter": "Z",
+   "page": 1,
+   "image": "data/hospital/raw/images/24.png",
+   "position": 2,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-24-03",
+   "text": "Zopiclon",
+   "name": "Zopiclon",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Zopiclon"
+   ],
+   "letter": "Z",
+   "page": 1,
+   "image": "data/hospital/raw/images/24.png",
+   "position": 3,
+   "duplicate_of": null
+  },
+  {
+   "id": "HL-24-04",
+   "text": "Zopiclon",
+   "name": "Zopiclon",
+   "route_hint": null,
+   "note": null,
+   "components": [
+    "Zopiclon"
+   ],
+   "letter": "Z",
+   "page": 1,
+   "image": "data/hospital/raw/images/24.png",
+   "position": 4,
+   "duplicate_of": "HL-24-03"
+  }
+ ]
+}

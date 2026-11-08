@@ -147,6 +147,7 @@ class Corpus:
                 if a.get('verified') is True and str(a.get('source_url','')).startswith('https://') and normalize(a.get('ingredient','')) in self.names:
                     self.aliases[normalize(a['brand'])]=normalize(a['ingredient'])
                     self.alias_sources[normalize(a['brand'])]=a
+        self.load_hospital_list()
         self.source_fingerprint=hashlib.sha256((self.data/'rag_current.jsonl').read_bytes()).hexdigest()
         self.fingerprint=effective_fingerprint(self.chunks)
         # TF-IDF sparse vectors support local ranked evidence retrieval without an external API.
@@ -156,6 +157,89 @@ class Corpus:
         self.vectors=[self.vector(x) for x in self.counts]
         self.semantic_path=self.data/'embeddings.sqlite'
         self._state_key=secrets.token_bytes(32)
+
+    def load_hospital_list(self):
+        """Hospital public drug list (website "Danh sách thuốc", data/hospital/). Every entry is
+        kept. Only deterministic matches (exact / spelling / salt / combination, see
+        tools/match_hospital_list.py) let the hospital spelling find a TT20 row, and the answer
+        says which spelling was converted. Presence on the list is shown; absence means nothing."""
+        self.hospital={};self.hospital_aliases={};self.hospital_combos=[];self.hospital_other={}
+        f=self.data/'hospital'/'hospital_tt20_match.json'
+        if not f.exists():return
+        doc=json.loads(f.read_text(encoding='utf-8'));usable=set(doc.get('usable_levels',()))
+        for r in doc.get('results',[]):
+            if r.get('duplicate_of'):continue
+            keys=[t['key'] for t in r.get('tt20',[]) if t.get('key') in self.names]
+            if r.get('level') in usable and len(keys)==1:
+                key=keys[0];self.hospital.setdefault(key,[]).append(r)
+                if r['kind']=='combination':
+                    parts=[normalize(p) for p in re.split(r'\s*/\s*',r['name']) if normalize(p)]
+                    if len(parts)>=2:self.hospital_combos.append((parts,key,r))
+                    continue
+                alias=normalize(r['name'])
+                # Only a spelling the catalogue cannot already resolve ("Paracetamol" already
+                # finds "Paracetamol (acetaminophen)" through the printed synonym).
+                if r['level']!='exact' and alias and alias!=key and alias not in self.names and alias not in self.aliases and alias not in self.source_names:
+                    self.aliases[alias]=key;self.hospital_aliases[alias]=(key,r)
+            else:
+                self.hospital_other[normalize(r['name'])]=r
+
+    def hospital_combo_matches(self,message):
+        """"Amoxicillin/ Clavulanic Acid" as printed on the hospital list: parts joined by
+        "+", "/", "&" or "phối hợp" (any order), the same guard as a listed combination."""
+        plus=normalize_keep_plus(message);found=[]
+        joiner=r'\s*(?:\+|/|&|phoi hop|ket hop)\s*'
+        for parts,key,_ in self.hospital_combos:
+            for order in itertools.permutations(parts):
+                if re.search(r'(?<![a-z0-9])'+joiner.join(re.escape(p) for p in order)+r'(?![a-z0-9])',plus):
+                    found.append(key);break
+        return found
+
+    def hospital_notes(self,message,result):
+        """Notes about the hospital list for the recognised medicines, and for names the list
+        has but TT20 does not (product names, other spellings, unlisted ingredients)."""
+        q=' '+normalize(message)+' ';notes=[];seen=set()
+        tail=' Danh sách này chỉ ghi tên hoạt chất (không có biệt dược, hàm lượng, số đăng ký) nên không xác nhận thuốc đang được cung ứng hay được BHYT thanh toán.'
+        combo_hits=self.hospital_combo_matches(message)
+        for res in result.get('results') or []:
+            key=normalize(res.get('ingredient',''))
+            entries=self.hospital.get(key)
+            if not entries or key in seen:continue
+            seen.add(key)
+            text='Danh sách thuốc công khai trên website Vinmec có: '+', '.join('“'+e['text']+'”' for e in entries)+'.'
+            for alias,(k,e) in self.hospital_aliases.items():
+                if k==key and ' '+alias+' ' in q:
+                    text+=f' Đã quy đổi cách viết “{e["name"]}” → “{res["ingredient"]}” (tên trong TT20) theo quy tắc chính tả cố định, không theo tên gần giống.'
+            for parts,k,e in self.hospital_combos:
+                if k==key and key in combo_hits:
+                    text+=f' Đã đối chiếu “{e["name"]}” với dòng phối hợp “{res["ingredient"]}” trong TT20.';break
+            for e in entries:
+                if e.get('route_hint_in_tt20') is False:
+                    routes=', '.join(r2 for t in e['tt20'] for r2 in t['routes'])
+                    text+=f' Lưu ý: danh sách bệnh viện ghi đường “{e["route_hint"]}”, còn dòng TT20 chỉ có: {routes}.'
+            notes.append(text+tail)
+        names=sorted((k for k in self.hospital_other if ' '+k+' ' in q),key=len,reverse=True)
+        for k in names:
+            if any(' '+k+' ' in ' '+other+' ' for other in names if other!=k):continue   # "Neopeptin" inside "Neopeptin syrup"
+            e=self.hospital_other[k];tt=[t['ingredient'] for t in e.get('tt20',[])]
+            if e['kind']=='product_name':
+                text=f'“{e["text"]}” có trong danh sách thuốc công khai trên website Vinmec nhưng là tên sản phẩm; bộ nguồn chưa có ánh xạ sản phẩm → hoạt chất đã kiểm chứng nên chưa tra được BHYT. Hãy nhập tên hoạt chất.'
+                if tt:text+=' Dòng TT20 có in tên này (cần Dược xác nhận đúng sản phẩm): '+', '.join(tt)+'.'
+            elif e['level']=='parts':
+                found=[t for p in e.get('parts',[]) for t in p['tt20']]
+                text=f'“{e["text"]}” có trong danh sách thuốc công khai trên website Vinmec; TT20 không có dòng phối hợp này.'+(' Thành phần thấy riêng trong TT20: '+', '.join(found)+'.' if found else '')
+            elif e['level'] in ('review','ambiguous'):
+                text=f'“{e["text"]}” có trong danh sách thuốc công khai trên website Vinmec nhưng không khớp chắc một tên trong TT20.'+(' Tên gần nhất (chỉ là gợi ý, cần Dược xác nhận): '+', '.join(tt)+'.' if tt else '')
+            else:
+                text=f'“{e["text"]}” có trong danh sách thuốc công khai trên website Vinmec, nhưng không tìm thấy tên hoạt chất này trong Phụ lục I/II TT20 của bộ nguồn (đã thử cách viết tiếng Việt).'
+            notes.append(text+' Không tìm thấy trong TT20 ở đây chưa đủ để kết luận thuốc không được BHYT thanh toán; cần Dược/BHYT kiểm tra.')
+        return notes
+
+    def with_hospital(self,message,result):
+        if isinstance(message,str) and not private_input(message):
+            notes=self.hospital_notes(message,result)
+            if notes:result["hospital_notes"]=notes
+        return result
 
     @staticmethod
     def allowed(c):
@@ -224,7 +308,7 @@ class Corpus:
 
     def resolve(self, message):
         q=' '+normalize(message)+' '
-        direct=[k for k in self.names if self.name_present(k,message,q)]+self.combo_matches(message)
+        direct=[k for k in self.names if self.name_present(k,message,q)]+self.combo_matches(message)+self.hospital_combo_matches(message)
         hits=list(direct)
         hits.extend(self.aliases[k] for k in self.aliases if ' '+k+' ' in q)
         for short,keys in self.source_names.items():
@@ -520,7 +604,7 @@ class Corpus:
                 suggested+=[self.names[k][0]["ingredient"] for t in unrecognized
                             for k in difflib.get_close_matches(normalize(t),self.names.keys(),n=3,cutoff=.85)]
                 suggested=list(dict.fromkeys(suggested))[:6]
-                return self.finalize_status(answerer.enrich(self.unrecognized_result(unrecognized,suggested=suggested),message,state))
+                return self.finalize_status(self.with_hospital(message,answerer.enrich(self.unrecognized_result(unrecognized,suggested=suggested),message,state)))
             if hits and prev_names and q.startswith(("thuoc nay ","thuoc do ")):
                 # "Thuốc này dùng phối hợp với docetaxel được không": keep the medicine under discussion too.
                 lookup_message=" ".join(n for n in prev_names if n not in {g[0]["ingredient"] for g in hits})+" "+lookup_message
@@ -544,7 +628,7 @@ class Corpus:
         if valid and result.get("results"):
             notices+=self.combination_notices(message,result)
         if notices:result["notice"]=" ".join([result.get("notice","")]+notices).strip()
-        return self.finalize_status(result)
+        return self.finalize_status(self.with_hospital(message,result))
 
     def confirm_fact(self,message,state,as_of,confirm,answerer):
         """A confirmation button: record one fact for the medicine under discussion and answer again.
@@ -637,6 +721,9 @@ class Corpus:
         for g in hits:
             for r in g:
                 covered.update(normalize(r["ingredient"]).split())
+            # The hospital spelling of a recognised medicine ("Amoxicillin/ Clavulanic Acid").
+            for e in self.hospital.get(normalize(g[0]["ingredient"]),[]):
+                covered.update(normalize(e["name"]).split())
         for t in re.findall(r"[^\s,.;:!?()\[\]\"'“”‘’]+",message):
             t=t.strip("-+/")
             lw=t.lower();nt=normalize(t)

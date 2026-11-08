@@ -1,0 +1,4818 @@
+{
+ "version": 2,
+ "source_list": "data/hospital/hospital_drug_list.json",
+ "usable_levels": [
+  "exact",
+  "spelling",
+  "salt",
+  "combination"
+ ],
+ "method": "tools/match_hospital_list.py (quy tắc chính tả cố định; 'review' chỉ là gợi ý cần Dược xem, không tự áp dụng)",
+ "summary": {
+  "entries": 192,
+  "unique": 188,
+  "by_level": {
+   "review": 9,
+   "exact": 80,
+   "spelling": 55,
+   "ambiguous": 1,
+   "parts": 3,
+   "none": 24,
+   "salt": 10,
+   "combination": 6
+  },
+  "by_kind": {
+   "ingredient": 163,
+   "combination": 10,
+   "product_name": 15
+  },
+  "usable": 151,
+  "with_conditions": 34,
+  "route_hint_not_in_tt20": [
+   "Alpha Chymotrypsine (Tiêm)",
+   "Glyceryl Trinitrate (Uống)"
+  ]
+ },
+ "results": [
+  {
+   "id": "HL-01-01",
+   "text": "Abobotulinum Toxin A",
+   "name": "Abobotulinum Toxin A",
+   "kind": "ingredient",
+   "level": "review",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "botulinum toxin",
+     "ingredient": "Botulinum toxin",
+     "stt": 816,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0816-R970"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-02",
+   "text": "Abobotulinum Toxin A",
+   "name": "Abobotulinum Toxin A",
+   "kind": "ingredient",
+   "level": "review",
+   "usable": false,
+   "duplicate_of": "HL-01-01",
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "botulinum toxin",
+     "ingredient": "Botulinum toxin",
+     "stt": 816,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0816-R970"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-03",
+   "text": "Acarbose",
+   "name": "Acarbose",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "acarbose",
+     "ingredient": "Acarbose",
+     "stt": 777,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0777-R926"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-04",
+   "text": "Acenocoumarol",
+   "name": "Acenocoumarol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "acenocoumarol",
+     "ingredient": "Acenocoumarol",
+     "stt": 558,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0558-R667"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-05",
+   "text": "Acetazolamide",
+   "name": "Acetazolamide",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "acetazolamid",
+     "ingredient": "Acetazolamid",
+     "stt": 824,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0824-R981",
+      "TT20-PLI-0824-R982"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-06",
+   "text": "Acetyl-Dl-Leucine",
+   "name": "Acetyl-Dl-Leucine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "acetyl leucin",
+     "ingredient": "Acetyl leucin",
+     "stt": 939,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0939-R1116",
+      "TT20-PLI-0939-R1117"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-07",
+   "text": "Acetylcysteine",
+   "name": "Acetylcysteine",
+   "kind": "ingredient",
+   "level": "ambiguous",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "acetylcystein",
+     "ingredient": "Acetylcystein",
+     "stt": 114,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0114-R136"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    },
+    {
+     "key": "n acetylcystein",
+     "ingredient": "N-acetylcystein",
+     "stt": 977,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0977-R1165"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-08",
+   "text": "Acid Folic",
+   "name": "Acid Folic",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "acid folic vitamin b9",
+     "ingredient": "Acid folic (vitamin B9)",
+     "stt": 442,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0442-R528",
+      "TT20-PLI-0442-R529"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-09",
+   "text": "Acid Thioctic",
+   "name": "Acid Thioctic",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "acid thioctic meglumin thioctat",
+     "ingredient": "Acid thioctic (Meglumin thioctat)",
+     "stt": 907,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0907-R1077"
+     ],
+     "routes": [
+      "Uống, tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-10",
+   "text": "Acid Ursodeoxycholic",
+   "name": "Acid Ursodeoxycholic",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "ursodeoxycholic acid",
+     "ingredient": "Ursodeoxycholic acid",
+     "stt": 744,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0744-R882"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-11",
+   "text": "Acyclovir (Tra mắt)",
+   "name": "Acyclovir",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Tra mắt",
+   "tt20": [
+    {
+     "key": "aciclovir",
+     "ingredient": "Aciclovir",
+     "stt": 280,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0280-R339",
+      "TT20-PLI-0280-R340"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống, tra mắt, dùng ngoài"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-01-12",
+   "text": "Acyclovir (Uống)",
+   "name": "Acyclovir",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Uống",
+   "tt20": [
+    {
+     "key": "aciclovir",
+     "ingredient": "Aciclovir",
+     "stt": 280,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0280-R339",
+      "TT20-PLI-0280-R340"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống, tra mắt, dùng ngoài"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-01-13",
+   "text": "Adalimumab",
+   "name": "Adalimumab",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "adalimumab",
+     "ingredient": "Adalimumab",
+     "stt": 81,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0081-R99"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-14",
+   "text": "Adapalene",
+   "name": "Adapalene",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "adapalen",
+     "ingredient": "Adapalen",
+     "stt": 599,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0599-R711"
+     ],
+     "routes": [
+      "Dùng ngoài"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-15",
+   "text": "Adapalene/ Clindamycin",
+   "name": "Adapalene/ Clindamycin",
+   "kind": "combination",
+   "level": "parts",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null,
+   "parts": [
+    {
+     "component": "Adapalene",
+     "level": "spelling",
+     "tt20": [
+      "Adapalen"
+     ]
+    },
+    {
+     "component": "Clindamycin",
+     "level": "exact",
+     "tt20": [
+      "Clindamycin"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "HL-01-16",
+   "text": "Adenosine",
+   "name": "Adenosine",
+   "kind": "ingredient",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-17",
+   "text": "Adrenaline",
+   "name": "Adrenaline",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "epinephrin adrenalin",
+     "ingredient": "Epinephrin (adrenalin)",
+     "stt": 105,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0105-R125"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-18",
+   "text": "Afatinib",
+   "name": "Afatinib",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "afatinib dimaleate",
+     "ingredient": "Afatinib dimaleate",
+     "stt": 391,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0391-R470"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-19",
+   "text": "Albendazole",
+   "name": "Albendazole",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "albendazol",
+     "ingredient": "Albendazol",
+     "stt": 160,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0160-R189"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-20",
+   "text": "Albumin",
+   "name": "Albumin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "albumin",
+     "ingredient": "Albumin",
+     "stt": 463,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0463-R554"
+     ],
+     "routes": [
+      "Tiêm truyền"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-21",
+   "text": "Alendronate",
+   "name": "Alendronate",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "alendronat",
+     "ingredient": "Alendronat",
+     "stt": 82,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0082-R100"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-22",
+   "text": "Alendronate",
+   "name": "Alendronate",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": "HL-01-21",
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "alendronat",
+     "ingredient": "Alendronat",
+     "stt": 82,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0082-R100"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-23",
+   "text": "Alfuzosin",
+   "name": "Alfuzosin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "alfuzosin",
+     "ingredient": "Alfuzosin",
+     "stt": 427,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0427-R510"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-01-24",
+   "text": "Alimemazine",
+   "name": "Alimemazine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "alimemazin",
+     "ingredient": "Alimemazin",
+     "stt": 94,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0094-R113"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-01",
+   "text": "Allopurinol",
+   "name": "Allopurinol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "allopurinol",
+     "ingredient": "Allopurinol",
+     "stt": 76,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0076-R92"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-02",
+   "text": "Alpha Chymotrypsine (Tiêm)",
+   "name": "Alpha Chymotrypsine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Tiêm",
+   "tt20": [
+    {
+     "key": "alpha chymotrypsin",
+     "ingredient": "Alpha chymotrypsin",
+     "stt": 84,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0084-R102"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": false
+  },
+  {
+   "id": "HL-02-03",
+   "text": "Alpha Chymotrypsine (Uống)",
+   "name": "Alpha Chymotrypsine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Uống",
+   "tt20": [
+    {
+     "key": "alpha chymotrypsin",
+     "ingredient": "Alpha chymotrypsin",
+     "stt": 84,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0084-R102"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-02-04",
+   "text": "Alprostadil",
+   "name": "Alprostadil",
+   "kind": "ingredient",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-05",
+   "text": "Alteplase",
+   "name": "Alteplase",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "alteplase",
+     "ingredient": "Alteplase",
+     "stt": 561,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0561-R670"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-06",
+   "text": "Alverine",
+   "name": "Alverine",
+   "kind": "ingredient",
+   "level": "salt",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "alverin citrat",
+     "ingredient": "Alverin citrat",
+     "stt": 696,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0696-R826"
+     ],
+     "routes": [
+      "Tiêm, uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-07",
+   "text": "Alverine/ Simethicone",
+   "name": "Alverine/ Simethicone",
+   "kind": "combination",
+   "level": "combination",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "alverin citrat simethicon",
+     "ingredient": "Alverin citrat + simethicon",
+     "stt": 697,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0697-R827"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-08",
+   "text": "Alvesin",
+   "name": "Alvesin",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-09",
+   "text": "Ambroxol",
+   "name": "Ambroxol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "ambroxol",
+     "ingredient": "Ambroxol",
+     "stt": 968,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0968-R1156"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-10",
+   "text": "Amikacin",
+   "name": "Amikacin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "amikacin",
+     "ingredient": "Amikacin",
+     "stt": 212,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0212-R247",
+      "TT20-PLI-0327-R397"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-11",
+   "text": "Aminophyllin",
+   "name": "Aminophyllin",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "aminophylin",
+     "ingredient": "Aminophylin",
+     "stt": 951,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0951-R1135"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-12",
+   "text": "Aminosteril N-Hepa 8%",
+   "name": "Aminosteril N-Hepa 8%",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-13",
+   "text": "Amiodarone",
+   "name": "Amiodarone",
+   "kind": "ingredient",
+   "level": "salt",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "amiodaron hydroclorid",
+     "ingredient": "Amiodaron hydroclorid",
+     "stt": 494,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0494-R593",
+      "TT20-PLI-0494-R594"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-14",
+   "text": "Amlodipine",
+   "name": "Amlodipine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "amlodipin",
+     "ingredient": "Amlodipin",
+     "stt": 500,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0500-R603"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-15",
+   "text": "Amoxicillin/ Clavulanic Acid (tiêm)",
+   "name": "Amoxicillin/ Clavulanic Acid",
+   "kind": "combination",
+   "level": "combination",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "tiêm",
+   "tt20": [
+    {
+     "key": "amoxicilin acid clavulanic",
+     "ingredient": "Amoxicilin + acid clavulanic",
+     "stt": 169,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0169-R200",
+      "TT20-PLI-0169-R201"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-02-16",
+   "text": "Amphotericin B lipid complex",
+   "name": "Amphotericin B lipid complex",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "amphotericin b",
+     "ingredient": "Amphotericin B*",
+     "stt": 288,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0288-R350",
+      "TT20-PLI-0288-R351"
+     ],
+     "routes": [
+      "Phức hợp lipid",
+      "Tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-17",
+   "text": "Anastrozole",
+   "name": "Anastrozole",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "anastrozol",
+     "ingredient": "Anastrozol",
+     "stt": 404,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0404-R484"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-18",
+   "text": "Atorvastatin",
+   "name": "Atorvastatin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "atorvastatin",
+     "ingredient": "Atorvastatin",
+     "stt": 573,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0573-R683"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-19",
+   "text": "Atosiban",
+   "name": "Atosiban",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "atosiban",
+     "ingredient": "Atosiban",
+     "stt": 892,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0892-R1056"
+     ],
+     "routes": [
+      "Tiêm truyền"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-02-20",
+   "text": "Azithromycin (Uống)",
+   "name": "Azithromycin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Uống",
+   "tt20": [
+    {
+     "key": "azithromycin",
+     "ingredient": "Azithromycin",
+     "stt": 226,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0226-R270",
+      "TT20-PLI-0226-R271"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-03-01",
+   "text": "Bambuterol",
+   "name": "Bambuterol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "bambuterol",
+     "ingredient": "Bambuterol",
+     "stt": 952,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0952-R1136"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-03-02",
+   "text": "Bernevit",
+   "name": "Bernevit",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-03-03",
+   "text": "Betahistin",
+   "name": "Betahistin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "betahistin",
+     "ingredient": "Betahistin",
+     "stt": 872,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0872-R1032"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-03-04",
+   "text": "Bevacizumab",
+   "name": "Bevacizumab",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "bevacizumab",
+     "ingredient": "Bevacizumab",
+     "stt": 392,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0392-R471"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-03-05",
+   "text": "Bisoprolol",
+   "name": "Bisoprolol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "bisoprolol",
+     "ingredient": "Bisoprolol",
+     "stt": 511,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0511-R614"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-03-06",
+   "text": "Broncho Vacxom",
+   "name": "Broncho Vacxom",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-03-07",
+   "text": "Budesonide (Khí dung)",
+   "name": "Budesonide",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Khí dung",
+   "tt20": [
+    {
+     "key": "budesonid",
+     "ingredient": "Budesonid",
+     "stt": 953,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0953-R1137",
+      "TT20-PLI-0953-R1138"
+     ],
+     "routes": [
+      "Xịt mũi, xịt họng",
+      "Đường hô hấp"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-04-01",
+   "text": "Capecitabine",
+   "name": "Capecitabine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "capecitabin",
+     "ingredient": "Capecitabin",
+     "stt": 351,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0351-R429"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-04-02",
+   "text": "Carvedilol",
+   "name": "Carvedilol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "carvedilol",
+     "ingredient": "Carvedilol",
+     "stt": 517,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0517-R620",
+      "TT20-PLI-0552-R659"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-04-03",
+   "text": "Caspofungin",
+   "name": "Caspofungin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "caspofungin",
+     "ingredient": "Caspofungin*",
+     "stt": 291,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0291-R354"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-04-04",
+   "text": "Ceftriaxone",
+   "name": "Ceftriaxone",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "ceftriaxon",
+     "ingredient": "Ceftriaxon",
+     "stt": 198,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0198-R231"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-04-05",
+   "text": "Celecoxib",
+   "name": "Celecoxib",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "celecoxib",
+     "ingredient": "Celecoxib",
+     "stt": 35,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0035-R43"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-04-06",
+   "text": "Cerebrolysin",
+   "name": "Cerebrolysin",
+   "kind": "product_name",
+   "level": "review",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "peptid cerebrolysin concentrate",
+     "ingredient": "Peptid (Cerebrolysin concentrate)",
+     "stt": 940,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0940-R1118"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-04-07",
+   "text": "Cilostazol",
+   "name": "Cilostazol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "cilostazol",
+     "ingredient": "Cilostazol",
+     "stt": 453,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0453-R542"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-04-08",
+   "text": "Clopidogrel",
+   "name": "Clopidogrel",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "clopidogrel",
+     "ingredient": "Clopidogrel",
+     "stt": 563,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0563-R672"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-04-09",
+   "text": "Clotrimazole",
+   "name": "Clotrimazole",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "clotrimazol",
+     "ingredient": "Clotrimazol",
+     "stt": 293,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0293-R356",
+      "TT20-PLI-0609-R721"
+     ],
+     "routes": [
+      "Dùng ngoài",
+      "Đặt âm đạo"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-04-10",
+   "text": "Colchicine",
+   "name": "Colchicine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "colchicin",
+     "ingredient": "Colchicin",
+     "stt": 77,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0077-R93"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-05-01",
+   "text": "Dabigatran",
+   "name": "Dabigatran",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "dabigatran",
+     "ingredient": "Dabigatran",
+     "stt": 564,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0564-R673"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-05-02",
+   "text": "Dapagliflozin",
+   "name": "Dapagliflozin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "dapagliflozin",
+     "ingredient": "Dapagliflozin",
+     "stt": 778,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0778-R927"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-05-03",
+   "text": "Desloratadine",
+   "name": "Desloratadine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "desloratadin",
+     "ingredient": "Desloratadin",
+     "stt": 101,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0101-R120"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-05-04",
+   "text": "Diacerein",
+   "name": "Diacerein",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "diacerein",
+     "ingredient": "Diacerein",
+     "stt": 79,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0079-R96"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-05-05",
+   "text": "Diclofenac (Tiêm)",
+   "name": "Diclofenac",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Tiêm",
+   "tt20": [
+    {
+     "key": "diclofenac",
+     "ingredient": "Diclofenac",
+     "stt": 37,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0037-R45",
+      "TT20-PLI-0037-R46"
+     ],
+     "routes": [
+      "Tiêm, nhỏ mắt",
+      "Uống, dùng ngoài, đặt hậu môn"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-05-06",
+   "text": "Diphenhydramine",
+   "name": "Diphenhydramine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "diphenhydramin",
+     "ingredient": "Diphenhydramin",
+     "stt": 103,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0103-R123"
+     ],
+     "routes": [
+      "Tiêm, uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-06-01",
+   "text": "Enoxaparin",
+   "name": "Enoxaparin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "enoxaparin natri",
+     "ingredient": "Enoxaparin (natri)",
+     "stt": 454,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0454-R543"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-06-02",
+   "text": "Entecavir",
+   "name": "Entecavir",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "entecavir",
+     "ingredient": "Entecavir",
+     "stt": 281,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0281-R341"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-06-03",
+   "text": "Ertapenem",
+   "name": "Ertapenem",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "ertapenem",
+     "ingredient": "Ertapenem*",
+     "stt": 202,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0202-R236"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-06-04",
+   "text": "Esomeprazole",
+   "name": "Esomeprazole",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "esomeprazol",
+     "ingredient": "Esomeprazol",
+     "stt": 683,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0683-R806",
+      "TT20-PLI-0683-R807"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-06-05",
+   "text": "Etoricoxib",
+   "name": "Etoricoxib",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "etoricoxib",
+     "ingredient": "Etoricoxib",
+     "stt": 39,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0039-R48"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-06-06",
+   "text": "Ezetimibe",
+   "name": "Ezetimibe",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "ezetimibe",
+     "ingredient": "Ezetimibe",
+     "stt": 577,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0577-R687"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-07-01",
+   "text": "Febuxostat",
+   "name": "Febuxostat",
+   "kind": "ingredient",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-07-02",
+   "text": "Felodipine",
+   "name": "Felodipine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "felodipin",
+     "ingredient": "Felodipin",
+     "stt": 523,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0523-R627"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-07-03",
+   "text": "Fenofibrate",
+   "name": "Fenofibrate",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "fenofibrat",
+     "ingredient": "Fenofibrat",
+     "stt": 578,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0578-R688"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-07-04",
+   "text": "Fentanyl (Miếng dán)",
+   "name": "Fentanyl",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Miếng dán",
+   "tt20": [
+    {
+     "key": "fentanyl",
+     "ingredient": "Fentanyl",
+     "stt": 7,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0007-R11",
+      "TT20-PLI-0040-R49"
+     ],
+     "routes": [
+      "Dán ngoài da",
+      "Tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-07-05",
+   "text": "Fexofenadin",
+   "name": "Fexofenadin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "fexofenadin",
+     "ingredient": "Fexofenadin",
+     "stt": 106,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0106-R126"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-07-06",
+   "text": "Fleet Enema",
+   "name": "Fleet Enema",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-07-07",
+   "text": "Fluconazole",
+   "name": "Fluconazole",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "fluconazol",
+     "ingredient": "Fluconazol",
+     "stt": 296,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0296-R359",
+      "TT20-PLI-0296-R360"
+     ],
+     "routes": [
+      "Tiêm truyền, nhỏ mắt",
+      "Uống, đặt âm đạo"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-07-08",
+   "text": "Fluconazole",
+   "name": "Fluconazole",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": "HL-07-07",
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "fluconazol",
+     "ingredient": "Fluconazol",
+     "stt": 296,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0296-R359",
+      "TT20-PLI-0296-R360"
+     ],
+     "routes": [
+      "Tiêm truyền, nhỏ mắt",
+      "Uống, đặt âm đạo"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-08-01",
+   "text": "Gabapentin",
+   "name": "Gabapentin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "gabapentin",
+     "ingredient": "Gabapentin",
+     "stt": 149,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0149-R173"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-08-02",
+   "text": "Ganciclovir",
+   "name": "Ganciclovir",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "gancyclovir",
+     "ingredient": "Gancyclovir*",
+     "stt": 282,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0282-R342"
+     ],
+     "routes": [
+      "Tiêm, uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-08-03",
+   "text": "Gaviscon",
+   "name": "Gaviscon",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-08-04",
+   "text": "Gliclazide",
+   "name": "Gliclazide",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "gliclazid",
+     "ingredient": "Gliclazid",
+     "stt": 781,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0781-R930"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-08-05",
+   "text": "Glyceryl Trinitrate (Uống)",
+   "name": "Glyceryl Trinitrate",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Uống",
+   "tt20": [
+    {
+     "key": "glyceryl trinitrat nitroglycerin",
+     "ingredient": "Glyceryl trinitrat (Nitroglycerin)",
+     "stt": 489,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0489-R584",
+      "TT20-PLI-0489-R585"
+     ],
+     "routes": [
+      "Tiêm, phun mù, dán ngoài da",
+      "Đặt dưới lưỡi"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": false
+  },
+  {
+   "id": "HL-08-06",
+   "text": "Goserelin",
+   "name": "Goserelin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "goserelin acetat",
+     "ingredient": "Goserelin acetat",
+     "stt": 410,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0410-R490"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-09-01",
+   "text": "Haloperidol",
+   "name": "Haloperidol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "haloperidol",
+     "ingredient": "Haloperidol",
+     "stt": 916,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0916-R1087",
+      "TT20-PLI-0916-R1088",
+      "TT20-PLI-0916-R1089"
+     ],
+     "routes": [
+      "Tiêm (dạng dung dịch tiêm)",
+      "Tiêm (dạng dầu tiêm)",
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-09-02",
+   "text": "Hydroxychloroquine",
+   "name": "Hydroxychloroquine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "hydroxy cloroquin",
+     "ingredient": "Hydroxy cloroquin",
+     "stt": 316,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0316-R383"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-09-03",
+   "text": "Hyoscin-N-Butylbromide",
+   "name": "Hyoscin-N-Butylbromide",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "hyoscin butylbromid",
+     "ingredient": "Hyoscin butylbromid",
+     "stt": 700,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0700-R831",
+      "TT20-PLI-0700-R832"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-10-01",
+   "text": "Ibuprofen",
+   "name": "Ibuprofen",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "ibuprofen",
+     "ingredient": "Ibuprofen",
+     "stt": 43,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0043-R52"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-10-02",
+   "text": "Indapamide",
+   "name": "Indapamide",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "indapamid",
+     "ingredient": "Indapamid",
+     "stt": 527,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0527-R631"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-10-03",
+   "text": "Irbesartan",
+   "name": "Irbesartan",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "irbesartan",
+     "ingredient": "Irbesartan",
+     "stt": 528,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0528-R632"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-10-04",
+   "text": "Ivabradine",
+   "name": "Ivabradine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "ivabradin",
+     "ingredient": "Ivabradin",
+     "stt": 556,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0556-R664"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-11-01",
+   "text": "Ketorolac (Tiêm)",
+   "name": "Ketorolac",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Tiêm",
+   "tt20": [
+    {
+     "key": "ketorolac",
+     "ingredient": "Ketorolac",
+     "stt": 46,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0046-R56"
+     ],
+     "routes": [
+      "Tiêm, uống, nhỏ mắt"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-12-01",
+   "text": "Lactulose",
+   "name": "Lactulose",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "lactulose",
+     "ingredient": "Lactulose",
+     "stt": 709,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0709-R843"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-12-02",
+   "text": "Levetiracetam",
+   "name": "Levetiracetam",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "levetiracetam",
+     "ingredient": "Levetiracetam",
+     "stt": 151,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0151-R175",
+      "TT20-PLI-0151-R176"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-12-03",
+   "text": "Levodopa/Benserazide",
+   "name": "Levodopa/Benserazide",
+   "kind": "combination",
+   "level": "combination",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "levodopa benserazid",
+     "ingredient": "Levodopa + benserazid",
+     "stt": 436,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0436-R520"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-12-04",
+   "text": "Levothyroxine",
+   "name": "Levothyroxine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "levothyroxin muoi natri",
+     "ingredient": "Levothyroxin (muối natri)",
+     "stt": 804,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0804-R954"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-12-05",
+   "text": "Linezolid",
+   "name": "Linezolid",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "linezolid",
+     "ingredient": "Linezolid*",
+     "stt": 255,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0255-R309",
+      "TT20-PLI-0255-R405"
+     ],
+     "routes": [
+      "Uống",
+      "Uống, tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-12-06",
+   "text": "Lipofundin MCT/LCT",
+   "name": "Lipofundin MCT/LCT",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-12-07",
+   "text": "Lisinopril",
+   "name": "Lisinopril",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "lisinopril",
+     "ingredient": "Lisinopril",
+     "stt": 532,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0532-R636"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-12-08",
+   "text": "Loperamide",
+   "name": "Loperamide",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "loperamid",
+     "ingredient": "Loperamid",
+     "stt": 726,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0726-R861"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-12-09",
+   "text": "Loratadine",
+   "name": "Loratadine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "loratadin",
+     "ingredient": "Loratadin",
+     "stt": 109,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0109-R130"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-12-10",
+   "text": "Losartan",
+   "name": "Losartan",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "losartan",
+     "ingredient": "Losartan",
+     "stt": 534,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0534-R638"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-01",
+   "text": "Magnesi Lactate/ Vitamin B6",
+   "name": "Magnesi Lactate/ Vitamin B6",
+   "kind": "combination",
+   "level": "combination",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "vitamin b6 magnesi lactat",
+     "ingredient": "Vitamin B6 + magnesi lactat",
+     "stt": 1029,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-1029-R1227"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-02",
+   "text": "Magnesi Sulfate",
+   "name": "Magnesi Sulfate",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "magnesi sulfat",
+     "ingredient": "Magnesi sulfat",
+     "stt": 712,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0712-R846",
+      "TT20-PLI-0994-R1186"
+     ],
+     "routes": [
+      "Tiêm truyền",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-03",
+   "text": "Magnesi Sulfate/ Saccharomyces Cerevisiae",
+   "name": "Magnesi Sulfate/ Saccharomyces Cerevisiae",
+   "kind": "combination",
+   "level": "parts",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null,
+   "parts": [
+    {
+     "component": "Magnesi Sulfate",
+     "level": "spelling",
+     "tt20": [
+      "Magnesi sulfat"
+     ]
+    },
+    {
+     "component": "Saccharomyces Cerevisiae",
+     "level": "none",
+     "tt20": []
+    }
+   ]
+  },
+  {
+   "id": "HL-13-04",
+   "text": "Mannitol",
+   "name": "Mannitol",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "manitol",
+     "ingredient": "Manitol",
+     "stt": 996,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0996-R1188"
+     ],
+     "routes": [
+      "Tiêm truyền"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-05",
+   "text": "Maxitrol",
+   "name": "Maxitrol",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-06",
+   "text": "Mebendazole",
+   "name": "Mebendazole",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mebendazol",
+     "ingredient": "Mebendazol",
+     "stt": 163,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0163-R192"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-07",
+   "text": "Mebeverine",
+   "name": "Mebeverine",
+   "kind": "ingredient",
+   "level": "salt",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mebeverin hydroclorid",
+     "ingredient": "Mebeverin hydroclorid",
+     "stt": 701,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0701-R833"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-08",
+   "text": "Meloxicam",
+   "name": "Meloxicam",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "meloxicam",
+     "ingredient": "Meloxicam",
+     "stt": 48,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0048-R58",
+      "TT20-PLI-0048-R59"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống, dùng ngoài"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-09",
+   "text": "Menotrophin",
+   "name": "Menotrophin",
+   "kind": "ingredient",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-10",
+   "text": "Mephenesin",
+   "name": "Mephenesin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mephenesin",
+     "ingredient": "Mephenesin",
+     "stt": 818,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0818-R972"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-11",
+   "text": "Mepivacaine",
+   "name": "Mepivacaine",
+   "kind": "ingredient",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-12",
+   "text": "Mercaptopurine",
+   "name": "Mercaptopurine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mercaptopurin",
+     "ingredient": "Mercaptopurin",
+     "stt": 375,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0375-R453"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-13",
+   "text": "Meropenem",
+   "name": "Meropenem",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "meropenem",
+     "ingredient": "Meropenem*",
+     "stt": 204,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0204-R238"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-14",
+   "text": "Mesalazine",
+   "name": "Mesalazine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mesalazin mesalamin",
+     "ingredient": "Mesalazin (mesalamin)",
+     "stt": 737,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0737-R874",
+      "TT20-PLI-0737-R875"
+     ],
+     "routes": [
+      "Thụt hậu môn, đặt hậu môn",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-15",
+   "text": "Mesna",
+   "name": "Mesna",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mesna",
+     "ingredient": "Mesna",
+     "stt": 376,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0376-R454"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-16",
+   "text": "Metformin",
+   "name": "Metformin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "metformin",
+     "ingredient": "Metformin",
+     "stt": 795,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0795-R944"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-17",
+   "text": "Methotrexate",
+   "name": "Methotrexate",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "methotrexat",
+     "ingredient": "Methotrexat",
+     "stt": 377,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0377-R455"
+     ],
+     "routes": [
+      "Tiêm, uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-18",
+   "text": "Methycobalamin",
+   "name": "Methycobalamin",
+   "kind": "ingredient",
+   "level": "review",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mecobalamin",
+     "ingredient": "Mecobalamin",
+     "stt": 947,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0947-R1126"
+     ],
+     "routes": [
+      "Tiêm, uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null,
+   "typo_suspect": "Methylcobalamin (= Mecobalamin)"
+  },
+  {
+   "id": "HL-13-19",
+   "text": "Methyldopa",
+   "name": "Methyldopa",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "methyldopa",
+     "ingredient": "Methyldopa",
+     "stt": 536,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0536-R640"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-20",
+   "text": "Methylergometrine Maleate",
+   "name": "Methylergometrine Maleate",
+   "kind": "ingredient",
+   "level": "salt",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "methyl ergometrin maleat",
+     "ingredient": "Methyl ergometrin maleat",
+     "stt": 888,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0888-R1050"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-21",
+   "text": "Methylprednisolone",
+   "name": "Methylprednisolone",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "methyl prednisolon",
+     "ingredient": "Methyl prednisolon",
+     "stt": 755,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0755-R899",
+      "TT20-PLI-0755-R900"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-22",
+   "text": "Metoclopramide",
+   "name": "Metoclopramide",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "metoclopramid",
+     "ingredient": "Metoclopramid",
+     "stt": 693,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0693-R820",
+      "TT20-PLI-0693-R821"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống, đặt hậu môn"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-23",
+   "text": "Metoprolol",
+   "name": "Metoprolol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "metoprolol",
+     "ingredient": "Metoprolol",
+     "stt": 537,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0537-R641"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-13-24",
+   "text": "Metronidazole (Tiêm)",
+   "name": "Metronidazole",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Tiêm",
+   "tt20": [
+    {
+     "key": "metronidazol",
+     "ingredient": "Metronidazol",
+     "stt": 221,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0221-R260",
+      "TT20-PLI-0221-R261",
+      "TT20-PLI-0317-R384",
+      "TT20-PLI-0317-R385"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống",
+      "Uống, dùng ngoài, đặt âm đạo"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-14-01",
+   "text": "Metronidazole/ Chlorhexidine",
+   "name": "Metronidazole/ Chlorhexidine",
+   "kind": "combination",
+   "level": "parts",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null,
+   "parts": [
+    {
+     "component": "Metronidazole",
+     "level": "spelling",
+     "tt20": [
+      "Metronidazol"
+     ]
+    },
+    {
+     "component": "Chlorhexidine",
+     "level": "none",
+     "tt20": []
+    }
+   ]
+  },
+  {
+   "id": "HL-14-02",
+   "text": "Metronidazole/ Spiramycin",
+   "name": "Metronidazole/ Spiramycin",
+   "kind": "combination",
+   "level": "combination",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "spiramycin metronidazol",
+     "ingredient": "Spiramycin + metronidazol",
+     "stt": 231,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0231-R276"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-03",
+   "text": "Midazolam",
+   "name": "Midazolam",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "midazolam",
+     "ingredient": "Midazolam",
+     "stt": 15,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0015-R20"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-04",
+   "text": "Mifepristone",
+   "name": "Mifepristone",
+   "kind": "ingredient",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-05",
+   "text": "Mildagliptin/Metformin",
+   "name": "Mildagliptin/Metformin",
+   "kind": "combination",
+   "level": "review",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null,
+   "parts": [
+    {
+     "component": "Mildagliptin",
+     "level": "review",
+     "tt20": [
+      "Vildagliptin"
+     ]
+    },
+    {
+     "component": "Metformin",
+     "level": "exact",
+     "tt20": [
+      "Metformin"
+     ]
+    }
+   ],
+   "typo_suspect": "Vildagliptin + Metformin"
+  },
+  {
+   "id": "HL-14-06",
+   "text": "Milrinone",
+   "name": "Milrinone",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "milrinon",
+     "ingredient": "Milrinon",
+     "stt": 557,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0557-R665"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-07",
+   "text": "Minagliptin",
+   "name": "Minagliptin",
+   "kind": "ingredient",
+   "level": "review",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "linagliptin",
+     "ingredient": "Linagliptin",
+     "stt": 792,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0792-R941"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null,
+   "typo_suspect": "Linagliptin?"
+  },
+  {
+   "id": "HL-14-08",
+   "text": "Minoxidil",
+   "name": "Minoxidil",
+   "kind": "ingredient",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-09",
+   "text": "Mirtazapine",
+   "name": "Mirtazapine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mirtazapin",
+     "ingredient": "Mirtazapin",
+     "stt": 934,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0934-R1110"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-10",
+   "text": "Misoprostol",
+   "name": "Misoprostol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "misoprostol",
+     "ingredient": "Misoprostol",
+     "stt": 891,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0891-R1053",
+      "TT20-PLI-0891-R1054"
+     ],
+     "routes": [
+      "Uống",
+      "Đặt âm đạo"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-11",
+   "text": "Mometasone (bôi)",
+   "name": "Mometasone",
+   "kind": "ingredient",
+   "level": "salt",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "bôi",
+   "tt20": [
+    {
+     "key": "mometason furoat",
+     "ingredient": "Mometason furoat",
+     "stt": 628,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0628-R740",
+      "TT20-PLI-0981-R1170"
+     ],
+     "routes": [
+      "Dùng ngoài",
+      "Xịt mũi"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-14-12",
+   "text": "Montelukast",
+   "name": "Montelukast",
+   "kind": "ingredient",
+   "level": "salt",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "natri montelukast",
+     "ingredient": "Natri montelukast",
+     "stt": 960,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0960-R1145"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-13",
+   "text": "Moriamin Forte",
+   "name": "Moriamin Forte",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-14",
+   "text": "Morihepamin",
+   "name": "Morihepamin",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-15",
+   "text": "Morphine",
+   "name": "Morphine",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "morphin",
+     "ingredient": "Morphin",
+     "stt": 16,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0016-R21",
+      "TT20-PLI-0050-R61",
+      "TT20-PLI-0050-R62"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-16",
+   "text": "Morphine Sulfate (Tiêm Tủy Sống)",
+   "name": "Morphine Sulfate",
+   "kind": "ingredient",
+   "level": "salt",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Tiêm Tủy Sống",
+   "tt20": [
+    {
+     "key": "morphin",
+     "ingredient": "Morphin",
+     "stt": 16,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0016-R21",
+      "TT20-PLI-0050-R61",
+      "TT20-PLI-0050-R62"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-14-17",
+   "text": "Moxifloxacin (Nhỏ Mắt)",
+   "name": "Moxifloxacin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Nhỏ Mắt",
+   "tt20": [
+    {
+     "key": "moxifloxacin",
+     "ingredient": "Moxifloxacin",
+     "stt": 236,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0236-R284",
+      "TT20-PLI-0236-R285",
+      "TT20-PLI-0236-R407"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống",
+      "Uống, nhỏ mắt"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-14-18",
+   "text": "Moxifloxacin (Uống, Tiêm)",
+   "name": "Moxifloxacin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Uống, Tiêm",
+   "tt20": [
+    {
+     "key": "moxifloxacin",
+     "ingredient": "Moxifloxacin",
+     "stt": 236,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0236-R284",
+      "TT20-PLI-0236-R285",
+      "TT20-PLI-0236-R407"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống",
+      "Uống, nhỏ mắt"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-14-19",
+   "text": "Moxifloxacin/ Dexamethasone",
+   "name": "Moxifloxacin/ Dexamethasone",
+   "kind": "combination",
+   "level": "combination",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "moxifloxacin dexamethason",
+     "ingredient": "Moxifloxacin + dexamethason",
+     "stt": 850,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0850-R1008"
+     ],
+     "routes": [
+      "Nhỏ mắt"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-20",
+   "text": "Mucopolysaccharide Polysulfate",
+   "name": "Mucopolysaccharide Polysulfate",
+   "kind": "ingredient",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-21",
+   "text": "Mupirocin",
+   "name": "Mupirocin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mupirocin",
+     "ingredient": "Mupirocin",
+     "stt": 630,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0630-R742"
+     ],
+     "routes": [
+      "Dùng ngoài"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-22",
+   "text": "Mycophenolate Mofetil",
+   "name": "Mycophenolate Mofetil",
+   "kind": "ingredient",
+   "level": "salt",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mycophenolat",
+     "ingredient": "Mycophenolat",
+     "stt": 422,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0422-R503"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-14-23",
+   "text": "Mytomycin C",
+   "name": "Mytomycin C",
+   "kind": "ingredient",
+   "level": "review",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "mitomycin",
+     "ingredient": "Mitomycin",
+     "stt": 378,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0378-R456"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null,
+   "typo_suspect": "Mitomycin"
+  },
+  {
+   "id": "HL-15-01",
+   "text": "Naproxen",
+   "name": "Naproxen",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "naproxen",
+     "ingredient": "Naproxen",
+     "stt": 52,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0052-R64"
+     ],
+     "routes": [
+      "Uống, đặt"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-02",
+   "text": "Natri chloride 0,45%",
+   "name": "Natri chloride 0,45%",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "natri clorid",
+     "ingredient": "Natri clorid",
+     "stt": 666,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0666-R783",
+      "TT20-PLI-0854-R1012",
+      "TT20-PLI-0997-R1189",
+      "TT20-PLI-0997-R1190"
+     ],
+     "routes": [
+      "Dùng ngoài",
+      "Nhỏ mắt, nhỏ mũi",
+      "Tiêm",
+      "Tiêm truyền"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-03",
+   "text": "Natri chloride 10%",
+   "name": "Natri chloride 10%",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "natri clorid",
+     "ingredient": "Natri clorid",
+     "stt": 666,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0666-R783",
+      "TT20-PLI-0854-R1012",
+      "TT20-PLI-0997-R1189",
+      "TT20-PLI-0997-R1190"
+     ],
+     "routes": [
+      "Dùng ngoài",
+      "Nhỏ mắt, nhỏ mũi",
+      "Tiêm",
+      "Tiêm truyền"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-04",
+   "text": "Natri Hyaluronate",
+   "name": "Natri Hyaluronate",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "natri hyaluronat",
+     "ingredient": "Natri hyaluronat",
+     "stt": 856,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0856-R1014"
+     ],
+     "routes": [
+      "Tiêm, nhỏ mắt"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-05",
+   "text": "Natri hypochloride",
+   "name": "Natri hypochloride",
+   "kind": "ingredient",
+   "level": "review",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "natri hypoclorid dam dac",
+     "ingredient": "Natri hypoclorid đậm đặc",
+     "stt": 665,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0665-R782"
+     ],
+     "routes": [
+      "Dùng ngoài"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-06",
+   "text": "Natri polystyrene sulfonate",
+   "name": "Natri polystyrene sulfonate",
+   "kind": "ingredient",
+   "level": "salt",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "polystyren",
+     "ingredient": "Polystyren",
+     "stt": 137,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0137-R159",
+      "TT20-PLI-0137-R160"
+     ],
+     "routes": [
+      "Thụt hậu môn",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-07",
+   "text": "Natri sulphacetamide",
+   "name": "Natri sulphacetamide",
+   "kind": "ingredient",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-08",
+   "text": "Neoamyu",
+   "name": "Neoamyu",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-09",
+   "text": "Neopeptin",
+   "name": "Neopeptin",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-10",
+   "text": "Neopeptin syrup",
+   "name": "Neopeptin syrup",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-11",
+   "text": "Nepafenac",
+   "name": "Nepafenac",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "nepafenac",
+     "ingredient": "Nepafenac",
+     "stt": 857,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0857-R1015"
+     ],
+     "routes": [
+      "Nhỏ mắt"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-12",
+   "text": "Nepidermin (rhEGF)",
+   "name": "Nepidermin (rhEGF)",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "nepidermin",
+     "ingredient": "Nepidermin",
+     "stt": 632,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0632-R744"
+     ],
+     "routes": [
+      "Xịt ngoài da"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-15-13",
+   "text": "Neuroaid",
+   "name": "Neuroaid",
+   "kind": "product_name",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-16-01",
+   "text": "Ondansetron",
+   "name": "Ondansetron",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "ondansetron",
+     "ingredient": "Ondansetron",
+     "stt": 694,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0694-R822",
+      "TT20-PLI-0694-R823"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-16-02",
+   "text": "Oseltamivir",
+   "name": "Oseltamivir",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "oseltamivir",
+     "ingredient": "Oseltamivir",
+     "stt": 283,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0283-R343"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-16-03",
+   "text": "Oxycodone",
+   "name": "Oxycodone",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "oxycodone",
+     "ingredient": "Oxycodone",
+     "stt": 55,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0055-R67"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-17-01",
+   "text": "Pantoprazole",
+   "name": "Pantoprazole",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "pantoprazol",
+     "ingredient": "Pantoprazol",
+     "stt": 684,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0684-R808"
+     ],
+     "routes": [
+      "Tiêm, uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-17-02",
+   "text": "Paracetamol",
+   "name": "Paracetamol",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "paracetamol acetaminophen",
+     "ingredient": "Paracetamol (acetaminophen)",
+     "stt": 56,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0056-R68",
+      "TT20-PLI-0056-R69"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống, đặt"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-17-03",
+   "text": "Perindorpil",
+   "name": "Perindorpil",
+   "kind": "ingredient",
+   "level": "review",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "perindopril",
+     "ingredient": "Perindopril",
+     "stt": 541,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0541-R645"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null,
+   "typo_suspect": "Perindopril"
+  },
+  {
+   "id": "HL-17-04",
+   "text": "Piracetam (Tiêm)",
+   "name": "Piracetam",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": "Tiêm",
+   "tt20": [
+    {
+     "key": "piracetam",
+     "ingredient": "Piracetam",
+     "stt": 949,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0949-R1129",
+      "TT20-PLI-0949-R1130"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": true
+  },
+  {
+   "id": "HL-17-05",
+   "text": "Pregabalin",
+   "name": "Pregabalin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "pregabalin",
+     "ingredient": "Pregabalin",
+     "stt": 155,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0155-R181"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-17-06",
+   "text": "Protamine",
+   "name": "Protamine",
+   "kind": "ingredient",
+   "level": "salt",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "protamin sulfat",
+     "ingredient": "Protamin sulfat",
+     "stt": 139,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0139-R162",
+      "TT20-PLI-0459-R548"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-18-01",
+   "text": "Rabeprazole",
+   "name": "Rabeprazole",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "rabeprazol",
+     "ingredient": "Rabeprazol",
+     "stt": 685,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0685-R809",
+      "TT20-PLI-0685-R810"
+     ],
+     "routes": [
+      "Tiêm",
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-18-02",
+   "text": "Racecadotril",
+   "name": "Racecadotril",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "racecadotril",
+     "ingredient": "Racecadotril",
+     "stt": 728,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0728-R863"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-18-03",
+   "text": "Rivaroxaban",
+   "name": "Rivaroxaban",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "rivaroxaban",
+     "ingredient": "Rivaroxaban",
+     "stt": 568,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0568-R677"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-18-04",
+   "text": "Rosuvastatin",
+   "name": "Rosuvastatin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "rosuvastatin",
+     "ingredient": "Rosuvastatin",
+     "stt": 583,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0583-R693"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-19-01",
+   "text": "Sildenafil",
+   "name": "Sildenafil",
+   "kind": "ingredient",
+   "level": "none",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-19-02",
+   "text": "Sitagliptin",
+   "name": "Sitagliptin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "sitagliptin",
+     "ingredient": "Sitagliptin",
+     "stt": 799,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0799-R948"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-20-01",
+   "text": "Ticagrelor",
+   "name": "Ticagrelor",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "ticagrelor",
+     "ingredient": "Ticagrelor",
+     "stt": 571,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0571-R680"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-20-02",
+   "text": "Tiotropium",
+   "name": "Tiotropium",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "tiotropium",
+     "ingredient": "Tiotropium",
+     "stt": 967,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0967-R1154"
+     ],
+     "routes": [
+      "Dạng hít"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-21-01",
+   "text": "Valsartan",
+   "name": "Valsartan",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "valsartan",
+     "ingredient": "Valsartan",
+     "stt": 549,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0549-R653"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-21-02",
+   "text": "Vitamin K1 (Phytonadione)",
+   "name": "Vitamin K1 (Phytonadione)",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "phytomenadion vitamin k1",
+     "ingredient": "Phytomenadion (vitamin K1)",
+     "stt": 458,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0458-R547"
+     ],
+     "routes": [
+      "Tiêm, uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-21-03",
+   "text": "Vitamin K2 (Menatetrenone)",
+   "name": "Vitamin K2 (Menatetrenone)",
+   "kind": "ingredient",
+   "level": "review",
+   "usable": false,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "vitamin k",
+     "ingredient": "Vitamin K",
+     "stt": 1036,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-1036-R1237"
+     ],
+     "routes": [
+      "Tiêm, uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-22-01",
+   "text": "Warfarin",
+   "name": "Warfarin",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "warfarin muoi natri",
+     "ingredient": "Warfarin (muối natri)",
+     "stt": 462,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0462-R552"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-23-01",
+   "text": "Xanh methylen",
+   "name": "Xanh methylen",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "xanh methylen",
+     "ingredient": "Xanh methylen",
+     "stt": 147,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0147-R170"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-23-02",
+   "text": "Xylometazoline",
+   "name": "Xylometazoline",
+   "kind": "ingredient",
+   "level": "spelling",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "xylometazolin",
+     "ingredient": "Xylometazolin",
+     "stt": 883,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0883-R1043"
+     ],
+     "routes": [
+      "Nhỏ mũi, phun mù"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-24-01",
+   "text": "Zoledronic Acid",
+   "name": "Zoledronic Acid",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "zoledronic acid",
+     "ingredient": "Zoledronic acid",
+     "stt": 93,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0093-R111"
+     ],
+     "routes": [
+      "Tiêm"
+     ],
+     "has_conditions": true
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-24-02",
+   "text": "Zolpidem",
+   "name": "Zolpidem",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "zolpidem",
+     "ingredient": "Zolpidem",
+     "stt": 905,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0905-R1074"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-24-03",
+   "text": "Zopiclon",
+   "name": "Zopiclon",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": null,
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "zopiclon",
+     "ingredient": "Zopiclon",
+     "stt": 906,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0906-R1075"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  },
+  {
+   "id": "HL-24-04",
+   "text": "Zopiclon",
+   "name": "Zopiclon",
+   "kind": "ingredient",
+   "level": "exact",
+   "usable": true,
+   "duplicate_of": "HL-24-03",
+   "route_hint": null,
+   "tt20": [
+    {
+     "key": "zopiclon",
+     "ingredient": "Zopiclon",
+     "stt": 906,
+     "appendix": "I",
+     "record_ids": [
+      "TT20-PLI-0906-R1075"
+     ],
+     "routes": [
+      "Uống"
+     ],
+     "has_conditions": false
+    }
+   ],
+   "route_hint_in_tt20": null
+  }
+ ]
+}
