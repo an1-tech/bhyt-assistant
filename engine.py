@@ -63,6 +63,10 @@ class Corpus:
                 for part in re.findall(r'\(([^)]+)\)',name):
                     if re.fullmatch(r'[A-Za-z][A-Za-z -]{3,}',part):
                         self.source_names.setdefault(normalize(part),set()).add(key)
+                # Base name without a trailing salt word ("Afatinib dimaleate" -> "afatinib").
+                base=re.sub(r'(?:\s+(?:acetat|acetate|dimaleat|dimaleate|maleat|maleate|mesylat|mesylate|besylat|besylate|tartrat|fumarat|citrat|sulfat|hydroclorid|hydrochlorid|hydrobromid|natri|kali|calci))+$','',plain or key)
+                if base and base!=key and len(base)>=5 and base not in self.names:
+                    self.source_names.setdefault(base,set()).add(key)
         self.aliases={};self.alias_sources={}
         alias_file=self.data/'aliases.json'
         if alias_file.exists():
@@ -184,9 +188,14 @@ class Corpus:
             selected.extend(c for c in self.chunks if c.get('document_id')=='TT37_2024' and c.get('article')==a)
         if oncology:
             selected.extend(c for c in self.chunks if c.get('document_id')=='CV3293_2025')
-        selected.extend(self.search(query,3,True,distinct_parents=True))
+        found=self.search(query,3,True,distinct_parents=True)
         if transition_intent(normalize(query)):
-            selected=self.transition_chunks+selected
+            selected=self.transition_chunks+selected+found
+        else:
+            # Lexical matches on common words ("nếu… thì") must not pull the transition
+            # article into a drug answer; mapped drugs add it explicitly in chat().
+            transition_ids={c["id"] for c in self.transition_chunks}
+            selected+=[c for c in found if c["id"] not in transition_ids]
         return self.complete_context(selected)
 
     def complete_context(self, seeds):
@@ -294,20 +303,43 @@ class Corpus:
         from indication_chat import IndicationChat, topics_in
         # Short conversational follow-ups can retain a single medicine, even with
         # prefixes such as "còn", "vậy" or "nếu". A newly named medicine resets it.
-        lookup_message=message
-        if isinstance(message,str) and isinstance(state,dict) and not self.resolve(message):
-            previous=[self.by_id[x] for x in state.get("selected_ids",[])[:20] if isinstance(x,str) and x in self.by_id] if isinstance(state.get("selected_ids"),list) else []
-            if len({r["ingredient"] for r in previous})==1 and (topics_in(message) or re.search(r"\b(?:her[ -]?2|egfr)\b",message,re.I) or re.search(r"\b(?:ung thu|benh|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|dieu tri)\b",normalize(message))):
-                lookup_message=previous[0]["ingredient"]+" "+message
-        # General coverage answers use source-bound templates; no external AI call.
-        result=self.chat(lookup_message,state,as_of,allow_ai=False)
         answerer=getattr(self,"_indication_chat",None)
         if answerer is None:
             answerer=self._indication_chat=IndicationChat(self)
+        lookup_message=message
+        if isinstance(message,str):
+            hits=self.resolve(message)
+            related=self.condition_drugs(message,hits,answerer.rules)
+            if related:
+                # "Nilotinib ... kháng Imatinib": Imatinib is part of the condition, not a second medicine.
+                for name in related:lookup_message=re.sub(re.escape(name),"thuốc trước",lookup_message,flags=re.I)
+                hits=[g for g in hits if g[0]["ingredient"] not in related]
+            if isinstance(state,dict) and not hits:
+                previous=[self.by_id[x] for x in state.get("selected_ids",[])[:20] if isinstance(x,str) and x in self.by_id] if isinstance(state.get("selected_ids"),list) else []
+                q=normalize(message)
+                if len({r["ingredient"] for r in previous})==1 and (topics_in(message) or re.search(r"\b(?:her[ -]?2|egfr)\b",message,re.I)
+                        or re.search(r"\b(?:ung thu|benh|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|dieu tri)\b",q)
+                        or q.startswith(("neu ","con ","vay ","the con ","truong hop "))):
+                    lookup_message=previous[0]["ingredient"]+" "+message
+        # General coverage answers use source-bound templates; no external AI call.
+        result=self.chat(lookup_message,state,as_of,allow_ai=False)
         result=answerer.enrich(result,message,state)
         notes=self.brand_notes(message)
         if notes and result.get("results"):result["brand_notes"]=notes
         return self.finalize_status(result)
+
+    @staticmethod
+    def condition_drugs(message,hits,rules):
+        """Drugs named only as part of another drug's payment condition in this message."""
+        if len(hits)<2:return set()
+        names={g[0]["ingredient"] for g in hits}
+        q=normalize(message);found=set()
+        for g in hits:
+            for row in g:
+                for name in rules.get(row["record_id"],{}).get("related_drugs",[]):
+                    cue=r"(?:khang|dung nap|sau|that bai|voi|phu hop|chua dung|da dung|tien trien)[a-z0-9 ]{0,25}\b"+re.escape(normalize(name))+r"\b"
+                    if name in names and name!=g[0]["ingredient"] and re.search(cue,q):found.add(name)
+        return found if names-found else set()
 
     def brand_notes(self,message):
         q=' '+normalize(message)+' ';notes=[]

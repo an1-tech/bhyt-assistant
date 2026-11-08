@@ -14,8 +14,18 @@ TOPICS = {
     "sclc":("Ung thư phổi tế bào nhỏ",r"(?:ung thu|ut) phoi (?:the )?te bao nho|sclc"),
     "lung":("Ung thư phổi (chưa nêu thể)",r"(?:ung thu|ut) phoi"),
     "colorectal":("Ung thư đại trực tràng",r"(?:ung thu|ut) (?:dai truc trang|dai trang|truc trang)"),
-    "liver":("Ung thư gan",r"(?:ung thu|ut) gan"),
+    "liver":("Ung thư gan",r"(?:ung thu|ut) (?:(?:te bao|bieu mo) )*gan|hcc"),
     "t2d":("Đái tháo đường típ 2",r"(?:dai thao duong|tieu duong) (?:tip|type|typ|loai) 2"),
+    # Oncology prototype topics (khoa Ung bướu, 07/11/2026).
+    "mesothelioma":("U trung biểu mô màng phổi",r"(?:u|ung thu) trung bieu mo|mesothelioma"),
+    "head_neck":("Ung thư tế bào vảy vùng đầu cổ",r"(?:ung thu|ut) (?:te bao vay )?(?:vung )?dau(?: va)? co"),
+    "thyroid":("Ung thư tuyến giáp",r"(?:ung thu|ut) (?:(?:bieu mo|te bao) )*tuyen giap"),
+    "kidney":("Ung thư thận",r"(?:ung thu|ut) (?:(?:te bao|bieu mo) )*than|rcc"),
+    "prostate":("Ung thư tiền liệt tuyến",r"(?:ung thu|ut) (?:tien liet tuyen|tuyen tien liet)"),
+    "cml":("Bạch cầu tủy mạn (CML)",r"bach cau (?:dong )?tuy man|cml"),
+    "cll":("Bạch cầu lympho mạn (CLL)",r"bach cau lympho man|cll"),
+    "gist":("U mô đệm đường tiêu hóa (GIST)",r"gist|u mo dem (?:duong )?(?:da day )?(?:ruot|tieu hoa)"),
+    "nhl":("U lympho không Hodgkin",r"u lympho(?: ac tinh)? khong (?:phai )?hodgkin|lymphoma khong hodgkin|non hodgkin|nhl"),
 }
 
 DISEASE_SIGNAL = r"\b(?:ung thu|benh|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|dieu tri)\b"
@@ -52,6 +62,28 @@ def marker_mentioned(text, marker):
 
 def _capital(text):
     return text[:1].upper()+text[1:]
+
+
+def rate_text(branch):
+    return "không ghi tỷ lệ" if branch["rate"] is None else f"{branch['rate']}%"
+
+
+def requirement_not_met(context, req):
+    """A requirement is unmet only when the question states the opposite explicitly."""
+    from engine import normalize
+    if req.get("negative_patterns"):
+        q=normalize(context).replace("her 2","her2")
+        if re.search(r"(?:chua biet|khong ro|chua xac dinh|chua xet nghiem)",q) and not req.get("ignore_uncertainty"):
+            return False
+        return any(re.search(p,q) for p in req["negative_patterns"])
+    return explicit_negative(context,req["marker"])
+
+
+def requirement_mentioned(context, req):
+    from engine import normalize
+    q=normalize(context).replace("her 2","her2")
+    patterns=req.get("mention_patterns") or [r"\b"+req["marker"]+r"\b"]
+    return any(re.search(p,q) for p in patterns)
 
 
 class IndicationChat:
@@ -115,13 +147,27 @@ class IndicationChat:
             return answer
         rule=self.rules.get(ids[0]) if len(ids)==1 else None
         if rule:
-            answer["rule_review"]=rule.get("reviewed_by") or self.rules_meta["review_status"]
+            answer["rule_review"]=rule.get("reviewed_by") or rule.get("review_status") or self.rules_meta["review_status"]
+            if not rule.get("reviewed_by"):
+                answer["scope"]+=" Nhánh điều kiện của thuốc này là bản nháp tách từ nguyên văn, chưa được Dược/BHYT duyệt."
         if rule and rule["kind"]=="indication_branches":
             self.branch_answer(answer,rule,name,ids[0],topics,context,has_disease)
         elif rule and rule["kind"]=="formulation_note":
+            axis=rule.get("axis","dạng bào chế")
             answer["status"]="source_conditions"
-            answer["conclusion"]=name+" có trong danh mục BHYT; ghi chú phân biệt tỷ lệ theo dạng bào chế. Ghi chú này chưa đủ để xác nhận chi trả cho một bệnh/chỉ định cụ thể."
+            answer["conclusion"]=name+f" có trong danh mục BHYT; ghi chú phân biệt tỷ lệ theo {axis}. Ghi chú này chưa đủ để xác nhận chi trả cho một bệnh/chỉ định cụ thể."
+            q=normalize(context)
+            for f in rule["formulations"]:
+                if any(re.search(p,q) for p in f.get("context_patterns",[])):
+                    answer["conclusion"]+=f" Câu hỏi thuộc nhánh “{f['label']}”: tỷ lệ ghi trong nguồn {f['rate']}%."
             answer["conditions"]=list(row.get("conditions",[]))
+        elif rule and rule["kind"]=="rate_only":
+            facility=" và điều kiện cơ sở" if rule.get("common_verbatim") else ""
+            answer["status"]="source_conditions"
+            answer["conclusion"]=(f"{name} có trong danh mục BHYT; ghi chú chỉ nêu tỷ lệ thanh toán {rule['rate']}%{facility}, không ghi chỉ định cụ thể. "
+                "Bộ nguồn chưa đủ để xác nhận chỉ định nào được chấp nhận; cần đối chiếu nhãn thuốc đã đăng ký và hướng dẫn chẩn đoán, điều trị.")
+            answer["conditions"]=[f"Tỷ lệ ghi trong nguồn: {rule['rate']}%."]+list(rule.get("common_conditions",[]))+[
+                "Chỉ định được thanh toán cần Dược/BHYT xác định theo nhãn và hướng dẫn điều trị; ghi chú không tự giới hạn bệnh."]
         elif row.get("conditions"):
             answer["status"]="source_conditions"
             answer["conclusion"]=(name+" có trong danh mục BHYT và có điều kiện thanh toán riêng dưới đây. Bộ nguồn hiện chưa có đối chiếu đủ để xác nhận riêng cho bệnh/chỉ định trong câu hỏi." if has_disease
@@ -141,26 +187,29 @@ class IndicationChat:
 
     def branch_answer(self,answer,rule,name,source_id,topics,context,has_disease):
         branches=rule["branches"];known={b["topic"] for b in branches}
-        listing="; ".join(f"{b['scope']} ({b['rate']}%)" for b in branches)
+        listing="; ".join(f"{b['scope']} ({rate_text(b)})" for b in branches)
         relevant=[t for t in topics if t in known]
         parents=[t for t in topics if t in rule.get("parent_topics",{})]
         if len(topics)==1 and relevant:
             b=next(x for x in branches if x["topic"]==relevant[0])
             answer["status"]="conditional_coverage"
-            answer["conclusion"]=f"Có quy định BHYT thanh toán {name} trong {b['scope']}, với tỷ lệ {b['rate']}% ghi trong nguồn; áp dụng khi đáp ứng đủ điều kiện dưới đây."
-            answer["conditions"]=(list(b["conditions"])
-                +[f"Tỷ lệ ghi trong nhánh nguồn: {b['rate']}%; áp dụng khi đáp ứng các điều kiện của nguồn."]
-                +list(rule.get("common_conditions",[])))
-            answer["source_rate"]={"percentage":b["rate"],"source_id":source_id,"conditional":True}
+            if b["rate"] is None:
+                answer["conclusion"]=f"Có quy định BHYT thanh toán {name} trong {b['scope']}; ghi chú không ghi tỷ lệ thanh toán. Áp dụng khi đáp ứng đủ điều kiện dưới đây."
+                rate_line="Ghi chú không ghi tỷ lệ thanh toán; không tự suy ra 100%, cần Dược/BHYT xác định cách áp dụng."
+            else:
+                answer["conclusion"]=f"Có quy định BHYT thanh toán {name} trong {b['scope']}, với tỷ lệ {b['rate']}% ghi trong nguồn; áp dụng khi đáp ứng đủ điều kiện dưới đây."
+                rate_line=f"Tỷ lệ ghi trong nhánh nguồn: {b['rate']}%; áp dụng khi đáp ứng các điều kiện của nguồn."
+                answer["source_rate"]={"percentage":b["rate"],"source_id":source_id,"conditional":True}
+            answer["conditions"]=list(b["conditions"])+[rate_line]+list(rule.get("common_conditions",[]))
             answer["matched_branch"]=b["topic"]
             for req in b.get("requirements",[]):
-                if explicit_negative(context,req["marker"]):
+                if requirement_not_met(context,req):
                     answer["status"]="source_condition_not_met";answer["source_rate"]=None
-                    answer["conclusion"]=(f"Nhánh thanh toán {name} cho {b['disease']} trong nguồn yêu cầu {req['label']} dương tính. "
-                        f"Câu hỏi nêu {req['label']} âm tính/không dương tính nên không khớp điều kiện của nhánh này; chưa có căn cứ xác nhận chi trả cho tình huống được hỏi.")
+                    answer["conclusion"]=(f"Nhánh thanh toán {name} cho {b['disease']} trong nguồn yêu cầu {req.get('requires',req['label']+' dương tính')}. "
+                        f"Câu hỏi nêu {req.get('negative_desc',req['label']+' âm tính/không dương tính')} nên không khớp điều kiện của nhánh này; chưa có căn cứ xác nhận chi trả cho tình huống được hỏi.")
                     break
-                if not marker_mentioned(context,req["marker"]):
-                    answer["_suggested"].append(f"Nếu {req['label']} âm tính thì sao?")
+                if not requirement_mentioned(context,req):
+                    answer["_suggested"].append(req.get("ask",f"Nếu {req['label']} âm tính thì sao?"))
             answer["_suggested"]+=["Còn "+x["disease"]+" thì sao?" for x in branches if x is not b]
         elif (topics and not relevant and not parents) or (not topics and has_disease):
             answer["conclusion"]=(f"Chưa có căn cứ xác nhận BHYT chi trả {name} cho chỉ định được hỏi trong ghi chú hiện có. "
@@ -170,5 +219,5 @@ class IndicationChat:
             answer["status"]="source_conditions"
             answer["conclusion"]=f"{name} có quy định thanh toán theo từng chỉ định: {listing}. Đây là các tỷ lệ có điều kiện ghi trong nguồn, không phải xác nhận chi trả cho mọi bệnh/chỉ định."
             for t in parents:answer["conclusion"]+=" "+rule["parent_topics"][t]
-            answer["conditions"]=[f"{_capital(b['scope'])}: tỷ lệ {b['rate']}% ghi trong nguồn." for b in branches]+list(rule.get("common_conditions",[]))
+            answer["conditions"]=[f"{_capital(b['scope'])}: {rate_text(b)}." for b in branches]+list(rule.get("common_conditions",[]))
             answer["_suggested"]=[f"{name} điều trị {x['disease']} thì sao?" for x in branches]

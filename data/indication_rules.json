@@ -2,7 +2,7 @@
   "version": 1,
   "snapshot": "2026-11-06",
   "review_status": "prototype_extraction_not_hospital_validated",
-  "scope": "Nhánh chỉ định/dạng thuốc tách từ ô ghi chú danh mục TT20/2022 (bản hợp nhất). Mỗi tỷ lệ và điều kiện phải xuất hiện nguyên văn trong ghi chú nguồn; bộ nạp từ chối nếu ghi chú đổi hoặc trích đoạn không khớp. Chưa được Dược/BHYT bệnh viện thẩm định.",
+  "scope": "Nhánh chỉ định/dạng thuốc tách từ ô ghi chú danh mục TT20/2022 (bản hợp nhất). Mỗi tỷ lệ và điều kiện phải xuất hiện nguyên văn trong ghi chú nguồn; bộ nạp từ chối nếu ghi chú đổi hoặc trích đoạn không khớp. Chưa được Dược/BHYT bệnh viện thẩm định. Từ 08/11/2026 thêm 13 thuốc khoa Ung bướu ở trạng thái draft_for_demo_not_reviewed để demo; chờ duyệt theo prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx.",
   "how_to_add": "Thêm một mục cho record_id, sao chép note_sha256 = SHA-256 của conditions_verbatim, mỗi nhánh có verbatim là các đoạn chép nguyên văn từ ghi chú (chứa đúng tỷ lệ), topic phải có trong TOPICS của indication_chat.py. Ghi reviewed_by khi Dược/BHYT duyệt.",
   "rules": [
     {
@@ -17,22 +17,45 @@
           "disease": "ung thư vú",
           "scope": "ung thư vú có HER2 dương tính",
           "rate": 60,
-          "requirements": [{"marker": "her2", "label": "HER2"}],
-          "conditions": ["HER2 dương tính."],
-          "verbatim": ["Thanh toán 60% đối với ung thư vú có HER2 dương tính"]
+          "requirements": [
+            {
+              "marker": "her2",
+              "label": "HER2"
+            }
+          ],
+          "conditions": [
+            "HER2 dương tính."
+          ],
+          "verbatim": [
+            "Thanh toán 60% đối với ung thư vú có HER2 dương tính"
+          ]
         },
         {
           "topic": "gastric",
           "disease": "ung thư dạ dày",
           "scope": "ung thư dạ dày tiến xa hoặc di căn có HER2 dương tính",
           "rate": 50,
-          "requirements": [{"marker": "her2", "label": "HER2"}],
-          "conditions": ["HER2 dương tính.", "Ung thư dạ dày tiến xa hoặc di căn."],
-          "verbatim": ["thanh toán 50% đối với ung thư dạ dày tiến xa hoặc di căn có HER2 dương tính"]
+          "requirements": [
+            {
+              "marker": "her2",
+              "label": "HER2"
+            }
+          ],
+          "conditions": [
+            "HER2 dương tính.",
+            "Ung thư dạ dày tiến xa hoặc di căn."
+          ],
+          "verbatim": [
+            "thanh toán 50% đối với ung thư dạ dày tiến xa hoặc di căn có HER2 dương tính"
+          ]
         }
       ],
-      "common_conditions": ["Phạm vi cơ sở và các quy định thanh toán chung phải đọc cùng TT37/2024 và hướng dẫn liên quan; không dùng riêng cột hạng bệnh viện cũ."],
-      "common_verbatim": ["Quỹ bảo hiểm y tế thanh toán tại bệnh viện hạng đặc biệt, hạng I và bệnh viện chuyên khoa ung bướu hạng II."],
+      "common_conditions": [
+        "Phạm vi cơ sở và các quy định thanh toán chung phải đọc cùng TT37/2024 và hướng dẫn liên quan; không dùng riêng cột hạng bệnh viện cũ."
+      ],
+      "common_verbatim": [
+        "Quỹ bảo hiểm y tế thanh toán tại bệnh viện hạng đặc biệt, hạng I và bệnh viện chuyên khoa ung bướu hạng II."
+      ],
       "parent_topics": {}
     },
     {
@@ -47,14 +70,29 @@
           "disease": "ung thư phổi không phải tế bào nhỏ",
           "scope": "ung thư phổi không phải tế bào nhỏ có EGFR dương tính",
           "rate": 50,
-          "requirements": [{"marker": "egfr", "label": "EGFR"}],
-          "conditions": ["Đúng thể ung thư phổi không phải tế bào nhỏ; EGFR dương tính."],
-          "verbatim": ["ung thư phổi thể không phải tế bào nhỏ", "có EGFR dương tính", "thanh toán 50%"]
+          "requirements": [
+            {
+              "marker": "egfr",
+              "label": "EGFR"
+            }
+          ],
+          "conditions": [
+            "Đúng thể ung thư phổi không phải tế bào nhỏ; EGFR dương tính."
+          ],
+          "verbatim": [
+            "ung thư phổi thể không phải tế bào nhỏ",
+            "có EGFR dương tính",
+            "thanh toán 50%"
+          ]
         }
       ],
-      "common_conditions": ["Đọc cùng các quy định thanh toán chung và điều kiện chuyển tiếp nếu có."],
+      "common_conditions": [
+        "Đọc cùng các quy định thanh toán chung và điều kiện chuyển tiếp nếu có."
+      ],
       "common_verbatim": [],
-      "parent_topics": {"lung": "Quy định này có giới hạn về thể bệnh và EGFR; không áp dụng chung cho mọi ung thư phổi."}
+      "parent_topics": {
+        "lung": "Quy định này có giới hạn về thể bệnh và EGFR; không áp dụng chung cho mọi ung thư phổi."
+      }
     },
     {
       "record_id": "TT20-PLI-0395-R474",
@@ -68,14 +106,29 @@
           "disease": "ung thư phổi không phải tế bào nhỏ",
           "scope": "ung thư phổi không phải tế bào nhỏ có EGFR dương tính",
           "rate": 50,
-          "requirements": [{"marker": "egfr", "label": "EGFR"}],
-          "conditions": ["Đúng thể ung thư phổi không phải tế bào nhỏ; EGFR dương tính."],
-          "verbatim": ["ung thư phổi thể không phải tế bào nhỏ", "có EGFR dương tính", "thanh toán 50%"]
+          "requirements": [
+            {
+              "marker": "egfr",
+              "label": "EGFR"
+            }
+          ],
+          "conditions": [
+            "Đúng thể ung thư phổi không phải tế bào nhỏ; EGFR dương tính."
+          ],
+          "verbatim": [
+            "ung thư phổi thể không phải tế bào nhỏ",
+            "có EGFR dương tính",
+            "thanh toán 50%"
+          ]
         }
       ],
-      "common_conditions": ["Đọc cùng các quy định thanh toán chung và điều kiện chuyển tiếp nếu có."],
+      "common_conditions": [
+        "Đọc cùng các quy định thanh toán chung và điều kiện chuyển tiếp nếu có."
+      ],
       "common_verbatim": [],
-      "parent_topics": {"lung": "Quy định này có giới hạn về thể bệnh và EGFR; không áp dụng chung cho mọi ung thư phổi."}
+      "parent_topics": {
+        "lung": "Quy định này có giới hạn về thể bệnh và EGFR; không áp dụng chung cho mọi ung thư phổi."
+      }
     },
     {
       "record_id": "TT20-PLI-0362-R440",
@@ -84,8 +137,22 @@
       "kind": "formulation_note",
       "reviewed_by": null,
       "formulations": [
-        {"value": "liposome", "label": "Dạng liposome", "rate": 50, "verbatim": ["thanh toán 50% đối với dạng liposome"]},
-        {"value": "other", "label": "Dạng khác đã xác định", "rate": 100, "verbatim": ["thanh toán 100% đối với các dạng khác"]}
+        {
+          "value": "liposome",
+          "label": "Dạng liposome",
+          "rate": 50,
+          "verbatim": [
+            "thanh toán 50% đối với dạng liposome"
+          ]
+        },
+        {
+          "value": "other",
+          "label": "Dạng khác đã xác định",
+          "rate": 100,
+          "verbatim": [
+            "thanh toán 100% đối với các dạng khác"
+          ]
+        }
       ]
     },
     {
@@ -95,9 +162,582 @@
       "kind": "formulation_note",
       "reviewed_by": null,
       "formulations": [
-        {"value": "liposome", "label": "Dạng liposome", "rate": 50, "verbatim": ["thanh toán 50% đối với dạng liposome và dạng polymeric micelle"]},
-        {"value": "polymeric", "label": "Dạng polymeric micelle", "rate": 50, "verbatim": ["thanh toán 50% đối với dạng liposome và dạng polymeric micelle"]},
-        {"value": "other", "label": "Dạng khác đã xác định", "rate": 100, "verbatim": ["thanh toán 100% đối với các dạng khác"]}
+        {
+          "value": "liposome",
+          "label": "Dạng liposome",
+          "rate": 50,
+          "verbatim": [
+            "thanh toán 50% đối với dạng liposome và dạng polymeric micelle"
+          ]
+        },
+        {
+          "value": "polymeric",
+          "label": "Dạng polymeric micelle",
+          "rate": 50,
+          "verbatim": [
+            "thanh toán 50% đối với dạng liposome và dạng polymeric micelle"
+          ]
+        },
+        {
+          "value": "other",
+          "label": "Dạng khác đã xác định",
+          "rate": 100,
+          "verbatim": [
+            "thanh toán 100% đối với các dạng khác"
+          ]
+        }
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0382-R460",
+      "ingredient": "Pemetrexed",
+      "note_sha256": "0d7b1faf83984d131eb2af4ec6a68826d6a1c3a25b9196fa9e08ddc602d61f5b",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 382-x)",
+      "reviewed_by": null,
+      "kind": "indication_branches",
+      "branches": [
+        {
+          "topic": "nsclc",
+          "disease": "ung thư phổi không tế bào nhỏ",
+          "scope": "ung thư phổi không tế bào nhỏ",
+          "rate": 50,
+          "requirements": [],
+          "conditions": [
+            "Đúng thể ung thư phổi không tế bào nhỏ."
+          ],
+          "verbatim": [
+            "ung thư phổi không tế bào nhỏ",
+            "thanh toán 50%"
+          ]
+        },
+        {
+          "topic": "mesothelioma",
+          "disease": "u trung biểu mô màng phổi",
+          "scope": "ung thư trung biểu mô màng phổi ác tính",
+          "rate": 50,
+          "requirements": [],
+          "conditions": [
+            "Chẩn đoán u trung biểu mô màng phổi ác tính."
+          ],
+          "verbatim": [
+            "ung thư trung biểu mô màng phổi ác tính",
+            "thanh toán 50%"
+          ]
+        }
+      ],
+      "parent_topics": {
+        "lung": "Ghi chú chỉ nêu ung thư phổi không tế bào nhỏ; không áp dụng chung cho ung thư phổi tế bào nhỏ."
+      }
+    },
+    {
+      "record_id": "TT20-PLI-0385-R463",
+      "ingredient": "Tegafur + gimeracil + oteracil kali",
+      "note_sha256": "43a53f3cf2fa88a0caa16be7cc9225d82754cc7ffa14f33d474bb2439e08876d",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 385-x)",
+      "reviewed_by": null,
+      "kind": "indication_branches",
+      "branches": [
+        {
+          "topic": "gastric",
+          "disease": "ung thư dạ dày",
+          "scope": "ung thư dạ dày di căn",
+          "rate": 70,
+          "requirements": [
+            {
+              "marker": "dican",
+              "label": "di căn",
+              "requires": "giai đoạn di căn",
+              "negative_desc": "bệnh chưa di căn",
+              "negative_patterns": [
+                "\\b(?:chua|khong) (?:co )?di can",
+                "\\bgiai doan som\\b"
+              ],
+              "mention_patterns": [
+                "di can",
+                "giai doan"
+              ],
+              "ask": "Nếu chưa di căn thì sao?"
+            }
+          ],
+          "conditions": [
+            "Ung thư dạ dày giai đoạn di căn."
+          ],
+          "verbatim": [
+            "điều trị ung thư dạ dày di căn",
+            "thanh toán 70%"
+          ]
+        }
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0393-R472",
+      "ingredient": "Cetuximab",
+      "note_sha256": "2839bf7f41d29a3ef625885b6bddb84d329995cd4330a7af8b456d5af2b66bc6",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 393-x)",
+      "reviewed_by": null,
+      "kind": "indication_branches",
+      "branches": [
+        {
+          "topic": "colorectal",
+          "disease": "ung thư đại trực tràng",
+          "scope": "ung thư đại trực tràng di căn thuộc type RAS tự nhiên",
+          "rate": 50,
+          "requirements": [
+            {
+              "marker": "dican",
+              "label": "di căn",
+              "requires": "giai đoạn di căn",
+              "negative_desc": "bệnh chưa di căn",
+              "negative_patterns": [
+                "\\b(?:chua|khong) (?:co )?di can",
+                "\\bgiai doan som\\b"
+              ],
+              "mention_patterns": [
+                "di can",
+                "giai doan"
+              ],
+              "ask": "Nếu chưa di căn thì sao?"
+            },
+            {
+              "marker": "ras",
+              "label": "RAS",
+              "requires": "RAS tự nhiên (không đột biến)",
+              "negative_desc": "RAS đột biến",
+              "negative_patterns": [
+                "\\b(?:k|n)?ras (?:co )?dot bien",
+                "\\bdot bien (?:gen )?(?:k|n)?ras\\b"
+              ],
+              "mention_patterns": [
+                "\\b(?:k|n)?ras\\b"
+              ],
+              "ask": "Nếu RAS đột biến thì sao?"
+            }
+          ],
+          "conditions": [
+            "Ung thư đại trực tràng di căn.",
+            "RAS tự nhiên (không đột biến)."
+          ],
+          "verbatim": [
+            "ung thư đại trực tràng di căn thuộc type RAS tự nhiên",
+            "Thanh toán 50%"
+          ]
+        },
+        {
+          "topic": "head_neck",
+          "disease": "ung thư tế bào vảy vùng đầu cổ",
+          "scope": "ung thư tế bào vảy vùng đầu, cổ",
+          "rate": 50,
+          "requirements": [],
+          "conditions": [
+            "Mô bệnh học ung thư tế bào vảy, vị trí vùng đầu cổ."
+          ],
+          "verbatim": [
+            "ung thư tế bào vảy vùng đầu. cổ",
+            "Thanh toán 50%"
+          ]
+        }
+      ],
+      "common_conditions": [
+        "Bệnh viện hạng đặc biệt, hạng I hoặc bệnh viện chuyên khoa ung bướu hạng II; đọc cùng TT37/2024 và hướng dẫn liên quan, không dùng riêng cột hạng bệnh viện cũ."
+      ],
+      "common_verbatim": [
+        "Sử dụng tại Bệnh viện hạng đặc biệt, hạng I và bệnh viện chuyên khoa ung bướu hạng II."
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0401-R480",
+      "ingredient": "Sorafenib",
+      "note_sha256": "360167e8d895ce147dfd097d2178f79530ae2ec75921a18ab1644e6d0a9b34ee",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 401-x)",
+      "reviewed_by": null,
+      "kind": "indication_branches",
+      "branches": [
+        {
+          "topic": "liver",
+          "disease": "ung thư gan",
+          "scope": "ung thư tế bào biểu mô gan",
+          "rate": 50,
+          "requirements": [],
+          "conditions": [
+            "Chẩn đoán ung thư biểu mô tế bào gan."
+          ],
+          "verbatim": [
+            "thanh toán 50% đối với điều trị ung thư tế bào biểu mô gan"
+          ]
+        },
+        {
+          "topic": "thyroid",
+          "disease": "ung thư tuyến giáp",
+          "scope": "ung thư biểu mô tuyến giáp biệt hóa tiến triển tại chỗ hoặc di căn, đã thất bại điều trị với iod phóng xạ",
+          "rate": 50,
+          "requirements": [
+            {
+              "marker": "iod",
+              "label": "iod phóng xạ",
+              "requires": "đã thất bại điều trị với iod phóng xạ",
+              "negative_desc": "chưa dùng iod phóng xạ",
+              "negative_patterns": [
+                "\\bchua (?:dung|su dung|tung dung|lam|dieu tri) (?:voi )?iod",
+                "\\biod (?:con |van )?(?:hieu qua|dap ung)"
+              ],
+              "mention_patterns": [
+                "\\biod\\b",
+                "phong xa"
+              ],
+              "ask": "Nếu chưa dùng iod phóng xạ thì sao?"
+            }
+          ],
+          "conditions": [
+            "Ung thư biểu mô tuyến giáp biệt hóa, tiến triển tại chỗ hoặc di căn.",
+            "Đã thất bại điều trị với iod phóng xạ."
+          ],
+          "verbatim": [
+            "thanh toán 50% đối với điều trị ung thư tế bào biểu mô gan, ung thư biểu mô tuyến giáp biệt hóa tiến triển tại chỗ hoặc di căn đã thất bại điều trị với iod phóng xạ"
+          ]
+        },
+        {
+          "topic": "kidney",
+          "disease": "ung thư thận",
+          "scope": "ung thư tế bào biểu mô thận tiến triển",
+          "rate": 30,
+          "requirements": [],
+          "conditions": [
+            "Ung thư biểu mô tế bào thận giai đoạn tiến triển."
+          ],
+          "verbatim": [
+            "thanh toán 30% đối với điều trị ung thư tế bào biểu mô thận tiến triển"
+          ]
+        }
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0396-R475",
+      "ingredient": "Imatinib",
+      "note_sha256": "939f663facdea3669dd3e2d8c3496feec95cc12dcf22fc1cfb9bc4c94e566b1a",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 396-x)",
+      "reviewed_by": null,
+      "kind": "indication_branches",
+      "branches": [
+        {
+          "topic": "cml",
+          "disease": "bệnh bạch cầu tủy mạn (CML)",
+          "scope": "bệnh bạch cầu tủy mạn (CML)",
+          "rate": 80,
+          "requirements": [],
+          "conditions": [
+            "Chẩn đoán bạch cầu tủy mạn (CML)."
+          ],
+          "verbatim": [
+            "bệnh bạch cầu tủy mạn (CML)",
+            "Thanh toán 80%"
+          ]
+        },
+        {
+          "topic": "gist",
+          "disease": "u mô đệm dạ dày ruột (GIST)",
+          "scope": "u mô đệm dạ dày ruột (GIST)",
+          "rate": 80,
+          "requirements": [],
+          "conditions": [
+            "Chẩn đoán u mô đệm dạ dày ruột (GIST)."
+          ],
+          "verbatim": [
+            "u mô đệm dạ dày ruột (GIST)",
+            "Thanh toán 80%"
+          ]
+        }
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0397-R476",
+      "ingredient": "Nilotinib",
+      "note_sha256": "06122f685b7d35c9db8df70ef0a806ea63f52855fc0fa0a6924b56845b9c0fdf",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 397-x)",
+      "reviewed_by": null,
+      "kind": "indication_branches",
+      "related_drugs": [
+        "Imatinib"
+      ],
+      "branches": [
+        {
+          "topic": "cml",
+          "disease": "bệnh bạch cầu tủy mạn (CML)",
+          "scope": "bệnh bạch cầu tủy mạn (CML) không dung nạp hoặc kháng lại với Imatinib",
+          "rate": 80,
+          "requirements": [
+            {
+              "marker": "imatinib",
+              "label": "Imatinib",
+              "requires": "không dung nạp hoặc kháng lại với Imatinib",
+              "negative_desc": "chưa dùng thuốc trước đó",
+              "negative_patterns": [
+                "\\bchua (?:dung|su dung|tung dung) (?:thuoc|imatinib)",
+                "\\b(?:dau tay|lan dau)\\b",
+                "\\bimatinib (?:con |van )?(?:hieu qua|dap ung)"
+              ],
+              "mention_patterns": [
+                "imatinib",
+                "thuoc truoc",
+                "chua dung",
+                "dau tay",
+                "lan dau",
+                "khang",
+                "dung nap"
+              ],
+              "ask": "Nếu chưa dùng thuốc trước đó thì sao?"
+            }
+          ],
+          "conditions": [
+            "Chẩn đoán bạch cầu tủy mạn (CML).",
+            "Không dung nạp hoặc kháng lại với Imatinib."
+          ],
+          "verbatim": [
+            "bệnh bạch cầu tủy mạn (CML) không dung nạp hoặc kháng lại với thuốc Imatinib",
+            "thanh toán 80%"
+          ]
+        }
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0400-R479",
+      "ingredient": "Rituximab",
+      "note_sha256": "7b48753cbbf6c3639a30a2503f14a0eeefbdf419f252f9a7f87fc109522eb900",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 400-x)",
+      "reviewed_by": null,
+      "kind": "indication_branches",
+      "branches": [
+        {
+          "topic": "nhl",
+          "disease": "u lympho không Hodgkin",
+          "scope": "u lympho không phải Hodgkin tế bào B có CD20 dương tính",
+          "rate": null,
+          "requirements": [
+            {
+              "marker": "cd20",
+              "label": "CD20"
+            }
+          ],
+          "conditions": [
+            "U lympho không Hodgkin tế bào B.",
+            "CD20 dương tính."
+          ],
+          "verbatim": [
+            "u lympho không phải Hodgkin (non-Hodgkin lymphoma) tế bào B có CD20 dương tính"
+          ],
+          "rate_stated": false
+        }
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0347-R425",
+      "ingredient": "Bendamustine",
+      "note_sha256": "6c9ef8f64e354c4e63386b15f329c8b0dc93e4d047930d50f8b800549b65b116",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 347-x)",
+      "reviewed_by": null,
+      "kind": "indication_branches",
+      "related_drugs": [
+        "Fludarabin",
+        "Rituximab"
+      ],
+      "branches": [
+        {
+          "topic": "cll",
+          "disease": "bệnh bạch cầu lympho mạn (CLL)",
+          "scope": "bệnh bạch cầu lymphô mạn Binet B/C không phù hợp hóa trị với Fludarabin",
+          "rate": 50,
+          "requirements": [
+            {
+              "marker": "fludarabin",
+              "label": "Fludarabin",
+              "requires": "không phù hợp hóa trị với Fludarabin",
+              "negative_desc": "vẫn phù hợp hóa trị thông thường (Fludarabin)",
+              "negative_patterns": [
+                "(?<!khong )\\bphu hop (?:hoa tri )?(?:voi )?(?:fludarabin|thuoc truoc|hoa tri thong thuong)",
+                "\\bvan (?:dung duoc|phu hop)"
+              ],
+              "mention_patterns": [
+                "fludarabin",
+                "phu hop",
+                "thuoc truoc"
+              ],
+              "ask": "Nếu vẫn phù hợp hóa trị thông thường thì sao?"
+            }
+          ],
+          "conditions": [
+            "Bạch cầu lympho mạn giai đoạn Binet B hoặc C.",
+            "Không phù hợp hóa trị với Fludarabin."
+          ],
+          "verbatim": [
+            "bệnh bạch cầu lymphô mạn binet B/C không phù hợp hóa trị với Fludarabin",
+            "thanh toán 50%"
+          ]
+        },
+        {
+          "topic": "nhl",
+          "disease": "u lympho không Hodgkin",
+          "scope": "u lymphô không Hodgkin diễn tiến chậm, tiến triển sau điều trị với Rituximab",
+          "rate": 50,
+          "requirements": [
+            {
+              "marker": "rituximab",
+              "label": "Rituximab",
+              "requires": "tiến triển sau điều trị với Rituximab",
+              "negative_desc": "chưa dùng thuốc trước đó",
+              "negative_patterns": [
+                "\\bchua (?:dung|su dung|tung dung) (?:thuoc|rituximab)",
+                "\\b(?:dau tay|lan dau)\\b",
+                "\\brituximab (?:con |van )?(?:hieu qua|dap ung)"
+              ],
+              "mention_patterns": [
+                "rituximab",
+                "thuoc truoc",
+                "chua dung",
+                "dau tay",
+                "lan dau",
+                "tien trien"
+              ],
+              "ask": "Nếu chưa dùng thuốc trước đó thì sao?"
+            }
+          ],
+          "conditions": [
+            "U lympho không Hodgkin diễn tiến chậm.",
+            "Tiến triển sau điều trị với Rituximab."
+          ],
+          "verbatim": [
+            "U lymphô không Hodgkin, diễn tiến chậm, tiến triển sau điều trị với Rituximab",
+            "thanh toán 50%"
+          ]
+        }
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0403-R483",
+      "ingredient": "Abiraterone acetate",
+      "note_sha256": "4d9d8935679247cabe9afa7e7a643b2d1e8bda0e5e8ef5eea3663d7de060ab1b",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 403-x)",
+      "reviewed_by": null,
+      "kind": "indication_branches",
+      "branches": [
+        {
+          "topic": "prostate",
+          "disease": "ung thư tiền liệt tuyến",
+          "scope": "ung thư tiền liệt tuyến sau khi thất bại với điều trị nội tiết hoặc hóa trị",
+          "rate": 30,
+          "requirements": [
+            {
+              "marker": "noitiet",
+              "label": "điều trị trước",
+              "requires": "thất bại với điều trị nội tiết hoặc hóa trị trước đó",
+              "negative_desc": "chưa dùng nội tiết hoặc hóa trị trước đó",
+              "negative_patterns": [
+                "\\bchua (?:dung|su dung|tung dung|co|dieu tri) (?:dieu tri )?(?:noi tiet|hoa tri|thuoc)",
+                "\\b(?:dau tay|lan dau)\\b"
+              ],
+              "mention_patterns": [
+                "noi tiet",
+                "hoa tri",
+                "that bai",
+                "chua dung",
+                "dau tay"
+              ],
+              "ask": "Nếu chưa dùng nội tiết hoặc hóa trị trước đó thì sao?"
+            }
+          ],
+          "conditions": [
+            "Ung thư tiền liệt tuyến.",
+            "Đã thất bại với điều trị nội tiết hoặc hóa trị trước đó."
+          ],
+          "verbatim": [
+            "ung thư tiền liệt tuyến sau khi thất bại với điều trị nội tiết, hoặc sau khi thất bại với điều trị hóa trị",
+            "thanh toán 30%"
+          ]
+        }
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0391-R470",
+      "ingredient": "Afatinib dimaleate",
+      "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 391-x)",
+      "reviewed_by": null,
+      "kind": "rate_only",
+      "rate": 50,
+      "verbatim": [
+        "Quỹ bảo hiểm y tế thanh toán 50%."
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0409-R489",
+      "ingredient": "Fulvestrant",
+      "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 409-x)",
+      "reviewed_by": null,
+      "kind": "rate_only",
+      "rate": 50,
+      "verbatim": [
+        "Quỹ bảo hiểm y tế thanh toán 50%."
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0392-R471",
+      "ingredient": "Bevacizumab",
+      "note_sha256": "4dcb8dd7133e75f326ee1e4515f7d107db546aa8b0950cd7fbbd8e1d10569581",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 392-x)",
+      "reviewed_by": null,
+      "kind": "rate_only",
+      "rate": 50,
+      "verbatim": [
+        "thanh toán 50%"
+      ],
+      "common_conditions": [
+        "Bệnh viện hạng đặc biệt, hạng I hoặc bệnh viện chuyên khoa ung bướu hạng II; đọc cùng TT37/2024 và hướng dẫn liên quan, không dùng riêng cột hạng bệnh viện cũ."
+      ],
+      "common_verbatim": [
+        "thanh toán tại bệnh viện hạng đặc biệt, hạng I và bệnh viện chuyên khoa ung bướu hạng II"
+      ]
+    },
+    {
+      "record_id": "TT20-PLI-0365-R443",
+      "ingredient": "Everolimus",
+      "note_sha256": "fb8f46c8832d329de5c630dc16a89fe578563db421afd60c09e054a91aed94f1",
+      "review_status": "draft_for_demo_not_reviewed",
+      "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 365-x)",
+      "reviewed_by": null,
+      "kind": "formulation_note",
+      "axis": "mục đích sử dụng",
+      "formulations": [
+        {
+          "value": "oncology",
+          "label": "Điều trị ung thư",
+          "rate": 50,
+          "verbatim": [
+            "thanh toán 50% đối với điều trị ung thư"
+          ],
+          "context_patterns": [
+            "\\bung thu\\b",
+            "\\but\\b"
+          ]
+        },
+        {
+          "value": "other",
+          "label": "Các trường hợp khác",
+          "rate": 100,
+          "verbatim": [
+            "thanh toán 100% đối với các trường hợp khác"
+          ]
+        }
       ]
     }
   ]

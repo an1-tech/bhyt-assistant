@@ -23,12 +23,24 @@ class IndicationRuleDataTests(unittest.TestCase):
 
     def test_every_rate_is_quoted_from_the_source_note(self):
         _,rules=load_indication_rules(self.c.data,self.c.by_id,TOPICS)
-        self.assertEqual(len(rules),5)
+        self.assertEqual(len(rules),18)
         for id,rule in rules.items():
             note=self.c.by_id[id]["conditions_verbatim"]
-            for item in rule.get("branches",[])+rule.get("formulations",[]):
-                self.assertIn(f"{item['rate']}%",note)
+            items=rule.get("branches",[])+rule.get("formulations",[])+([rule] if rule["kind"]=="rate_only" else [])
+            for item in items:
+                if item["rate"] is None:
+                    self.assertNotRegex(note,r"\d+\s*%")
+                else:
+                    self.assertIn(f"{item['rate']}%",note)
                 self.assertTrue(all(q in note for q in item["verbatim"]))
+
+    def test_missing_rate_cannot_be_left_blank_when_note_has_one(self):
+        def bad(raw):raw["rules"][0]["branches"][0].update(rate=None,rate_stated=False)
+        with self.assertRaisesRegex(ValueError,"rate missing"):self.load_variant(bad)
+
+    def test_related_drug_must_be_named_in_note(self):
+        def bad(raw):raw["rules"][0]["related_drugs"]=["Imatinib"]
+        with self.assertRaisesRegex(ValueError,"Related drug"):self.load_variant(bad)
 
     def test_invented_rate_is_rejected(self):
         def bad(raw):raw["rules"][0]["branches"][0]["rate"]=70
