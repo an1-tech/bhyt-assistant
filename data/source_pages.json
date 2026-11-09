@@ -1,0 +1,511 @@
+{
+ "version": 1,
+ "pdf": "/sources/15-vbhn-byt-2024.pdf",
+ "pdf_sha256": "24edc424707ca6caee317560499a704b1549913e2d91df8844d1d214fb242e61",
+ "document": "Văn bản hợp nhất 15/VBHN-BYT (TT20/2022 và các lần sửa đổi), bản chính thức datafiles.chinhphu.vn",
+ "rule": "Chỉ ghi số trang đã đối chiếu bằng mắt với ảnh trang PDF; dòng chưa đối chiếu thì không có số trang.",
+ "pages": {
+  "TT20-PLI-0055-R67": {
+   "pages": [
+    8
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0081-R99": {
+   "pages": [
+    10
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0086-R104": {
+   "pages": [
+    11
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0087-R105": {
+   "pages": [
+    11
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0088-R106": {
+   "pages": [
+    11
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0092-R110": {
+   "pages": [
+    11
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0126-R148": {
+   "pages": [
+    13
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0275-R333": {
+   "pages": [
+    22
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0276-R334": {
+   "pages": [
+    22
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0277-R335": {
+   "pages": [
+    22
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0278-R336": {
+   "pages": [
+    22
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0279-R337": {
+   "pages": [
+    22,
+    23
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0285-R345": {
+   "pages": [
+    23
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0307-R373": {
+   "pages": [
+    25,
+    26
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0309-R375": {
+   "pages": [
+    26
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0347-R425": {
+   "pages": [
+    30
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0353-R431": {
+   "pages": [
+    30
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0360-R438": {
+   "pages": [
+    30
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0362-R440": {
+   "pages": [
+    30,
+    31
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0365-R443": {
+   "pages": [
+    31
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0373-R451": {
+   "pages": [
+    31
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0381-R459": {
+   "pages": [
+    31
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0382-R460": {
+   "pages": [
+    31,
+    32
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0385-R463": {
+   "pages": [
+    32
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0391-R470": {
+   "pages": [
+    32
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0392-R471": {
+   "pages": [
+    32
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0393-R472": {
+   "pages": [
+    32
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0394-R473": {
+   "pages": [
+    32,
+    33
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0395-R474": {
+   "pages": [
+    33
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0396-R475": {
+   "pages": [
+    33
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0397-R476": {
+   "pages": [
+    33
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0398-R477": {
+   "pages": [
+    33
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0399-R478": {
+   "pages": [
+    33
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0400-R479": {
+   "pages": [
+    33
+   ],
+   "checked_by": [
+    "oncology-visual-check"
+   ]
+  },
+  "TT20-PLI-0401-R480": {
+   "pages": [
+    33
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0402-R481": {
+   "pages": [
+    34
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0403-R483": {
+   "pages": [
+    34
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0409-R489": {
+   "pages": [
+    34
+   ],
+   "checked_by": [
+    "oncology-visual-check",
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0419-R500": {
+   "pages": [
+    35
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0421-R502": {
+   "pages": [
+    35
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0432-R515": {
+   "pages": [
+    36
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0440-R524": {
+   "pages": [
+    36
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0463-R554": {
+   "pages": [
+    37
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0571-R680": {
+   "pages": [
+    43
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0586-R697": {
+   "pages": [
+    44
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0638-R750": {
+   "pages": [
+    46
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0644-R756": {
+   "pages": [
+    47
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0654-R769": {
+   "pages": [
+    47
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0762-R908": {
+   "pages": [
+    53
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0778-R927": {
+   "pages": [
+    54
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0779-R928": {
+   "pages": [
+    54
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0788-R937": {
+   "pages": [
+    54
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0794-R943": {
+   "pages": [
+    55
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0809-R961": {
+   "pages": [
+    56
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0940-R1118": {
+   "pages": [
+    64
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0941-R1119": {
+   "pages": [
+    64
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0942-R1120": {
+   "pages": [
+    64
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0943-R1121": {
+   "pages": [
+    64
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0961-R1146": {
+   "pages": [
+    66
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  },
+  "TT20-PLI-0990-R1182": {
+   "pages": [
+    68
+   ],
+   "checked_by": [
+    "rate-verification"
+   ]
+  }
+ }
+}

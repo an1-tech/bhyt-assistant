@@ -175,6 +175,7 @@ class IndicationChat:
         if row.get("status")=="route_unmatched":
             answer["conclusion"]="Chưa có căn cứ cho đường dùng nêu trong câu hỏi. Các đường dùng được ghi trong danh mục: "+", ".join(row.get("routes",[]))+"."
             return answer
+        answer["_highlights"]=[]
         rule=self.rules.get(ids[0]) if len(ids)==1 else None
         if rule:
             answer["rule_review"]=rule.get("reviewed_by") or rule.get("review_status") or self.rules_meta["review_status"]
@@ -198,6 +199,7 @@ class IndicationChat:
                 source="Theo xác nhận" if state=="confirmed" else "Câu hỏi thuộc nhánh"
                 answer["conclusion"]+=f" {source} “{f['label']}”: tỷ lệ ghi trong nguồn {f['rate']}%."
                 answer["matched_branch"]=f["value"]
+                answer["_highlights"]+=list(f.get("verbatim",[]))
             elif state=="unclear":
                 answer["conclusion"]+=f" Câu hỏi chưa xác định rõ {axis}; chọn {axis} bên dưới để xem đúng nhánh."
             # Buttons when the choice is open, and after a confirmation so it can be changed.
@@ -223,9 +225,15 @@ class IndicationChat:
             answer["conditions"]=["Không suy ra mức thanh toán 100% từ ô ghi chú trống.","Cần căn cứ về chỉ định trong nhãn/hướng dẫn điều trị/Dược thư và quy định thanh toán chung."]
         if len(row.get("routes",[]))>1:
             answer["conditions"].append("Danh mục có các đường dùng: "+" / ".join(row["routes"])+". Thông tin trên giữ phạm vi của từng dòng nguồn.")
+        if rule and rule["kind"]=="rate_only":
+            answer["_highlights"]+=list(rule.get("verbatim",[]))+list(rule.get("common_verbatim",[]))
+        # Direct quotation: the stored source note of each row, with the sentences this answer
+        # relies on (matched branch / chosen formulation / rate) marked in place.
+        answer["quotes"]=self.c.source_quote(ids,answer.pop("_highlights",[]))
         if re.search(r"\b(?:2014|2015|truoc nam|chuyen tiep)\b",normalize(context)) and any(id in self.c.transition_rules["mapping"] for id in ids):
             answer["status"]="transition_requires_review";answer["source_rate"]=None;answer["_suggested"]=[];answer["confirm"]=[]
             answer.pop("matched_branch",None)
+            for q in answer.get("quotes",[]):q["highlights"]=[]
             answer["conclusion"]="Câu hỏi liên quan điều kiện chuyển tiếp. Bộ nguồn có Điều 8 TT20/2022 để đối chiếu, nhưng chưa đủ tỷ lệ lịch sử và chuỗi căn cứ để kết luận riêng trường hợp này. Không áp tỷ lệ của nhánh hiện tại cho thời kỳ khác."
         return answer
 
@@ -247,6 +255,7 @@ class IndicationChat:
                 answer["source_rate"]={"percentage":b["rate"],"source_id":source_id,"conditional":True}
             answer["conditions"]=list(b["conditions"])+[rate_line]+list(rule.get("common_conditions",[]))
             answer["matched_branch"]=b["topic"]
+            answer.setdefault("_highlights",[]).extend(list(b.get("verbatim",[]))+list(rule.get("common_verbatim",[])))
             answer["requirements"]=[]
             unmet=None;branch_facts=facts.get(b["topic"],{})
             for req in b.get("requirements",[]):

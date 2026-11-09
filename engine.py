@@ -148,6 +148,9 @@ class Corpus:
                     self.aliases[normalize(a['brand'])]=normalize(a['ingredient'])
                     self.alias_sources[normalize(a['brand'])]=a
         self.load_hospital_list()
+        # PDF page of a TT20 row, only where it was checked by eye (tools/build_source_pages.py).
+        pages_file=self.data/'source_pages.json'
+        self.source_pages=json.loads(pages_file.read_text(encoding='utf-8')) if pages_file.exists() else {'pdf':None,'pages':{}}
         self.source_fingerprint=hashlib.sha256((self.data/'rag_current.jsonl').read_bytes()).hexdigest()
         self.fingerprint=effective_fingerprint(self.chunks)
         # TF-IDF sparse vectors support local ranked evidence retrieval without an external API.
@@ -179,8 +182,9 @@ class Corpus:
                 alias=normalize(r['name'])
                 # Only a spelling the catalogue cannot already resolve ("Paracetamol" already
                 # finds "Paracetamol (acetaminophen)" through the printed synonym).
-                if r['level']!='exact' and alias and alias!=key and alias not in self.names and alias not in self.aliases and alias not in self.source_names:
-                    self.aliases[alias]=key;self.hospital_aliases[alias]=(key,r)
+                for a in dict.fromkeys([alias,re.sub(r'(?:\s\d+)+$','',alias)]):
+                    if r['level']!='exact' and len(a)>=4 and a!=key and a not in self.names and a not in self.aliases and a not in self.source_names:
+                        self.aliases[a]=key;self.hospital_aliases[a]=(key,r)
             else:
                 self.hospital_other[normalize(r['name'])]=r
 
@@ -207,9 +211,11 @@ class Corpus:
             if not entries or key in seen:continue
             seen.add(key)
             text='Danh sách thuốc công khai trên website Vinmec có: '+', '.join('“'+e['text']+'”' for e in entries)+'.'
-            for alias,(k,e) in self.hospital_aliases.items():
-                if k==key and ' '+alias+' ' in q:
-                    text+=f' Đã quy đổi cách viết “{e["name"]}” → “{res["ingredient"]}” (tên trong TT20) theo quy tắc chính tả cố định, không theo tên gần giống.'
+            named=[(alias,e) for alias,(k,e) in self.hospital_aliases.items() if k==key and ' '+alias+' ' in q]
+            if named:
+                alias,e=max(named,key=lambda x:len(x[0]))
+                shown=e["name"] if alias==normalize(e["name"]) else re.sub(r'\s*[\d,.]+\s*%?\s*$','',e["name"])
+                text+=f' Đã quy đổi cách viết “{shown}” → “{res["ingredient"]}” (tên trong TT20) theo quy tắc chính tả cố định, không theo tên gần giống.'
             for parts,k,e in self.hospital_combos:
                 if k==key and key in combo_hits:
                     text+=f' Đã đối chiếu “{e["name"]}” với dòng phối hợp “{res["ingredient"]}” trong TT20.';break
@@ -424,7 +430,52 @@ class Corpus:
         return self.context_index.expand(selected)
 
     def citation(self,c):
-        return {k:c.get(k) for k in ['id','document_id','locator','source_url','official_url','page','checked_as_of','article','kind','review_status','source_review','source_review_flags','scope','legal_status_review']} | {'excerpt':c['text']}
+        out={k:c.get(k) for k in ['id','document_id','locator','source_url','official_url','page','checked_as_of','article','kind','review_status','source_review','source_review_flags','scope','legal_status_review']} | {'excerpt':c['text']}
+        checked=self.source_pages['pages'].get(c.get('id'))
+        if checked and not out.get('page'):
+            out['page']=checked['pages'][0];out['page_checked']=True
+        return out
+
+    def source_quote(self,record_ids,highlights=()):
+        """The source note of each TT20 row, quoted exactly as stored, with the parts the
+        answer relies on marked by their position in that text (never re-typed). A page is
+        given only when it was checked by eye; otherwise the PDF opens without a page."""
+        quotes=[]
+        for rid in record_ids:
+            row=self.by_id.get(rid)
+            if not row:continue
+            text=row.get('conditions_verbatim') or ''
+            marks=[]
+            for h in highlights:
+                i=text.find(h) if h else -1
+                if i>=0 and not any(a<=i<b for a,b in marks):marks.append((i,i+len(h)))
+            checked=self.source_pages['pages'].get(rid)
+            appendix='Phụ lục II' if row.get('appendix')=='II' else 'Phụ lục I'
+            pdf=self.source_pages.get('pdf') or '/sources/15-vbhn-byt-2024.pdf'
+            quotes.append({'record_id':rid,'document':'TT20/2022/TT-BYT (bản hợp nhất 15/VBHN-BYT)',
+                'locator':f"{appendix}, STT {row['stt']} · {row['ingredient']} · {row['route']}",
+                'text':text,'empty':not text,'highlights':[{'start':a,'end':b} for a,b in sorted(marks)],
+                'page':checked['pages'][0] if checked else None,'pages':checked['pages'] if checked else [],
+                'page_checked':bool(checked),
+                'pdf_url':pdf+(f"#page={checked['pages'][0]}" if checked else ''),
+                'official_url':row.get('official_consolidated_url'),'_key':(row.get('appendix'),row['stt'],text),'_route':row['route'],'record_ids':[rid]})
+        # One quote per STT and note: "Morphin, STT 50 · Tiêm / Uống" shares one source cell.
+        merged=[]
+        for q in quotes:
+            same=next((m for m in merged if m['_key']==q['_key']),None)
+            if same:
+                same['record_ids'].append(q['record_id']);same['_routes'].append(q['_route'])
+                same['pages']=sorted(set(same['pages'])|set(q['pages']))
+                if not same['page_checked'] and q['page_checked']:
+                    same.update({k:q[k] for k in ('page','page_checked','pdf_url')})
+                continue
+            q['_routes']=[q['_route']];merged.append(q)
+        for q in merged:
+            if len(q['_routes'])>1:
+                head=q['locator'].rsplit(' · ',1)[0];q['locator']=head+' · '+' / '.join(q['_routes'])
+            for k in ('_key','_route','_routes'):q.pop(k,None)
+        return merged
+
 
     def chat(self,message,state=None,as_of=None,*,allow_ai=True):
         message=message.strip();state=state or {}
@@ -660,7 +711,8 @@ class Corpus:
             name=rows[0]["ingredient"]
             if '+' not in name or name in answered:continue
             parts=[' '.join(w for w in normalize(p).split() if w not in SALT_WORDS) for p in re.sub(r'\([^)]*\)','',name).split('+')]
-            if all(parts) and all(' '+p+' ' in q for p in parts):
+            hospital=[parts for parts,k,_ in self.hospital_combos if k==key]
+            if (all(parts) and all(' '+p+' ' in q for p in parts)) or any(all(' '+p+' ' in q for p in hp) for hp in hospital):
                 out.append(f"Danh mục còn có dạng phối hợp “{name}”; nếu ý bạn là thuốc phối hợp, hỏi lại với dấu “+” (ví dụ “{name}”).")
         return out[:2]
 
@@ -724,7 +776,14 @@ class Corpus:
             # The hospital spelling of a recognised medicine ("Amoxicillin/ Clavulanic Acid").
             for e in self.hospital.get(normalize(g[0]["ingredient"]),[]):
                 covered.update(normalize(e["name"]).split())
+        tokens=[]
         for t in re.findall(r"[^\s,.;:!?()\[\]\"'“”‘’]+",message):
+            # Names glued with "/" or "+" ("Pertuzumab/Trastuzumab") are separate medicines; so are
+            # word-word joins like "Trastuzumab-Pertuzumab" (codes such as "T-DM1", "I-131" stay whole).
+            for piece in re.split(r"[/+]",t):
+                parts=piece.strip("-").split("-")
+                tokens+=parts if len(parts)>1 and all(len(x)>=4 and x.isalpha() for x in parts) else [piece]
+        for t in tokens:
             t=t.strip("-+/")
             lw=t.lower();nt=normalize(t)
             if not t or not t.isascii() or lw in NOT_DRUG_WORDS or lw in SALT_WORDS:continue

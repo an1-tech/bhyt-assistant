@@ -9,3 +9,10 @@
 .followup-chips{margin-top:16px}.followup-chips strong{display:block;font-size:13px;color:var(--muted);margin-bottom:8px}
 .confirm-block{margin-top:16px;padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface)}.confirm-block>strong{display:block;font-size:14px}.confirm-block .hint{margin:4px 0 8px;font-size:13px;color:var(--muted)}.confirm-item{margin-top:10px}.confirm-label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
 .assistant button{scroll-margin-top:140px;scroll-margin-bottom:280px}
+
+/* Direct quotation of the source note */
+.source-quote{margin:16px 0 4px;padding:12px 16px;border-left:3px solid var(--evidence);background:var(--ground);border-radius:0 6px 6px 0}
+.source-quote figcaption{font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px;overflow-wrap:anywhere}
+.source-quote blockquote{margin:0;font-size:15px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
+.source-quote mark{background:#fde68a;color:inherit;padding:0 2px;border-radius:2px}
+.source-quote .source-links{margin-top:4px}.source-quote .hint{margin:0}
