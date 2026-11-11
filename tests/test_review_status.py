@@ -103,5 +103,66 @@ class RefusalsAreAnswered(unittest.TestCase):
             server.shutdown(); server.server_close(); thread.join()
 
 
+class OversizedRefusals(unittest.TestCase):
+    """A refused request far larger than the limit was still reset now and then: only the first
+    20 KB of it was read. The rest is now read and discarded, or the connection closed gently."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.server = make_server(0)
+        cls.thread = threading.Thread(target=cls.server.serve_forever, daemon=True)
+        cls.thread.start()
+        cls.base = f'http://127.0.0.1:{cls.server.server_port}'
+        with urlopen(cls.base + '/api/health') as response:
+            cls.token = json.load(response)['token']
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.server.shutdown(); cls.server.server_close(); cls.thread.join()
+
+    def refused(self, size, headers, times):
+        from urllib.error import HTTPError
+        from urllib.request import Request
+        body = json.dumps({'message': 'x' * size}).encode()
+        codes = []
+        for _ in range(times):
+            try:
+                urlopen(Request(self.base + '/api/chat', data=body, headers={'Content-Type': 'application/json', **headers}), timeout=30)
+                codes.append(200)
+            except HTTPError as error:
+                codes.append(error.code)
+        return set(codes)
+
+    def test_half_megabyte(self):
+        self.assertEqual(self.refused(500_000, {}, 25), {403})
+        self.assertEqual(self.refused(500_000, {'X-Session-Token': self.token}, 25), {413})
+
+    def test_several_megabytes(self):
+        self.assertEqual(self.refused(3_000_000, {}, 10), {403})
+        self.assertEqual(self.refused(3_000_000, {'X-Session-Token': self.token}, 10), {413})
+
+    def test_beyond_what_the_server_will_read(self):
+        self.assertEqual(self.refused(20_000_000, {}, 2), {403})
+        self.assertEqual(self.refused(20_000_000, {'X-Session-Token': self.token}, 2), {413})
+
+    def test_an_ordinary_question_still_works_afterwards(self):
+        from urllib.request import Request
+        request = Request(self.base + '/api/chat', data=json.dumps({'message': 'Paracetamol'}).encode(),
+                          headers={'Content-Type': 'application/json', 'X-Session-Token': self.token})
+        with urlopen(request) as response:
+            self.assertEqual(json.load(response)['results'][0]['ingredient'], 'Paracetamol (acetaminophen)')
+
+
+class SourceLabel(unittest.TestCase):
+    def test_lab_source_is_named_in_one_place_only(self):
+        script = (ROOT / 'web/app.js').read_text(encoding='utf-8')
+        start = script.index('function sourceStamp(data)')
+        end = script.index('\n', start)
+        outside = script[:start] + script[end:]
+        self.assertNotIn('Nguồn xét nghiệm kiểm tra', outside)        # footer and copied text both call sourceStamp()
+        self.assertEqual(outside.count('sourceStamp(data)'), 2)
+        self.assertIn("data.domain==='lab'||data.domain==='mixed'", script[start:end])
+
+
 if __name__ == '__main__':
     unittest.main()

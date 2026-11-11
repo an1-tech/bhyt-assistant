@@ -233,3 +233,12 @@ Người rà soát chỉ ra: ghi chú nói "đã thẩm định" nhưng chân c�
 - Server đọc hết nội dung yêu cầu trước khi từ chối (403/404/413/415). Trước đây thỉnh thoảng máy khách bị ngắt kết nối thay vì nhận mã lỗi; đây là nguyên nhân 1–2 kiểm thử HTTP lúc đạt lúc lỗi.
 
 Kiểm thử: `tests/test_review_status.py` (7 kiểm thử); tổng 429 kiểm thử backend, chạy 6 lượt liên tiếp đều đạt; 132 và 67 kiểm tra giao diện.
+
+## Rà soát lần 5 ngày 11/11/2026: 2 điểm, đã sửa
+
+| # | Điểm nêu | Sau khi sửa |
+|---|---|---|
+| 1 | Yêu cầu quá lớn (khoảng 0,5 MB trở lên) bị từ chối vẫn có lượt bị ngắt kết nối, vì server chỉ đọc 20 KB đầu | Phần còn lại được đọc và bỏ đi, tối đa 16 MB, rồi mới trả 403 hoặc 413. Lớn hơn mức đó thì server trả lời xong mới đóng kết nối từ từ. Mỗi kết nối có giới hạn chờ 30 giây |
+| 2 | Phần sao chép của câu trả lời về thuốc vẫn ghi "Nguồn xét nghiệm kiểm tra…" | Chân câu trả lời và phần sao chép dùng chung một hàm (`sourceStamp`), chỉ nêu nguồn xét nghiệm khi câu trả lời có xét nghiệm |
+
+Kiểm thử: thêm 5 kiểm thử vào `tests/test_review_status.py` (yêu cầu 0,5 MB, 3 MB và 20 MB bị từ chối đều nhận đúng mã lỗi); tổng 434 kiểm thử backend, 135 và 67 kiểm tra giao diện.

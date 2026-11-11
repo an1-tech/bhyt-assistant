@@ -2,18 +2,21 @@
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse,parse_qs
-import argparse,hashlib,json,secrets,sys
+import argparse,hashlib,json,secrets,socket,sys
 from engine import Corpus,load_env,ROOT,SNAPSHOT,RETRIEVAL_VERSION
 from catalog import metadata,catalog,DEPARTMENTS
 from case_workbench import CaseWorkbench
 
 APP_VERSION="1.11"
+MAX_BODY=20000               # the longest chat request accepted
+DRAIN_LIMIT=16*1024*1024     # how much of a refused body is read and discarded
 INSTANCE_ID=hashlib.sha256(str(ROOT.resolve()).casefold().encode()).hexdigest()[:20]
 load_env()
 
 def make_server(port=8765,corpus=None):
     corpus=corpus or Corpus();token=secrets.token_urlsafe(24);workbench=CaseWorkbench(corpus)
     class Handler(BaseHTTPRequestHandler):
+        timeout=30                 # a client that stops sending cannot hold a thread for ever
         def log_message(self,*args):pass
         def send(self,status,body,ctype='application/json; charset=utf-8'):
             if not isinstance(body,bytes):body=json.dumps(body,ensure_ascii=False).encode()
@@ -21,6 +24,15 @@ def make_server(port=8765,corpus=None):
             self.send_header('Cache-Control','no-store');self.send_header('X-Content-Type-Options','nosniff');self.send_header('Referrer-Policy','no-referrer')
             self.send_header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'")
             self.end_headers();self.wfile.write(body)
+            if getattr(self,'unread_body',False):
+                # More was announced than this server will read: finish our side, then let the
+                # client finish sending for a moment, so it receives the reply instead of a reset.
+                self.close_connection=True
+                try:
+                    self.wfile.flush();self.connection.shutdown(socket.SHUT_WR);self.connection.settimeout(2)
+                    for _ in range(4096):
+                        if not self.connection.recv(65536):break
+                except OSError:pass
         def trusted_host(self):
             return self.headers.get('Host','') in [f'127.0.0.1:{self.server.server_port}',f'localhost:{self.server.server_port}']
         def do_GET(self):
@@ -84,12 +96,20 @@ def make_server(port=8765,corpus=None):
             # Windows reset the connection, and the client then sees an abort instead of the 403.
             try:length=int(self.headers.get('Content-Length','0'))
             except ValueError:length=0
-            raw=self.rfile.read(min(length,20001)) if length>0 else b''
+            raw=self.rfile.read(min(length,MAX_BODY+1)) if length>0 else b''
+            # An oversized body is refused too, so the rest of it is read and thrown away (never
+            # kept) up to DRAIN_LIMIT; past that the connection is closed gently after the reply.
+            left=max(length,0)-len(raw);drained=0
+            while left>0 and drained<DRAIN_LIMIT:
+                chunk=self.rfile.read(min(65536,left))
+                if not chunk:break
+                left-=len(chunk);drained+=len(chunk)
+            self.unread_body=left>0
             if not self.trusted_host() or self.headers.get('X-Session-Token')!=token:self.send(403,{'error':'Phiên không hợp lệ. Tải lại trang.'});return
             if urlparse(self.path).path not in ('/api/chat','/api/case/evaluate'):self.send(404,{'error':'Không tìm thấy.'});return
             if not self.headers.get('Content-Type','').startswith('application/json'):self.send(415,{'error':'Yêu cầu JSON.'});return
             try:
-                if length<1 or length>20000:self.send(413,{'error':'Nội dung quá dài.'});return
+                if length<1 or length>MAX_BODY:self.send(413,{'error':'Nội dung quá dài.'});return
                 payload=json.loads(raw)
                 if urlparse(self.path).path=='/api/case/evaluate':
                     if not isinstance(payload,dict) or payload.get("department","Tất cả các khoa") not in DEPARTMENTS:raise ValueError("Khoa hoặc dữ liệu ca không hợp lệ.")

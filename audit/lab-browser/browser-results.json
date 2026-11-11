@@ -141,6 +141,10 @@
       "passed": true
     },
     {
+      "name": "Copied text names the lab source only for a lab reply 1440",
+      "passed": true
+    },
+    {
       "name": "Submitted question: Xét nghiệm troponin có được BHYT không?",
       "passed": true
     },
@@ -317,6 +321,10 @@
       "passed": true
     },
     {
+      "name": "Copied text names the lab source only for a lab reply 768",
+      "passed": true
+    },
+    {
       "name": "Submitted question: Xét nghiệm troponin có được BHYT không?",
       "passed": true
     },
@@ -490,6 +498,10 @@
     },
     {
       "name": "Drug reply: drug source date, same review status in footer, notes and copied text 390",
+      "passed": true
+    },
+    {
+      "name": "Copied text names the lab source only for a lab reply 390",
       "passed": true
     },
     {
