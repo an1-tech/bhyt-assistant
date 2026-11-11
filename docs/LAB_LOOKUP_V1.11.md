@@ -149,3 +149,42 @@ Cả 8 điểm trong bản nhận xét đều tái hiện được. Ba lỗi đ�
 - Chat chạy bằng quy tắc và mẫu câu, không gọi mô hình ngôn ngữ. Cách đọc mới thu hẹp lỗi phủ định nhưng không bảo đảm hiểu mọi cách diễn đạt; khi không chắc thì chatbot hỏi lại.
 - 24 dòng bản scan mở ảnh nguyên trang, chưa đánh dấu đúng dòng.
 - Phần thuốc chỉ có số trang đã kiểm cho 60 dòng; các dòng khác mở PDF từ đầu.
+
+## Rà soát bên ngoài lần 2 ngày 11/11/2026: thêm 8 lỗi, đổi nguyên tắc kết luận
+
+Cả 8 điểm của lần rà soát thứ hai đều tái hiện được và đã sửa. Tự thử thêm 73 cách diễn đạt khác còn thấy 16 câu sai (“từ chối insulin”, “mẹ bệnh nhân bị đái tháo đường”, “kết quả bị hủy”…). Kết luận rút ra: đọc theo mẫu câu thì không bao giờ hết trường hợp sót, nên đổi nguyên tắc.
+
+**Nguyên tắc mới**
+- Chatbot chỉ kết luận “khớp” hoặc “không khớp” thẳng từ câu hỏi khi mọi từ trong câu đều thuộc danh sách từ đã biết (`ACCOUNTED` trong `lab_lookup.py`) và câu không có từ thể hiện sự chưa chắc.
+- Nếu còn từ chưa hiểu chắc, chatbot nêu rõ các từ đó, trình bày “Chatbot hiểu dữ kiện như sau” và chờ bác sĩ bấm “Đúng, đối chiếu theo các dữ kiện này”. Bấm xong mới có kết luận, mở đầu bằng “Theo các dữ kiện bạn vừa xác nhận”.
+- Nếu cách hiểu sai, bác sĩ gõ lại dữ kiện cần sửa thay vì bấm xác nhận.
+- Lượt xác nhận không đọc lại câu chữ nào. Dữ kiện nằm trong trạng thái có chữ ký nên không sửa được từ trình duyệt.
+- Danh sách từ đã biết giữ dấu tiếng Việt, để “hội” (hội chẩn) không bị coi là “hỏi”. Gõ không dấu thì so theo dạng không dấu.
+- Phần “Chatbot hiểu dữ kiện như sau” hiện ở mọi câu trả lời có đối chiếu ca bệnh, kể cả khi kết luận thẳng.
+
+**Tám lỗi của lần 2**
+
+| # | Lỗi | Sau khi sửa |
+|---|---|---|
+| 1 | “Có thể nhằm chẩn đoán đột biến” vẫn kết luận khớp | Mục đích chỉ được ghi nhận khi mọi lần nhắc đều rõ ràng; còn lại hỏi lại |
+| 2 | Phủ định dài (“chưa có đủ bằng chứng để chẩn đoán xác định…”) và chẩn đoán được đính chính | Xét cả vế câu thay vì 6 từ; một bệnh vừa được nêu vừa bị phủ định thì hỏi lại |
+| 3 | “Chưa xác định có đái tháo đường thai kỳ” vẫn áp nhánh thai kỳ | Thai kỳ được đọc như mọi dữ kiện khác; chưa rõ thì hỏi |
+| 4 | “Lần đầu tại bệnh viện này” bị hiểu là chưa từng làm | “Lần đầu” chỉ tính khi nói về chính xét nghiệm; kèm nơi chốn hoặc “khám lần đầu” thì hỏi ngày lần trước |
+| 5 | “Không tầm soát mà…” vẫn bị ghi là tầm soát, kể cả khi sửa ở lượt sau | Tầm soát chỉ ghi khi nói rõ; lượt sau sửa lại thì thay mục đích cũ |
+| 6 | “Cả xét nghiệm HER2 và Trastuzumab… chưa có kết quả” mất phần thuốc | Câu “cả… và…” luôn trả đủ hai phần |
+| 7 | “Định type HLA-B bằng PCR-SSP” bị coi là kỹ thuật khác | Chỉ các xét nghiệm alen riêng (B27, B*5801, B*1502), NGS, flow… mới bị coi là khác dòng |
+| 8 | Nguồn xét nghiệm hỏng bị bỏ qua không báo trong câu trả lời gộp | Câu trả lời gộp ghi rõ xét nghiệm nào chưa trả lời vì tệp nguồn hỏng |
+
+**Sửa thêm ngoài tám lỗi**
+- Khoảng cách ước lượng (“gần 100 ngày”, “chưa đến 3 tháng”, “khoảng…”) không được so với mốc ngày; chatbot hỏi ngày chính xác.
+- “Từng dùng”, “trước đây”, “đã điều trị xong” được hiểu là chuyện đã qua, không phải hiện tại.
+- “Chắc là”, “hình như”, “gia đình”, “người nhà” đi trước một dữ kiện thì dữ kiện đó chưa được khẳng định.
+- “Insulin tạm ngưng”, “mới ngưng”, “chưa cần đến insulin” được hiểu là không dùng.
+
+**Kiểm thử**
+- `tests/test_lab_review7.py`: 15 kiểm thử, gồm 33 câu “không được kết luận nếu chưa xác nhận hoặc hỏi lại”.
+- 396 kiểm thử backend; 123 và 67 kiểm tra giao diện.
+
+**Hệ quả cần biết**
+- Câu hỏi có thêm chi tiết lâm sàng ngoài danh sách từ đã biết (ví dụ “bước 2”, “thuốc viên”, “suy thận”) sẽ cần thêm một lần bấm xác nhận. Đây là đánh đổi có chủ ý: thà hỏi thêm còn hơn kết luận sai.
+- Lớp chặn này chỉ bảo đảm chatbot không kết luận khi gặp từ lạ. Một câu chỉ gồm từ đã biết nhưng ghép theo cách chưa lường tới vẫn có thể bị hiểu sai; khi đó phần “Chatbot hiểu dữ kiện như sau” là chỗ để bác sĩ phát hiện.

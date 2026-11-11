@@ -5,7 +5,7 @@
   "base_commit": "89cef56",
   "backend": {
     "command": "python -B -m unittest discover -s tests",
-    "passed": 381,
+    "passed": 396,
     "failed": 0,
     "skipped": 0,
     "log": "audit/lab-v1.11-tests.log"
@@ -18,7 +18,7 @@
       390
     ],
     "inspector_warnings": 1,
-    "passed": 111,
+    "passed": 123,
     "inspector_failures": 0,
     "checks": "audit/lab-browser/browser-results.json",
     "inspector": "audit/lab-browser/inspect/report.json",
@@ -45,5 +45,12 @@
     "confirmed": 8,
     "fixed": 8,
     "regression_tests": "tests/test_lab_review6.py"
+  },
+  "external_review_2_2026_11_11": {
+    "findings": 8,
+    "confirmed": 8,
+    "fixed": 8,
+    "own_sweep": "73 phrasings, 16 wrong before the confirmation layer, 0 decided wrongly after",
+    "regression_tests": "tests/test_lab_review7.py"
   }
 }

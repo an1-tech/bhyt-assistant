@@ -618,6 +618,8 @@ class Corpus:
                     drug['domain']='mixed'
                     drug['source_checked_as_of']=result.get('source_checked_as_of')
                     drug['state']={**drug.get('state',{}),**result.get('state',{})}
+                    # A lab row left out (damaged source) is said in the combined answer too.
+                    if result.get('notice'):drug['notice']=' '.join(x for x in (drug.get('notice'),result['notice']) if x)
                     result=drug
             else:
                 # A switch to medication must not carry laboratory dates or purpose.

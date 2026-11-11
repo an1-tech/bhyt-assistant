@@ -32,6 +32,13 @@ class Base(unittest.TestCase):
     def lab(self, q, prev=None):
         return self.ask(q, prev)['lab_results'][0]
 
+    def settle(self, q, prev=None):
+        """The conclusion after the one-click confirmation that a question with unread words needs."""
+        r = self.ask(q, prev)
+        if r['lab_results'][0]['status'] == 'needs_confirmation':
+            r = self.ask('Đúng, đối chiếu theo các dữ kiện này', r)
+        return r['lab_results'][0]
+
 
 class ReadingMechanism(unittest.TestCase):
     def state(self, text, keyword='insulin', fillers=F_USE, **kw):
@@ -77,7 +84,7 @@ class Finding1Insulin(Base):
 
     def test_using_insulin_still_matches(self):
         for text in ('đang dùng insulin', 'điều trị bằng insulin', 'không dùng thuốc viên mà dùng insulin', 'đã chuyển sang insulin'):
-            self.assertEqual(self.lab(GDM.format(text))['status'], 'source_conditions_match', text)
+            self.assertEqual(self.settle(GDM.format(text))['status'], 'source_conditions_match', text)
 
 
 class Finding2FirstTest(Base):
@@ -97,7 +104,7 @@ class Finding2FirstTest(Base):
         self.assertEqual(self.lab('chưa làm lần nào', a)['status'], 'source_conditions_match')
 
     def test_first_here_but_done_elsewhere(self):
-        r = self.lab('HbA1c hôm nay xác định phác đồ đái tháo đường, lần đầu tại viện này nhưng đã làm ở viện khác cách 20 ngày')
+        r = self.settle('HbA1c hôm nay xác định phác đồ đái tháo đường, lần đầu tại viện này nhưng đã làm ở viện khác cách 20 ngày')
         self.assertEqual(r['status'], 'source_condition_not_met')
 
 
@@ -126,7 +133,7 @@ class Finding3Gene(Base):
                   'Xét nghiệm EGFR hôm nay cho bệnh nhân ung thư phổi không tế bào nhỏ không hút thuốc đang điều trị',
                   'Xét nghiệm EGFR hôm nay, bệnh nhân NSCLC giai đoạn IV chưa di căn não, để chọn thuốc điều trị',
                   'Xét nghiệm HER2 hôm nay cho bệnh nhân ung thư vú, chưa hóa trị, chuẩn bị điều trị đích'):
-            self.assertEqual(self.lab(q)['status'], 'source_conditions_match', q)
+            self.assertEqual(self.settle(q)['status'], 'source_conditions_match', q)
         r = self.lab('Xét nghiệm HER2 hôm nay cho bệnh nhân ung thư vú đã ngừng điều trị')
         self.assertEqual(r['facts']['disease'], 'breast')            # the disease is not "stopped"
 
@@ -135,8 +142,8 @@ class Finding4to8(Base):
     def test_4_kidney_word_does_not_hide_the_mutation_test(self):
         r = self.ask('Xét nghiệm đột biến gen EGFR cho bệnh nhân ung thư phổi không tế bào nhỏ có suy thận, có được BHYT không')
         self.assertEqual(r['lab_results'][0]['id'], 'egfr')
-        r = self.ask('Xét nghiệm EGFR hôm nay cho bệnh nhân ung thư phổi không tế bào nhỏ đang điều trị, không có suy thận')
-        self.assertEqual(r['lab_results'][0]['status'], 'source_conditions_match')
+        r = self.settle('Xét nghiệm EGFR hôm nay cho bệnh nhân ung thư phổi không tế bào nhỏ đang điều trị, không có suy thận')
+        self.assertEqual((r['id'], r['status']), ('egfr', 'source_conditions_match'))
         self.assertEqual(self.ask('eGFR cho bệnh nhân suy thận có được BHYT không')['status'], 'unknown')
         self.assertEqual(self.ask('eGFR cho bệnh nhân ung thư phổi có suy thận')['status'], 'needs_info')   # really ambiguous: ask
 

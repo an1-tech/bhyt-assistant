@@ -60,7 +60,7 @@ def paragraphs(text):
 # ---- TT39/2024 appendix rows (text layer). Key: (list, STT theo TT35). -----------------
 GENE_SPECIAL = r'\b(?:ngs|pcr|panel|sinh thiet long|mau|huyet tuong|lan thu|lan 2|lan hai|lan 3|lam lai|lap lai|nhac lai|bao nhieu lan|gia|phan tram|ty le)\b'
 # A question that names one of these asks about another HLA test or method than the two rows.
-HLA_OTHER = r'\b(?:ngs|giai trinh tu|the he moi|sanger|flow|luminex|b27|b 27|b5801|b 5801|b1502|b 1502|hla b|hla a|hla c|hla dr|hla dq)\b'
+HLA_OTHER = r'\b(?:ngs|giai trinh tu|the he moi|sanger|flow|luminex|b27|b 27|b5801|b 5801|b1502|b 1502|b 58 01|b 15 02)\b'
 TT39_ROWS = [
     dict(key=(1, 10), id='tumor_markers', name='Các xét nghiệm chỉ điểm khối u (CA 125, CA 15-3, CA 19-9, CA 72-4, CEA)',
          official_name='Các xét nghiệm chỉ điểm khối u bằng kỹ thuật miễn dịch phóng xạ hoặc hóa sinh.',

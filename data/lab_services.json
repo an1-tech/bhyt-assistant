@@ -617,7 +617,7 @@
         45
       ],
       "name_note": "Dòng này chỉ quy định định type HLA cho 1 locus (A, B, C, DR hoặc DQ) bằng kỹ thuật PCR-SSP; xét nghiệm HLA bằng kỹ thuật khác không thuộc dòng này.",
-      "foreign": "\\b(?:ngs|giai trinh tu|the he moi|sanger|flow|luminex|b27|b 27|b5801|b 5801|b1502|b 1502|hla b|hla a|hla c|hla dr|hla dq)\\b",
+      "foreign": "\\b(?:ngs|giai trinh tu|the he moi|sanger|flow|luminex|b27|b 27|b5801|b 5801|b1502|b 1502|b 58 01|b 15 02)\\b",
       "doc": "tt39",
       "transcription": "text_layer",
       "list": 2,
@@ -673,7 +673,7 @@
         "định type hla"
       ],
       "name_note": "Dòng này chỉ quy định định type HLA độ phân giải cao cho 1 locus bằng kỹ thuật PCR-SSO; xét nghiệm HLA bằng kỹ thuật khác không thuộc dòng này.",
-      "foreign": "\\b(?:ngs|giai trinh tu|the he moi|sanger|flow|luminex|b27|b 27|b5801|b 5801|b1502|b 1502|hla b|hla a|hla c|hla dr|hla dq)\\b",
+      "foreign": "\\b(?:ngs|giai trinh tu|the he moi|sanger|flow|luminex|b27|b 27|b5801|b 5801|b1502|b 1502|b 58 01|b 15 02)\\b",
       "conditions": [
         "Thanh toán đối với các trường hợp sau:",
         "a) Người bệnh có chỉ định ghép tạng hoặc ghép tế bào gốc đồng loài khi cần kết quả HLA ở độ phân giải cao.",

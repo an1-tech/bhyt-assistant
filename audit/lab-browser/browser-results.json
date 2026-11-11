@@ -113,6 +113,22 @@
       "passed": true
     },
     {
+      "name": "Submitted question: HbA1c hôm nay theo dõi đái tháo đường thai kỳ, từ chối insulin, lần trước cách 35 ngày",
+      "passed": true
+    },
+    {
+      "name": "Unread words: reading shown, no conclusion, one confirm button 1440",
+      "passed": true
+    },
+    {
+      "name": "Confirm button reachable by keyboard and sends 1440",
+      "passed": true
+    },
+    {
+      "name": "Confirmed reading gives the conclusion with the marked branch 1440",
+      "passed": true
+    },
+    {
       "name": "Submitted question: Xét nghiệm troponin có được BHYT không?",
       "passed": true
     },
@@ -261,6 +277,22 @@
       "passed": true
     },
     {
+      "name": "Submitted question: HbA1c hôm nay theo dõi đái tháo đường thai kỳ, từ chối insulin, lần trước cách 35 ngày",
+      "passed": true
+    },
+    {
+      "name": "Unread words: reading shown, no conclusion, one confirm button 768",
+      "passed": true
+    },
+    {
+      "name": "Confirm button reachable by keyboard and sends 768",
+      "passed": true
+    },
+    {
+      "name": "Confirmed reading gives the conclusion with the marked branch 768",
+      "passed": true
+    },
+    {
       "name": "Submitted question: Xét nghiệm troponin có được BHYT không?",
       "passed": true
     },
@@ -406,6 +438,22 @@
     },
     {
       "name": "Scan page image shown with transcription 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: HbA1c hôm nay theo dõi đái tháo đường thai kỳ, từ chối insulin, lần trước cách 35 ngày",
+      "passed": true
+    },
+    {
+      "name": "Unread words: reading shown, no conclusion, one confirm button 390",
+      "passed": true
+    },
+    {
+      "name": "Confirm button reachable by keyboard and sends 390",
+      "passed": true
+    },
+    {
+      "name": "Confirmed reading gives the conclusion with the marked branch 390",
       "passed": true
     },
     {

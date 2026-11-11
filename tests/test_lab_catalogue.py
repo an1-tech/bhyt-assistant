@@ -37,6 +37,13 @@ class Base(unittest.TestCase):
     def ids(self, q):
         return [x['id'] for x in self.ask(q).get('lab_results', [])]
 
+    def settle(self, q, prev=None):
+        """The conclusion after the one-click confirmation that a question with unread words needs."""
+        r = self.ask(q, prev)
+        if r['lab_results'][0]['status'] == 'needs_confirmation':
+            r = self.ask('Đúng, đối chiếu theo các dữ kiện này', r)
+        return r['lab_results'][0]
+
 
 class Catalogue(Base):
     def test_counts_and_transcription(self):
@@ -207,7 +214,7 @@ class HbA1cReading(Base):
     def test_unconfirmed_diabetes_is_not_confirmed(self):
         for q in ('Bệnh nhân tiền đái tháo đường làm HbA1c hôm nay để theo dõi', 'HbA1c hôm nay cho bệnh nhân chưa có chẩn đoán đái tháo đường, để theo dõi',
                   'HbA1c hôm nay cho bệnh nhân nghi ngờ đái tháo đường, để theo dõi', 'HbA1c hôm nay, rối loạn dung nạp glucose, để theo dõi'):
-            r = self.lab(q)
+            r = self.settle(q)
             self.assertIs(r['facts']['diabetes'], False, q)
             self.assertEqual(r['status'], 'source_condition_not_met', q)
 
