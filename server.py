@@ -36,7 +36,7 @@ def make_server(port=8765,corpus=None):
             if path in lab_files:
                 file=corpus.data/path.removeprefix('/')
                 if file.is_file():
-                    if path.endswith('.png') and not corpus.labs.integrity_ok():
+                    if path.endswith('.png') and not corpus.labs.file_ok(path):
                         self.send(409,{'error':'Nguồn xét nghiệm đã thay đổi; cần đối chiếu lại.'});return
                     self.send(200,file.read_bytes(),lab_files[path]);return
             if path=='/api/health':

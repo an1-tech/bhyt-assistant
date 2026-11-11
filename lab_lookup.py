@@ -34,9 +34,81 @@ def local_today():
     return dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
 
 
+# ---- How a fact is read ----------------------------------------------------------------
+# A keyword ("insulin", "lần đầu", "ung thư vú", "điều trị") is looked at inside its own clause:
+#   'no'       a negation governs it (only filler words in between, or "… đã ngừng" after it)
+#   'unknown'  doubt, plan, question, double negation, or a negation that may or may not govern it
+#   'yes'      otherwise
+# Anything but a plain 'yes'/'no' is asked back, never guessed.
+CLAUSE_SPLIT = re.compile(r'[,;!?\n]+|\.(?=\s|$)|\s+(?:nhưng|nhung|mà|tuy nhiên|tuy nhien)\s+')
+STOPPED = re.compile(r'\b(?:dừng|ngừng|ngưng|hết|thôi|bỏ|cắt)\b')      # with diacritics: "dừng" is not "dùng"
+NEGATORS = ('khong', 'chua', 'chang', 'ko', 'ngung', 'loaitru', 'stopx')
+HEDGE = r'\b(?:du kien|du dinh|co the|se|sap|can nhac|chua ro|khong ro|chua biet|khong biet|chua chac|khong chac|co le|dang cho|cho ket qua|khong nho|khong thay|khong ghi|chua thay|chua ghi|nghi ngo|nghi)\b'
+SUSPECT = HEDGE[:-3] + r'|nguy co|tam soat|sang loc)\b'
+SUSPICION = ('nghi ngo', 'nghi', 'nguy co', 'tam soat', 'sang loc')
+
+
+def clause_list(message):
+    """Normalised clauses; "không tế bào nhỏ" and "loại trừ" become single tokens so that the
+    "không" inside a disease name is never read as a negation of what follows."""
+    out = []
+    for raw in CLAUSE_SPLIT.split(unicodedata.normalize('NFC', str(message).lower())):
+        c = norm(STOPPED.sub(' stopx ', raw))
+        c = re.sub(r'\bkhong (?:phai )?te bao nho\b', 'ktbn', c)
+        c = re.sub(r'\bloai tru\b', 'loaitru', c)
+        if c:
+            out.append(c)
+    return out
+
+
+def governed(clause, start, end, fillers, hedge=HEDGE, stoppable=False):
+    """(state, word) for the keyword at clause[start:end]. `stoppable`: the keyword is a
+    treatment, so "… đã ngừng" after it negates it (never said of a disease)."""
+    before = clause[:start].split()[-6:]
+    after = clause[end:].split()
+    m = re.search(hedge, ' '.join(before))
+    if m:
+        return 'unknown', m.group(0)
+    if stoppable and re.match(r'(?:(?:thi|la|nay|hien|tai|da|roi|nua|cung) )*(?:stopx|ngung)\b', ' '.join(after[:6])):
+        return 'no', 'stopx'                                  # "insulin nay đã ngưng"
+    if re.fullmatch(r'(?:(?:thi|la|hay) )*(?:khong|chua)(?: (?:a|nhi|vay|nua))?', ' '.join(after)):
+        return 'unknown', 'question'                          # "… dùng insulin không?"
+    neg = [i for i, w in enumerate(before) if w in NEGATORS]
+    if not neg:
+        return 'yes', None
+    if len(neg) > 1:
+        return 'unknown', 'double'                            # "chưa loại trừ", "không phải không"
+    between = before[neg[-1] + 1:]
+    if all(w in fillers for w in between):
+        return 'no', before[neg[-1]]
+    if between[-1] in ('dang', 'da'):
+        return 'yes', None                                    # "… không hút thuốc đang điều trị": the negation ended earlier
+    return ('unknown', 'far') if len(between) <= 3 else ('yes', None)
+
+
+def mentions(clauses, pattern, fillers, hedge=HEDGE, stoppable=False):
+    """[(state, word, clause, match)] for every occurrence of the keyword."""
+    out = []
+    for c in clauses:
+        for m in re.finditer(r'\b(?:' + pattern + r')\b', c):
+            out.append(governed(c, m.start(), m.end(), fillers, hedge, stoppable) + (c, m))
+    return out
+
+
+def verdict(found):
+    """One answer for a fact named several times: any doubt or contradiction is 'unknown'."""
+    states = {x[0] for x in found}
+    return None if not states else 'unknown' if 'unknown' in states or len(states) > 1 else states.pop()
+
+
+F_USE = {'co', 'con', 'can', 'phai', 'duoc', 'chi', 'dinh', 'dung', 'su', 'tiem', 'dieu', 'tri', 'bang', 'voi', 'thuoc', 'them', 'nua', 'tung', 'dang'}
+F_IS = {'phai', 'la', 'bi', 'mac', 'co', 'cho', 'benh', 'nhan', 'nguoi', 'truong', 'hop', 'duoc', 'chan', 'doan', 'xac', 'dinh', 'ro', 'ket', 'luan',
+        'khang', 'tung', 'tien', 'su', 'du', 'tieu', 'chuan', 'ly'}
+F_PURPOSE = {'phai', 'la', 'de', 'nham', 'muc', 'dich', 'dung', 'lam', 'trong', 'qua', 'trinh', 'dang', 'duoc', 'co', 'cho', 'viec'}
+
 # Diseases named in a question; the more specific pattern comes first.
 DISEASES = [
-    ('nsclc', 'ung thư phổi không tế bào nhỏ', r'nsclc|ung thu phoi khong (?:phai )?te bao nho|utp khong te bao nho'),
+    ('nsclc', 'ung thư phổi không tế bào nhỏ', r'nsclc|ung thu phoi ktbn|utp ktbn'),      # after clause_list()
     ('sclc', 'ung thư phổi tế bào nhỏ', r'sclc|ung thu phoi te bao nho'),
     ('lung_unspecified', 'ung thư phổi (chưa nêu thể bệnh)', r'ung thu phoi'),
     ('breast', 'ung thư vú', r'ung thu vu'),
@@ -56,8 +128,6 @@ DISEASES = [
 ]
 DISEASE_LABEL = {k: label for k, label, _ in DISEASES}
 DIABETES = r'(?:dai thao duong|dtd|tieu duong)'
-NOT_CONFIRMED_DIABETES = (r'\b(?:khong|chua) (?:duoc |co |bi |mac |tung |phai )*(?:chan doan (?:xac dinh )?(?:la |bi |mac )?)?' + DIABETES + r'\b'
-                          r'|\btien ' + DIABETES + r'\b|\b(?:nghi ngo|nghi|nguy co|tam soat|sang loc) (?:bi |mac |co )?' + DIABETES + r'\b|\broi loan dung nap\b')
 # Other tests a doctor may name; never answered with another service's rule.
 COMMON_TESTS = (r'\b(?:troponin|creatinin|ure mau|glucose|duong huyet|duong mau|men gan|ast|alt|got|gpt|ggt|bilirubin|cholesterol|triglycerid|mo mau|lipid mau|'
                 r'tsh|ft3|ft4|d dimer|psa|afp|ferritin|inr|dong mau|dien giai do|khi mau|nuoc tieu|hbsag|anti hcv|anti hbs|cay mau|vitamin d|acid uric|'
@@ -108,11 +178,21 @@ class LabLookup:
         if not self.source:
             return False
         rows = [s for s in self.services.values() if service in (None, s['id'])]
-        files = {(self.doc(s)['local_url'], self.doc(s)['sha256']) for s in rows} | {(self.source['local_url'], self.source['sha256'])}
+        files = {(self.doc(s)['local_url'], self.doc(s)['sha256']) for s in rows}
+        if service is None:
+            files.add((self.source['local_url'], self.source['sha256']))
         for s in rows:
             for image in s.get('images') or [{'url': s['image_url'], 'sha256': s['image_sha256']}]:
                 files.add((image['url'], image['sha256']))
         return all(self._hash_ok(url, expected) for url, expected in files)
+
+    def file_ok(self, url):
+        """One row/page image is the file that was checked (other files do not matter)."""
+        for s in self.services.values():
+            for image in s.get('images') or [{'url': s['image_url'], 'sha256': s['image_sha256']}]:
+                if image['url'] == url:
+                    return self._hash_ok(url, image['sha256'])
+        return False
 
     def served_files(self):
         """Local files the server may send: source PDFs and row/page images."""
@@ -152,6 +232,13 @@ class LabLookup:
                     i != sid and 'giai trinh tu' in norm(self.services[i]['name']) for i in ids)):
                 ids.remove(sid)
         loose = {sid for sid in ids if all(x[3] == 'loose' for x in kept if x[2] == sid)}
+        # "HLA bằng PCR-SSP": the row named by its own method wins over a row that only shares
+        # the general word.
+        strong = [sid for sid in ids if sid not in loose]
+        for sid in sorted(loose):
+            words = {q[a:b] for a, b, i, _ in kept if i == sid}
+            if any(words & {alias for alias, other, _ in self.alias_index if other == o} for o in strong):
+                ids.remove(sid); loose.discard(sid)
         spans = {sid: [(x[0], x[1]) for x in kept if x[2] == sid] for sid in ids}
         return ids, loose, spans
 
@@ -167,9 +254,25 @@ class LabLookup:
         test_focus = has(q, r'\b(?:bhyt (?:cua|cho) (?:xet nghiem|xn)|(?:xet nghiem|dich vu|xn|dinh luong).{0,80}(?:co duoc|co bhyt|thanh toan|chi tra|dieu kien)|chi phi xet nghiem)\b')
         both = bool(drug_hits or state.get('selected_ids') or has(q, r'\bthuoc\b')) and has(q, r'\b(?:ca hai|ca thuoc va|ca xet nghiem va|va (?:thuoc|erlotinib|gefitinib|afatinib|osimertinib)|va (?:ca )?xet nghiem)\b')
         markers = [i for i in ids if self.services[i].get('marker')]
-        if renal and 'egfr' in ids:
-            return {'ids': [], 'kind': 'renal'}
-        if 'egfr' in ids and re.search(r'\beGFR\b', message) and not has(q, r'\b(?:dot bien|gen|ung thu|nsclc)\b') and not drug_hits:
+        # "Cả xét nghiệm HER2 và Trastuzumab …", "HbA1c và Metformin …": a medicine and a test joined
+        # by "và/cùng/lẫn", whatever the medicine is. The test must be an operand of the conjunction
+        # (not a result such as "HER2 dương tính" elsewhere in a medicine question).
+        if drug_hits and ids and not both:
+            joined = False
+            for i in ids:
+                for start, end in spans[i]:
+                    left, right = q[:start], q[end:]
+                    if has(right, r'^(?: \w+){0,3} (?:va|cung|lan)(?: ca)?(?: thuoc)? \w') or has(left, r'\b(?:va|cung|lan)(?: ca)?(?: viec)?(?: lam)?(?: (?:xet nghiem|dinh luong|xn))?(?: dot bien(?: gen)?)? $'):
+                        joined = True
+            both = joined and not (markers and marker)
+        # "Xét nghiệm đột biến gen EGFR … có suy thận" is the mutation test; a kidney word only
+        # redirects when nothing says mutation, and asks when a cancer is named as well.
+        mutation = has(q, r'\b(?:dot bien|gen|gene)\b')
+        cancer = has(q, r'\b(?:ung thu|nsclc|utp)\b')
+        lower_e = bool(re.search(r'\beGFR\b', message))
+        if renal and 'egfr' in ids and not mutation and (lower_e or not cancer):
+            return {'ids': [], 'kind': 'ambiguous_egfr' if cancer else 'renal'}
+        if 'egfr' in ids and re.search(r'\beGFR\b', message) and not mutation and not cancer and not drug_hits:
             return {'ids': [], 'kind': 'ambiguous_egfr'}
         # Insulin used to describe the HbA1c exception is not a second coverage question.
         only_insulin_context = 'hba1c' in ids and has(q, r'\bthai ky\b') and not both
@@ -202,12 +305,14 @@ class LabLookup:
         named_other = has(q, COMMON_TESTS)
         if explicit_test or named_other:
             # A newly named test that is not in the lists must never reuse another service's rule.
-            referring = has(q, r'\b(?:xet nghiem (?:nay|do|lai|lan)|lan truoc|lan dau|lan thu|dinh luong lai)\b')
+            # "Xét nghiệm để chẩn đoán đột biến trong điều trị" answers the bot's own question
+            # about the test under discussion; "xét nghiệm ABC …" names another test.
+            referring = has(q, r'\b(?:(?:xet nghiem|xn|dinh luong) (?:nay|do|lai|lan|de|nham|la|duoc|hom nay|cho benh nhan|da|se|dang|thi|khi|truoc|tren)|lan truoc|lan dau|lan thu|dinh luong lai)\b')
             if named_other or not (lab_state and referring):
                 return {'ids': [], 'kind': 'unsupported'}
         if has(q, OTHER_SERVICES) and has(q, COVERAGE) and not state.get('selected_ids'):
             return {'ids': [], 'kind': 'other_service'}
-        followup = has(q, r'\b(?:dieu kien|quy dinh|nguon|ngay|tuan|thang|lan truoc|lan dau|lan thu|dai thao duong|dtd|thai ky|insulin|phac do|theo doi|danh gia|dieu tri|chan doan|ung thu|nsclc|te bao nho|tam soat|sang loc|khong ro|chua ro|khong nho|khong biet|khong dung|chua dung)\b') or has(message, r'\d{1,4}[/.-]\d{1,2}[/.-]\d{1,4}')
+        followup = has(q, r'\b(?:dieu kien|quy dinh|nguon|ngay|tuan|thang|lan truoc|lan dau|lan thu|dai thao duong|dtd|thai ky|insulin|phac do|theo doi|danh gia|dieu tri|chan doan|ung thu|nsclc|te bao nho|tam soat|sang loc|khong ro|chua ro|khong nho|khong biet|khong dung|chua dung|chua lam|chua tung|da lam|da xet nghiem)\b') or has(message, r'\d{1,4}[/.-]\d{1,2}[/.-]\d{1,4}')
         if lab_state.get('id') in self.services and followup:
             return {'ids': [lab_state['id']], 'kind': 'lab'}
         if lab_state.get('pending') in ('insulin', 'diabetes', 'disease', 'purpose') and q in YES_NO:
@@ -246,16 +351,21 @@ class LabLookup:
                            'answer': f'Chưa thấy xét nghiệm đang hỏi trong {n} dòng xét nghiệm có điều kiện thanh toán riêng đã nạp (Thông tư 39/2024 và bản hợp nhất 17/VBHN-BYT). '
                                      'Hai danh mục này chỉ liệt kê dịch vụ có điều kiện riêng; xét nghiệm không có dòng riêng thì áp dụng quy định thanh toán chung. '
                                      'Chatbot khớp theo tên nên có thể sót tên gọi khác: không tìm thấy ở đây không có nghĩa là BHYT không chi trả, cũng chưa khẳng định xét nghiệm này không có điều kiện.'}
-        if not self.integrity_ok():
-            return base | {'status': 'source_unavailable', 'answer': 'Nguồn xét nghiệm bị thiếu hoặc đã thay đổi. Cần đối chiếu lại tài liệu trước khi trả lời điều kiện BHYT.'}
+        # A damaged file stops only the services that cite it, not the whole laboratory module.
+        usable = [sid for sid in route['ids'] if self.integrity_ok(sid)]
+        broken = [self.services[sid]['name'] for sid in route['ids'] if sid not in usable]
+        if not usable:
+            return base | {'status': 'source_unavailable', 'answer': 'Nguồn của xét nghiệm đang hỏi bị thiếu hoặc đã thay đổi. Cần đối chiếu lại tài liệu trước khi trả lời điều kiện BHYT.'}
+        if broken:
+            base['notice'] = 'Chưa trả lời cho: ' + '; '.join(broken) + ' — tệp nguồn của dòng này bị thiếu hoặc đã thay đổi, cần đối chiếu lại.'
         single = len(route['ids']) == 1
-        for sid in route['ids']:
+        for sid in usable:
             row = self.services[sid]
             prev = state.get('lab', {}) if single else {}
             facts, case, errors = self.extract(message, sid, prev, today)
             if not single:
                 # Dates/purposes in a multi-service question cannot be attributed safely.
-                facts, case, errors = {}, False, []
+                facts, case, errors = {k: v for k, v in facts.items() if k == 'foreign_method'}, False, []
             a = self.evaluate(sid, facts, case, errors, today)
             notes = []
             if sid in route.get('loose', []) and row.get('name_note'):
@@ -280,23 +390,24 @@ class LabLookup:
 
     # ---- facts of the case --------------------------------------------------------
     @staticmethod
-    def diseases_in(q):
-        """[(key, state)] with state 'named' | 'negated' | 'unknown', in reading order."""
-        taken, out = set(), []
-        for key, _, pattern in DISEASES:
-            for m in re.finditer(r'\b(?:' + pattern + r')\b', q):
-                if any(a <= m.start() < b for a, b in taken):
-                    continue
-                taken.add((m.start(), m.end()))
-                before = q[max(0, m.start() - 45):m.start()]
-                if has(before, r'\b(?:khong phai|khong bi|khong mac|loai tru)(?: (?:cho|la|benh|benh nhan|truong hop|bi|mac))* $'):
-                    state = 'negated'
-                elif has(before, r'\b(?:chua (?:ro|xac dinh|chan doan)|khong ro|nghi ngo|nghi)(?: (?:co|la|bi|mac|benh|phai))* $'):
-                    state = 'unknown'
-                else:
-                    state = 'named'
-                out.append((m.start(), key, state))
-        return [(k, s) for _, k, s in sorted(out)]
+    def diseases_in(clauses, monitoring_is_doubt=True):
+        """[(key, state)] with state 'named' | 'negated' | 'unknown', in reading order.
+        "chưa có chẩn đoán …", "nghi ngờ …", "chưa loại trừ …" are unknown; only a plain
+        "không phải / không bị / loại trừ …" is negated."""
+        out = []
+        for n, c in enumerate(clauses):
+            taken = []
+            for key, _, pattern in DISEASES:
+                for m in re.finditer(r'\b(?:' + pattern + r')\b', c):
+                    if any(a <= m.start() < b for a, b in taken):
+                        continue
+                    taken.append((m.start(), m.end()))
+                    state, word = governed(c, m.start(), m.end(), F_IS, SUSPECT)
+                    if monitoring_is_doubt and has(c[:m.start()], r'\b(?:theo doi|td) $'):
+                        state = 'unknown'                      # "theo dõi K phổi": suspected, not diagnosed
+                    result = 'named' if state == 'yes' else 'negated' if state == 'no' and word != 'chua' else 'unknown'
+                    out.append((n, m.start(), key, result))
+        return [(k, s) for _, _, k, s in sorted(out)]
 
     def extract(self, message, sid, prev, today):
         q = norm(message)
@@ -328,72 +439,103 @@ class LabLookup:
         case_requested = has(q, r'\b(?:hom nay|ngay mai|chi dinh lai|lam lai|lan truoc|cach day|truoc do|benh nhan|nguoi benh|truong hop nay|ca nay|da duoc chan doan|da chan doan|lan dau|lan thu|chua tung)\b')
         if case_requested:
             case = True
+        # The question names a method or test other than the one this row is about.
+        foreign = bool(row.get('foreign') and has(q, row['foreign']))
         if generic and not case_requested and not (row.get('special') and has(q, row['special'])) and not has(q, r'\b(?:tam soat|sang loc|ngs|pcr|panel|gia|ty le|phan tram)\b'):
-            return {}, False, []
+            return ({'foreign_method': True} if foreign else {}), False, []
+        clauses = clause_list(message)
         if row.get('rule') == 'hba1c':
-            self.extract_hba1c(message, q, f, prev if same else {}, today, errors)
+            self.extract_hba1c(message, q, clauses, f, prev if same else {}, today, errors)
         elif row.get('rule') in ('gene', 'scope'):
-            self.extract_disease(q, f, row)
+            self.extract_disease(q, clauses, f, row)
+        f.pop('foreign_method', None)
+        if foreign:
+            f['foreign_method'] = True
         return f, case, errors
 
-    def extract_disease(self, q, f, row):
+    def extract_disease(self, q, clauses, f, row):
         if has(q, r'\b(?:tam soat|sang loc)\b'):
             f['purpose'] = 'screening'
-        found = self.diseases_in(q)
+        found = self.diseases_in(clauses, monitoring_is_doubt=row.get('rule') == 'gene')
         named = list(dict.fromkeys(k for k, s in found if s == 'named'))
         scope = row.get('scope', [])
         if named:
             inside = [k for k in named if k in scope]
             # Several diseases in one question: decide only when they agree.
             f['disease'] = named[0] if len(named) == 1 else inside[0] if len(inside) == len(named) else 'other' if not inside else 'unknown'
-        elif any(s == 'negated' for _, s in found):
-            f['disease'] = 'other'
-        elif found:
+            if any(s == 'unknown' for _, s in found) and f['disease'] in scope and len(set(k for k, _ in found)) == 1:
+                f['disease'] = 'unknown'                      # the same disease both stated and doubted
+        elif any(s == 'unknown' for _, s in found):
             f['disease'] = 'unknown'
+        elif found:
+            f['disease'] = 'other'
         if has(q, r'\b(?:chua ro|khong ro).{0,20}(?:the benh|mo benh hoc|loai ung thu)\b'):
             f['disease'] = 'unknown'
-        if has(q, r'\b(?:nsclc|te bao nho) (?:hay )?(?:chua|khong)\b'):
-            f['disease'] = 'unknown'
         if row.get('rule') == 'gene':
-            if has(q, r'\b(?:dieu tri|chan doan dot bien)\b') and f.get('purpose') != 'screening':
-                f['purpose'] = 'mutation_in_treatment'
+            if f.get('purpose') != 'screening':
+                mutation = mentions(clauses, r'chan doan dot bien|(?:tim|xac dinh|phat hien) dot bien', F_PURPOSE)
+                treatment = mentions(clauses, r'dieu tri', F_PURPOSE)
+                if any(x[0] == 'no' for x in mutation):
+                    f['purpose'] = 'not_mutation'              # "không nhằm chẩn đoán đột biến …"
+                elif any(x[0] != 'yes' for x in treatment):
+                    f.pop('purpose', None)                     # "chưa điều trị", "dự kiến điều trị": ask
+                elif mutation or treatment:
+                    f['purpose'] = 'mutation_in_treatment'
             # Method, sample, repetition or price are not in the row: an explicit limitation.
             f.pop('special_question', None)
             if has(q, row.get('special') or r'\b(?:ngs|pcr|panel|sinh thiet long|mau|huyet tuong|lan thu|lan 2|lan hai|lan 3|lam lai|lap lai|nhac lai|bao nhieu lan|gia|phan tram|ty le)\b'):
                 f['special_question'] = True
 
-    def extract_hba1c(self, message, q, f, prev, today, errors):
-        if has(q, r'\b(?:tam soat|sang loc|chan doan ban dau)\b|(?<!da )(?<!da duoc )\bchan doan ' + DIABETES + r'\b|\b(?:de|nham) chan doan\b(?! dot bien)'):
-            f['purpose'] = 'screening'
-        negated = r'\b(?:khong|chua)(?: phai)?(?: la)?(?: de| nham)? '
-        if has(q, r'\b(?:xac dinh|chon|lap|dieu chinh) phac do\b') and not has(q, negated + r'(?:xac dinh|chon|lap|dieu chinh) phac do\b'):
-            f['purpose'] = 'regimen'
-        monitoring = r'(?:theo doi|danh gia (?:ket qua |dap ung |hieu qua )?dieu tri|kiem soat duong huyet)'
-        if has(q, r'\b' + monitoring + r'\b') and not has(q, negated + monitoring + r'\b'):
-            f['purpose'] = 'monitoring'
+    def extract_hba1c(self, message, q, clauses, f, prev, today, errors):
+        # Purpose: only a plainly stated purpose counts; a negated one is dropped.
+        kinds = {
+            'screening': r'tam soat|sang loc|chan doan ban dau|(?<!da )(?<!duoc )(?<!moi )(?<!vua )chan doan (?:xac dinh )?' + DIABETES + r'|(?:de|nham) chan doan(?! dot bien)',
+            'regimen': r'(?:xac dinh|chon|lap|dieu chinh|thay doi|doi) phac do',
+            'monitoring': r'theo doi|danh gia (?:ket qua |dap ung |hieu qua )?dieu tri|kiem soat duong huyet'}
+        # A purpose stated plainly once counts ("không theo dõi được tại nhà, đánh giá kết quả điều trị").
+        stated = {k: {x[0] for x in mentions(clauses, pattern, F_PURPOSE)} for k, pattern in kinds.items()}
+        for kind in ('screening', 'regimen', 'monitoring'):       # later wins, as before
+            if 'yes' in stated[kind]:
+                f['purpose'] = kind
+        if f.get('purpose') and stated[f['purpose']] and 'yes' not in stated[f['purpose']]:
+            f.pop('purpose')
         if has(q, r'\b(?:khong|chua) (?:ro|biet|xac dinh) muc dich\b'):
             f.pop('purpose', None)
-        if has(q, NOT_CONFIRMED_DIABETES):
-            f['diabetes'] = False
-        elif has(q, r'\b' + DIABETES + r'\b'):
-            f['diabetes'] = True
+        # Confirmed diabetes: suspected, pre-diabetes or "chưa có chẩn đoán" is not confirmed.
+        found = []
+        for state, word, c, m in mentions(clauses, r'(?:tien )?' + DIABETES, F_IS, SUSPECT):
+            if c[m.end():].startswith(' thai ky') and state == 'no':
+                continue                                           # "không phải đái tháo đường thai kỳ" negates the pregnancy form only
+            found.append(False if m.group(0).startswith('tien ') or state == 'no' or word in SUSPICION else True if state == 'yes' else None)
+        if has(q, r'\broi loan dung nap\b'):
+            found.append(False)
+        if found:
+            if None in found or len(set(found)) > 1:
+                f.pop('diabetes', None)
+            else:
+                f['diabetes'] = found[0]
         if has(q, r'\b(?:thai ky)\b'):
             f['gestational'] = not has(q, r'\b(?:khong (?:phai |co )?|loai tru )(?:dai thao duong )?thai ky\b')
-        if has(q, r'\b(?:khong|chua|ngung|da ngung) (?:co |dieu tri |dung |su dung |bang )*insulin\b'):
-            f['insulin'] = False
-        elif has(q, r'\binsulin\b'):
+        # Insulin: "không còn dùng", "đã dừng", "chưa có chỉ định dùng" are not "đang dùng";
+        # "dự kiến dùng", "có thể sẽ dùng", "… không?" are asked back.
+        insulin = verdict(mentions(clauses, r'insulin', F_USE, stoppable=True))
+        if any(raw.isascii() and has(norm(raw), r'\bda dung (?:\w+ ){0,2}insulin\b') for raw in CLAUSE_SPLIT.split(message.lower())):
+            insulin = 'unknown'                                    # typed without diacritics: "đã dùng" or "đã dừng"?
+        if insulin == 'yes':
             f['insulin'] = True
-        if has(q, r'\b(?:chua ro|khong ro|chua biet|khong biet).{0,25}insulin\b'):
+        elif insulin == 'no':
+            f['insulin'] = False
+        elif insulin == 'unknown':
             f.pop('insulin', None)
-        if has(q, r'\binsulin (?:hay )?khong\b'):
-            f.pop('insulin', None)
-        if has(q, r'\b(?:chua ro|khong ro|chua biet|khong biet).{0,30}' + DIABETES + r'\b'):
-            f.pop('diabetes', None)
-        if has(q, r'\b' + DIABETES + r' (?:hay )?(?:chua|khong)\b'):
-            f.pop('diabetes', None)
-        if has(q, r'\b(?:chua tung (?:lam|thuc hien|xet nghiem)|lan dau|lan dau tien)\b'):
+        # First test: "không phải lần đầu" means there was an earlier test.
+        first = verdict(mentions(clauses, r'chua tung (?:lam|thuc hien|xet nghiem|do)(?: hba1c| a1c)?|chua (?:lam|xet nghiem|do)(?: hba1c| a1c)? (?:lan nao|bao gio)|lan dau(?: tien)?', {'phai', 'la'}))
+        if first == 'yes':
             f['first_test'] = True
             f.pop('last_date', None); f.pop('last_range', None)
+        elif first == 'no':
+            f['first_test'] = False
+        elif first == 'unknown':
+            f.pop('first_test', None)
         if has(q, r'\b(?:lan thu (?:2|hai|3|ba)|tu lan thu 2|da lam|da xet nghiem)\b'):
             f['first_test'] = False
         self.extract_dates(message, q, f, prev, today, errors)
@@ -472,6 +614,8 @@ class LabLookup:
             return self.evaluate_gene(row, f, case, result, reasons)
         if rule == 'scope':
             return self.evaluate_scope(row, f, result, reasons)
+        if rule != 'hba1c' and f.get('foreign_method'):
+            return result('needs_review', 'Câu hỏi nêu kỹ thuật hoặc xét nghiệm khác với dòng này (xem tên dịch vụ và ghi chú). Chưa có căn cứ từ dòng này cho xét nghiệm đang hỏi; điều đó không có nghĩa là BHYT không chi trả.')
         if rule != 'hba1c':
             return result('conditions_only', 'Dịch vụ này có điều kiện thanh toán riêng trong nguồn; đọc nguyên văn dưới đây. Chatbot chưa tự đối chiếu ca bệnh cụ thể với dòng này.')
         if not case:
@@ -538,7 +682,7 @@ class LabLookup:
         outside = disease not in (None, 'unknown', 'lung_unspecified') and disease not in scope
         if disease == 'lung_unspecified' and 'nsclc' not in scope:
             outside = True
-        if outside or f.get('purpose') == 'screening':
+        if outside or f.get('purpose') in ('screening', 'not_mutation'):
             text = (f'Bối cảnh vừa nêu không khớp phạm vi của dòng “{name}” (nguồn chỉ nêu {label}, để chẩn đoán đột biến gen trong điều trị). Không dùng dòng này để kết luận chi trả cho bệnh hoặc mục đích khác.' if not case else
                     f'Bệnh hoặc mục đích vừa nêu không khớp điều kiện của dòng “{name}” trong nguồn (nguồn chỉ nêu {label}); chưa có căn cứ khác trong bộ dữ liệu này.')
             return result('source_condition_not_met', text, highlight=[0])

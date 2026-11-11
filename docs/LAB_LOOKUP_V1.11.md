@@ -114,3 +114,38 @@ Kết quả kiểm thử: `audit/LAB_V1.11_VALIDATION.json`.
 - 24 dòng chép từ bản scan đã được một lượt đọc độc lập thứ hai (cũng do AI) so từng chữ với ảnh trang phóng to: không có khác biệt. Vẫn cần Dược/BHYT thẩm định.
 - Lượt đọc này cũng xác nhận không sót dòng xét nghiệm nào ở các trang 26–28 và 44–50. Dòng STT 81 (thu thập, chiết tách tế bào gốc) là dịch vụ xử lý tế bào, không phải xét nghiệm, nên không nạp.
 - Quét 1.071 tên hoạt chất của danh mục thuốc qua bộ nhận diện xét nghiệm: không tên nào bị chuyển nhầm sang luồng xét nghiệm.
+
+## Rà soát bên ngoài ngày 11/11/2026: 8 lỗi, đều xác nhận và đã sửa
+
+Cả 8 điểm trong bản nhận xét đều tái hiện được. Ba lỗi đầu chung một nguyên nhân: phủ định và nghi ngờ được đọc theo từng cụm từ gõ sẵn, nên cụm nào chưa liệt kê thì bị hiểu ngược.
+
+**Cách đọc mới (dùng cho mọi dữ kiện)**
+- Câu hỏi được tách thành các vế. Mỗi từ khóa (insulin, lần đầu, tên bệnh, điều trị…) được xét trong vế của nó.
+- “Không”: có từ phủ định chi phối từ khóa, ở giữa chỉ có từ đệm. Ví dụ “không còn dùng insulin”, “chưa có chỉ định dùng insulin”, “insulin nay đã ngưng”.
+- “Chưa rõ”: dự kiến, có thể, câu hỏi, phủ định kép (“chưa loại trừ”, “không phải không”), hoặc phủ định ở gần nhưng không chắc chi phối. Trường hợp này chatbot hỏi lại, không đoán.
+- “Có”: các trường hợp còn lại.
+- “Không” nằm trong tên bệnh (“ung thư phổi không tế bào nhỏ”) không tính là phủ định.
+- “Dừng” và “dùng” được phân biệt bằng dấu. Gõ không dấu “da dung insulin” thì hỏi lại.
+
+**Từng lỗi**
+
+| # | Lỗi | Sau khi sửa |
+|---|---|---|
+| 1 | “Không còn dùng insulin” bị hiểu là đang dùng | Hiểu là không dùng; “dự kiến dùng”, “có thể sẽ dùng” thì hỏi lại |
+| 2 | “Không phải lần đầu” bị hiểu là lần đầu | Hiểu là đã có lần trước và hỏi ngày lần trước |
+| 3 | Xét nghiệm gen: “chưa có chẩn đoán…”, “chưa loại trừ…”, “không nhằm chẩn đoán đột biến…” | Bệnh chưa xác định thì hỏi lại; mục đích bị phủ định thì không khớp; “chưa điều trị” thì hỏi mục đích |
+| 4 | Nhắc “suy thận” làm câu hỏi đột biến gen EGFR chuyển sang eGFR thận | Có “đột biến/gen” hoặc có tên ung thư thì vẫn là xét nghiệm gen; chỉ “eGFR” kèm ung thư và bệnh thận mới hỏi lại |
+| 5 | Trả lời câu hỏi bổ sung của bot bằng “Xét nghiệm để…” thì mất ngữ cảnh | Giữ xét nghiệm đang bàn; nêu tên xét nghiệm khác thì chuyển sang xét nghiệm đó |
+| 6 | “Cả xét nghiệm HER2 và Trastuzumab” chỉ trả phần xét nghiệm | Thuốc và xét nghiệm nối bằng “và/cùng/lẫn” đều được trả, với bất kỳ thuốc nào |
+| 7 | “HLA bằng NGS”, “HLA-B27” dẫn tới hai dòng PCR-SSP/PCR-SSO mà không nói rõ | Hai dòng ghi chú phạm vi kỹ thuật; nêu kỹ thuật khác thì trả “khác với dòng này, chưa có căn cứ” |
+| 8 | Một ảnh nguồn hỏng làm ngừng cả phần xét nghiệm | Chỉ dòng dùng tệp hỏng bị dừng; server kiểm từng ảnh |
+
+**Kiểm thử**
+- `tests/test_lab_review6.py`: 21 kiểm thử hồi quy.
+- Tổng cộng 381 kiểm thử backend, 111 và 67 kiểm tra giao diện đều đạt.
+- Quét lại 1.071 tên thuốc: không tên nào bị chuyển nhầm sang xét nghiệm.
+
+**Giới hạn còn lại (bản nhận xét nêu đúng)**
+- Chat chạy bằng quy tắc và mẫu câu, không gọi mô hình ngôn ngữ. Cách đọc mới thu hẹp lỗi phủ định nhưng không bảo đảm hiểu mọi cách diễn đạt; khi không chắc thì chatbot hỏi lại.
+- 24 dòng bản scan mở ảnh nguyên trang, chưa đánh dấu đúng dòng.
+- Phần thuốc chỉ có số trang đã kiểm cho 60 dòng; các dòng khác mở PDF từ đầu.

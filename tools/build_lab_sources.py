@@ -59,6 +59,8 @@ def paragraphs(text):
 
 # ---- TT39/2024 appendix rows (text layer). Key: (list, STT theo TT35). -----------------
 GENE_SPECIAL = r'\b(?:ngs|pcr|panel|sinh thiet long|mau|huyet tuong|lan thu|lan 2|lan hai|lan 3|lam lai|lap lai|nhac lai|bao nhieu lan|gia|phan tram|ty le)\b'
+# A question that names one of these asks about another HLA test or method than the two rows.
+HLA_OTHER = r'\b(?:ngs|giai trinh tu|the he moi|sanger|flow|luminex|b27|b 27|b5801|b 5801|b1502|b 1502|hla b|hla a|hla c|hla dr|hla dq)\b'
 TT39_ROWS = [
     dict(key=(1, 10), id='tumor_markers', name='Các xét nghiệm chỉ điểm khối u (CA 125, CA 15-3, CA 19-9, CA 72-4, CEA)',
          official_name='Các xét nghiệm chỉ điểm khối u bằng kỹ thuật miễn dịch phóng xạ hoặc hóa sinh.',
@@ -72,7 +74,9 @@ TT39_ROWS = [
          official_name='Định lượng CD25 (IL-2R) hòa tan trong huyết thanh bằng kỹ thuật ELISA', aliases=['cd25', 'il 2r', 'il2r'], consolidated_pages=[44]),
     dict(key=(2, 72), id='hla_ssp', name='Định type HLA cho 1 locus bằng kỹ thuật PCR-SSP',
          official_name='Định type HLA cho 1 locus (Locus A, hoặc Locus B, hoặc Locus C, hoặc Locus DR, hoặc Locus DQ) bằng kỹ thuật PCR-SSP',
-         aliases=['hla', 'định type hla', 'pcr ssp'], consolidated_pages=[44, 45]),
+         aliases=['pcr ssp', 'hla pcr ssp'], loose_aliases=['hla', 'định type hla'], consolidated_pages=[44, 45],
+         name_note='Dòng này chỉ quy định định type HLA cho 1 locus (A, B, C, DR hoặc DQ) bằng kỹ thuật PCR-SSP; xét nghiệm HLA bằng kỹ thuật khác không thuộc dòng này.',
+         foreign=HLA_OTHER),
     dict(key=(2, 76), id='colony_culture', name='Nuôi cấy cụm tế bào gốc (colony forming culture)',
          official_name='Nuôi cấy cụm tế bào gốc (colony forming culture)', aliases=['nuôi cấy cụm tế bào gốc', 'colony forming'], consolidated_pages=[46]),
     dict(key=(2, 79), id='platelet_ab_flow', name='Phát hiện kháng thể kháng tiểu cầu bằng kỹ thuật Flow-cytometry',
@@ -141,7 +145,9 @@ VBHN_ROWS = [
          conditions=['Chẩn đoán, theo dõi suy tim trên người bệnh suy thận.', 'Chẩn đoán, theo dõi suy tim trên người bệnh không suy thận.'],
          rate=['Thanh toán bằng giá DVKT.', 'Thanh toán theo giá DVKT “Định lượng Pro-BNP”.'], rate_mode=PAIR),
     dict(list=1, row=13, id='liquiprep', pages=[28], name='Xét nghiệm tế bào học bằng phương pháp Liqui Prep',
-         aliases=['liqui prep', 'liquiprep', 'tế bào học cổ tử cung'],
+         aliases=['liqui prep', 'liquiprep'], loose_aliases=['tế bào học cổ tử cung', 'tế bào cổ tử cung'],
+         name_note='Dòng này chỉ quy định cho xét nghiệm tế bào học bằng phương pháp Liqui Prep, không phải mọi xét nghiệm tế bào học cổ tử cung.',
+         foreign=r'\b(?:thinprep|thin prep|pap|papanicolaou|cell prep|cellprep|surepath)\b',
          conditions=['Sau điều trị đối với người bệnh đã được khoét chóp cổ tử cung một phần và chẩn đoán tế bào học cổ tử cung - HSIL (tổn thương nội biểu mô vảy độ cao), tương đương đã được chẩn đoán mô bệnh học CIN 2,3',
                      'Các chỉ định khác.'],
          rate=['Thanh toán bằng giá DVKT.', 'Thanh toán theo giá DVKT “Nhuộm phiến đồ tế bào theo Papanicolaou”.'], rate_mode=PAIR),
@@ -157,7 +163,9 @@ VBHN_ROWS = [
          conditions=['Chẩn đoán và theo dõi điều trị rối loạn đông máu do thiếu yếu tố XIII.']),
     dict(list=2, row=73, id='hla_sso', pages=[45],
          name='Định type HLA độ phân giải cao cho 1 locus (Locus A, hoặc Locus B, hoặc Locus C, hoặc Locus DR, hoặc Locus DQ, hoặc Locus DP) bằng kỹ thuật PCR-SSO',
-         aliases=['hla', 'hla độ phân giải cao', 'định type hla độ phân giải cao', 'pcr sso'],
+         aliases=['hla độ phân giải cao', 'định type hla độ phân giải cao', 'pcr sso', 'hla pcr sso'], loose_aliases=['hla', 'định type hla'],
+         name_note='Dòng này chỉ quy định định type HLA độ phân giải cao cho 1 locus bằng kỹ thuật PCR-SSO; xét nghiệm HLA bằng kỹ thuật khác không thuộc dòng này.',
+         foreign=HLA_OTHER,
          conditions=['Thanh toán đối với các trường hợp sau:', 'a) Người bệnh có chỉ định ghép tạng hoặc ghép tế bào gốc đồng loài khi cần kết quả HLA ở độ phân giải cao.',
                      'b) Đơn vị tế bào gốc hoặc tạng ghép cho người bệnh.']),
     dict(list=2, row=74, id='pivka', pages=[45], name='Định lượng PIVKA', aliases=['pivka', 'pivka ii', 'pivka 2'],

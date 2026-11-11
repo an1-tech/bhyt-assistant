@@ -352,9 +352,14 @@
       "name": "Xét nghiệm tế bào học bằng phương pháp Liqui Prep",
       "aliases": [
         "liqui prep",
-        "liquiprep",
-        "tế bào học cổ tử cung"
+        "liquiprep"
       ],
+      "loose_aliases": [
+        "tế bào học cổ tử cung",
+        "tế bào cổ tử cung"
+      ],
+      "name_note": "Dòng này chỉ quy định cho xét nghiệm tế bào học bằng phương pháp Liqui Prep, không phải mọi xét nghiệm tế bào học cổ tử cung.",
+      "foreign": "\\b(?:thinprep|thin prep|pap|papanicolaou|cell prep|cellprep|surepath)\\b",
       "conditions": [
         "Sau điều trị đối với người bệnh đã được khoét chóp cổ tử cung một phần và chẩn đoán tế bào học cổ tử cung - HSIL (tổn thương nội biểu mô vảy độ cao), tương đương đã được chẩn đoán mô bệnh học CIN 2,3",
         "Các chỉ định khác."
@@ -600,14 +605,19 @@
       "name": "Định type HLA cho 1 locus bằng kỹ thuật PCR-SSP",
       "official_name": "Định type HLA cho 1 locus (Locus A, hoặc Locus B, hoặc Locus C, hoặc Locus DR, hoặc Locus DQ) bằng kỹ thuật PCR-SSP",
       "aliases": [
+        "pcr ssp",
+        "hla pcr ssp"
+      ],
+      "loose_aliases": [
         "hla",
-        "định type hla",
-        "pcr ssp"
+        "định type hla"
       ],
       "consolidated_pages": [
         44,
         45
       ],
+      "name_note": "Dòng này chỉ quy định định type HLA cho 1 locus (A, B, C, DR hoặc DQ) bằng kỹ thuật PCR-SSP; xét nghiệm HLA bằng kỹ thuật khác không thuộc dòng này.",
+      "foreign": "\\b(?:ngs|giai trinh tu|the he moi|sanger|flow|luminex|b27|b 27|b5801|b 5801|b1502|b 1502|hla b|hla a|hla c|hla dr|hla dq)\\b",
       "doc": "tt39",
       "transcription": "text_layer",
       "list": 2,
@@ -653,11 +663,17 @@
       ],
       "name": "Định type HLA độ phân giải cao cho 1 locus (Locus A, hoặc Locus B, hoặc Locus C, hoặc Locus DR, hoặc Locus DQ, hoặc Locus DP) bằng kỹ thuật PCR-SSO",
       "aliases": [
-        "hla",
         "hla độ phân giải cao",
         "định type hla độ phân giải cao",
-        "pcr sso"
+        "pcr sso",
+        "hla pcr sso"
       ],
+      "loose_aliases": [
+        "hla",
+        "định type hla"
+      ],
+      "name_note": "Dòng này chỉ quy định định type HLA độ phân giải cao cho 1 locus bằng kỹ thuật PCR-SSO; xét nghiệm HLA bằng kỹ thuật khác không thuộc dòng này.",
+      "foreign": "\\b(?:ngs|giai trinh tu|the he moi|sanger|flow|luminex|b27|b 27|b5801|b 5801|b1502|b 1502|hla b|hla a|hla c|hla dr|hla dq)\\b",
       "conditions": [
         "Thanh toán đối với các trường hợp sau:",
         "a) Người bệnh có chỉ định ghép tạng hoặc ghép tế bào gốc đồng loài khi cần kết quả HLA ở độ phân giải cao.",

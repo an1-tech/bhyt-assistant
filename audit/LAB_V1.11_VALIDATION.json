@@ -5,7 +5,7 @@
   "base_commit": "89cef56",
   "backend": {
     "command": "python -B -m unittest discover -s tests",
-    "passed": 360,
+    "passed": 381,
     "failed": 0,
     "skipped": 0,
     "log": "audit/lab-v1.11-tests.log"
@@ -39,5 +39,11 @@
   },
   "backup": "D:/Vinmec/backups/before-lab-v1.11-20261110",
   "api_calls_required": false,
-  "published": false
+  "published": false,
+  "external_review_2026_11_11": {
+    "findings": 8,
+    "confirmed": 8,
+    "fixed": 8,
+    "regression_tests": "tests/test_lab_review6.py"
+  }
 }
