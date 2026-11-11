@@ -12,7 +12,10 @@ Tệp `.python-path.txt` ghi đường dẫn Python đang có trên máy; nếu 
 
 - Thử “HbA1c theo dõi đái tháo đường có điều kiện BHYT gì?”, hoặc “HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước cách 60 ngày”.
 - Thử “Xét nghiệm EGFR trong điều trị ung thư phổi không tế bào nhỏ có BHYT không?” và “Cả xét nghiệm EGFR và thuốc Erlotinib trong ung thư phổi không tế bào nhỏ có BHYT không?”.
-- “Xem vị trí trích dẫn” ở câu trả lời xét nghiệm mở ảnh trọn dòng dịch vụ, bản chữ dễ đọc và liên kết PDF gốc. Không suy ra quy tắc cho xét nghiệm ngoài hai dịch vụ này.
+- Thử câu hỏi một lần của bác sĩ: “HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước làm ngày 01/08/2026, BHYT có thanh toán không?”.
+- Thử các xét nghiệm khác: “Xét nghiệm HER2 cho bệnh nhân ung thư vú đang điều trị hôm nay”, “Định lượng procalcitonin có điều kiện BHYT gì?”, “Định lượng BNP”.
+- Có 41 dòng xét nghiệm có điều kiện riêng (TT39/2024 và 17/VBHN-BYT). Chỉ HbA1c, bốn xét nghiệm gen và SCC được đối chiếu với ca bệnh; các dòng khác chỉ trích nguyên văn.
+- “Xem vị trí trích dẫn” mở ảnh trọn dòng dịch vụ (hoặc ảnh trang với dòng chép từ bản scan), bản chữ và liên kết PDF gốc. Xét nghiệm ngoài 41 dòng không được mượn quy tắc của dòng khác.
 
 - Gõ tên hoạt chất và bệnh/chỉ định trong một câu, bấm Gửi câu hỏi hoặc Enter. Shift + Enter xuống dòng.
 - Câu trả lời nêu quy định tìm được, điều kiện áp dụng và nguồn. Thiếu dữ liệu để kết luận thì bot nói rõ giới hạn, không yêu cầu biểu mẫu ca bệnh.
@@ -36,7 +39,7 @@ Bộ nguồn BHYT chốt 06/11/2026; nguồn bổ sung được tìm kiếm/ki�
 
 Luồng `/api/chat` dùng `Corpus.converse()` và các nhánh trả lời có gắn nguồn, không gọi OpenAI ngay cả khi cấu hình AI cũ tồn tại. Phần tra cứu nội bộ `Corpus.chat()` và các API ca bệnh cũ còn giữ để tương thích; chúng không xuất hiện thành biểu mẫu trên giao diện. Mã AI cũ (tắt mặc định) nằm riêng trong `ai_explain.py`.
 
-Chạy kiểm thử backend bằng Python thực tế: `python -B -m unittest discover -s tests -q`. Kiểm thử xét nghiệm riêng: `python -B -m unittest discover -s tests -p test_lab_lookup.py -q`. Chạy ứng dụng trước khi kiểm tra trình duyệt: `node tools/check-lab-ui.mjs http://127.0.0.1:8766` (cần Node 22+, Chrome/Edge và toolkit design-taste-frontend đã cài trên máy). Kết quả kiểm tra bản v1.11 và giới hạn được ghi trong `docs/LAB_LOOKUP_V1.11.md`. Các script giao diện của phiên bản cũ được giữ để tham khảo lịch sử.
+Chạy kiểm thử backend bằng Python thực tế: `python -B -m unittest discover -s tests -q`. Kiểm thử xét nghiệm riêng: `python -B -m unittest discover -s tests -p "test_lab_*.py" -q`. Chạy ứng dụng trước khi kiểm tra trình duyệt: `node tools/check-lab-ui.mjs http://127.0.0.1:8766` (cần Node 22+, Chrome/Edge và toolkit design-taste-frontend đã cài trên máy). Kết quả kiểm tra bản v1.11 và giới hạn được ghi trong `docs/LAB_LOOKUP_V1.11.md`. Các script giao diện của phiên bản cũ được giữ để tham khảo lịch sử.
 
 Đã xem ảnh desktop, tablet và mobile. Bộ đo giao diện báo 0 FAIL / 1 WARN: cảnh báo `unused-canvas` do nhận nhầm thanh điều hướng ngang là sidebar; khung chat chủ ý rộng tối đa 840px, căn giữa với hai lề bằng nhau để đọc hội thoại. Đây là lựa chọn cho yêu cầu chỉ có một chatbot, không phải một dashboard nhiều cột.
 

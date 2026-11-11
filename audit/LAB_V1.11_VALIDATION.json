@@ -1,14 +1,14 @@
 {
   "version": "1.11",
-  "checked_at": "2026-11-10",
+  "checked_at": "2026-11-11",
   "project": "D:/Vinmec/bhyt-chatbot",
-  "base_commit": "a1ffc4a",
+  "base_commit": "89cef56",
   "backend": {
-    "command": "python -B -m unittest discover -s tests -q",
-    "passed": 330,
-    "log": "audit/lab-v1.11-tests.log",
+    "command": "python -B -m unittest discover -s tests",
+    "passed": 360,
     "failed": 0,
-    "skipped": 0
+    "skipped": 0,
+    "log": "audit/lab-v1.11-tests.log"
   },
   "browser": {
     "warning_explanation": "Cột chat 840px cố ý căn giữa, giữ thiết kế hiện tại; cảnh báo unused-canvas có từ bản trước.",
@@ -18,23 +18,24 @@
       390
     ],
     "inspector_warnings": 1,
-    "passed": 75,
+    "passed": 111,
     "inspector_failures": 0,
     "checks": "audit/lab-browser/browser-results.json",
     "inspector": "audit/lab-browser/inspect/report.json",
-    "failed": 0
+    "failed": 0,
+    "chat_ui_passed": 67
   },
   "sources": {
     "effective_from": "2025-01-01",
     "pdf_rows_visually_checked": [
-      "TT39 appendix PDF20/STT38",
-      "TT39 appendix PDF21/STT43",
-      "17 VBHN PDF47-48/STT84",
-      "17 VBHN PDF50/STT98"
+      "TT39 appendix: 17 lab rows extracted from the text layer, names asserted by the build tool",
+      "17/VBHN-BYT pages 26, 28, 44-50: 24 lab rows transcribed by reading the page images (AI)"
     ],
-    "source_checked_as_of": "2026-11-10",
-    "services": 2,
-    "limitations": "Chưa truy cập được trang lịch sử hiệu lực VBPL; chưa được bệnh viện thẩm định; vùng 87–93 ngày cần đối chiếu thêm."
+    "source_checked_as_of": "2026-11-11",
+    "services": 41,
+    "limitations": "Chưa truy cập được trang lịch sử hiệu lực VBPL; chưa được bệnh viện thẩm định; 24 dòng bản scan do AI đọc ảnh; vùng 87–93 ngày cần đối chiếu thêm; chỉ 6 dịch vụ có đối chiếu ca bệnh.",
+    "text_layer_rows": 17,
+    "scan_read_rows": 24
   },
   "backup": "D:/Vinmec/backups/before-lab-v1.11-20261110",
   "api_calls_required": false,

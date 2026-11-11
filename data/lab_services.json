@@ -1,17 +1,17 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "source": {
     "document_id": "TT39_2024_LABS",
     "title": "Thông tư 39/2024/TT-BYT",
     "published_at": "2024-11-17",
     "effective_from": "2025-01-01",
-    "checked_as_of": "2026-11-10",
+    "checked_as_of": "2026-11-11",
     "official_url": "https://vanban.chinhphu.vn/?docid=211771&pageid=27160",
     "source_url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/39-byt-kem.pdf",
     "local_url": "/sources/labs/39-2024-appendix.pdf",
     "sha256": "0defbcf27dfb8b82b5defa1d8eb2ee7ed72e55366ef589f8f0c9582a6f7db17e",
     "review_status": "Đã đối chiếu ảnh PDF và văn bản hợp nhất; chờ bệnh viện thẩm định.",
-    "review_limitations": "Tra cứu nguồn ngày 10/11/2026 chưa phát hiện văn bản sửa hai dòng này sau TT39/2024. Trang lịch sử hiệu lực VBPL không truy cập được; không khẳng định đã rà soát đầy đủ mọi văn bản mới.",
+    "review_limitations": "Tra cứu nguồn ngày 10/11/2026 chưa phát hiện văn bản sửa các dòng này sau TT39/2024. Trang lịch sử hiệu lực VBPL không truy cập được; không khẳng định đã rà soát đầy đủ mọi văn bản mới.",
     "related_documents": [
       {
         "title": "Thông tư 35/2016/TT-BYT, sửa đổi bởi TT50/2017, TT13/2020 và TT39/2024",
@@ -27,7 +27,1068 @@
       }
     ]
   },
+  "documents": {
+    "tt39": {
+      "document_id": "TT39_2024_LABS",
+      "title": "Thông tư 39/2024/TT-BYT",
+      "published_at": "2024-11-17",
+      "effective_from": "2025-01-01",
+      "checked_as_of": "2026-11-11",
+      "official_url": "https://vanban.chinhphu.vn/?docid=211771&pageid=27160",
+      "source_url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/39-byt-kem.pdf",
+      "local_url": "/sources/labs/39-2024-appendix.pdf",
+      "sha256": "0defbcf27dfb8b82b5defa1d8eb2ee7ed72e55366ef589f8f0c9582a6f7db17e",
+      "review_status": "Đã đối chiếu ảnh PDF và văn bản hợp nhất; chờ bệnh viện thẩm định.",
+      "review_limitations": "Tra cứu nguồn ngày 10/11/2026 chưa phát hiện văn bản sửa các dòng này sau TT39/2024. Trang lịch sử hiệu lực VBPL không truy cập được; không khẳng định đã rà soát đầy đủ mọi văn bản mới.",
+      "related_documents": [
+        {
+          "title": "Thông tư 35/2016/TT-BYT, sửa đổi bởi TT50/2017, TT13/2020 và TT39/2024",
+          "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf",
+          "local_url": "/sources/labs/17-vbhn-2024.pdf",
+          "sha256": "c6505d94f0597416aebcee575d6be4a43917435a660e14cc750c2536519f2658"
+        },
+        {
+          "title": "Thông tư 39/2024/TT-BYT · Nội dung sửa đổi",
+          "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/39-byt.pdf",
+          "local_url": "/sources/labs/39-2024-main.pdf",
+          "sha256": "d79679b2781609ec85d622571f28041906ad964c5a2880c7246ebdfa2d55da18"
+        }
+      ]
+    },
+    "vbhn": {
+      "document_id": "TT35_VBHN17_LABS",
+      "title": "Văn bản hợp nhất 17/VBHN-BYT (Thông tư 35/2016/TT-BYT và các lần sửa đổi)",
+      "effective_from": "2025-01-01",
+      "checked_as_of": "2026-11-11",
+      "official_url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf",
+      "source_url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf",
+      "local_url": "/sources/labs/17-vbhn-2024.pdf",
+      "sha256": "c6505d94f0597416aebcee575d6be4a43917435a660e14cc750c2536519f2658",
+      "review_status": "Chép từ ảnh trang của bản scan (AI đọc, không dùng lớp OCR); chờ bệnh viện thẩm định.",
+      "review_limitations": "Các dòng này không bị TT39/2024 sửa nên chỉ có trong bản hợp nhất dạng scan. Tra cứu nguồn ngày 10/11/2026 chưa phát hiện văn bản sửa các dòng này sau TT39/2024. Trang lịch sử hiệu lực VBPL không truy cập được; không khẳng định đã rà soát đầy đủ mọi văn bản mới."
+    }
+  },
   "services": [
+    {
+      "list": 1,
+      "id": "cbc_auto",
+      "pages": [
+        26
+      ],
+      "name": "Tổng phân tích tế bào máu ngoại vi bằng hệ thống tự động hoàn toàn (có nhuộm tiêu bản tự động)",
+      "aliases": [
+        "tổng phân tích tế bào máu",
+        "tế bào máu ngoại vi"
+      ],
+      "loose_aliases": [
+        "công thức máu"
+      ],
+      "name_note": "Dòng này chỉ quy định cho kỹ thuật “hệ thống tự động hoàn toàn (có nhuộm tiêu bản tự động)”, không phải mọi xét nghiệm công thức máu.",
+      "conditions": [
+        "Nghi ngờ bệnh lý về tế bào máu và có bất thường về số lượng tế bào máu, có kết quả đọc tiêu bản do máy tự động kéo nhuộm.",
+        "Trường hợp khác."
+      ],
+      "rate": [
+        "Thanh toán 01 lần/một lượt khám bệnh, chữa bệnh theo giá dịch vụ Tổng phân tích tế bào máu bằng hệ thống tự động hoàn toàn.",
+        "Thanh toán theo giá DVKT “Tổng phân tích tế bào máu ngoại vi bằng máy laser”."
+      ],
+      "rate_mode": "paired",
+      "source_note": "Cụm “một lượt khám bệnh, chữa bệnh” là nội dung đã sửa theo khoản 3 Điều 1 TT39/2024 (chú thích 22 của bản hợp nhất).",
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Tổng phân tích tế bào máu ngoại vi bằng hệ thống tự động hoàn toàn (có nhuộm tiêu bản tự động)",
+      "appendix_row": null,
+      "original_row": 8,
+      "page": 26,
+      "consolidated_pages": [
+        26
+      ],
+      "method": null,
+      "service_code": null,
+      "quote": "Nghi ngờ bệnh lý về tế bào máu và có bất thường về số lượng tế bào máu, có kết quả đọc tiêu bản do máy tự động kéo nhuộm.\nTrường hợp khác.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p26.png",
+          "sha256": "497ffb75cd0b203729c9ee62325613d2c623a3824a9ce8249144ed3986797c20",
+          "page": 26
+        }
+      ],
+      "locator": "Danh mục 1 · STT 8 · trang 26 của bản hợp nhất",
+      "viewer_url": "/sources/labs/cbc_auto.html#source-row",
+      "image_url": "/sources/labs/vbhn-p26.png",
+      "image_sha256": "497ffb75cd0b203729c9ee62325613d2c623a3824a9ce8249144ed3986797c20"
+    },
+    {
+      "list": 1,
+      "id": "bnp",
+      "pages": [
+        26
+      ],
+      "name": "Định lượng BNP",
+      "aliases": [
+        "bnp",
+        "định lượng bnp"
+      ],
+      "conditions": [
+        "Chẩn đoán, theo dõi suy tim trên người bệnh suy thận.",
+        "Chẩn đoán, theo dõi suy tim trên người bệnh không suy thận."
+      ],
+      "rate": [
+        "Thanh toán bằng giá DVKT.",
+        "Thanh toán theo giá DVKT “Định lượng Pro-BNP”."
+      ],
+      "rate_mode": "paired",
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Định lượng BNP",
+      "appendix_row": null,
+      "original_row": 9,
+      "page": 26,
+      "consolidated_pages": [
+        26
+      ],
+      "method": null,
+      "service_code": null,
+      "quote": "Chẩn đoán, theo dõi suy tim trên người bệnh suy thận.\nChẩn đoán, theo dõi suy tim trên người bệnh không suy thận.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p26.png",
+          "sha256": "497ffb75cd0b203729c9ee62325613d2c623a3824a9ce8249144ed3986797c20",
+          "page": 26
+        }
+      ],
+      "locator": "Danh mục 1 · STT 9 · trang 26 của bản hợp nhất",
+      "viewer_url": "/sources/labs/bnp.html#source-row",
+      "image_url": "/sources/labs/vbhn-p26.png",
+      "image_sha256": "497ffb75cd0b203729c9ee62325613d2c623a3824a9ce8249144ed3986797c20"
+    },
+    {
+      "id": "tumor_markers",
+      "name": "Các xét nghiệm chỉ điểm khối u (CA 125, CA 15-3, CA 19-9, CA 72-4, CEA)",
+      "official_name": "Các xét nghiệm chỉ điểm khối u bằng kỹ thuật miễn dịch phóng xạ hoặc hóa sinh.",
+      "aliases": [
+        "chỉ điểm khối u",
+        "dấu ấn ung thư",
+        "tumor marker",
+        "ca 125",
+        "ca125",
+        "ca 15 3",
+        "ca15 3",
+        "ca153",
+        "ca 19 9",
+        "ca19 9",
+        "ca199",
+        "ca 72 4",
+        "ca72 4",
+        "ca724",
+        "cea"
+      ],
+      "consolidated_pages": [
+        26,
+        27
+      ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 1,
+      "appendix_row": 6,
+      "original_row": 10,
+      "page": 8,
+      "pages": [
+        8
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "a) Chẩn đoán ung thư di căn không rõ u nguyên phát: CA 125, CA 15-3, CA 19-9, CA 72-4, CEA.",
+        "b) Chẩn đoán, theo dõi điều trị bệnh ung thư đối với một trong các xét nghiệm sau:",
+        "- Định lượng CA 125: Buồng trứng;",
+        "- Định lượng CA 15-3: Vú;",
+        "- Định lượng CA 19-9: Tụy, đường mật,",
+        "- Định lượng CA 72 - 4: Dạ dày;",
+        "- Định lượng CEA: Ung thư biểu mô.",
+        "c) Định lượng CA 19-9: theo dõi và chẩn đoán ung thư tái phát, di căn sau điều trị ung thư Đại trực tràng. Chẩn đoán phân biệt di căn phổi đối với Ung thư phổi không tế bào nhỏ."
+      ],
+      "rate": [
+        "- Thanh toán theo giá DVKT “Xét nghiệm chỉ điểm khối u bằng kỹ thuật hóa sinh”;"
+      ],
+      "rate_mode": "row",
+      "quote": "a) Chẩn đoán ung thư di căn không rõ u nguyên phát: CA 125, CA 15-3, CA 19-9, CA 72-4, CEA.\nb) Chẩn đoán, theo dõi điều trị bệnh ung thư đối với một trong các xét nghiệm sau:\n- Định lượng CA 125: Buồng trứng;\n- Định lượng CA 15-3: Vú;\n- Định lượng CA 19-9: Tụy, đường mật,\n- Định lượng CA 72 - 4: Dạ dày;\n- Định lượng CEA: Ung thư biểu mô.\nc) Định lượng CA 19-9: theo dõi và chẩn đoán ung thư tái phát, di căn sau điều trị ung thư Đại trực tràng. Chẩn đoán phân biệt di căn phổi đối với Ung thư phổi không tế bào nhỏ.",
+      "images": [
+        {
+          "url": "/sources/labs/tumor_markers-row.png",
+          "sha256": "c3ea6b3ff3331ef74351d7b1ff8874661b462b21f392c560f2a90b2967c822a5",
+          "page": 8
+        }
+      ],
+      "locator": "Danh mục 1 · STT 6 (STT 10 theo TT35) · trang PDF 8",
+      "viewer_url": "/sources/labs/tumor_markers.html#source-row",
+      "image_url": "/sources/labs/tumor_markers-row.png",
+      "image_sha256": "c3ea6b3ff3331ef74351d7b1ff8874661b462b21f392c560f2a90b2967c822a5"
+    },
+    {
+      "id": "crp",
+      "name": "Định lượng CRP/CRP hs [Máu]",
+      "official_name": "Định lượng CRP/CRP hs [Máu]",
+      "aliases": [
+        "crp",
+        "crp hs",
+        "hs crp",
+        "protein phản ứng c"
+      ],
+      "consolidated_pages": [
+        27
+      ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 1,
+      "appendix_row": 7,
+      "original_row": 11,
+      "page": 8,
+      "pages": [
+        8,
+        9
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Chẩn đoán, theo dõi một trong các trường hợp sau đây:",
+        "a) Nghi ngờ có ổ nhiễm trùng, có ít nhất 02 trong 04 tiêu chuẩn sau:",
+        "- Nhiệt độ cơ thể < 36°c hoặc > 38°C;",
+        "- Nhịp tim nhanh > 90 lần/phút;",
+        "- Nhịp thở > 22 lần/phút hoặc PaCO2 <32 mmHg;",
+        "- Bạch cầu máu >12G/L, hoặc < 4G/L hoặc > 10% bạch cầu non.",
+        "Đối với trẻ em: Khi nghi ngờ có ô nhiễm trùng, có nhiệt độ cơ thể ≤ 36°C hoặc ≥ 38,3°C và có nhịp tim hoặc nhịp thở thay đổi quá giới hạn sinh lý theo tuổi.",
+        "b) Nhiễm trùng sơ sinh;",
+        "c) Bệnh mạch vành, nhồi máu cơ tim;",
+        "d) Viêm da nhiễm độc, các bệnh tự miễn."
+      ],
+      "rate": [
+        "Thanh toán bằng giá DVKT"
+      ],
+      "rate_mode": "row",
+      "quote": "Chẩn đoán, theo dõi một trong các trường hợp sau đây:\na) Nghi ngờ có ổ nhiễm trùng, có ít nhất 02 trong 04 tiêu chuẩn sau:\n- Nhiệt độ cơ thể < 36°c hoặc > 38°C;\n- Nhịp tim nhanh > 90 lần/phút;\n- Nhịp thở > 22 lần/phút hoặc PaCO2 <32 mmHg;\n- Bạch cầu máu >12G/L, hoặc < 4G/L hoặc > 10% bạch cầu non.\nĐối với trẻ em: Khi nghi ngờ có ô nhiễm trùng, có nhiệt độ cơ thể ≤ 36°C hoặc ≥ 38,3°C và có nhịp tim hoặc nhịp thở thay đổi quá giới hạn sinh lý theo tuổi.\nb) Nhiễm trùng sơ sinh;\nc) Bệnh mạch vành, nhồi máu cơ tim;\nd) Viêm da nhiễm độc, các bệnh tự miễn.",
+      "images": [
+        {
+          "url": "/sources/labs/crp-row.png",
+          "sha256": "89008e1ab2e2aac65a5c9f572194483b14f8ae600058662e43e01fa0581465bc",
+          "page": 8
+        },
+        {
+          "url": "/sources/labs/crp-row-2.png",
+          "sha256": "2105642d207ca088903c00bc60d89fe7694c183d5aca516e128dbfdcad2666bd",
+          "page": 9
+        }
+      ],
+      "locator": "Danh mục 1 · STT 7 (STT 11 theo TT35) · trang PDF 8–9",
+      "viewer_url": "/sources/labs/crp.html#source-row",
+      "image_url": "/sources/labs/crp-row.png",
+      "image_sha256": "89008e1ab2e2aac65a5c9f572194483b14f8ae600058662e43e01fa0581465bc"
+    },
+    {
+      "id": "procalcitonin",
+      "name": "Định lượng Procalcitonin [Máu]",
+      "official_name": "Định lượng Pro-calcitonin [Máu]",
+      "aliases": [
+        "procalcitonin",
+        "pro calcitonin",
+        "pct"
+      ],
+      "consolidated_pages": [
+        27,
+        28
+      ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 1,
+      "appendix_row": 8,
+      "original_row": 12,
+      "page": 9,
+      "pages": [
+        9,
+        10
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "a) Chẩn đoán và theo dõi tình trạng nhiễm trùng nặng khi đáp ứng 01 trong 02 tiêu chuẩn sau đây:",
+        "- Điểm suy đa tạng (SOFA) ≥ 2;",
+        "- Nghi ngờ có ổ nhiễm trùng và có 2 trong 3 tiêu chuẩn: Nhịp thở ≥ 22 lần/phút; Huyết áp tâm thu ≤ 100 mmHg; Glasgow <15 điểm.",
+        "b) Đối với trẻ em:",
+        "- Chẩn đoán và theo dõi các trường hợp nhiễm trùng huyết;",
+        "- Theo dõi và tiên lượng suy đa tạng khi có rối loạn chức năng từ 2 cơ quan trở lên."
+      ],
+      "rate": [
+        "Thanh toán bằng giá DVKT.",
+        "Khi sử dụng xét nghiệm Procalcitonin để theo dõi tình trạng nhiễm trùng nặng và đáp ứng điều trị theo quy định tại khoản 1 Mục này:",
+        "+ Thanh toán tối đa 01 lần/mỗi 24 giờ đối với người bệnh sốc nhiễm trùng;",
+        "+ Thanh toán tối đa 01 lần/mỗi 48 giờ đối với người bệnh nhiễm trùng nặng;",
+        "+ Không thanh toán đối với các trường hợp đã có bằng chứng chứng minh: hết dấu hiệu chỉ định và Procalcitonin ≤ 02 lần giá trị tham chiếu."
+      ],
+      "rate_mode": "row",
+      "quote": "a) Chẩn đoán và theo dõi tình trạng nhiễm trùng nặng khi đáp ứng 01 trong 02 tiêu chuẩn sau đây:\n- Điểm suy đa tạng (SOFA) ≥ 2;\n- Nghi ngờ có ổ nhiễm trùng và có 2 trong 3 tiêu chuẩn: Nhịp thở ≥ 22 lần/phút; Huyết áp tâm thu ≤ 100 mmHg; Glasgow <15 điểm.\nb) Đối với trẻ em:\n- Chẩn đoán và theo dõi các trường hợp nhiễm trùng huyết;\n- Theo dõi và tiên lượng suy đa tạng khi có rối loạn chức năng từ 2 cơ quan trở lên.",
+      "images": [
+        {
+          "url": "/sources/labs/procalcitonin-row.png",
+          "sha256": "0b18fa9f6b36c3a628bcfc25c72400911eed21df276c154f28acbb0df3b0bc2a",
+          "page": 9
+        },
+        {
+          "url": "/sources/labs/procalcitonin-row-2.png",
+          "sha256": "22997c6f7615a597a77ab2ccf517114713738c7a83a2bc37d6d78b1f6aaee03c",
+          "page": 10
+        }
+      ],
+      "locator": "Danh mục 1 · STT 8 (STT 12 theo TT35) · trang PDF 9–10",
+      "viewer_url": "/sources/labs/procalcitonin.html#source-row",
+      "image_url": "/sources/labs/procalcitonin-row.png",
+      "image_sha256": "0b18fa9f6b36c3a628bcfc25c72400911eed21df276c154f28acbb0df3b0bc2a"
+    },
+    {
+      "list": 1,
+      "id": "liquiprep",
+      "pages": [
+        28
+      ],
+      "name": "Xét nghiệm tế bào học bằng phương pháp Liqui Prep",
+      "aliases": [
+        "liqui prep",
+        "liquiprep",
+        "tế bào học cổ tử cung"
+      ],
+      "conditions": [
+        "Sau điều trị đối với người bệnh đã được khoét chóp cổ tử cung một phần và chẩn đoán tế bào học cổ tử cung - HSIL (tổn thương nội biểu mô vảy độ cao), tương đương đã được chẩn đoán mô bệnh học CIN 2,3",
+        "Các chỉ định khác."
+      ],
+      "rate": [
+        "Thanh toán bằng giá DVKT.",
+        "Thanh toán theo giá DVKT “Nhuộm phiến đồ tế bào theo Papanicolaou”."
+      ],
+      "rate_mode": "paired",
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Xét nghiệm tế bào học bằng phương pháp Liqui Prep",
+      "appendix_row": null,
+      "original_row": 13,
+      "page": 28,
+      "consolidated_pages": [
+        28
+      ],
+      "method": null,
+      "service_code": null,
+      "quote": "Sau điều trị đối với người bệnh đã được khoét chóp cổ tử cung một phần và chẩn đoán tế bào học cổ tử cung - HSIL (tổn thương nội biểu mô vảy độ cao), tương đương đã được chẩn đoán mô bệnh học CIN 2,3\nCác chỉ định khác.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p28.png",
+          "sha256": "b142cf6ff4b341e4ebe6bb51447366d59dd0f35c97cf7fea05175f751614f86f",
+          "page": 28
+        }
+      ],
+      "locator": "Danh mục 1 · STT 13 · trang 28 của bản hợp nhất",
+      "viewer_url": "/sources/labs/liquiprep.html#source-row",
+      "image_url": "/sources/labs/vbhn-p28.png",
+      "image_sha256": "b142cf6ff4b341e4ebe6bb51447366d59dd0f35c97cf7fea05175f751614f86f"
+    },
+    {
+      "list": 2,
+      "id": "serum_ife",
+      "pages": [
+        44
+      ],
+      "name": "Điện di miễn dịch huyết thanh",
+      "aliases": [
+        "điện di miễn dịch huyết thanh",
+        "điện di miễn dịch"
+      ],
+      "conditions": [
+        "Thanh toán đối với các trường hợp sau:",
+        "a) Tăng Gama Globulin máu;",
+        "b) Bệnh lý đơn dòng globulin miễn dịch."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Điện di miễn dịch huyết thanh",
+      "appendix_row": null,
+      "original_row": 67,
+      "page": 44,
+      "consolidated_pages": [
+        44
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Thanh toán đối với các trường hợp sau:\na) Tăng Gama Globulin máu;\nb) Bệnh lý đơn dòng globulin miễn dịch.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p44.png",
+          "sha256": "6b5624c705fbe2d4675ad51416bc33ce34690a4225d6133baaccd2f442a18439",
+          "page": 44
+        }
+      ],
+      "locator": "Danh mục 2 · STT 67 · trang 44 của bản hợp nhất",
+      "viewer_url": "/sources/labs/serum_ife.html#source-row",
+      "image_url": "/sources/labs/vbhn-p44.png",
+      "image_sha256": "6b5624c705fbe2d4675ad51416bc33ce34690a4225d6133baaccd2f442a18439"
+    },
+    {
+      "list": 2,
+      "id": "antibody_id",
+      "pages": [
+        44
+      ],
+      "name": "Định danh kháng thể bất thường",
+      "aliases": [
+        "định danh kháng thể bất thường",
+        "kháng thể bất thường"
+      ],
+      "conditions": [
+        "Kết quả xét nghiệm kháng thể bất thường dương tính."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Định danh kháng thể bất thường",
+      "appendix_row": null,
+      "original_row": 68,
+      "page": 44,
+      "consolidated_pages": [
+        44
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Kết quả xét nghiệm kháng thể bất thường dương tính.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p44.png",
+          "sha256": "6b5624c705fbe2d4675ad51416bc33ce34690a4225d6133baaccd2f442a18439",
+          "page": 44
+        }
+      ],
+      "locator": "Danh mục 2 · STT 68 · trang 44 của bản hợp nhất",
+      "viewer_url": "/sources/labs/antibody_id.html#source-row",
+      "image_url": "/sources/labs/vbhn-p44.png",
+      "image_sha256": "6b5624c705fbe2d4675ad51416bc33ce34690a4225d6133baaccd2f442a18439"
+    },
+    {
+      "id": "cd25",
+      "name": "Định lượng CD25 (IL-2R) hòa tan trong huyết thanh bằng kỹ thuật ELISA",
+      "official_name": "Định lượng CD25 (IL-2R) hòa tan trong huyết thanh bằng kỹ thuật ELISA",
+      "aliases": [
+        "cd25",
+        "il 2r",
+        "il2r"
+      ],
+      "consolidated_pages": [
+        44
+      ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 33,
+      "original_row": 69,
+      "page": 18,
+      "pages": [
+        18
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Thanh toán đối với các trường hợp sau:",
+        "a) Để chẩn đoán và đánh giá điều trị Hội chứng thực bào tế bào máu",
+        "b) Tăng hoạt tính lympho T;",
+        "c) Sau ghép tế bào gốc tạo máu."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Thanh toán đối với các trường hợp sau:\na) Để chẩn đoán và đánh giá điều trị Hội chứng thực bào tế bào máu\nb) Tăng hoạt tính lympho T;\nc) Sau ghép tế bào gốc tạo máu.",
+      "images": [
+        {
+          "url": "/sources/labs/cd25-row.png",
+          "sha256": "11eb151def40cbf25f0b2e39253e66945b7c64d256c97b6082f6b903b12fd710",
+          "page": 18
+        }
+      ],
+      "locator": "Danh mục 2 · STT 33 (STT 69 theo TT35) · trang PDF 18",
+      "viewer_url": "/sources/labs/cd25.html#source-row",
+      "image_url": "/sources/labs/cd25-row.png",
+      "image_sha256": "11eb151def40cbf25f0b2e39253e66945b7c64d256c97b6082f6b903b12fd710"
+    },
+    {
+      "list": 2,
+      "id": "heme_gene_quant",
+      "pages": [
+        44
+      ],
+      "name": "Định lượng gen bệnh máu ác tính bằng kỹ thuật Real - Time PCR",
+      "aliases": [
+        "định lượng gen bệnh máu ác tính",
+        "gen bệnh máu ác tính"
+      ],
+      "conditions": [
+        "Theo dõi điều trị bằng hóa chất hoặc ghép tế bào gốc tạo máu ở người bệnh máu ác tính đã xác định đột biến gen bằng phương pháp định tính."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Định lượng gen bệnh máu ác tính bằng kỹ thuật Real - Time PCR",
+      "appendix_row": null,
+      "original_row": 70,
+      "page": 44,
+      "consolidated_pages": [
+        44
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Theo dõi điều trị bằng hóa chất hoặc ghép tế bào gốc tạo máu ở người bệnh máu ác tính đã xác định đột biến gen bằng phương pháp định tính.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p44.png",
+          "sha256": "6b5624c705fbe2d4675ad51416bc33ce34690a4225d6133baaccd2f442a18439",
+          "page": 44
+        }
+      ],
+      "locator": "Danh mục 2 · STT 70 · trang 44 của bản hợp nhất",
+      "viewer_url": "/sources/labs/heme_gene_quant.html#source-row",
+      "image_url": "/sources/labs/vbhn-p44.png",
+      "image_sha256": "6b5624c705fbe2d4675ad51416bc33ce34690a4225d6133baaccd2f442a18439"
+    },
+    {
+      "list": 2,
+      "id": "factor_xiii",
+      "pages": [
+        44
+      ],
+      "name": "Định lượng yếu tố XIII (Tên khác: Định lượng yếu tố ổn định sợi huyết)",
+      "aliases": [
+        "yếu tố xiii",
+        "yếu tố 13",
+        "yếu tố ổn định sợi huyết"
+      ],
+      "conditions": [
+        "Chẩn đoán và theo dõi điều trị rối loạn đông máu do thiếu yếu tố XIII."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Định lượng yếu tố XIII (Tên khác: Định lượng yếu tố ổn định sợi huyết)",
+      "appendix_row": null,
+      "original_row": 71,
+      "page": 44,
+      "consolidated_pages": [
+        44
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Chẩn đoán và theo dõi điều trị rối loạn đông máu do thiếu yếu tố XIII.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p44.png",
+          "sha256": "6b5624c705fbe2d4675ad51416bc33ce34690a4225d6133baaccd2f442a18439",
+          "page": 44
+        }
+      ],
+      "locator": "Danh mục 2 · STT 71 · trang 44 của bản hợp nhất",
+      "viewer_url": "/sources/labs/factor_xiii.html#source-row",
+      "image_url": "/sources/labs/vbhn-p44.png",
+      "image_sha256": "6b5624c705fbe2d4675ad51416bc33ce34690a4225d6133baaccd2f442a18439"
+    },
+    {
+      "id": "hla_ssp",
+      "name": "Định type HLA cho 1 locus bằng kỹ thuật PCR-SSP",
+      "official_name": "Định type HLA cho 1 locus (Locus A, hoặc Locus B, hoặc Locus C, hoặc Locus DR, hoặc Locus DQ) bằng kỹ thuật PCR-SSP",
+      "aliases": [
+        "hla",
+        "định type hla",
+        "pcr ssp"
+      ],
+      "consolidated_pages": [
+        44,
+        45
+      ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 34,
+      "original_row": 72,
+      "page": 18,
+      "pages": [
+        18,
+        19
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Thanh toán đối với các trường hợp sau:",
+        "a) Người bệnh có chỉ định ghép tế bào gốc tạo máu đồng loài hoặc điều trị theo hướng ghép tế bào gốc tạo máu đồng loài hoặc có chỉ định ghép tạng.",
+        "b) Đơn vị tế bào gốc hoặc tạng ghép cho người bệnh."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Thanh toán đối với các trường hợp sau:\na) Người bệnh có chỉ định ghép tế bào gốc tạo máu đồng loài hoặc điều trị theo hướng ghép tế bào gốc tạo máu đồng loài hoặc có chỉ định ghép tạng.\nb) Đơn vị tế bào gốc hoặc tạng ghép cho người bệnh.",
+      "images": [
+        {
+          "url": "/sources/labs/hla_ssp-row.png",
+          "sha256": "9b9523a9f8cf45e0b89770cc89b00fcd8c3b970255ef7535c3d3ebdf920a4d31",
+          "page": 18
+        },
+        {
+          "url": "/sources/labs/hla_ssp-row-2.png",
+          "sha256": "0bd62d1051942f51f7e42c356108d3dc427edb0f296fef4d4269dff7e3fc75a6",
+          "page": 19
+        }
+      ],
+      "locator": "Danh mục 2 · STT 34 (STT 72 theo TT35) · trang PDF 18–19",
+      "viewer_url": "/sources/labs/hla_ssp.html#source-row",
+      "image_url": "/sources/labs/hla_ssp-row.png",
+      "image_sha256": "9b9523a9f8cf45e0b89770cc89b00fcd8c3b970255ef7535c3d3ebdf920a4d31"
+    },
+    {
+      "list": 2,
+      "id": "hla_sso",
+      "pages": [
+        45
+      ],
+      "name": "Định type HLA độ phân giải cao cho 1 locus (Locus A, hoặc Locus B, hoặc Locus C, hoặc Locus DR, hoặc Locus DQ, hoặc Locus DP) bằng kỹ thuật PCR-SSO",
+      "aliases": [
+        "hla",
+        "hla độ phân giải cao",
+        "định type hla độ phân giải cao",
+        "pcr sso"
+      ],
+      "conditions": [
+        "Thanh toán đối với các trường hợp sau:",
+        "a) Người bệnh có chỉ định ghép tạng hoặc ghép tế bào gốc đồng loài khi cần kết quả HLA ở độ phân giải cao.",
+        "b) Đơn vị tế bào gốc hoặc tạng ghép cho người bệnh."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Định type HLA độ phân giải cao cho 1 locus (Locus A, hoặc Locus B, hoặc Locus C, hoặc Locus DR, hoặc Locus DQ, hoặc Locus DP) bằng kỹ thuật PCR-SSO",
+      "appendix_row": null,
+      "original_row": 73,
+      "page": 45,
+      "consolidated_pages": [
+        45
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Thanh toán đối với các trường hợp sau:\na) Người bệnh có chỉ định ghép tạng hoặc ghép tế bào gốc đồng loài khi cần kết quả HLA ở độ phân giải cao.\nb) Đơn vị tế bào gốc hoặc tạng ghép cho người bệnh.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p45.png",
+          "sha256": "b875a627911afc8d686b105efa44fdd31d2d60625fc5b7e9dcad66474e123f3e",
+          "page": 45
+        }
+      ],
+      "locator": "Danh mục 2 · STT 73 · trang 45 của bản hợp nhất",
+      "viewer_url": "/sources/labs/hla_sso.html#source-row",
+      "image_url": "/sources/labs/vbhn-p45.png",
+      "image_sha256": "b875a627911afc8d686b105efa44fdd31d2d60625fc5b7e9dcad66474e123f3e"
+    },
+    {
+      "list": 2,
+      "id": "pivka",
+      "pages": [
+        45
+      ],
+      "name": "Định lượng PIVKA",
+      "aliases": [
+        "pivka",
+        "pivka ii",
+        "pivka 2"
+      ],
+      "conditions": [
+        "Khi các phương pháp chẩn đoán hình ảnh phát hiện có khối u gan + AFP dưới 400ng/ml; đánh giá hiệu quả điều trị, theo dõi di căn, tái phát."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Định lượng PIVKA",
+      "appendix_row": null,
+      "original_row": 74,
+      "page": 45,
+      "consolidated_pages": [
+        45
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Khi các phương pháp chẩn đoán hình ảnh phát hiện có khối u gan + AFP dưới 400ng/ml; đánh giá hiệu quả điều trị, theo dõi di căn, tái phát.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p45.png",
+          "sha256": "b875a627911afc8d686b105efa44fdd31d2d60625fc5b7e9dcad66474e123f3e",
+          "page": 45
+        }
+      ],
+      "locator": "Danh mục 2 · STT 74 · trang 45 của bản hợp nhất",
+      "viewer_url": "/sources/labs/pivka.html#source-row",
+      "image_url": "/sources/labs/vbhn-p45.png",
+      "image_sha256": "b875a627911afc8d686b105efa44fdd31d2d60625fc5b7e9dcad66474e123f3e"
+    },
+    {
+      "list": 2,
+      "id": "gene_sequencing",
+      "pages": [
+        45,
+        46
+      ],
+      "name": "Xét nghiệm giải trình tự gen",
+      "aliases": [
+        "giải trình tự gen",
+        "giải trình tự gene",
+        "chimerism"
+      ],
+      "conditions": [
+        "Thanh toán khi thực hiện đối với một trong các trường hợp sau:",
+        "a) Phân tích đột biến gen bệnh máu (gen có nhiều loại đột biến hoặc đột biến trên nhiều gen). Đột biến gen kháng thuốc với các thuốc điều trị đích ở người bệnh Lơ xê mi kinh dòng bạch cầu hạt: Đã xác định dương tính với gen BCR-ABL bằng xét nghiệm RT - PCR và được điều trị bằng thuốc ức chế Tyrosine kinase sau 03 tháng nhưng không đáp ứng hoặc mất đáp ứng trong quá trình điều trị.",
+        "b) Phân tích tồn dư tối thiểu ở bệnh máu ác tính đối với người bệnh đã được chẩn đoán bệnh máu ác tính bằng xét nghiệm huyết đồ, tủy đồ thuộc một trong các trường hợp sau:",
+        "- Xét nghiệm RT-PCR âm tính với các gen AML1-ETO, PML-RAR a, CBFB-MIH11, NPM1, FLT3 (đối với bệnh Lơ xê mi cấp dòng tủy AML) hoặc gen BCR-ABL, TEL- AML1, MLL-AF4, E2A-PBX1 (đối với bệnh Lơ xê mi cấp dòng lympho ALL);",
+        "- Xét nghiệm di truyền tế bào âm tính với del (5q), del (7q), trisomy 8, del (20q) hoặc âm tính với gen JAK2 V617F (đối với bệnh tăng sinh tủy mạn MPN).",
+        "c) Xét nghiệm Chimerism sau ghép tế bào gốc tạo máu: Thực hiện khi không tìm được marker dương tính với xét nghiệm RQ-PCR. Thanh toán tối đa 04 lần trong 06 tháng đầu sau ghép; những lần sau cách nhau tối thiểu 02 tháng khi có hiện tượng thải ghép hoặc nguy cơ tái phát cần phải điều chỉnh thuốc ức chế miễn dịch."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Xét nghiệm giải trình tự gen",
+      "appendix_row": null,
+      "original_row": 75,
+      "page": 45,
+      "consolidated_pages": [
+        45,
+        46
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Thanh toán khi thực hiện đối với một trong các trường hợp sau:\na) Phân tích đột biến gen bệnh máu (gen có nhiều loại đột biến hoặc đột biến trên nhiều gen). Đột biến gen kháng thuốc với các thuốc điều trị đích ở người bệnh Lơ xê mi kinh dòng bạch cầu hạt: Đã xác định dương tính với gen BCR-ABL bằng xét nghiệm RT - PCR và được điều trị bằng thuốc ức chế Tyrosine kinase sau 03 tháng nhưng không đáp ứng hoặc mất đáp ứng trong quá trình điều trị.\nb) Phân tích tồn dư tối thiểu ở bệnh máu ác tính đối với người bệnh đã được chẩn đoán bệnh máu ác tính bằng xét nghiệm huyết đồ, tủy đồ thuộc một trong các trường hợp sau:\n- Xét nghiệm RT-PCR âm tính với các gen AML1-ETO, PML-RAR a, CBFB-MIH11, NPM1, FLT3 (đối với bệnh Lơ xê mi cấp dòng tủy AML) hoặc gen BCR-ABL, TEL- AML1, MLL-AF4, E2A-PBX1 (đối với bệnh Lơ xê mi cấp dòng lympho ALL);\n- Xét nghiệm di truyền tế bào âm tính với del (5q), del (7q), trisomy 8, del (20q) hoặc âm tính với gen JAK2 V617F (đối với bệnh tăng sinh tủy mạn MPN).\nc) Xét nghiệm Chimerism sau ghép tế bào gốc tạo máu: Thực hiện khi không tìm được marker dương tính với xét nghiệm RQ-PCR. Thanh toán tối đa 04 lần trong 06 tháng đầu sau ghép; những lần sau cách nhau tối thiểu 02 tháng khi có hiện tượng thải ghép hoặc nguy cơ tái phát cần phải điều chỉnh thuốc ức chế miễn dịch.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p45.png",
+          "sha256": "b875a627911afc8d686b105efa44fdd31d2d60625fc5b7e9dcad66474e123f3e",
+          "page": 45
+        },
+        {
+          "url": "/sources/labs/vbhn-p46.png",
+          "sha256": "00af4784d7640734101634c51d2b5b5c8feba0162d3c7c61dc033d1d0d150c7b",
+          "page": 46
+        }
+      ],
+      "locator": "Danh mục 2 · STT 75 · trang 45–46 của bản hợp nhất",
+      "viewer_url": "/sources/labs/gene_sequencing.html#source-row",
+      "image_url": "/sources/labs/vbhn-p45.png",
+      "image_sha256": "b875a627911afc8d686b105efa44fdd31d2d60625fc5b7e9dcad66474e123f3e"
+    },
+    {
+      "id": "colony_culture",
+      "name": "Nuôi cấy cụm tế bào gốc (colony forming culture)",
+      "official_name": "Nuôi cấy cụm tế bào gốc (colony forming culture)",
+      "aliases": [
+        "nuôi cấy cụm tế bào gốc",
+        "colony forming"
+      ],
+      "consolidated_pages": [
+        46
+      ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 35,
+      "original_row": 76,
+      "page": 19,
+      "pages": [
+        19
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Thanh toán đối với các trường hợp sau:",
+        "a) Ghép tế bào gốc tự thân.",
+        "b) Đánh giá khả năng sinh máu của tế bào gốc tủy xương trong các trường hợp suy tủy xương, Bệnh bạch cầu mạn dòng tủy."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Thanh toán đối với các trường hợp sau:\na) Ghép tế bào gốc tự thân.\nb) Đánh giá khả năng sinh máu của tế bào gốc tủy xương trong các trường hợp suy tủy xương, Bệnh bạch cầu mạn dòng tủy.",
+      "images": [
+        {
+          "url": "/sources/labs/colony_culture-row.png",
+          "sha256": "14a74c7e9b63d5dcf698c781537efa6f61287d0fa537ae7028351d234dc5f892",
+          "page": 19
+        }
+      ],
+      "locator": "Danh mục 2 · STT 35 (STT 76 theo TT35) · trang PDF 19",
+      "viewer_url": "/sources/labs/colony_culture.html#source-row",
+      "image_url": "/sources/labs/colony_culture-row.png",
+      "image_sha256": "14a74c7e9b63d5dcf698c781537efa6f61287d0fa537ae7028351d234dc5f892"
+    },
+    {
+      "list": 2,
+      "id": "thalassemia_rflp",
+      "pages": [
+        46
+      ],
+      "name": "Phát hiện gen bệnh Thalassemia bằng kỹ thuật PCR-RFLP",
+      "aliases": [
+        "gen bệnh thalassemia",
+        "gen thalassemia",
+        "pcr rflp"
+      ],
+      "explicit_aliases": [
+        "thalassemia"
+      ],
+      "conditions": [
+        "Bệnh Thalassemia hoặc nghi ngờ bệnh Thalassemia."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Phát hiện gen bệnh Thalassemia bằng kỹ thuật PCR-RFLP",
+      "appendix_row": null,
+      "original_row": 77,
+      "page": 46,
+      "consolidated_pages": [
+        46
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Bệnh Thalassemia hoặc nghi ngờ bệnh Thalassemia.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p46.png",
+          "sha256": "00af4784d7640734101634c51d2b5b5c8feba0162d3c7c61dc033d1d0d150c7b",
+          "page": 46
+        }
+      ],
+      "locator": "Danh mục 2 · STT 77 · trang 46 của bản hợp nhất",
+      "viewer_url": "/sources/labs/thalassemia_rflp.html#source-row",
+      "image_url": "/sources/labs/vbhn-p46.png",
+      "image_sha256": "00af4784d7640734101634c51d2b5b5c8feba0162d3c7c61dc033d1d0d150c7b"
+    },
+    {
+      "list": 2,
+      "id": "thalassemia_pcr",
+      "pages": [
+        46
+      ],
+      "name": "Xét nghiệm phát hiện đột biến gen thalassemia bằng kỹ thuật PCR",
+      "aliases": [
+        "đột biến gen thalassemia",
+        "gen thalassemia"
+      ],
+      "explicit_aliases": [
+        "thalassemia"
+      ],
+      "conditions": [
+        "Bệnh Thalassemia hoặc nghi ngờ bệnh Thalassemia."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Xét nghiệm phát hiện đột biến gen thalassemia bằng kỹ thuật PCR",
+      "appendix_row": null,
+      "original_row": 78,
+      "page": 46,
+      "consolidated_pages": [
+        46
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Bệnh Thalassemia hoặc nghi ngờ bệnh Thalassemia.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p46.png",
+          "sha256": "00af4784d7640734101634c51d2b5b5c8feba0162d3c7c61dc033d1d0d150c7b",
+          "page": 46
+        }
+      ],
+      "locator": "Danh mục 2 · STT 78 · trang 46 của bản hợp nhất",
+      "viewer_url": "/sources/labs/thalassemia_pcr.html#source-row",
+      "image_url": "/sources/labs/vbhn-p46.png",
+      "image_sha256": "00af4784d7640734101634c51d2b5b5c8feba0162d3c7c61dc033d1d0d150c7b"
+    },
+    {
+      "id": "platelet_ab_flow",
+      "name": "Phát hiện kháng thể kháng tiểu cầu bằng kỹ thuật Flow-cytometry",
+      "official_name": "Phát hiện kháng thể kháng tiểu cầu bằng kỹ thuật Flow-cytometry",
+      "aliases": [
+        "kháng thể kháng tiểu cầu"
+      ],
+      "consolidated_pages": [
+        46
+      ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 36,
+      "original_row": 79,
+      "page": 19,
+      "pages": [
+        19
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Thanh toán đối với các trường hợp sau:",
+        "a) Người bệnh có chỉ định ghép tế bào gốc hoặc ghép tạng.",
+        "b) Trong các trường hợp nghi ngờ có kháng thể kháng tiểu cầu sau:",
+        "- Theo dõi ở một số bệnh có truyền tiểu cầu nhiều lần: Xuất huyết giảm tiểu cầu, Suy tủy xương, Bệnh hệ thống, Lupus, giảm sinh tủy, sau hóa trị liệu hoặc sau ghép tế bào gốc tạo máu.",
+        "- Các bệnh tự miễn.",
+        "- Các trường hợp truyền tiểu cầu không hiệu lực.",
+        "c) Đơn vị tế bào gốc hoặc tạng sử dụng để ghép cho người bệnh."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Thanh toán đối với các trường hợp sau:\na) Người bệnh có chỉ định ghép tế bào gốc hoặc ghép tạng.\nb) Trong các trường hợp nghi ngờ có kháng thể kháng tiểu cầu sau:\n- Theo dõi ở một số bệnh có truyền tiểu cầu nhiều lần: Xuất huyết giảm tiểu cầu, Suy tủy xương, Bệnh hệ thống, Lupus, giảm sinh tủy, sau hóa trị liệu hoặc sau ghép tế bào gốc tạo máu.\n- Các bệnh tự miễn.\n- Các trường hợp truyền tiểu cầu không hiệu lực.\nc) Đơn vị tế bào gốc hoặc tạng sử dụng để ghép cho người bệnh.",
+      "images": [
+        {
+          "url": "/sources/labs/platelet_ab_flow-row.png",
+          "sha256": "3219cb52c6aad91ac08b7cda9572ee15a72102580779d454e77911eff778f498",
+          "page": 19
+        }
+      ],
+      "locator": "Danh mục 2 · STT 36 (STT 79 theo TT35) · trang PDF 19",
+      "viewer_url": "/sources/labs/platelet_ab_flow.html#source-row",
+      "image_url": "/sources/labs/platelet_ab_flow-row.png",
+      "image_sha256": "3219cb52c6aad91ac08b7cda9572ee15a72102580779d454e77911eff778f498"
+    },
+    {
+      "id": "platelet_ab_direct",
+      "name": "Xét nghiệm xác định kháng thể kháng tiểu cầu trực tiếp",
+      "official_name": "Xét nghiệm xác định kháng thể kháng tiểu cầu trực tiếp",
+      "aliases": [
+        "kháng thể kháng tiểu cầu",
+        "kháng thể kháng tiểu cầu trực tiếp"
+      ],
+      "consolidated_pages": [
+        47
+      ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 37,
+      "original_row": 80,
+      "page": 19,
+      "pages": [
+        19,
+        20
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "a) Người bệnh có chỉ định ghép tế bào gốc hoặc ghép tạng.",
+        "b) Trong các trường hợp nghi ngờ có kháng thể kháng tiểu cầu:",
+        "- Theo dõi ở một số bệnh có truyền tiểu cầu nhiều lần: Xuất huyết giảm tiểu cầu, Suy tủy xương, Bệnh hệ thống, Lupus, giảm sinh tủy, sau hóa trị liệu hoặc sau ghép tế bào gốc tạo máu.",
+        "- Các bệnh tự miễn.",
+        "c) Các trường hợp truyền tiểu cầu không hiệu lực."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "a) Người bệnh có chỉ định ghép tế bào gốc hoặc ghép tạng.\nb) Trong các trường hợp nghi ngờ có kháng thể kháng tiểu cầu:\n- Theo dõi ở một số bệnh có truyền tiểu cầu nhiều lần: Xuất huyết giảm tiểu cầu, Suy tủy xương, Bệnh hệ thống, Lupus, giảm sinh tủy, sau hóa trị liệu hoặc sau ghép tế bào gốc tạo máu.\n- Các bệnh tự miễn.\nc) Các trường hợp truyền tiểu cầu không hiệu lực.",
+      "images": [
+        {
+          "url": "/sources/labs/platelet_ab_direct-row.png",
+          "sha256": "19a833b17e624f117930c3c4f9e2ca676cc2d3b36f0ef00e26ac69e094df7b9d",
+          "page": 19
+        },
+        {
+          "url": "/sources/labs/platelet_ab_direct-row-2.png",
+          "sha256": "0fcd04111a24435da3d14affed6cf781b5fe1849a235a1b5aea4e94b28d56e20",
+          "page": 20
+        }
+      ],
+      "locator": "Danh mục 2 · STT 37 (STT 80 theo TT35) · trang PDF 19–20",
+      "viewer_url": "/sources/labs/platelet_ab_direct.html#source-row",
+      "image_url": "/sources/labs/platelet_ab_direct-row.png",
+      "image_sha256": "19a833b17e624f117930c3c4f9e2ca676cc2d3b36f0ef00e26ac69e094df7b9d"
+    },
+    {
+      "list": 2,
+      "id": "marrow_ihc",
+      "pages": [
+        47
+      ],
+      "name": "Xét nghiệm và chẩn đoán hóa mô miễn dịch tủy xương cho một dấu ấn (Marker) trên máy nhuộm tự động",
+      "aliases": [
+        "hóa mô miễn dịch tủy xương"
+      ],
+      "conditions": [
+        "Xác định loại tế bào trong tủy xương: u lympho xâm lấn tủy, u lympho thể tủy, đa u tủy xương, lơ xê mi cấp, lơ xê mi kinh dòng lympho, hội chứng tăng sinh lympho, rối loạn sinh tủy hoặc ung thư di căn tủy."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Xét nghiệm và chẩn đoán hóa mô miễn dịch tủy xương cho một dấu ấn (Marker) trên máy nhuộm tự động",
+      "appendix_row": null,
+      "original_row": 82,
+      "page": 47,
+      "consolidated_pages": [
+        47
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Xác định loại tế bào trong tủy xương: u lympho xâm lấn tủy, u lympho thể tủy, đa u tủy xương, lơ xê mi cấp, lơ xê mi kinh dòng lympho, hội chứng tăng sinh lympho, rối loạn sinh tủy hoặc ung thư di căn tủy.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p47.png",
+          "sha256": "fbaa415848b1ca24a89661796ed54a4f7d0baaecd16986390cd592f47171ea87",
+          "page": 47
+        }
+      ],
+      "locator": "Danh mục 2 · STT 82 · trang 47 của bản hợp nhất",
+      "viewer_url": "/sources/labs/marrow_ihc.html#source-row",
+      "image_url": "/sources/labs/vbhn-p47.png",
+      "image_sha256": "fbaa415848b1ca24a89661796ed54a4f7d0baaecd16986390cd592f47171ea87"
+    },
+    {
+      "list": 2,
+      "id": "probnp",
+      "pages": [
+        47
+      ],
+      "name": "Định lượng Pro-BNP",
+      "aliases": [
+        "pro bnp",
+        "probnp",
+        "nt probnp",
+        "nt pro bnp",
+        "định lượng pro bnp"
+      ],
+      "conditions": [
+        "Chẩn đoán, theo dõi suy tim."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Định lượng Pro-BNP",
+      "appendix_row": null,
+      "original_row": 83,
+      "page": 47,
+      "consolidated_pages": [
+        47
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Chẩn đoán, theo dõi suy tim.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p47.png",
+          "sha256": "fbaa415848b1ca24a89661796ed54a4f7d0baaecd16986390cd592f47171ea87",
+          "page": 47
+        }
+      ],
+      "locator": "Danh mục 2 · STT 83 · trang 47 của bản hợp nhất",
+      "viewer_url": "/sources/labs/probnp.html#source-row",
+      "image_url": "/sources/labs/vbhn-p47.png",
+      "image_sha256": "fbaa415848b1ca24a89661796ed54a4f7d0baaecd16986390cd592f47171ea87"
+    },
     {
       "id": "hba1c",
       "name": "Định lượng HbA1c [Máu]",
@@ -38,26 +1099,11 @@
         "a1c",
         "hemoglobin a1c"
       ],
-      "method": null,
-      "service_code": null,
-      "appendix_row": 38,
-      "original_row": 84,
-      "page": 20,
-      "bbox": [
-        70,
-        243,
-        559,
-        459
-      ],
       "consolidated_pages": [
         47,
         48
       ],
-      "conditions": [
-        "a) Thanh toán cho xét nghiệm định lượng HbA1c trong máu đối với trường hợp đã được chẩn đoán xác định đái tháo đường để xác định phác đồ điều trị nếu chưa thực hiện xét nghiệm HbA1c trong vòng 90 ± 3 (chín mươi cộng trừ 3) ngày.",
-        "b) Thanh toán cho xét nghiệm từ lần thứ 2 trở đi để đánh giá kết quả điều trị bệnh đái tháo đường tối thiểu sau mỗi 90 ± 3 (chín mươi cộng trừ 3) ngày.",
-        "c) Trường hợp đái tháo đường thai kỳ có điều trị bằng insulin, thực hiện xét nghiệm HbA1C mỗi 30 ngày 01 lần."
-      ],
+      "rule": "hba1c",
       "branches": [
         {
           "id": "regimen",
@@ -83,11 +1129,624 @@
         "above_days": 93,
         "note": "87–93 ngày: cần đối chiếu cách áp dụng sai số với bộ phận BHYT; đây là giới hạn tự động hóa của prototype, không phải điều kiện pháp luật bổ sung."
       },
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 38,
+      "original_row": 84,
+      "page": 20,
+      "pages": [
+        20
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "a) Thanh toán cho xét nghiệm định lượng HbA1c trong máu đối với trường hợp đã được chẩn đoán xác định đái tháo đường để xác định phác đồ điều trị nếu chưa thực hiện xét nghiệm HbA1c trong vòng 90 ± 3 (chín mươi cộng trừ 3) ngày.",
+        "b) Thanh toán cho xét nghiệm từ lần thứ 2 trở đi để đánh giá kết quả điều trị bệnh đái tháo đường tối thiểu sau mỗi 90 ± 3 (chín mươi cộng trừ 3) ngày.",
+        "c) Trường hợp đái tháo đường thai kỳ có điều trị bằng insulin, thực hiện xét nghiệm HbA1C mỗi 30 ngày 01 lần."
+      ],
+      "rate": [],
+      "rate_mode": null,
       "quote": "a) Thanh toán cho xét nghiệm định lượng HbA1c trong máu đối với trường hợp đã được chẩn đoán xác định đái tháo đường để xác định phác đồ điều trị nếu chưa thực hiện xét nghiệm HbA1c trong vòng 90 ± 3 (chín mươi cộng trừ 3) ngày.\nb) Thanh toán cho xét nghiệm từ lần thứ 2 trở đi để đánh giá kết quả điều trị bệnh đái tháo đường tối thiểu sau mỗi 90 ± 3 (chín mươi cộng trừ 3) ngày.\nc) Trường hợp đái tháo đường thai kỳ có điều trị bằng insulin, thực hiện xét nghiệm HbA1C mỗi 30 ngày 01 lần.",
+      "images": [
+        {
+          "url": "/sources/labs/hba1c-row.png",
+          "sha256": "06a38b14cc8e980b76802d7b21fafc4e4142a3ed3c1961ffb8efa66a45a84ea6",
+          "page": 20
+        }
+      ],
       "locator": "Danh mục 2 · STT 38 (STT 84 theo TT35) · trang PDF 20",
       "viewer_url": "/sources/labs/hba1c.html#source-row",
       "image_url": "/sources/labs/hba1c-row.png",
-      "image_sha256": "05b4db22434f5bd125ccd2207bdcd0d9acfccddcf2a4206a9b4c694c9571045c"
+      "image_sha256": "06a38b14cc8e980b76802d7b21fafc4e4142a3ed3c1961ffb8efa66a45a84ea6"
+    },
+    {
+      "list": 2,
+      "id": "cdiff",
+      "pages": [
+        48
+      ],
+      "name": "Clostridium nuôi cấy, định danh/Clostridium difficile miễn dịch tự động",
+      "aliases": [
+        "clostridium difficile",
+        "clostridium",
+        "c difficile",
+        "c diff"
+      ],
+      "conditions": [
+        "Người bị tiêu chảy nghi ngờ nhiễm C.difficle sau điều trị kháng sinh."
+      ],
+      "source_note": "Nguồn in “C.difficle”; giữ nguyên văn.",
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Clostridium nuôi cấy, định danh/Clostridium difficile miễn dịch tự động",
+      "appendix_row": null,
+      "original_row": 85,
+      "page": 48,
+      "consolidated_pages": [
+        48
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Người bị tiêu chảy nghi ngờ nhiễm C.difficle sau điều trị kháng sinh.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p48.png",
+          "sha256": "9d22a7c12193245573b4b6a269bac330258d7b84b33f11987957ea34c8593419",
+          "page": 48
+        }
+      ],
+      "locator": "Danh mục 2 · STT 85 · trang 48 của bản hợp nhất",
+      "viewer_url": "/sources/labs/cdiff.html#source-row",
+      "image_url": "/sources/labs/vbhn-p48.png",
+      "image_sha256": "9d22a7c12193245573b4b6a269bac330258d7b84b33f11987957ea34c8593419"
+    },
+    {
+      "list": 2,
+      "id": "cmv_pcr",
+      "pages": [
+        48
+      ],
+      "name": "CMV Real-time PCR",
+      "aliases": [
+        "cmv real time pcr",
+        "cmv pcr",
+        "pcr cmv"
+      ],
+      "explicit_aliases": [
+        "cmv",
+        "cytomegalovirus"
+      ],
+      "conditions": [
+        "Chẩn đoán để điều trị các bệnh lý não, gan, mắt, ghép tạng, ghép tế bào gốc, sốt kéo dài hoặc tình trạng suy giảm miễn dịch không rõ nguyên nhân nghi ngờ do Cytomegalovirus."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "CMV Real-time PCR",
+      "appendix_row": null,
+      "original_row": 86,
+      "page": 48,
+      "consolidated_pages": [
+        48
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Chẩn đoán để điều trị các bệnh lý não, gan, mắt, ghép tạng, ghép tế bào gốc, sốt kéo dài hoặc tình trạng suy giảm miễn dịch không rõ nguyên nhân nghi ngờ do Cytomegalovirus.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p48.png",
+          "sha256": "9d22a7c12193245573b4b6a269bac330258d7b84b33f11987957ea34c8593419",
+          "page": 48
+        }
+      ],
+      "locator": "Danh mục 2 · STT 86 · trang 48 của bản hợp nhất",
+      "viewer_url": "/sources/labs/cmv_pcr.html#source-row",
+      "image_url": "/sources/labs/vbhn-p48.png",
+      "image_sha256": "9d22a7c12193245573b4b6a269bac330258d7b84b33f11987957ea34c8593419"
+    },
+    {
+      "id": "hbv_load",
+      "name": "HBV đo tải lượng (Real-time PCR hoặc hệ thống tự động)",
+      "official_name": "HBV đo tải lượng Real-time PCR; HBV đo tải lượng hệ thống tự động",
+      "aliases": [
+        "hbv đo tải lượng",
+        "đo tải lượng hbv",
+        "tải lượng hbv",
+        "hbv dna",
+        "định lượng hbv",
+        "tải lượng virus viêm gan b",
+        "tải lượng vi rút viêm gan b",
+        "tải lượng viêm gan b"
+      ],
+      "consolidated_pages": [
+        48
+      ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 39,
+      "original_row": 87,
+      "page": 20,
+      "pages": [
+        20
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Thực hiện để điều trị viêm gan vi rút B trong các trường hợp:",
+        "- Xét nghiệm lần đầu.",
+        "- Người bệnh được điều trị thì thanh toán xét nghiệm lần đầu và những lần xét nghiệm tiếp theo ở tuần điều trị thứ 12, 24 và 48, sau đó thực hiện mỗi 24 - 48 tuần hoặc khi ALT tăng không rõ nguyên nhân để đánh giá đáp ứng điều trị và khả năng tái phát HBV hoặc khi người bệnh không tuân thủ điều trị với cùng 01 phương pháp xét nghiệm.",
+        "Không thanh toán đồng thời 02 phương pháp xét nghiệm cho 01 người bệnh trong cùng 01 đợt điều trị."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Thực hiện để điều trị viêm gan vi rút B trong các trường hợp:\n- Xét nghiệm lần đầu.\n- Người bệnh được điều trị thì thanh toán xét nghiệm lần đầu và những lần xét nghiệm tiếp theo ở tuần điều trị thứ 12, 24 và 48, sau đó thực hiện mỗi 24 - 48 tuần hoặc khi ALT tăng không rõ nguyên nhân để đánh giá đáp ứng điều trị và khả năng tái phát HBV hoặc khi người bệnh không tuân thủ điều trị với cùng 01 phương pháp xét nghiệm.\nKhông thanh toán đồng thời 02 phương pháp xét nghiệm cho 01 người bệnh trong cùng 01 đợt điều trị.",
+      "images": [
+        {
+          "url": "/sources/labs/hbv_load-row.png",
+          "sha256": "43c8a865b1ab8f5aa182f6333fcc4283fcfdb5edfb74ab1fb183fa48e5d22dce",
+          "page": 20
+        }
+      ],
+      "locator": "Danh mục 2 · STT 39 (STT 87 theo TT35) · trang PDF 20",
+      "viewer_url": "/sources/labs/hbv_load.html#source-row",
+      "image_url": "/sources/labs/hbv_load-row.png",
+      "image_sha256": "43c8a865b1ab8f5aa182f6333fcc4283fcfdb5edfb74ab1fb183fa48e5d22dce"
+    },
+    {
+      "id": "hcv_load",
+      "name": "HCV đo tải lượng (Real-time PCR hoặc hệ thống tự động)",
+      "official_name": "HCV đo tải lượng Real-time PCR; HCV đo tải lượng hệ thống tự động",
+      "aliases": [
+        "hcv đo tải lượng",
+        "đo tải lượng hcv",
+        "tải lượng hcv",
+        "hcv rna",
+        "định lượng hcv",
+        "tải lượng virus viêm gan c",
+        "tải lượng vi rút viêm gan c",
+        "tải lượng viêm gan c"
+      ],
+      "consolidated_pages": [
+        48,
+        49
+      ],
+      "source_note": "Nguồn in “viêm ban vi rút C” (cả TT39 và bản hợp nhất); giữ nguyên văn.",
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 40,
+      "original_row": 88,
+      "page": 20,
+      "pages": [
+        20,
+        21
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Thực hiện để điều trị viêm ban vi rút C trong các trường hợp:",
+        "- Xét nghiệm lần đầu.",
+        "- Người bệnh được điều trị thì thanh toán xét nghiệm lần đầu và xét nghiệm tại tuần thứ 12 sau khi kết thúc điều trị đối với cùng 01 phương pháp xét nghiệm.",
+        "Không thanh toán đồng thời 02 phương pháp xét nghiệm cho 01 người bệnh trong cùng 01 đợt điều trị."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Thực hiện để điều trị viêm ban vi rút C trong các trường hợp:\n- Xét nghiệm lần đầu.\n- Người bệnh được điều trị thì thanh toán xét nghiệm lần đầu và xét nghiệm tại tuần thứ 12 sau khi kết thúc điều trị đối với cùng 01 phương pháp xét nghiệm.\nKhông thanh toán đồng thời 02 phương pháp xét nghiệm cho 01 người bệnh trong cùng 01 đợt điều trị.",
+      "images": [
+        {
+          "url": "/sources/labs/hcv_load-row.png",
+          "sha256": "46de39b2fcef1b79e3336f1aecc52f824fcf2558e222f63658b68dd012600b8c",
+          "page": 20
+        },
+        {
+          "url": "/sources/labs/hcv_load-row-2.png",
+          "sha256": "ed305424dee15e53042fddedea881d5b4599e76d1c3297f00ce6024bcbb447c4",
+          "page": 21
+        }
+      ],
+      "locator": "Danh mục 2 · STT 40 (STT 88 theo TT35) · trang PDF 20–21",
+      "viewer_url": "/sources/labs/hcv_load.html#source-row",
+      "image_url": "/sources/labs/hcv_load-row.png",
+      "image_sha256": "46de39b2fcef1b79e3336f1aecc52f824fcf2558e222f63658b68dd012600b8c"
+    },
+    {
+      "list": 2,
+      "id": "hp_culture",
+      "pages": [
+        49
+      ],
+      "name": "Helicobacter pylori nuôi cấy, định danh và kháng thuốc",
+      "aliases": [
+        "helicobacter pylori nuôi cấy",
+        "nuôi cấy helicobacter pylori",
+        "nuôi cấy h pylori",
+        "h pylori nuôi cấy",
+        "nuôi cấy hp",
+        "hp nuôi cấy"
+      ],
+      "conditions": [
+        "Sau điều trị kháng sinh trên 15 ngày Helicobacter pylori vẫn dương tính."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Helicobacter pylori nuôi cấy, định danh và kháng thuốc",
+      "appendix_row": null,
+      "original_row": 89,
+      "page": 49,
+      "consolidated_pages": [
+        49
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Sau điều trị kháng sinh trên 15 ngày Helicobacter pylori vẫn dương tính.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p49.png",
+          "sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265",
+          "page": 49
+        }
+      ],
+      "locator": "Danh mục 2 · STT 89 · trang 49 của bản hợp nhất",
+      "viewer_url": "/sources/labs/hp_culture.html#source-row",
+      "image_url": "/sources/labs/vbhn-p49.png",
+      "image_sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265"
+    },
+    {
+      "list": 2,
+      "id": "fungi_seq",
+      "pages": [
+        49
+      ],
+      "name": "Vi nấm giải trình tự gene",
+      "aliases": [
+        "vi nấm giải trình tự gene",
+        "vi nấm giải trình tự gen",
+        "giải trình tự gene vi nấm",
+        "giải trình tự gen vi nấm"
+      ],
+      "conditions": [
+        "Chỉ định định danh các vi nấm không nuôi cấy được, khó nuôi cấy, nuôi cấy trên 15 ngày hoặc chưa định hướng được căn nguyên vi nấm gây bệnh."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Vi nấm giải trình tự gene",
+      "appendix_row": null,
+      "original_row": 90,
+      "page": 49,
+      "consolidated_pages": [
+        49
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Chỉ định định danh các vi nấm không nuôi cấy được, khó nuôi cấy, nuôi cấy trên 15 ngày hoặc chưa định hướng được căn nguyên vi nấm gây bệnh.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p49.png",
+          "sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265",
+          "page": 49
+        }
+      ],
+      "locator": "Danh mục 2 · STT 90 · trang 49 của bản hợp nhất",
+      "viewer_url": "/sources/labs/fungi_seq.html#source-row",
+      "image_url": "/sources/labs/vbhn-p49.png",
+      "image_sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265"
+    },
+    {
+      "list": 2,
+      "id": "hiv_resistance",
+      "pages": [
+        49
+      ],
+      "name": "HIV kháng thuốc giải trình tự gene",
+      "aliases": [
+        "hiv kháng thuốc",
+        "kháng thuốc hiv"
+      ],
+      "conditions": [
+        "Người bệnh được điều trị theo phác đồ điều trị HIV/AIDS của Bộ Y tế nhưng nghi ngờ kháng thuốc."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "HIV kháng thuốc giải trình tự gene",
+      "appendix_row": null,
+      "original_row": 91,
+      "page": 49,
+      "consolidated_pages": [
+        49
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Người bệnh được điều trị theo phác đồ điều trị HIV/AIDS của Bộ Y tế nhưng nghi ngờ kháng thuốc.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p49.png",
+          "sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265",
+          "page": 49
+        }
+      ],
+      "locator": "Danh mục 2 · STT 91 · trang 49 của bản hợp nhất",
+      "viewer_url": "/sources/labs/hiv_resistance.html#source-row",
+      "image_url": "/sources/labs/vbhn-p49.png",
+      "image_sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265"
+    },
+    {
+      "list": 2,
+      "id": "hcv_genotype",
+      "pages": [
+        49
+      ],
+      "name": "HCV genotype giải trình tự gene",
+      "aliases": [
+        "hcv genotype",
+        "genotype hcv",
+        "kiểu gen hcv"
+      ],
+      "conditions": [
+        "Chỉ định khi cần khẳng định genotype cho điều trị, khi DVKT “HCV genotype Real- time PCR” không thể xác định được genotype."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "HCV genotype giải trình tự gene",
+      "appendix_row": null,
+      "original_row": 92,
+      "page": 49,
+      "consolidated_pages": [
+        49
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Chỉ định khi cần khẳng định genotype cho điều trị, khi DVKT “HCV genotype Real- time PCR” không thể xác định được genotype.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p49.png",
+          "sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265",
+          "page": 49
+        }
+      ],
+      "locator": "Danh mục 2 · STT 92 · trang 49 của bản hợp nhất",
+      "viewer_url": "/sources/labs/hcv_genotype.html#source-row",
+      "image_url": "/sources/labs/vbhn-p49.png",
+      "image_sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265"
+    },
+    {
+      "list": 2,
+      "id": "hbv_resistance",
+      "pages": [
+        49
+      ],
+      "name": "HBV kháng thuốc giải trình tự gene",
+      "aliases": [
+        "hbv kháng thuốc",
+        "kháng thuốc hbv"
+      ],
+      "conditions": [
+        "Người bệnh được điều trị theo hướng dẫn điều trị của Bộ Y tế nhưng nghi ngờ kháng thuốc."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "HBV kháng thuốc giải trình tự gene",
+      "appendix_row": null,
+      "original_row": 93,
+      "page": 49,
+      "consolidated_pages": [
+        49
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Người bệnh được điều trị theo hướng dẫn điều trị của Bộ Y tế nhưng nghi ngờ kháng thuốc.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p49.png",
+          "sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265",
+          "page": 49
+        }
+      ],
+      "locator": "Danh mục 2 · STT 93 · trang 49 của bản hợp nhất",
+      "viewer_url": "/sources/labs/hbv_resistance.html#source-row",
+      "image_url": "/sources/labs/vbhn-p49.png",
+      "image_sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265"
+    },
+    {
+      "list": 2,
+      "id": "virus_seq",
+      "pages": [
+        49
+      ],
+      "name": "Virus giải trình tự gene",
+      "aliases": [
+        "virus giải trình tự gene",
+        "virus giải trình tự gen",
+        "vi rút giải trình tự gen",
+        "giải trình tự gene virus",
+        "giải trình tự gen virus"
+      ],
+      "conditions": [
+        "Để định danh virus khi chưa định hướng được căn nguyên gây bệnh bằng các kỹ thuật xét nghiệm vi sinh khác."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Virus giải trình tự gene",
+      "appendix_row": null,
+      "original_row": 94,
+      "page": 49,
+      "consolidated_pages": [
+        49
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Để định danh virus khi chưa định hướng được căn nguyên gây bệnh bằng các kỹ thuật xét nghiệm vi sinh khác.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p49.png",
+          "sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265",
+          "page": 49
+        }
+      ],
+      "locator": "Danh mục 2 · STT 94 · trang 49 của bản hợp nhất",
+      "viewer_url": "/sources/labs/virus_seq.html#source-row",
+      "image_url": "/sources/labs/vbhn-p49.png",
+      "image_sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265"
+    },
+    {
+      "list": 2,
+      "id": "bacteria_seq",
+      "pages": [
+        49
+      ],
+      "name": "Vi khuẩn định danh giải trình tự gene",
+      "aliases": [
+        "vi khuẩn định danh giải trình tự gene",
+        "vi khuẩn định danh giải trình tự gen",
+        "vi khuẩn giải trình tự gene",
+        "vi khuẩn giải trình tự gen",
+        "giải trình tự gen vi khuẩn",
+        "giải trình tự gene vi khuẩn"
+      ],
+      "conditions": [
+        "Chỉ định để định danh các vi khuẩn không nuôi cấy được, khó nuôi cấy, nuôi cấy trên 15 ngày không có kết quả hoặc chưa định hướng được căn nguyên vi khuẩn gây bệnh."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Vi khuẩn định danh giải trình tự gene",
+      "appendix_row": null,
+      "original_row": 95,
+      "page": 49,
+      "consolidated_pages": [
+        49
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Chỉ định để định danh các vi khuẩn không nuôi cấy được, khó nuôi cấy, nuôi cấy trên 15 ngày không có kết quả hoặc chưa định hướng được căn nguyên vi khuẩn gây bệnh.",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p49.png",
+          "sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265",
+          "page": 49
+        }
+      ],
+      "locator": "Danh mục 2 · STT 95 · trang 49 của bản hợp nhất",
+      "viewer_url": "/sources/labs/bacteria_seq.html#source-row",
+      "image_url": "/sources/labs/vbhn-p49.png",
+      "image_sha256": "da07473ad2182213d3e33d567f758b38a00d1269670bcecfe844c7ab5bf93265"
+    },
+    {
+      "id": "her2",
+      "name": "Xét nghiệm đột biến gen Her 2",
+      "official_name": "Xét nghiệm đột biến gen Her 2",
+      "aliases": [
+        "her2",
+        "her 2",
+        "đột biến gen her2",
+        "đột biến gen her 2"
+      ],
+      "consolidated_pages": [
+        49
+      ],
+      "rule": "gene",
+      "marker": true,
+      "scope": [
+        "breast",
+        "gastric",
+        "nsclc"
+      ],
+      "scope_label": "ung thư vú, ung thư dạ dày hoặc ung thư phổi không tế bào nhỏ",
+      "special": "\\b(?:ngs|pcr|panel|sinh thiet long|mau|huyet tuong|lan thu|lan 2|lan hai|lan 3|lam lai|lap lai|nhac lai|bao nhieu lan|gia|phan tram|ty le|ihc|fish|hoa mo mien dich|nhuom|khuech dai|bieu hien)\\b",
+      "special_note": "Dòng này ghi “xét nghiệm đột biến gen Her 2” và không nêu phương pháp (hóa mô miễn dịch, FISH, giải trình tự…), bệnh phẩm, số lần lặp lại hay giá/tỷ lệ.",
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 41,
+      "original_row": 96,
+      "page": 21,
+      "pages": [
+        21
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Chẩn đoán đột biến gen trong điều trị ung thư vú hoặc ung thư dạ dày hoặc ung thư phổi không tế bào nhỏ."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Chẩn đoán đột biến gen trong điều trị ung thư vú hoặc ung thư dạ dày hoặc ung thư phổi không tế bào nhỏ.",
+      "images": [
+        {
+          "url": "/sources/labs/her2-row.png",
+          "sha256": "7697f7e7bda51905679ab90631021ca43bc1790d885490470f7dbd8a491936e3",
+          "page": 21
+        }
+      ],
+      "locator": "Danh mục 2 · STT 41 (STT 96 theo TT35) · trang PDF 21",
+      "viewer_url": "/sources/labs/her2.html#source-row",
+      "image_url": "/sources/labs/her2-row.png",
+      "image_sha256": "7697f7e7bda51905679ab90631021ca43bc1790d885490470f7dbd8a491936e3"
+    },
+    {
+      "id": "braf",
+      "name": "Xét nghiệm đột biến gen BRAF",
+      "official_name": "Xét nghiệm đột biến gen BRAF",
+      "aliases": [
+        "braf",
+        "đột biến gen braf"
+      ],
+      "consolidated_pages": [
+        49
+      ],
+      "rule": "gene",
+      "marker": true,
+      "scope": [
+        "colorectal",
+        "thyroid"
+      ],
+      "scope_label": "ung thư đại trực tràng hoặc ung thư tuyến giáp",
+      "special": "\\b(?:ngs|pcr|panel|sinh thiet long|mau|huyet tuong|lan thu|lan 2|lan hai|lan 3|lam lai|lap lai|nhac lai|bao nhieu lan|gia|phan tram|ty le)\\b",
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 42,
+      "original_row": 97,
+      "page": 21,
+      "pages": [
+        21
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Chẩn đoán đột biến gen trong điều trị ung thư đại trực tràng hoặc ung thư tuyến giáp."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Chẩn đoán đột biến gen trong điều trị ung thư đại trực tràng hoặc ung thư tuyến giáp.",
+      "images": [
+        {
+          "url": "/sources/labs/braf-row.png",
+          "sha256": "1cd146e51907c219c7cb3698ede280ae361ab66f69ec261367ee9a6a3d6785ff",
+          "page": 21
+        }
+      ],
+      "locator": "Danh mục 2 · STT 42 (STT 97 theo TT35) · trang PDF 21",
+      "viewer_url": "/sources/labs/braf.html#source-row",
+      "image_url": "/sources/labs/braf-row.png",
+      "image_sha256": "1cd146e51907c219c7cb3698ede280ae361ab66f69ec261367ee9a6a3d6785ff"
     },
     {
       "id": "egfr",
@@ -98,23 +1757,16 @@
         "e gfr",
         "đột biến gen egfr"
       ],
-      "method": null,
-      "service_code": null,
-      "appendix_row": 43,
-      "original_row": 98,
-      "page": 21,
-      "bbox": [
-        70,
-        385,
-        559,
-        450
-      ],
       "consolidated_pages": [
         50
       ],
-      "conditions": [
-        "Chẩn đoán đột biến gen EGFR trong điều trị ung thư phổi không tế bào nhỏ."
+      "rule": "gene",
+      "marker": true,
+      "scope": [
+        "nsclc"
       ],
+      "scope_label": "ung thư phổi không tế bào nhỏ",
+      "special": "\\b(?:ngs|pcr|panel|sinh thiet long|mau|huyet tuong|lan thu|lan 2|lan hai|lan 3|lam lai|lap lai|nhac lai|bao nhieu lan|gia|phan tram|ty le)\\b",
       "branches": [
         {
           "id": "nsclc",
@@ -122,11 +1774,224 @@
           "purpose": "Chẩn đoán đột biến gen EGFR trong điều trị"
         }
       ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 43,
+      "original_row": 98,
+      "page": 21,
+      "pages": [
+        21
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Chẩn đoán đột biến gen EGFR trong điều trị ung thư phổi không tế bào nhỏ."
+      ],
+      "rate": [],
+      "rate_mode": null,
       "quote": "Chẩn đoán đột biến gen EGFR trong điều trị ung thư phổi không tế bào nhỏ.",
+      "images": [
+        {
+          "url": "/sources/labs/egfr-row.png",
+          "sha256": "31bf0b42d1d87d320668d7ceae50d9c92c0c4ca4c89be07c49449f6f1cf894b9",
+          "page": 21
+        }
+      ],
       "locator": "Danh mục 2 · STT 43 (STT 98 theo TT35) · trang PDF 21",
       "viewer_url": "/sources/labs/egfr.html#source-row",
       "image_url": "/sources/labs/egfr-row.png",
-      "image_sha256": "15f8c594fba1ff780c3b82c7aaa08cc2eca92b489a61cd4ce20e2626f769e2f3"
+      "image_sha256": "31bf0b42d1d87d320668d7ceae50d9c92c0c4ca4c89be07c49449f6f1cf894b9"
+    },
+    {
+      "id": "kras",
+      "name": "Xét nghiệm đột biến gen KRAS",
+      "official_name": "Xét nghiệm đột biến gen KRAS",
+      "aliases": [
+        "kras",
+        "đột biến gen kras"
+      ],
+      "consolidated_pages": [
+        50
+      ],
+      "rule": "gene",
+      "marker": true,
+      "scope": [
+        "colorectal"
+      ],
+      "scope_label": "ung thư đại trực tràng",
+      "special": "\\b(?:ngs|pcr|panel|sinh thiet long|mau|huyet tuong|lan thu|lan 2|lan hai|lan 3|lam lai|lap lai|nhac lai|bao nhieu lan|gia|phan tram|ty le)\\b",
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 44,
+      "original_row": 99,
+      "page": 21,
+      "pages": [
+        21
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Chẩn đoán đột biến gen trong điều trị ung thư đại trực tràng."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Chẩn đoán đột biến gen trong điều trị ung thư đại trực tràng.",
+      "images": [
+        {
+          "url": "/sources/labs/kras-row.png",
+          "sha256": "b47a82a7a0609405e47cf61e5bfa6b413b416d4f4de049732a258a53bb87738b",
+          "page": 21
+        }
+      ],
+      "locator": "Danh mục 2 · STT 44 (STT 99 theo TT35) · trang PDF 21",
+      "viewer_url": "/sources/labs/kras.html#source-row",
+      "image_url": "/sources/labs/kras-row.png",
+      "image_sha256": "b47a82a7a0609405e47cf61e5bfa6b413b416d4f4de049732a258a53bb87738b"
+    },
+    {
+      "id": "scc",
+      "name": "Định lượng SCC (Squamous cell carcinoma antigen) [Máu]",
+      "official_name": "Định lượng SCC (Squamous cell carcinoma antigen)[Máu]",
+      "aliases": [
+        "định lượng scc",
+        "squamous cell carcinoma antigen"
+      ],
+      "explicit_aliases": [
+        "scc"
+      ],
+      "consolidated_pages": [
+        50
+      ],
+      "rule": "scope",
+      "scope": [
+        "nsclc",
+        "sclc",
+        "lung_unspecified",
+        "cervical",
+        "nasopharynx",
+        "larynx",
+        "oral",
+        "sinus",
+        "esophagus",
+        "vulva",
+        "penis",
+        "skin"
+      ],
+      "scope_label": "ung thư biểu mô tế bào vảy của phổi, cổ tử cung, vòm mũi họng, thanh quản - hạ họng, khoang miệng, xoang mặt, thực quản, âm hộ, dương vật, da",
+      "scope_note": "Dòng này yêu cầu ung thư biểu mô tế bào vảy và mục đích theo dõi đáp ứng điều trị, phát hiện tái phát hoặc di căn xa; chatbot chưa tự xác nhận hai điểm này.",
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 45,
+      "original_row": 100,
+      "page": 21,
+      "pages": [
+        21
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Theo dõi đáp ứng điều trị, phát hiện tái phát, di căn xa trong ung thư biểu mô tế bào vảy (ung thư phổi, ung thư cổ tử cung, Ung thư vòm mũi họng, ung thư thanh quản - hạ họng, ung thư khoang miệng, ung thư xoang mặt, ung thư thực quản, ung thư âm hộ, ung thư dương vật, ung thư da)."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Theo dõi đáp ứng điều trị, phát hiện tái phát, di căn xa trong ung thư biểu mô tế bào vảy (ung thư phổi, ung thư cổ tử cung, Ung thư vòm mũi họng, ung thư thanh quản - hạ họng, ung thư khoang miệng, ung thư xoang mặt, ung thư thực quản, ung thư âm hộ, ung thư dương vật, ung thư da).",
+      "images": [
+        {
+          "url": "/sources/labs/scc-row.png",
+          "sha256": "56379b472d1e60e9512296a94397bbd0e4323886ce2a8c00e6accc52013070dd",
+          "page": 21
+        }
+      ],
+      "locator": "Danh mục 2 · STT 45 (STT 100 theo TT35) · trang PDF 21",
+      "viewer_url": "/sources/labs/scc.html#source-row",
+      "image_url": "/sources/labs/scc-row.png",
+      "image_sha256": "56379b472d1e60e9512296a94397bbd0e4323886ce2a8c00e6accc52013070dd"
+    },
+    {
+      "id": "pathology",
+      "name": "Các xét nghiệm giải phẫu bệnh",
+      "official_name": "Các xét nghiệm giải phẫu bệnh",
+      "aliases": [
+        "giải phẫu bệnh",
+        "xét nghiệm giải phẫu bệnh"
+      ],
+      "explicit_aliases": [
+        "mô bệnh học"
+      ],
+      "consolidated_pages": [
+        50
+      ],
+      "doc": "tt39",
+      "transcription": "text_layer",
+      "list": 2,
+      "appendix_row": 46,
+      "original_row": 101,
+      "page": 21,
+      "pages": [
+        21
+      ],
+      "method": null,
+      "service_code": null,
+      "conditions": [
+        "Đơn vị tính là mẫu bệnh phẩm cho 01 cơ quan hoặc tổ chức hoặc vị trí hoặc bộ phận cơ thể hoặc nhóm hạch, không tính theo block."
+      ],
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Đơn vị tính là mẫu bệnh phẩm cho 01 cơ quan hoặc tổ chức hoặc vị trí hoặc bộ phận cơ thể hoặc nhóm hạch, không tính theo block.",
+      "images": [
+        {
+          "url": "/sources/labs/pathology-row.png",
+          "sha256": "b27e9c4bc96125c81f4f322136a5cac43abbb7fb47abfa1c29bfcc0c71f384fc",
+          "page": 21
+        }
+      ],
+      "locator": "Danh mục 2 · STT 46 (STT 101 theo TT35) · trang PDF 21",
+      "viewer_url": "/sources/labs/pathology.html#source-row",
+      "image_url": "/sources/labs/pathology-row.png",
+      "image_sha256": "b27e9c4bc96125c81f4f322136a5cac43abbb7fb47abfa1c29bfcc0c71f384fc"
+    },
+    {
+      "list": 2,
+      "id": "pas_stain",
+      "pages": [
+        50
+      ],
+      "name": "Nhuộm PAS Periodic Acid Schiff",
+      "aliases": [
+        "nhuộm pas",
+        "periodic acid schiff"
+      ],
+      "conditions": [
+        "Không thanh toán đối với bệnh phẩm nạo hút buồng tử cung, ruột thừa (trừ trường hợp u ruột thừa)."
+      ],
+      "doc": "vbhn",
+      "transcription": "scan_read",
+      "official_name": "Nhuộm PAS Periodic Acid Schiff",
+      "appendix_row": null,
+      "original_row": 102,
+      "page": 50,
+      "consolidated_pages": [
+        50
+      ],
+      "method": null,
+      "service_code": null,
+      "rate": [],
+      "rate_mode": null,
+      "quote": "Không thanh toán đối với bệnh phẩm nạo hút buồng tử cung, ruột thừa (trừ trường hợp u ruột thừa).",
+      "images": [
+        {
+          "url": "/sources/labs/vbhn-p50.png",
+          "sha256": "81fa55c7790c84b1452f746e6c248a6db10a9d3a4db5c5fa817c85180ecbbe11",
+          "page": 50
+        }
+      ],
+      "locator": "Danh mục 2 · STT 102 · trang 50 của bản hợp nhất",
+      "viewer_url": "/sources/labs/pas_stain.html#source-row",
+      "image_url": "/sources/labs/vbhn-p50.png",
+      "image_sha256": "81fa55c7790c84b1452f746e6c248a6db10a9d3a4db5c5fa817c85180ecbbe11"
     }
   ]
 }

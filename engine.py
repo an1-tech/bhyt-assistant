@@ -605,7 +605,10 @@ class Corpus:
         else:
             lab_route=None
             if confirm is None and isinstance(message,str) and 0<len(message.strip())<=3000:
-                lab_route=self.labs.route(message,trusted,self.resolve(message))
+                # Medicines named in the message, including catalogue words that are not a full
+                # name on their own ("insulin"): a lab value inside a medicine question stays there.
+                words=[w for w in normalize(message).split() if w in self.drug_lexicon()]
+                lab_route=self.labs.route(message,trusted,self.resolve(message),words)
             if lab_route:
                 result=self.labs.answer(message,trusted,lab_route)
                 if lab_route['kind']=='mixed':

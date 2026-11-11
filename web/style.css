@@ -25,3 +25,10 @@
 .lab-source-page summary{cursor:pointer;min-height:44px;padding:10px 0}.lab-verbatim{white-space:pre-wrap;overflow-wrap:anywhere}
 .lab-source-page>a{display:inline-flex;min-height:44px;align-items:center;color:var(--evidence)}
 .lab-source-page .source-links{margin:16px 0}.lab-source-page h1{font-size:24px}
+
+/* Verbatim laboratory row: marked branch, paired rate, notes */
+.lab-quote li.lab-used mark{background:#fde68a;color:inherit;padding:0 2px;border-radius:2px}
+.lab-rate{display:block;margin-top:4px;font-size:14px;color:var(--muted)}
+.lab-note{margin:8px 0 0}.lab-quote .hint{margin:8px 0 0}
+.lab-source-page .lab-source-image+.lab-source-image{margin-top:12px}
+.source-row details .text-link{display:flex}

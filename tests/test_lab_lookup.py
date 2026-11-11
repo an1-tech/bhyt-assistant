@@ -190,9 +190,12 @@ class LaboratoryTests(unittest.TestCase):
 
     def test_unsupported_new_test_drops_previous_lab(self):
         a=self.ask('HbA1c hôm nay theo dõi đái tháo đường, lần trước cách 120 ngày')
-        b=self.ask('Còn xét nghiệm CRP có được chi trả không?',a)
+        b=self.ask('Còn xét nghiệm troponin có được chi trả không?',a)
         self.assertEqual(b['status'],'unknown')
         self.assertEqual(b['state'],{})
+        c=self.ask('Còn xét nghiệm CRP có được chi trả không?',a)      # another listed test: its own row, no HbA1c facts
+        self.assertEqual([x['id'] for x in c['lab_results']],['crp'])
+        self.assertEqual(c['lab_results'][0]['facts'],{})
 
     def test_two_services_do_not_share_case_facts(self):
         r=self.ask('HbA1c và xét nghiệm EGFR hôm nay, lần trước cách 30 ngày có BHYT không?')
@@ -258,7 +261,7 @@ class LabHTTPTests(unittest.TestCase):
     def test_chat_protocol_and_metadata(self):
         with urlopen(self.base+'/api/health') as response:health=json.load(response)
         with urlopen(self.base+'/api/metadata') as response:m=json.load(response)
-        self.assertEqual(m['lab_source']['service_count'],2)
+        self.assertEqual(m['lab_source']['service_count'],41)
         req=Request(self.base+'/api/chat',data=json.dumps({'message':'HbA1c có điều kiện BHYT gì?'}).encode(),headers={'Content-Type':'application/json','X-Session-Token':health['token']})
         with urlopen(req) as response:r=json.load(response)
         self.assertEqual(r['lab_results'][0]['status'],'conditions_only')

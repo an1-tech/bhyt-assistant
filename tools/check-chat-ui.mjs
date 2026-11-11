@@ -35,7 +35,7 @@ try{
   assert(await p.eval(()=>document.querySelectorAll('.turn').length===4),'Conversation history stays visible '+size.width);
   assert(await p.eval(()=>document.documentElement.scrollWidth<=innerWidth),'No answer overflow '+size.width);
   await p.eval(()=>{location.hash='sources';});await wait(p,()=>!document.getElementById('view-sources').hidden);
-  assert(await p.eval(()=>document.querySelectorAll('#source-list .source-row').length===4&&document.querySelectorAll('#supplemental-source-list .source-row').length===6),'All ten source groups/documents preserved '+size.width);
+  assert(await p.eval(()=>document.querySelectorAll('#source-list .source-row').length===5&&document.querySelectorAll('#supplemental-source-list .source-row').length===6),'Four drug source groups, the lab source and six documents shown '+size.width);
   await p.screenshot({path:out+'/sources-'+size.width+'.jpg',quality:88});
   await p.eval(()=>{location.hash='lookup';});await wait(p,()=>!document.getElementById('view-lookup').hidden);await p.eval(()=>document.getElementById('new-chat').click());
   assert(await p.eval(()=>!document.querySelector('.turn')&&!document.getElementById('welcome').hidden&&document.activeElement.id==='question'),'New chat resets state and focuses input '+size.width);

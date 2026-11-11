@@ -26,19 +26,19 @@ def make_server(port=8765,corpus=None):
         def do_GET(self):
             if not self.trusted_host():self.send(403,{'error':'Invalid host'});return
             path=urlparse(self.path).path
-            if path in ('/sources/labs/hba1c.html','/sources/labs/egfr.html'):
-                body=corpus.labs.source_html(path.rsplit('/',1)[-1].split('.')[0])
+            if path.startswith('/sources/labs/') and path.endswith('.html'):
+                body=corpus.labs.source_html(path.rsplit('/',1)[-1][:-5])
                 if body is None:self.send(404,{'error':'Chưa có nguồn xét nghiệm.'})
                 else:self.send(200,body,'text/html; charset=utf-8')
                 return
-            lab_files={
-                '/sources/labs/'+name:corpus.data/'sources/labs'/name
-                for name in ('39-2024-appendix.pdf','39-2024-main.pdf','17-vbhn-2024.pdf','hba1c-row.png','egfr-row.png')
-            }
-            if path in lab_files and lab_files[path].is_file():
-                if path.endswith('.png') and not corpus.labs.integrity_ok():
-                    self.send(409,{'error':'Nguồn xét nghiệm đã thay đổi; cần đối chiếu lại.'});return
-                self.send(200,lab_files[path].read_bytes(),'image/png' if path.endswith('.png') else 'application/pdf');return
+            # Only the source PDFs and the row/page images named in the lab bundle are served.
+            lab_files=corpus.labs.served_files()
+            if path in lab_files:
+                file=corpus.data/path.removeprefix('/')
+                if file.is_file():
+                    if path.endswith('.png') and not corpus.labs.integrity_ok():
+                        self.send(409,{'error':'Nguồn xét nghiệm đã thay đổi; cần đối chiếu lại.'});return
+                    self.send(200,file.read_bytes(),lab_files[path]);return
             if path=='/api/health':
                 import os
                 self.send(200,dict(ok=True,app_id='bhyt-toan-vien',version=APP_VERSION,instance_id=INSTANCE_ID,retrieval_version=RETRIEVAL_VERSION,snapshot=SNAPSHOT,drug_entries=len({r['stt'] for r in corpus.drugs}),radio_entries=len({r['stt'] for r in corpus.radio}),chunks=len(corpus.chunks),token=token,ai_configured=bool(os.environ.get('BHYT_ENABLE_AI')=='1' and os.environ.get('OPENAI_API_KEY') and os.environ.get('OPENAI_MODEL')),embeddings=corpus.semantic_path.exists(),source_update_date=corpus.supplemental.registry['checked_as_of'],supplemental_documents=len(corpus.supplemental.documents)));return

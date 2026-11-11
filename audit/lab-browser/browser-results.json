@@ -77,6 +77,54 @@
       "passed": true
     },
     {
+      "name": "Submitted question: HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước làm ngày 01/08/2026, BHYT có thanh toán không?",
+      "passed": true
+    },
+    {
+      "name": "Matched HbA1c branch is marked in the verbatim row 1440",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Xét nghiệm HER2 cho bệnh nhân ung thư đại trực tràng đang điều trị hôm nay có được BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Gene test outside the row scope 1440",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Định lượng procalcitonin có điều kiện BHYT gì?",
+      "passed": true
+    },
+    {
+      "name": "Rate column quoted for Danh mục 1 row 1440",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Định lượng BNP cho bệnh nhân suy tim có được BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Scan-read row is flagged with paired rates 1440",
+      "passed": true
+    },
+    {
+      "name": "Scan page image shown with transcription 1440",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Xét nghiệm troponin có được BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Unlisted test: no rule borrowed, two source documents offered 1440",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow after lab answers 1440",
+      "passed": true
+    },
+    {
       "name": "New chat clears state 1440",
       "passed": true
     },
@@ -177,6 +225,54 @@
       "passed": true
     },
     {
+      "name": "Submitted question: HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước làm ngày 01/08/2026, BHYT có thanh toán không?",
+      "passed": true
+    },
+    {
+      "name": "Matched HbA1c branch is marked in the verbatim row 768",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Xét nghiệm HER2 cho bệnh nhân ung thư đại trực tràng đang điều trị hôm nay có được BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Gene test outside the row scope 768",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Định lượng procalcitonin có điều kiện BHYT gì?",
+      "passed": true
+    },
+    {
+      "name": "Rate column quoted for Danh mục 1 row 768",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Định lượng BNP cho bệnh nhân suy tim có được BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Scan-read row is flagged with paired rates 768",
+      "passed": true
+    },
+    {
+      "name": "Scan page image shown with transcription 768",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Xét nghiệm troponin có được BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Unlisted test: no rule borrowed, two source documents offered 768",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow after lab answers 768",
+      "passed": true
+    },
+    {
       "name": "New chat clears state 768",
       "passed": true
     },
@@ -274,6 +370,54 @@
     },
     {
       "name": "Copy report includes source location 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước làm ngày 01/08/2026, BHYT có thanh toán không?",
+      "passed": true
+    },
+    {
+      "name": "Matched HbA1c branch is marked in the verbatim row 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Xét nghiệm HER2 cho bệnh nhân ung thư đại trực tràng đang điều trị hôm nay có được BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Gene test outside the row scope 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Định lượng procalcitonin có điều kiện BHYT gì?",
+      "passed": true
+    },
+    {
+      "name": "Rate column quoted for Danh mục 1 row 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Định lượng BNP cho bệnh nhân suy tim có được BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Scan-read row is flagged with paired rates 390",
+      "passed": true
+    },
+    {
+      "name": "Scan page image shown with transcription 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Xét nghiệm troponin có được BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Unlisted test: no rule borrowed, two source documents offered 390",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow after lab answers 390",
       "passed": true
     },
     {

@@ -37,7 +37,7 @@ def metadata(corpus):
         source_update=corpus.supplemental.metadata(),
         lab_source=corpus.labs.metadata(),
         review_status='Chưa được bệnh viện thẩm định',
-        scope='Toàn bộ các khoa; thuốc hóa dược, sinh phẩm, thuốc phóng xạ, chất đánh dấu và hai xét nghiệm HbA1c/đột biến gen EGFR trong bộ nguồn.',
+        scope='Toàn bộ các khoa; thuốc hóa dược, sinh phẩm, thuốc phóng xạ, chất đánh dấu và các xét nghiệm có điều kiện thanh toán riêng (TT39/2024, 17/VBHN-BYT) trong bộ nguồn.',
         missing=['Danh mục thuốc, biệt dược và phạm vi hợp đồng BHYT tại bệnh viện.',
                  'Danh mục thuốc y học cổ truyền, dược liệu và vị thuốc chưa có trong gói dữ liệu này.',
                  'Chưa xác minh mức hưởng, chuyển cơ sở, chỉ định lâm sàng của từng người bệnh.'])
