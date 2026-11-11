@@ -123,7 +123,7 @@ class IndicationChat:
         prior=previous_turns(previous) if (same or carry_prior) else []
         # Confirmed facts (buttons) belong to the case under discussion; a new medicine starts a new case.
         facts=valid_facts(previous.get("facts")) if same else {}
-        self._new_turn=None
+        new_turn=None      # this request's own text; never kept on the object shared by all requests
         if confirm:
             # A button click adds a fact; it is not a new question and adds no text turn.
             rid,topic,marker=confirm["key"].split("|");facts.setdefault(rid,{}).setdefault(topic,{})[marker]=confirm["value"]
@@ -138,13 +138,13 @@ class IndicationChat:
             reset_topic=bool(current_topics or (named_drug and not carry_prior) or disease_signal)
             turns=[message] if reset_topic or not prior else (prior+[message])[-8:]
             topics=current_topics if reset_topic else topics_in("; ".join(prior))
-            self._new_turn=message
+            new_turn=message
         context="; ".join(turns)[-1000:]
         has_disease=bool(topics or re.search(CONTEXT_DISEASE,normalize(context)))
         supplemental=[]
         for row in result["results"]:
             # Every answered medicine gets its own buttons; each key carries that medicine's record id.
-            row["question_answer"]=self.answer(row,topics,turns,has_disease,facts,confirmable=True)
+            row["question_answer"]=self.answer(row,topics,turns,has_disease,facts,confirmable=True,new_turn=new_turn)
             row["question_answer"]["source_ids"]=row.get("record_ids",[])
             for id in row.get("record_ids",[]):
                 source=self.c.by_id[id]
@@ -165,7 +165,7 @@ class IndicationChat:
         result["state"]["facts"]=facts
         return result
 
-    def answer(self,row,topics,turns,has_disease,facts=None,confirmable=True):
+    def answer(self,row,topics,turns,has_disease,facts=None,confirmable=True,new_turn=None):
         from engine import normalize
         context="; ".join(turns)
         name=row["ingredient"];ids=row.get("record_ids",[])
@@ -184,15 +184,15 @@ class IndicationChat:
             else:
                 answer["scope"]+=" Riêng nhánh điều kiện của thuốc này: "+rule["reviewed_by"]
         if rule and rule["kind"]=="indication_branches":
-            self.branch_answer(answer,rule,name,ids[0],topics,turns,has_disease,facts.get(ids[0],{}),confirmable)
+            self.branch_answer(answer,rule,name,ids[0],topics,turns,has_disease,facts.get(ids[0],{}),confirmable,new_turn)
         elif rule and rule["kind"]=="formulation_note":
             axis=rule.get("axis","dạng bào chế")
             answer["status"]="source_conditions"
             answer["conclusion"]=name+f" có trong danh mục BHYT; ghi chú phân biệt tỷ lệ theo {axis}. Ghi chú này chưa đủ để xác nhận chi trả cho một bệnh/chỉ định cụ thể."
             fact=facts.get(ids[0],{}).get("formulation",{}).get("value")
-            if fact and getattr(self,"_new_turn",None):
+            if fact and new_turn:
                 # "Nếu dùng chống thải ghép thì sao?" replaces an earlier confirmed purpose.
-                _,new_state=choose_formulation([self._new_turn],rule["formulations"])
+                _,new_state=choose_formulation([new_turn],rule["formulations"])
                 if new_state in ("chosen","unclear"):
                     facts[ids[0]]["formulation"].pop("value",None);fact=None
             chosen,state=choose_formulation(turns,rule["formulations"],fact)
@@ -243,7 +243,7 @@ class IndicationChat:
             answer["conclusion"]="Câu hỏi liên quan điều kiện chuyển tiếp. Bộ nguồn có Điều 8 TT20/2022 để đối chiếu, nhưng chưa đủ tỷ lệ lịch sử và chuỗi căn cứ để kết luận riêng trường hợp này. Không áp tỷ lệ của nhánh hiện tại cho thời kỳ khác."
         return answer
 
-    def branch_answer(self,answer,rule,name,source_id,topics,turns,has_disease,facts=None,confirmable=True):
+    def branch_answer(self,answer,rule,name,source_id,topics,turns,has_disease,facts=None,confirmable=True,new_turn=None):
         facts=facts or {}
         branches=rule["branches"];known={b["topic"] for b in branches}
         listing="; ".join(f"{b['scope']} ({rate_text(b)})" for b in branches)
@@ -270,7 +270,7 @@ class IndicationChat:
                 # A new question that says anything about this condition — a clear restatement
                 # ("Nếu RAS tự nhiên thì sao?") or a doubt ("nếu chưa xét nghiệm EGFR", "nếu chưa
                 # di căn" for an either/or condition) — replaces the earlier confirmation.
-                if fact and getattr(self,"_new_turn",None) and requirement_status([self._new_turn],req) is not None:
+                if fact and new_turn and requirement_status([new_turn],req) is not None:
                     branch_facts.pop(req["marker"],None);fact=None
                 status=requirement_status(turns,req,fact)
                 source="Theo xác nhận" if fact in ("met","not_met","unknown") else "Theo câu hỏi"

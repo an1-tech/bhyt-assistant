@@ -201,3 +201,13 @@ Cả 8 điểm của lần rà soát thứ hai đều tái hiện được và �
 Kiểm thử: `tests/test_lab_review8.py` (12 kiểm thử); tổng 408 kiểm thử backend, 123 và 67 kiểm tra giao diện.
 
 Giới hạn vẫn còn: một câu chỉ gồm từ đã biết, ghép theo cách chưa lường tới, vẫn có thể bị hiểu sai. Phần "Chatbot hiểu dữ kiện như sau" là chỗ để bác sĩ kiểm tra trước khi tin kết luận.
+
+## Rà soát lần 4 ngày 11/11/2026: 2 lỗi, đã sửa
+
+| # | Lỗi | Sau khi sửa |
+|---|---|---|
+| 1 | Câu bắt đầu bằng "Đúng" hoặc "Ok" bị coi là xác nhận, phần còn lại bị bỏ qua ("Đúng nhưng bệnh nhân không dùng insulin", "Ok, hỏi Trastuzumab…") | Chỉ khi cả câu là lời xác nhận thì mới tính. Câu có sửa dữ kiện được đọc và hiện lại cách hiểu mới; câu chuyển chủ đề thì chuyển |
+| 2 | Hai yêu cầu chạy xen kẽ có thể làm mất bước chờ xác nhận, vì trạng thái của một yêu cầu bị lưu trên đối tượng dùng chung | Trạng thái của từng yêu cầu chỉ nằm trong biến cục bộ, cả ở phần xét nghiệm (`_same_case`) lẫn phần thuốc (`_new_turn`) |
+
+Kiểm thử: `tests/test_lab_review9.py` (8 kiểm thử), có ca tái hiện đúng tình huống yêu cầu B chạy chen giữa yêu cầu A; tổng 422 kiểm thử backend.
+

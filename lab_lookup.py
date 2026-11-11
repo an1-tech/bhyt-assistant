@@ -163,7 +163,9 @@ def unread_words(message, aliases=()):
 
 
 NEW_CASE = r'\b(?:(?:benh nhan|nguoi benh|bn|ca|truong hop|nguoi) (?:khac|thu (?:hai|ba|tu|\d+)|tiep theo|ke tiep)|(?:ca|truong hop) moi|mot (?:benh nhan|ca|truong hop|nguoi) (?:khac|moi))\b'
-CONFIRM_WORDS = r'^(?:dung|dung roi|dung vay|xac nhan|chinh xac|ok|dong y)\b'
+# A confirmation is the whole message and nothing else. "Đúng nhưng bệnh nhân không dùng
+# insulin" corrects a fact and "Ok, hỏi Trastuzumab …" changes the subject: both are read.
+CONFIRMATION = r'(?:dung|dung roi|dung vay|chinh xac|xac nhan|ok|dong y)(?: (?:roi|vay|a|nhe))?(?: doi chieu(?: theo(?: cac)? du kien(?: nay| tren)?)?)?'
 
 F_USE = {'den', 'toi', 'co', 'con', 'can', 'phai', 'duoc', 'chi', 'dinh', 'dung', 'su', 'tiem', 'dieu', 'tri', 'bang', 'voi', 'thuoc', 'them', 'nua', 'tung', 'dang'}
 F_IS = {'phai', 'la', 'bi', 'mac', 'co', 'cho', 'benh', 'nhan', 'nguoi', 'truong', 'hop', 'duoc', 'chan', 'doan', 'xac', 'dinh', 'ro', 'ket', 'luan',
@@ -323,7 +325,7 @@ class LabLookup:
         marker = has(q, r'\b(?:ket qua|duong tinh|am tinh|chua co|chua xet nghiem|chua lam|cho xet nghiem|cho ket qua|can xet nghiem|de nghi xet nghiem|chi dinh xet nghiem)\b')
         test_focus = has(q, r'\b(?:bhyt (?:cua|cho) (?:xet nghiem|xn)|(?:xet nghiem|dich vu|xn|dinh luong).{0,80}(?:co duoc|co bhyt|thanh toan|chi tra|dieu kien)|chi phi xet nghiem)\b')
         both = bool(drug_hits or state.get('selected_ids') or has(q, r'\bthuoc\b')) and has(q, r'\b(?:ca hai|ca thuoc va|ca xet nghiem va|va (?:thuoc|erlotinib|gefitinib|afatinib|osimertinib)|va (?:ca )?xet nghiem)\b')
-        if not ids and lab_state.get('pending') == 'confirm' and lab_state.get('id') in self.services and has(q, CONFIRM_WORDS) and len(q.split()) <= 12:
+        if not ids and lab_state.get('pending') == 'confirm' and lab_state.get('id') in self.services and re.fullmatch(CONFIRMATION, q):
             return {'ids': [lab_state['id']], 'kind': 'lab', 'confirmed': True}
         markers = [i for i in ids if self.services[i].get('marker')]
         # "Cả xét nghiệm HER2 và Trastuzumab …", "HbA1c và Metformin …": a medicine and a test joined
@@ -465,11 +467,10 @@ class LabLookup:
             row = self.services[sid]
             prev = state.get('lab', {}) if single else {}
             confirmed = bool(route.get('confirmed'))
-            self._same_case = False
             if confirmed:      # the user confirmed the reading shown last turn: nothing is read again
-                facts, case, errors = dict(prev.get('facts', {})), bool(prev.get('case')), []
+                facts, case, errors, same_case = dict(prev.get('facts', {})), bool(prev.get('case')), [], True
             else:
-                facts, case, errors = self.extract(message, sid, prev, today)
+                facts, case, errors, same_case = self.extract(message, sid, prev, today)
             if not single:
                 # Dates/purposes in a multi-service question cannot be attributed safely.
                 facts, case, errors = {k: v for k, v in facts.items() if k == 'foreign_method'}, False, []
@@ -481,7 +482,7 @@ class LabLookup:
             # an explicit confirmation of the reading clears them.
             unread, doubt = [], None
             if row.get('rule') and not confirmed:
-                carried = prev if self._same_case else {}
+                carried = prev if same_case else {}
                 unread = list(dict.fromkeys(list(carried.get('unread', [])) + unread_words(message, [norm(x) for x in row.get('aliases', []) + [row['name']]])))
                 found = re.search(DOUBT, ' ; '.join(clause_list(message)))
                 doubt = found.group(0).replace('loaitru', 'loại trừ') if found else carried.get('doubt')
@@ -554,7 +555,6 @@ class LabLookup:
         named = any(sid == i for i in self.match_services(q, True)[0])
         continuation = not named or has(q, r'^(?:con|vay|neu|the|lan truoc|lan nay)\b')
         same = prev.get('id') == sid and continuation and not has(q, NEW_CASE)
-        self._same_case = same
         f = dict(prev.get('facts', {})) if same else {}
         errors = []
         case = bool(prev.get('case')) if same else False
@@ -582,7 +582,7 @@ class LabLookup:
         # The question names a method or test other than the one this row is about.
         foreign = bool(row.get('foreign') and has(q, row['foreign']))
         if generic and not case_requested and not (row.get('special') and has(q, row['special'])) and not has(q, r'\b(?:tam soat|sang loc|ngs|pcr|panel|gia|ty le|phan tram)\b'):
-            return ({'foreign_method': True} if foreign else {}), False, []
+            return ({'foreign_method': True} if foreign else {}), False, [], same
         clauses = clause_list(message)
         if row.get('rule') == 'hba1c':
             self.extract_hba1c(message, q, clauses, f, prev if same else {}, today, errors)
@@ -591,7 +591,7 @@ class LabLookup:
         f.pop('foreign_method', None)
         if foreign:
             f['foreign_method'] = True
-        return f, case, errors
+        return f, case, errors, same
 
     def extract_disease(self, q, clauses, f, row):
         found = self.diseases_in(clauses, monitoring_is_doubt=row.get('rule') == 'gene')
