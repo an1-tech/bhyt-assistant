@@ -213,6 +213,10 @@ class LabLookup:
         self.source = self.bundle['source']
         self.documents = self.bundle.get('documents') or ({'tt39': self.source} if self.source else {})
         self._hashes = {}
+        attestation = self.data / 'review_attestation.json'
+        self.attestation = json.loads(attestation.read_text(encoding='utf-8')) if attestation.exists() else None
+        # What is said about the rows read from the scan: reviewed (as attested) or still waiting.
+        self.scan_status = self.attestation['statement'] if self.attestation else 'Chưa được thẩm định; hãy đối chiếu ảnh trang trước khi dùng.'
         # Names as printed are usable aliases too.
         self.alias_index = []
         for s in self.services.values():
@@ -496,7 +500,7 @@ class LabLookup:
             if sid in route.get('loose', []) and row.get('name_note'):
                 notes.append(row['name_note'])
             if row.get('transcription') == 'scan_read':
-                notes.append('Nguyên văn dòng này được chép từ ảnh trang của bản hợp nhất 17/VBHN-BYT (bản scan, Đỗ Quốc An đọc), chưa được thẩm định; hãy đối chiếu ảnh trang trước khi dùng.')
+                notes.append('Nguyên văn dòng này được chép từ ảnh trang của bản hợp nhất 17/VBHN-BYT (bản scan, Đỗ Quốc An đọc). ' + self.scan_status)
             if row.get('source_note'):
                 notes.append(row['source_note'])
             if a.get('unconfirmed_note'):
@@ -897,7 +901,7 @@ class LabLookup:
             body = ''.join(f'<img class="lab-source-image" src="{e(i["url"])}" alt="Ảnh {"trang " + str(i["page"]) + " của bản hợp nhất, có dòng" if scan else "nguyên văn dòng"} STT {s["original_row"] if scan else s["appendix_row"]}, {e(s["name"])}">' for i in images)
         else:
             body = '<p class="error">Tệp nguồn bị thiếu hoặc thay đổi. Không hiển thị ảnh trích dẫn chưa kiểm chứng.</p>'
-        hint = (f'Ảnh toàn trang của bản scan; dòng STT {s["original_row"]} nằm trên trang này. Phần chữ bên dưới được chép từ ảnh (Đỗ Quốc An đọc), chưa được thẩm định.' if scan
+        hint = (f'Ảnh toàn trang của bản scan; dòng STT {s["original_row"]} nằm trên trang này. Phần chữ bên dưới được chép từ ảnh (Đỗ Quốc An đọc). {e(self.scan_status)}' if scan
                 else 'Ảnh cắt trọn dòng dịch vụ, gồm tất cả nhánh và ngoại lệ.')
         text = s['quote'] + ('\n\nTỷ lệ, mức giá thanh toán:\n' + '\n'.join(s['rate']) if s.get('rate') else '')
         page_link = (f'<a href="{e(d["local_url"])}#page={s["page"]}" target="_blank" rel="noopener noreferrer">Mở trang {s["page"]} của bản hợp nhất</a>' if scan

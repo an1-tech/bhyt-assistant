@@ -1,0 +1,12 @@
+{
+ "reviewer": "Bộ phận Dược/BHYT của bệnh viện",
+ "date": "2026-11-11",
+ "attested_by": "Nhóm dự án",
+ "scope": [
+  "28 nhánh điều kiện của 18 thuốc ung bướu (data/indication_rules.json)",
+  "24 dòng xét nghiệm chép từ bản hợp nhất 17/VBHN-BYT",
+  "60 số trang PDF của danh mục thuốc (data/source_pages.json)"
+ ],
+ "record": "Chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn.",
+ "statement": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn)."
+}

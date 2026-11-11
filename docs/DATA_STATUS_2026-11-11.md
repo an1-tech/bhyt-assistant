@@ -22,6 +22,10 @@ Hệ quả cho chatbot:
 - Danh sách thuốc công khai: 24 ảnh là toàn bộ; không có thuốc bắt đầu bằng J, Q, U, Y.
 - Cơ sở: Hệ thống Y tế Vinmec, bệnh viện tư nhân, nhóm ghi nhận là tương đương hạng I. Lưu ở `data/hospital/facility.json` và hiện kèm câu "chưa có văn bản xếp hạng trong bộ nguồn" ở những thuốc có điều kiện về hạng bệnh viện. Các xếp hạng quốc tế (Newsweek, JCI) không phải căn cứ thanh toán BHYT nên không dùng.
 - Bác sĩ xác nhận ô chat một câu hỏi là đúng nhu cầu.
+- Thời gian tra cứu (nhóm cung cấp):
+  - Cách hiện tại: mở tab mới, tìm tên thuốc và nguồn theo thông tư mới nhất, mỗi thuốc khoảng 5–10 phút.
+  - Bằng chatbot: bấm giờ 10 lượt, trung bình khoảng 1 phút mỗi lượt.
+  - Hai con số do nhóm tự đo; chưa có số liệu xuất toán của bệnh viện.
 
 ## Bộ ca thử giả lập
 
@@ -30,7 +34,14 @@ Hệ quả cho chatbot:
 - Kết quả hiện tại: 24/24 ca nhất quán với văn bản.
 - Đây là ca giả lập. Kết quả mong đợi suy ra từ nguyên văn văn bản, nên con số này đo việc chatbot có làm đúng theo văn bản hay không, không đo độ chính xác so với quyết định thanh toán thật.
 
+## Thẩm định của Dược/BHYT
+
+- Nhóm dự án xác nhận bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026: 28 nhánh điều kiện của 18 thuốc ung bướu, 24 dòng xét nghiệm chép từ bản hợp nhất và 60 số trang PDF.
+- Ghi ở `data/review_attestation.json`. Chatbot hiện đúng câu này, kèm "theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn".
+- Cần bổ sung khi có: tên người duyệt, đơn vị và biên bản. Khi đó sửa file trên và chạy lại `tools/build_lab_sources.py`.
+
 ## Việc còn chờ
 
-- Dược/BHYT duyệt 28 nhánh điều kiện thuốc, 24 dòng xét nghiệm chép từ bản scan và 60 số trang. Chưa ghi nhận là đã duyệt vì chưa có tên người duyệt, đơn vị và ngày duyệt.
+- Tên người duyệt và biên bản thẩm định của Dược/BHYT.
 - Danh mục xét nghiệm nội bộ của bệnh viện (tên gọi và mã dịch vụ).
+- Văn bản xác nhận hạng tương đương của cơ sở.

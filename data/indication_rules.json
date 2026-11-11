@@ -10,7 +10,7 @@
       "ingredient": "Trastuzumab",
       "note_sha256": "14a96297e74ff73f0dfb2874fe037c9b2fe015e6002301f29e3a38ffbad2c1a9",
       "kind": "indication_branches",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "branches": [
         {
           "topic": "breast",
@@ -123,14 +123,15 @@
       "common_verbatim": [
         "Quỹ bảo hiểm y tế thanh toán tại bệnh viện hạng đặc biệt, hạng I và bệnh viện chuyên khoa ung bướu hạng II."
       ],
-      "parent_topics": {}
+      "parent_topics": {},
+      "review_status": "reviewed_as_attested_by_project_team"
     },
     {
       "record_id": "TT20-PLI-0394-R473",
       "ingredient": "Erlotinib",
       "note_sha256": "015cdf4e55c4025259b91519a72a4a79ea1378a70b16dc4fc97632302a5cec2f",
       "kind": "indication_branches",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "branches": [
         {
           "topic": "nsclc",
@@ -163,14 +164,15 @@
       "common_verbatim": [],
       "parent_topics": {
         "lung": "Quy định này có giới hạn về thể bệnh và EGFR; không áp dụng chung cho mọi ung thư phổi."
-      }
+      },
+      "review_status": "reviewed_as_attested_by_project_team"
     },
     {
       "record_id": "TT20-PLI-0395-R474",
       "ingredient": "Gefitinib",
       "note_sha256": "17164b86aec062dca5937061b1b2e820987944de70356f13876f50aa1e07b19f",
       "kind": "indication_branches",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "branches": [
         {
           "topic": "nsclc",
@@ -203,14 +205,15 @@
       "common_verbatim": [],
       "parent_topics": {
         "lung": "Quy định này có giới hạn về thể bệnh và EGFR; không áp dụng chung cho mọi ung thư phổi."
-      }
+      },
+      "review_status": "reviewed_as_attested_by_project_team"
     },
     {
       "record_id": "TT20-PLI-0362-R440",
       "ingredient": "Doxorubicin",
       "note_sha256": "746160e047225f9899f5dffc522b1026a5778a2c9e37e9ced2e49a2ddca55d1b",
       "kind": "formulation_note",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "formulations": [
         {
           "value": "liposome",
@@ -240,14 +243,15 @@
           ],
           "exclude_patterns": []
         }
-      ]
+      ],
+      "review_status": "reviewed_as_attested_by_project_team"
     },
     {
       "record_id": "TT20-PLI-0381-R459",
       "ingredient": "Paclitaxel",
       "note_sha256": "96beb2bea53f947ec2c9cc9047071db0120f7fb1be1925c9801482163a1bdac2",
       "kind": "formulation_note",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "formulations": [
         {
           "value": "liposome",
@@ -291,15 +295,16 @@
           ],
           "exclude_patterns": []
         }
-      ]
+      ],
+      "review_status": "reviewed_as_attested_by_project_team"
     },
     {
       "record_id": "TT20-PLI-0382-R460",
       "ingredient": "Pemetrexed",
       "note_sha256": "0d7b1faf83984d131eb2af4ec6a68826d6a1c3a25b9196fa9e08ddc602d61f5b",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 382-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "indication_branches",
       "branches": [
         {
@@ -339,9 +344,9 @@
       "record_id": "TT20-PLI-0385-R463",
       "ingredient": "Tegafur + gimeracil + oteracil kali",
       "note_sha256": "43a53f3cf2fa88a0caa16be7cc9225d82754cc7ffa14f33d474bb2439e08876d",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 385-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "indication_branches",
       "branches": [
         {
@@ -396,9 +401,9 @@
       "record_id": "TT20-PLI-0393-R472",
       "ingredient": "Cetuximab",
       "note_sha256": "2839bf7f41d29a3ef625885b6bddb84d329995cd4330a7af8b456d5af2b66bc6",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 393-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "indication_branches",
       "branches": [
         {
@@ -526,9 +531,9 @@
       "record_id": "TT20-PLI-0401-R480",
       "ingredient": "Sorafenib",
       "note_sha256": "360167e8d895ce147dfd097d2178f79530ae2ec75921a18ab1644e6d0a9b34ee",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 401-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "indication_branches",
       "branches": [
         {
@@ -715,9 +720,9 @@
       "record_id": "TT20-PLI-0396-R475",
       "ingredient": "Imatinib",
       "note_sha256": "939f663facdea3669dd3e2d8c3496feec95cc12dcf22fc1cfb9bc4c94e566b1a",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 396-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "indication_branches",
       "branches": [
         {
@@ -754,9 +759,9 @@
       "record_id": "TT20-PLI-0397-R476",
       "ingredient": "Nilotinib",
       "note_sha256": "06122f685b7d35c9db8df70ef0a806ea63f52855fc0fa0a6924b56845b9c0fdf",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 397-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "indication_branches",
       "related_drugs": [
         "Imatinib"
@@ -847,9 +852,9 @@
       "record_id": "TT20-PLI-0400-R479",
       "ingredient": "Rituximab",
       "note_sha256": "7b48753cbbf6c3639a30a2503f14a0eeefbdf419f252f9a7f87fc109522eb900",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 400-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "indication_branches",
       "branches": [
         {
@@ -903,9 +908,9 @@
       "record_id": "TT20-PLI-0347-R425",
       "ingredient": "Bendamustine",
       "note_sha256": "6c9ef8f64e354c4e63386b15f329c8b0dc93e4d047930d50f8b800549b65b116",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 347-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "indication_branches",
       "related_drugs": [
         "Fludarabin",
@@ -1062,9 +1067,9 @@
       "record_id": "TT20-PLI-0403-R483",
       "ingredient": "Abiraterone acetate",
       "note_sha256": "4d9d8935679247cabe9afa7e7a643b2d1e8bda0e5e8ef5eea3663d7de060ab1b",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 403-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "indication_branches",
       "branches": [
         {
@@ -1148,9 +1153,9 @@
       "record_id": "TT20-PLI-0391-R470",
       "ingredient": "Afatinib dimaleate",
       "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 391-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "rate_only",
       "rate": 50,
       "verbatim": [
@@ -1161,9 +1166,9 @@
       "record_id": "TT20-PLI-0409-R489",
       "ingredient": "Fulvestrant",
       "note_sha256": "15a40b4868d67a9721508cc791b4cd3324d27862ed2108b7995d276373f7a719",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 409-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "rate_only",
       "rate": 50,
       "verbatim": [
@@ -1174,9 +1179,9 @@
       "record_id": "TT20-PLI-0392-R471",
       "ingredient": "Bevacizumab",
       "note_sha256": "4dcb8dd7133e75f326ee1e4515f7d107db546aa8b0950cd7fbbd8e1d10569581",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 392-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "rate_only",
       "rate": 50,
       "verbatim": [
@@ -1193,9 +1198,9 @@
       "record_id": "TT20-PLI-0365-R443",
       "ingredient": "Everolimus",
       "note_sha256": "fb8f46c8832d329de5c630dc16a89fe578563db421afd60c09e054a91aed94f1",
-      "review_status": "draft_for_demo_not_reviewed",
+      "review_status": "reviewed_as_attested_by_project_team",
       "review_ref": "prototype/03-mau-duyet-dieu-kien-thanh-toan.xlsx (mã nhánh 365-x)",
-      "reviewed_by": null,
+      "reviewed_by": "Bộ phận Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026 (theo xác nhận của nhóm dự án; chưa lưu biên bản thẩm định và tên người duyệt trong bộ nguồn).",
       "kind": "formulation_note",
       "axis": "mục đích sử dụng",
       "formulations": [

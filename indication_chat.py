@@ -181,6 +181,8 @@ class IndicationChat:
             answer["rule_review"]=rule.get("reviewed_by") or rule.get("review_status") or self.rules_meta["review_status"]
             if not rule.get("reviewed_by"):
                 answer["scope"]+=" Nhánh điều kiện của thuốc này là bản nháp tách từ nguyên văn, chưa được Dược/BHYT duyệt."
+            else:
+                answer["scope"]+=" Riêng nhánh điều kiện của thuốc này: "+rule["reviewed_by"]
         if rule and rule["kind"]=="indication_branches":
             self.branch_answer(answer,rule,name,ids[0],topics,turns,has_disease,facts.get(ids[0],{}),confirmable)
         elif rule and rule["kind"]=="formulation_note":

@@ -260,13 +260,15 @@ def main():
              'local_url': '/sources/labs/39-2024-main.pdf', 'sha256': digest(DEST / '39-2024-main.pdf')},
         ],
     }
+    attestation = ROOT / 'data/review_attestation.json'
+    scan_review = json.loads(attestation.read_text(encoding='utf-8'))['statement'] if attestation.exists() else 'Chờ bệnh viện thẩm định.'
     vbhn = {
         'document_id': 'TT35_VBHN17_LABS', 'title': 'Văn bản hợp nhất 17/VBHN-BYT (Thông tư 35/2016/TT-BYT và các lần sửa đổi)',
         'effective_from': '2025-01-01', 'checked_as_of': CHECKED,
         'official_url': 'https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf',
         'source_url': 'https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf',
         'local_url': '/sources/labs/17-vbhn-2024.pdf', 'sha256': digest(vbhn_pdf),
-        'review_status': 'Chép từ ảnh trang của bản scan (Đỗ Quốc An đọc, không dùng lớp OCR); chờ bệnh viện thẩm định.',
+        'review_status': 'Chép từ ảnh trang của bản scan (Đỗ Quốc An đọc, không dùng lớp OCR). ' + scan_review,
         'review_limitations': 'Các dòng này không bị TT39/2024 sửa nên chỉ có trong bản hợp nhất dạng scan. ' + limitations,
     }
     services = []

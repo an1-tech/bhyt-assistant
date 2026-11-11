@@ -33,7 +33,9 @@ class OncologyPrototypeTests(unittest.TestCase):
             a=self.qa(r)
             self.assertEqual(a["status"],"conditional_coverage",q)
             self.assertEqual(a["source_rate"]["percentage"],rate,q)
-            self.assertIn("chưa được Dược/BHYT duyệt",a["scope"],q)
+            self.assertIn("Dược/BHYT của bệnh viện đã thẩm định ngày 11/11/2026",a["scope"],q)
+            self.assertIn("theo xác nhận của nhóm dự án",a["scope"],q)          # how the review is known
+            self.assertNotIn("chưa được Dược/BHYT duyệt",a["scope"],q)
 
     def test_explicit_opposite_condition_is_not_met(self):
         for q in ("Cetuximab ung thư đại trực tràng di căn RAS đột biến",

@@ -93,7 +93,7 @@ class Catalogue(Base):
             r = self.lab(q)
             self.assertEqual(r['status'], 'conditions_only', q)
             self.assertEqual(r['transcription'], 'scan_read')
-            self.assertTrue(any('bản scan' in n and 'chưa được thẩm định' in n for n in r['notes']), q)
+            self.assertTrue(any('bản scan' in n and 'đã thẩm định ngày 11/11/2026' in n and 'theo xác nhận của nhóm dự án' in n for n in r['notes']), q)
             self.assertEqual(r['citation']['document_id'], 'TT35_VBHN17_LABS')
             self.assertIn('chưa tự đối chiếu ca bệnh', r['conclusion'])
 

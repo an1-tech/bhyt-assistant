@@ -43,7 +43,7 @@ try{
   await ask(p,'Định lượng procalcitonin có điều kiện BHYT gì?');
   assert(await p.eval(()=>{const r=[...document.querySelectorAll('.lab-result')].at(-1);return r.querySelector('.lab-rate-block')?.innerText.includes('01 lần/mỗi 24 giờ')&&!r.querySelector('mark');}),'Rate column quoted for Danh mục 1 row '+width);
   await ask(p,'Định lượng BNP cho bệnh nhân suy tim có được BHYT không?');
-  assert(await p.eval(()=>{const r=[...document.querySelectorAll('.lab-result')].at(-1);return r.querySelectorAll('.lab-rate').length===2&&r.innerText.includes('bản scan')&&r.innerText.includes('chưa được thẩm định');}),'Scan-read row is flagged with paired rates '+width);
+  assert(await p.eval(()=>{const r=[...document.querySelectorAll('.lab-result')].at(-1);return r.querySelectorAll('.lab-rate').length===2&&r.innerText.includes('bản scan')&&r.innerText.includes('đã thẩm định ngày 11/11/2026');}),'Scan-read row is flagged with paired rates '+width);
   {const url=await p.eval(()=>[...document.querySelectorAll('.lab-result')].at(-1).querySelector('.lab-source a').href);const v=await browser.newPage({width,height:900,reducedMotion:true});await v.goto(url,{settleMs:200});await wait(v,()=>document.querySelector('img')?.complete);
    assert(await v.eval(()=>document.querySelector('img').naturalWidth>500&&document.querySelector('details').open&&document.body.innerText.includes('Đỗ Quốc An đọc')&&document.documentElement.scrollWidth<=innerWidth),'Scan page image shown with transcription '+width);await v.screenshot({path:`audit/lab-browser/scan-source-${width}.jpg`,quality:85});await v.close();}
   await ask(p,'HbA1c hôm nay theo dõi đái tháo đường thai kỳ, từ chối insulin, lần trước cách 35 ngày');

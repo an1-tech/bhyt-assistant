@@ -150,6 +150,8 @@ class Corpus:
                     self.aliases[normalize(a['brand'])]=normalize(a['ingredient'])
                     self.alias_sources[normalize(a['brand'])]=a
         self.load_hospital_list()
+        attestation=self.data/'review_attestation.json'
+        self.attestation=json.loads(attestation.read_text(encoding='utf-8')) if attestation.exists() else None
         facility=self.data/'hospital'/'facility.json'
         self.facility=json.loads(facility.read_text(encoding='utf-8')) if facility.exists() else None
         # PDF page of a TT20 row, only where it was checked by eye (tools/build_source_pages.py).
@@ -461,6 +463,7 @@ class Corpus:
                 'text':text,'empty':not text,'highlights':[{'start':a,'end':b} for a,b in sorted(marks)],
                 'page':checked['pages'][0] if checked else None,'pages':checked['pages'] if checked else [],
                 'page_checked':bool(checked),
+                'page_note':('Số trang do Đỗ Quốc An đối chiếu với ảnh trang PDF. '+(self.attestation['statement'] if self.attestation else 'Chờ Dược xác nhận.')) if checked else None,
                 'pdf_url':pdf+(f"#page={checked['pages'][0]}" if checked else ''),
                 'official_url':row.get('official_consolidated_url'),'_key':(row.get('appendix'),row['stt'],text),'_route':row['route'],'record_ids':[rid]})
         # One quote per STT and note: "Morphin, STT 50 · Tiêm / Uống" shares one source cell.
