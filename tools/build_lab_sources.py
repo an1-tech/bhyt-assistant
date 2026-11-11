@@ -249,7 +249,7 @@ def main():
         'official_url': 'https://vanban.chinhphu.vn/?docid=211771&pageid=27160',
         'source_url': 'https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/39-byt-kem.pdf',
         'local_url': '/sources/labs/39-2024-appendix.pdf', 'sha256': digest(appendix),
-        'review_status': 'Đã đối chiếu ảnh PDF và văn bản hợp nhất; chờ bệnh viện thẩm định.',
+        'review_status': 'Nguyên văn lấy từ lớp chữ của phụ lục và đã đối chiếu với bản hợp nhất. Phần đối chiếu ca bệnh (HbA1c, xét nghiệm gen, SCC) do nhóm dự án xây dựng, chưa nằm trong phạm vi Dược/BHYT thẩm định.',
         'review_limitations': limitations,
         'related_documents': [
             {'title': 'Thông tư 35/2016/TT-BYT, sửa đổi bởi TT50/2017, TT13/2020 và TT39/2024',

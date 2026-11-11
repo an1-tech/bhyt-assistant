@@ -506,10 +506,16 @@ class LabLookup:
                 notes.append(row['source_note'])
             if a.get('unconfirmed_note'):
                 notes.insert(0, a.pop('unconfirmed_note'))
+            if row.get('transcription') == 'scan_read':
+                review = {'kind': 'attested' if self.attestation else 'unreviewed', 'text': 'Nguyên văn chép từ bản scan. ' + self.scan_status}
+            elif row.get('rule'):
+                review = {'kind': 'unreviewed', 'text': 'Nguyên văn lấy từ lớp chữ của phụ lục Thông tư 39/2024. Phần đối chiếu ca bệnh do nhóm dự án xây dựng, chưa nằm trong phạm vi Dược/BHYT thẩm định.'}
+            else:
+                review = {'kind': 'source_text', 'text': 'Nguyên văn lấy từ lớp chữ của phụ lục Thông tư 39/2024.'}
             base['lab_results'].append({'id': sid, 'name': row['name'], **a, 'conditions': row['conditions'],
                                         'rate': row.get('rate') or [], 'rate_mode': row.get('rate_mode'), 'notes': notes,
                                         'transcription': row.get('transcription', 'text_layer'), 'automatic': bool(row.get('rule')),
-                                        'citation': self.citation(row), 'facts': facts,
+                                        'citation': self.citation(row), 'facts': facts, 'review': review,
                                         'scope': 'Đối chiếu điều kiện riêng của dịch vụ theo nguồn; chưa xác nhận mức hưởng cá nhân, giá hay phạm vi hợp đồng của bệnh viện.'})
             base['citations'].append(self.citation(row))
             if single:

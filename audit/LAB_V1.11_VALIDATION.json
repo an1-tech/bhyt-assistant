@@ -5,7 +5,7 @@
   "base_commit": "89cef56",
   "backend": {
     "command": "python -B -m unittest discover -s tests",
-    "passed": 422,
+    "passed": 429,
     "failed": 0,
     "skipped": 0,
     "log": "audit/lab-v1.11-tests.log"
@@ -18,7 +18,7 @@
       390
     ],
     "inspector_warnings": 1,
-    "passed": 123,
+    "passed": 132,
     "inspector_failures": 0,
     "checks": "audit/lab-browser/browser-results.json",
     "inspector": "audit/lab-browser/inspect/report.json",

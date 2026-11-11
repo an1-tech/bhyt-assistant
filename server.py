@@ -80,13 +80,17 @@ def make_server(port=8765,corpus=None):
                 self.send(200,file.read_bytes(),ctype+'; charset=utf-8');return
             self.send(404,{'error':'Không tìm thấy.'})
         def do_POST(self):
+            # Read the body before any refusal: answering while the client is still sending makes
+            # Windows reset the connection, and the client then sees an abort instead of the 403.
+            try:length=int(self.headers.get('Content-Length','0'))
+            except ValueError:length=0
+            raw=self.rfile.read(min(length,20001)) if length>0 else b''
             if not self.trusted_host() or self.headers.get('X-Session-Token')!=token:self.send(403,{'error':'Phiên không hợp lệ. Tải lại trang.'});return
             if urlparse(self.path).path not in ('/api/chat','/api/case/evaluate'):self.send(404,{'error':'Không tìm thấy.'});return
             if not self.headers.get('Content-Type','').startswith('application/json'):self.send(415,{'error':'Yêu cầu JSON.'});return
             try:
-                length=int(self.headers.get('Content-Length','0'))
                 if length<1 or length>20000:self.send(413,{'error':'Nội dung quá dài.'});return
-                payload=json.loads(self.rfile.read(length))
+                payload=json.loads(raw)
                 if urlparse(self.path).path=='/api/case/evaluate':
                     if not isinstance(payload,dict) or payload.get("department","Tất cả các khoa") not in DEPARTMENTS:raise ValueError("Khoa hoặc dữ liệu ca không hợp lệ.")
                     result=workbench.evaluate(payload);result["department"]=payload.get("department","Tất cả các khoa")
@@ -100,7 +104,10 @@ def make_server(port=8765,corpus=None):
             except (ValueError,TypeError,KeyError) as e:self.send(400,{'error':str(e)[:180]})
             except RecursionError:self.send(400,{'error':'Dữ liệu gửi lên lồng quá sâu.'})
             except Exception:self.send(500,{'error':'Không xử lý được yêu cầu. Thử lại hoặc kiểm tra dữ liệu nguồn.'})
-    return ThreadingHTTPServer(('127.0.0.1',port),Handler)
+    class Server(ThreadingHTTPServer):
+        request_queue_size=64      # the default of 5 can refuse connections when a page loads many files at once
+        daemon_threads=True
+    return Server(('127.0.0.1',port),Handler)
 
 def normalize_query(q):
     from engine import normalize

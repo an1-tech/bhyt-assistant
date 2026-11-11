@@ -35,7 +35,7 @@ TOPICS = {
 DISEASE_SIGNAL = r"\b(?:ung thu|benh(?! (?:nhan|da|dang|van|con|khong|chua|tien trien|tai phat|on dinh|di can|giai doan))|dai thao duong|tang huyet ap|viem|nhiem khuan|suy tim|hen|copd|trung bieu mo|sarcom)\b"
 CONTEXT_DISEASE = r"\b(?:ung thu|benh(?! nhan)|dai thao duong|tang huyet ap|dau|sot|viem|nhiem khuan|suy tim|hen|copd|trung bieu mo|lympho|bach cau|sarcom)\b"
 TOPIC_NEGATION = r"(?:khong phai|khong phai la|khong bi|khong co|khong mac|chua co|chua mac|loai tru)\s*$"
-SCOPE_NOTE = ("Thông tin chung theo bộ nguồn BHYT chốt 06/11/2026; chưa được bệnh viện thẩm định. "
+SCOPE_NOTE = ("Thông tin chung theo bộ nguồn BHYT chốt 06/11/2026; là đối chiếu với nguồn, không phải quyết định thanh toán. "
               "Tỷ lệ của thuốc không đồng nghĩa mức hưởng cá nhân hoặc số tiền quỹ chi trả.")
 
 
@@ -177,12 +177,16 @@ class IndicationChat:
             return answer
         answer["_highlights"]=[]
         rule=self.rules.get(ids[0]) if len(ids)==1 else None
+        # The review status of exactly what this answer shows; the footer and the copied text use it too.
         if rule:
             answer["rule_review"]=rule.get("reviewed_by") or rule.get("review_status") or self.rules_meta["review_status"]
-            if not rule.get("reviewed_by"):
-                answer["scope"]+=" Nhánh điều kiện của thuốc này là bản nháp tách từ nguyên văn, chưa được Dược/BHYT duyệt."
+            if rule.get("reviewed_by"):
+                answer["review"]={"kind":"attested","text":"Bảng điều kiện của thuốc này: "+rule["reviewed_by"]}
             else:
-                answer["scope"]+=" Riêng nhánh điều kiện của thuốc này: "+rule["reviewed_by"]
+                answer["review"]={"kind":"unreviewed","text":"Bảng điều kiện của thuốc này là bản nháp tách từ nguyên văn, chưa được Dược/BHYT duyệt."}
+        else:
+            answer["review"]={"kind":"source_text","text":"Nội dung là nguyên văn danh mục; thuốc này chưa có bảng điều kiện riêng."}
+        answer["scope"]+=" "+answer["review"]["text"]
         if rule and rule["kind"]=="indication_branches":
             self.branch_answer(answer,rule,name,ids[0],topics,turns,has_disease,facts.get(ids[0],{}),confirmable,new_turn)
         elif rule and rule["kind"]=="formulation_note":

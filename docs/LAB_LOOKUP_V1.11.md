@@ -211,3 +211,25 @@ Giới hạn vẫn còn: một câu chỉ gồm từ đã biết, ghép theo cá
 
 Kiểm thử: `tests/test_lab_review9.py` (8 kiểm thử), có ca tái hiện đúng tình huống yêu cầu B chạy chen giữa yêu cầu A; tổng 422 kiểm thử backend.
 
+
+## Đồng bộ trạng thái thẩm định (11/11/2026)
+
+Người rà soát chỉ ra: ghi chú nói "đã thẩm định" nhưng chân câu trả lời ghi "Chờ bệnh viện thẩm định" và phần sao chép ghi "chưa được bệnh viện thẩm định". Nhận xét đúng.
+
+**Cách làm mới**
+- Mỗi phần của câu trả lời tự nêu trạng thái thẩm định của đúng nội dung nó hiển thị (`review` của từng thuốc, từng xét nghiệm).
+- Chân câu trả lời (`review_label`) và phần sao chép (`review_note`) được ghép từ các trạng thái đó, không còn câu viết sẵn.
+- Bốn nhãn:
+
+| Nhãn ở chân câu trả lời | Khi nào |
+|---|---|
+| Dược/BHYT đã thẩm định điều kiện (theo xác nhận của nhóm dự án) | Thuốc có bảng điều kiện đã thẩm định; xét nghiệm chép từ bản scan |
+| Phần đối chiếu chưa được Dược/BHYT thẩm định | HbA1c, xét nghiệm gen, SCC: nguyên văn lấy từ lớp chữ, phần đối chiếu ca bệnh do nhóm xây dựng |
+| Trích nguyên văn nguồn | Thuốc không có bảng điều kiện riêng; xét nghiệm TT39 không có đối chiếu ca bệnh |
+| Thẩm định một phần, xem ghi chú từng mục | Câu trả lời gồm cả hai loại |
+
+**Sửa kèm theo**
+- Câu trả lời về thuốc trước đây ghi nhầm "Nguồn xét nghiệm kiểm tra…" ở chân; nay ghi "Theo bộ nguồn BHYT 06/11/2026".
+- Server đọc hết nội dung yêu cầu trước khi từ chối (403/404/413/415). Trước đây thỉnh thoảng máy khách bị ngắt kết nối thay vì nhận mã lỗi; đây là nguyên nhân 1–2 kiểm thử HTTP lúc đạt lúc lỗi.
+
+Kiểm thử: `tests/test_review_status.py` (7 kiểm thử); tổng 429 kiểm thử backend, chạy 6 lượt liên tiếp đều đạt; 132 và 67 kiểm tra giao diện.

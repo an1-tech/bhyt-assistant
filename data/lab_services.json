@@ -10,7 +10,7 @@
     "source_url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/39-byt-kem.pdf",
     "local_url": "/sources/labs/39-2024-appendix.pdf",
     "sha256": "0defbcf27dfb8b82b5defa1d8eb2ee7ed72e55366ef589f8f0c9582a6f7db17e",
-    "review_status": "Đã đối chiếu ảnh PDF và văn bản hợp nhất; chờ bệnh viện thẩm định.",
+    "review_status": "Nguyên văn lấy từ lớp chữ của phụ lục và đã đối chiếu với bản hợp nhất. Phần đối chiếu ca bệnh (HbA1c, xét nghiệm gen, SCC) do nhóm dự án xây dựng, chưa nằm trong phạm vi Dược/BHYT thẩm định.",
     "review_limitations": "Tra cứu nguồn ngày 10/11/2026 chưa phát hiện văn bản sửa các dòng này sau TT39/2024. Trang lịch sử hiệu lực VBPL không truy cập được; không khẳng định đã rà soát đầy đủ mọi văn bản mới.",
     "related_documents": [
       {
@@ -38,7 +38,7 @@
       "source_url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/39-byt-kem.pdf",
       "local_url": "/sources/labs/39-2024-appendix.pdf",
       "sha256": "0defbcf27dfb8b82b5defa1d8eb2ee7ed72e55366ef589f8f0c9582a6f7db17e",
-      "review_status": "Đã đối chiếu ảnh PDF và văn bản hợp nhất; chờ bệnh viện thẩm định.",
+      "review_status": "Nguyên văn lấy từ lớp chữ của phụ lục và đã đối chiếu với bản hợp nhất. Phần đối chiếu ca bệnh (HbA1c, xét nghiệm gen, SCC) do nhóm dự án xây dựng, chưa nằm trong phạm vi Dược/BHYT thẩm định.",
       "review_limitations": "Tra cứu nguồn ngày 10/11/2026 chưa phát hiện văn bản sửa các dòng này sau TT39/2024. Trang lịch sử hiệu lực VBPL không truy cập được; không khẳng định đã rà soát đầy đủ mọi văn bản mới.",
       "related_documents": [
         {

@@ -129,6 +129,18 @@
       "passed": true
     },
     {
+      "name": "Footer states the review status of this reply, no blanket sentence 1440",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Trastuzumab ung thư vú HER2 dương tính",
+      "passed": true
+    },
+    {
+      "name": "Drug reply: drug source date, same review status in footer, notes and copied text 1440",
+      "passed": true
+    },
+    {
       "name": "Submitted question: Xét nghiệm troponin có được BHYT không?",
       "passed": true
     },
@@ -293,6 +305,18 @@
       "passed": true
     },
     {
+      "name": "Footer states the review status of this reply, no blanket sentence 768",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Trastuzumab ung thư vú HER2 dương tính",
+      "passed": true
+    },
+    {
+      "name": "Drug reply: drug source date, same review status in footer, notes and copied text 768",
+      "passed": true
+    },
+    {
       "name": "Submitted question: Xét nghiệm troponin có được BHYT không?",
       "passed": true
     },
@@ -454,6 +478,18 @@
     },
     {
       "name": "Confirmed reading gives the conclusion with the marked branch 390",
+      "passed": true
+    },
+    {
+      "name": "Footer states the review status of this reply, no blanket sentence 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Trastuzumab ung thư vú HER2 dương tính",
+      "passed": true
+    },
+    {
+      "name": "Drug reply: drug source date, same review status in footer, notes and copied text 390",
       "passed": true
     },
     {

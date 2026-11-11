@@ -29,7 +29,7 @@ try{
   await ask(p,'Nếu HER2 âm tính thì sao?');
   assert(await p.eval(()=>[...document.querySelectorAll('.assistant .conclusion')].at(-1).textContent.includes('không khớp điều kiện')),'Negative HER2 does not get positive conclusion '+size.width);
   await p.eval(()=>{window.copiedChat='';Object.defineProperty(navigator.clipboard,'writeText',{configurable:true,value:async text=>{window.copiedChat=text;}});[...document.querySelectorAll('.answer-foot button')].at(-1).click();});await wait(p,()=>!!window.copiedChat);
-  assert(await p.eval(()=>copiedChat.includes('không khớp điều kiện')&&copiedChat.includes('NGUỒN')&&copiedChat.includes('chưa được bệnh viện thẩm định')),'Copy includes conclusion, evidence and scope '+size.width);
+  assert(await p.eval(()=>copiedChat.includes('không khớp điều kiện')&&copiedChat.includes('NGUỒN')&&copiedChat.includes('không phải quyết định thanh toán')&&copiedChat.includes('đã thẩm định ngày 11/11/2026')&&!copiedChat.includes('chưa được bệnh viện thẩm định')),'Copy includes conclusion, evidence and scope '+size.width);
   await ask(p,'Metformin điều trị đái tháo đường típ 2 có được BHYT chi trả không?');
   assert(await p.eval(()=>[...document.querySelectorAll('.assistant .conclusion')].at(-1).textContent.includes('chưa đủ căn cứ')),'Incomplete indication evidence is explicit '+size.width);
   assert(await p.eval(()=>document.querySelectorAll('.turn').length===4),'Conversation history stays visible '+size.width);

@@ -635,8 +635,25 @@ class Corpus:
             else:
                 # A switch to medication must not carry laboratory dates or purpose.
                 result=self._converse(message,{k:v for k,v in trusted.items() if k!='lab'},as_of,confirm)
+        self.review_summary(result)
         result["state"]=self.sign_state(result.get("state") or {})
         return result
+
+    @staticmethod
+    def review_summary(result):
+        """One review status for the whole reply, built from what each part of it says about
+        itself, so the footer and the copied text can never contradict the notes."""
+        items=[((r.get("question_answer") or {}).get("review"),r.get("ingredient")) for r in result.get("results") or []]
+        items+=[(r.get("review"),r.get("name")) for r in result.get("lab_results") or []]
+        items=[(review,name) for review,name in items if review]
+        if not items:return
+        kinds={review["kind"] for review,_ in items}
+        if "unreviewed" in kinds and "attested" in kinds:label="Thẩm định một phần, xem ghi chú từng mục"
+        elif "unreviewed" in kinds:label="Phần đối chiếu chưa được Dược/BHYT thẩm định"
+        elif "attested" in kinds:label="Dược/BHYT đã thẩm định điều kiện (theo xác nhận của nhóm dự án)"
+        else:label="Trích nguyên văn nguồn"
+        result["review_label"]=label
+        result["review_note"]=" ".join(dict.fromkeys((name+": " if len(items)>1 else "")+review["text"] for review,name in items))
 
     def _converse(self,message,state=None,as_of=None,confirm=None):
         from indication_chat import IndicationChat, topics_in

@@ -36,7 +36,9 @@ def metadata(corpus):
         variants=len(corpus.rows),chunks=len(corpus.chunks),sources=sources,
         source_update=corpus.supplemental.metadata(),
         lab_source=corpus.labs.metadata(),
-        review_status='Chưa được bệnh viện thẩm định',
+        review_status=('Theo xác nhận của nhóm dự án, Dược/BHYT của bệnh viện đã thẩm định ngày '+'/'.join(reversed(corpus.attestation['date'].split('-')))
+                       +': '+'; '.join(corpus.attestation['scope'])+'. '+corpus.attestation['record']
+                       +' Các phần khác là trích nguyên văn nguồn hoặc do nhóm dự án xây dựng, chưa thẩm định') if getattr(corpus,'attestation',None) else 'Chưa được bệnh viện thẩm định',
         scope='Toàn bộ các khoa; thuốc hóa dược, sinh phẩm, thuốc phóng xạ, chất đánh dấu và các xét nghiệm có điều kiện thanh toán riêng (TT39/2024, 17/VBHN-BYT) trong bộ nguồn.',
         missing=['Danh mục thuốc, biệt dược và phạm vi hợp đồng BHYT tại bệnh viện.',
                  'Danh mục thuốc y học cổ truyền, dược liệu và vị thuốc chưa có trong gói dữ liệu này.',
