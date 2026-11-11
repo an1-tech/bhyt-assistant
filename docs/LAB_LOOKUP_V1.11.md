@@ -242,3 +242,16 @@ Kiểm thử: `tests/test_review_status.py` (7 kiểm thử); tổng 429 kiểm 
 | 2 | Phần sao chép của câu trả lời về thuốc vẫn ghi "Nguồn xét nghiệm kiểm tra…" | Chân câu trả lời và phần sao chép dùng chung một hàm (`sourceStamp`), chỉ nêu nguồn xét nghiệm khi câu trả lời có xét nghiệm |
 
 Kiểm thử: thêm 5 kiểm thử vào `tests/test_review_status.py` (yêu cầu 0,5 MB, 3 MB và 20 MB bị từ chối đều nhận đúng mã lỗi); tổng 434 kiểm thử backend, 135 và 67 kiểm tra giao diện.
+
+## Chạy thử bộ câu hỏi mẫu ngày 11/11/2026: 4 điểm, đã sửa
+
+| # | Điểm gặp khi chạy thử | Sau khi sửa |
+|---|---|---|
+| 1 | Gõ "SCC" không kèm "xét nghiệm" thì không được nhận là xét nghiệm | Tên trùng với tên bệnh ("SCC", "thalassemia", "CMV", "mô bệnh học") được hiểu là xét nghiệm khi câu coi nó là xét nghiệm: đứng sau "làm", "chỉ định", "kiểm tra", hoặc mở đầu câu và theo sau là "cho", "có", "để", "điều kiện", "BHYT"… Câu trả lời ghi rõ chatbot đã hiểu như vậy. "SCC thực quản…", câu có tên thuốc, và câu hỏi nối tiếp một cuộc trò chuyện về thuốc thì giữ nguyên như trước |
+| 2 | Trả lời ngắn cho câu chatbot vừa hỏi chỉ được hiểu khi là "có" hoặc "không" | "Đã xác định", "đã chẩn đoán xác định", "chưa chẩn đoán", "đang dùng", "không dùng" cũng là câu trả lời; có thể kèm ý tiếp theo ("Đã xác định, đang điều trị"). "Không tế bào nhỏ" hoặc "tế bào nhỏ" đứng riêng được ghép với "ung thư phổi" đã nêu trước đó. Cách nói còn nghi ngờ ("nghi…", "chưa rõ… hay…", "không phải không…") vẫn bị hỏi lại |
+| 3 | "Để chọn thuốc điều trị" (trả lời câu hỏi về mục đích xét nghiệm gen) bị chuyển sang tra thuốc vì có chữ "thuốc" | Ngay sau khi chatbot hỏi về bệnh hoặc mục đích, chữ "thuốc" đứng một mình không làm đổi hướng. Câu có tên thuốc, "thuốc nào", "thuốc này", hoặc có từ hỏi về BHYT thì vẫn sang phần thuốc |
+| 4 | Mục "Chatbot hiểu dữ kiện" ghi sai ở hai câu (kết luận vẫn đúng) | "Để/nhằm chẩn đoán đái tháo đường" được ghi là chưa chẩn đoán xác định. "Tầm soát cho bệnh nhân ung thư phổi không tế bào nhỏ" được ghi đúng bệnh của người bệnh; "tầm soát ung thư phổi…" vẫn là chưa xác định bệnh |
+
+Giữ nguyên có chủ ý: với dòng nêu nhiều bệnh (HER2), trả lời "Có" cho câu hỏi về thể bệnh vẫn chưa xác định được bệnh nào; cần nêu rõ "không tế bào nhỏ".
+
+Kiểm thử: `tests/test_lab_review10.py` (19 kiểm thử); tổng 453 kiểm thử backend, 135 và 67 kiểm tra giao diện.

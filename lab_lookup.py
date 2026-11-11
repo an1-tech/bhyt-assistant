@@ -203,7 +203,47 @@ COMMON_TESTS = (r'\b(?:troponin|creatinin|ure mau|glucose|duong huyet|duong mau|
 OTHER_SERVICES = (r'\b(?:sieu am|x quang|xquang|cat lop vi tinh|ct scanner|ct scan|chup ct|mri|cong huong tu|pet ct|pet|noi soi|dien tim|dien tam do|dien nao|'
                   r'do loang xuong|loc mau|chup mach|phuc hoi chuc nang|cham cuu)\b')
 COVERAGE = r'\b(?:bhyt|bao hiem|thanh toan|chi tra|dieu kien|co duoc|duoc khong)\b'
-YES_NO = ('co', 'dung', 'dung roi', 'khong', 'chua', 'chua ro', 'khong ro')
+ASKED = ('insulin', 'diabetes', 'disease', 'purpose', 'gestational')
+# A name that is also a disease ("SCC", "thalassemia", "CMV") is read as the test without the
+# word "xét nghiệm" only where the sentence treats it as one: ordered ("làm SCC"), or opening
+# the question and followed by a patient, a purpose or a coverage word ("SCC cho ung thư …").
+ORDERED = r'(?:^|\b)(?:lam|chi dinh|chi dinh lam|kiem tra) $'
+AS_TEST = r'^(?: mau| huyet thanh)?(?:$| (?:cho|co|de|khi|duoc|bhyt|dieu kien|hom nay|lan|thi|la|can|theo doi|o benh nhan|o nguoi benh)\b)'
+_YES = r'(?:co|dung|vang|phai|roi|da)(?: (?:roi|vay|a|nhe|co|dung))*'
+_NO = r'(?:khong|chua|ko)(?: (?:a|nhe|co|phai|dau))*'
+_DIAGNOSED = r'(?:duoc )?(?:xac dinh|chan doan|chan doan xac dinh|co chan doan|co ket qua)'
+SHORT = {
+    'disease': (r'da ' + _DIAGNOSED + r'(?: roi)?', r'chua ' + _DIAGNOSED),
+    'diabetes': (r'da ' + _DIAGNOSED + r'(?: roi)?', r'chua ' + _DIAGNOSED),
+    'gestational': (r'da ' + _DIAGNOSED + r'(?: roi)?', r'chua ' + _DIAGNOSED),
+    'insulin': (r'(?:co|dang) (?:dung|tiem)', r'(?:khong|chua|ko) (?:dung|tiem)'),
+}
+
+
+def short_reply(q, pending):
+    """'yes' | 'no' | 'unknown' when `q` is nothing but an answer to the question the chatbot
+    asked last turn (`pending`), else None. "Đã xác định", "chưa chẩn đoán", "đang dùng" are
+    answers too, not only "có" and "không"."""
+    if pending not in ASKED:
+        return None
+    if re.fullmatch(r'(?:chua|khong|ko) (?:ro|biet|chac|nho)', q):
+        return 'unknown'
+    yes, no = SHORT.get(pending, (None, None))
+    if re.fullmatch(_YES, q) or (yes and re.fullmatch(yes, q)):
+        return 'yes'
+    if re.fullmatch(_NO, q) or (no and re.fullmatch(no, q)):
+        return 'no'
+    return None
+
+
+def reply_parts(message, pending):
+    """(answer, rest): the opening clause when it is a short answer to the pending question
+    ("Đã xác định, đang điều trị"), and what follows it."""
+    parts = [norm(p) for p in CLAUSE_SPLIT.split(str(message).lower())]
+    parts = [p for p in parts if p]
+    if not parts:
+        return None, ''
+    return short_reply(parts[0], pending), ' ; '.join(parts[1:])
 
 
 class LabLookup:
@@ -321,6 +361,12 @@ class LabLookup:
         renal = has(q, r'\b(?:do loc cau than|muc loc cau than|creatinin|ckd epi|ml phut|ml min|suy than|benh than man|chuc nang than)\b')
         explicit_test = has(q, r'\b(?:xet nghiem|dinh luong|dich vu|xn)\b')
         ids, loose, spans = self.match_services(q, explicit_test)
+        assumed = []
+        if not ids and not explicit_test and not (drug_hits or drug_words or state.get('selected_ids') or has(q, r'\bthuoc\b')):
+            every, every_loose, every_spans = self.match_services(q, True)
+            assumed = [i for i in every if any(has(q[:a], ORDERED) or (a == 0 and has(q[b:], AS_TEST)) for a, b in every_spans[i])]
+            if assumed:
+                ids, loose, spans = assumed, every_loose & set(assumed), {i: every_spans[i] for i in assumed}
         drug_question = has(q, r'\b(?:thuoc nay|thuoc do|bhyt (?:cua|cho) thuoc|thuoc (?:nay |do )?(?:co duoc|duoc|co bhyt))\b')
         marker = has(q, r'\b(?:ket qua|duong tinh|am tinh|chua co|chua xet nghiem|chua lam|cho xet nghiem|cho ket qua|can xet nghiem|de nghi xet nghiem|chi dinh xet nghiem)\b')
         test_focus = has(q, r'\b(?:bhyt (?:cua|cho) (?:xet nghiem|xn)|(?:xet nghiem|dich vu|xn|dinh luong).{0,80}(?:co duoc|co bhyt|thanh toan|chi tra|dieu kien)|chi phi xet nghiem)\b')
@@ -371,12 +417,16 @@ class LabLookup:
             if drugish and not test_focus and (value or not (explicit_test or case_words or starts)):
                 return None
         if ids:
-            return {'ids': ids, 'kind': 'mixed' if both and not only_insulin_context else 'lab', 'loose': sorted(loose)}
+            return {'ids': ids, 'kind': 'mixed' if both and not only_insulin_context else 'lab', 'loose': sorted(loose), 'assumed': assumed}
         if state.get('selected_ids') and not test_focus and has(q, r'\b(?:fish|ihc|her2|her 2|egfr|kras|nras|ras|co can xet nghiem|ket qua xet nghiem)\b'):
             return None
         # "Định lượng albumin máu có được BHYT không" asks about a test even though albumin is also a medicine.
         lab_start = has(q, r'^(?:xet nghiem|dinh luong|xn|chi dinh xet nghiem|lam xet nghiem)\b') and not drug_question and not has(q, r'\b(?:truoc khi dung|khi dung|dang dung|dieu tri bang|thuoc)\b')
-        if (drug_hits or drug_question or has(q, r'\bthuoc\b')) and not lab_start:
+        # "Để chọn thuốc điều trị" answers the chatbot's question about the purpose of a gene test;
+        # the bare word "thuốc" does not turn it into a medicine question.
+        asked = lab_state.get('id') in self.services and lab_state.get('pending') in ASKED
+        purpose_reply = asked and lab_state.get('pending') in ('purpose', 'disease') and not has(q, COVERAGE) and not has(q, r'\bthuoc (?:gi|nao|khac)\b')
+        if (drug_hits or drug_question or (has(q, r'\bthuoc\b') and not purpose_reply)) and not lab_start:
             return None
         named_other = has(q, COMMON_TESTS)
         if explicit_test or named_other:
@@ -391,7 +441,7 @@ class LabLookup:
         followup = has(q, r'\b(?:dieu kien|quy dinh|nguon|ngay|tuan|thang|lan truoc|lan dau|lan thu|dai thao duong|dtd|thai ky|insulin|phac do|theo doi|danh gia|dieu tri|chan doan|ung thu|nsclc|te bao nho|tam soat|sang loc|khong ro|chua ro|khong nho|khong biet|khong dung|chua dung|chua lam|chua tung|da lam|da xet nghiem)\b') or has(message, r'\d{1,4}[/.-]\d{1,2}[/.-]\d{1,4}')
         if lab_state.get('id') in self.services and followup:
             return {'ids': [lab_state['id']], 'kind': 'lab'}
-        if lab_state.get('pending') in ('insulin', 'diabetes', 'disease', 'purpose', 'gestational') and q in YES_NO:
+        if asked and reply_parts(message, lab_state['pending'])[0]:
             return {'ids': [lab_state['id']], 'kind': 'lab'}
         return None
 
@@ -500,6 +550,8 @@ class LabLookup:
             notes = []
             if sid in route.get('loose', []) and row.get('name_note'):
                 notes.append(row['name_note'])
+            if sid in route.get('assumed', []):
+                notes.append(f'Chatbot hiểu câu hỏi là về xét nghiệm “{row["name"]}”. Nếu bạn hỏi về bệnh hoặc về một thuốc, hãy nêu rõ tên thuốc.')
             if row.get('transcription') == 'scan_read':
                 notes.append('Nguyên văn dòng này được chép từ ảnh trang của bản hợp nhất 17/VBHN-BYT (bản scan, Đỗ Quốc An đọc). ' + self.scan_status)
             if row.get('source_note'):
@@ -542,6 +594,10 @@ class LabLookup:
                         continue
                     taken.append((m.start(), m.end()))
                     state, word = governed(c, m.start(), m.end(), F_IS, SUSPECT)
+                    if state == 'unknown' and word in ('tam soat', 'sang loc') and has(c[:m.start()], r'\b(?:tam soat|sang loc)\b.*\b(?:cho|o|tren|voi) (?:benh nhan|nguoi benh|bn|nguoi|ca|truong hop)(?: (?:da|duoc|bi|mac|co|chan doan|xac dinh|la))* $'):
+                        # "tầm soát ung thư phổi" doubts the disease; "tầm soát cho bệnh nhân
+                        # ung thư phổi" states it and names screening as the purpose.
+                        state, word = governed(c, m.start(), m.end(), F_IS, HEDGE)
                     if monitoring_is_doubt and has(c[:m.start()], r'\b(?:theo doi|td) $'):
                         state = 'unknown'                      # "theo dõi K phổi": suspected, not diagnosed
                     if has(c[m.end():], r'\b(?:loaitru|(?:chua|khong) (?:phan biet|xac dinh|chac|khang dinh|ro|co ket qua|ket luan|hoi chan)|hay (?:la )?(?:ung thu|te bao|sclc|nsclc))\b'):
@@ -564,9 +620,10 @@ class LabLookup:
         f = dict(prev.get('facts', {})) if same else {}
         errors = []
         case = bool(prev.get('case')) if same else False
-        if same and q in YES_NO:
+        reply, rest = reply_parts(message, prev.get('pending')) if same else (None, '')
+        if reply:
             key = prev.get('pending')
-            value = True if q in ('co', 'dung', 'dung roi') else False if q in ('khong', 'chua') else None
+            value = {'yes': True, 'no': False}.get(reply)
             if key in ('insulin', 'diabetes', 'gestational'):
                 if value is None:
                     f.pop(key, None)
@@ -611,6 +668,14 @@ class LabLookup:
             f['disease'] = 'unknown'
         elif found:
             f['disease'] = 'other'
+        if f.get('disease') == 'lung_unspecified':
+            # "Không tế bào nhỏ" on its own names the type of the lung cancer said earlier, or
+            # in another clause of the same message. Decided only when one type is plainly stated.
+            types = {k: verdict(mentions(clauses, p, F_IS, SUSPECT)) for k, p in
+                     (('nsclc', r'(?<!ung thu phoi )(?<!utp )ktbn'), ('sclc', r'(?<!ung thu phoi )te bao nho'))}
+            plain = [k for k, v in types.items() if v == 'yes']
+            if len(plain) == 1 and all(v in (None, 'yes') for v in types.values()):
+                f['disease'] = plain[0]
         if has(q, r'\b(?:chua ro|khong ro).{0,20}(?:the benh|mo benh hoc|loai ung thu)\b'):
             f['disease'] = 'unknown'
         # Purpose. Screening only when plainly stated; "không tầm soát mà …" and a later
@@ -663,7 +728,8 @@ class LabLookup:
         for state, word, c, m in mentions(clauses, r'(?:tien )?' + DIABETES, F_IS, SUSPECT):
             if c[m.end():].startswith(' thai ky') and state == 'no':
                 continue                                           # "không phải đái tháo đường thai kỳ" negates the pregnancy form only
-            found.append(False if m.group(0).startswith('tien ') or state == 'no' or word in SUSPICION else True if state == 'yes' else None)
+            being_diagnosed = has(c[:m.start()], r'\b(?:de|nham|muon|can) chan doan (?:xac dinh )?(?:benh )?$')      # the test is ordered to find out
+            found.append(False if m.group(0).startswith('tien ') or state == 'no' or word in SUSPICION or being_diagnosed else True if state == 'yes' else None)
         if has(q, r'\broi loan dung nap\b'):
             found.append(False)
         if found:
