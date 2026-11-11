@@ -34,3 +34,52 @@
 .source-row details .text-link{display:flex}
 
 .lab-reading .actions{margin-top:10px}.lab-reading .hint{margin:6px 0 0}
+
+/* Approved mint + medical mascot direction, 11/11/2026. Shared evidence styles above remain valid for standalone source pages. */
+:root{--ground:#fafbf5;--surface:#fff;--text:#123e36;--muted:#526a62;--border:#dce6dd;--raised:#e9f3e9;--accent:#176756;--evidence:#176756;--warning:#87501a;--radius:18px}
+body{background:var(--ground)}
+button{border-radius:12px;transition:background-color .15s,color .15s}
+button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #247d70;outline-offset:4px}
+.topbar{background:rgba(250,251,245,.97);border-color:#e3e9df}
+.topbar-inner{max-width:1248px;min-height:84px;gap:32px}
+.brand{gap:10px;font-size:18px;letter-spacing:-.4px}.brand small{font-size:11px;letter-spacing:0}
+.brand-mark{display:grid;place-items:center;width:44px;height:44px;background:var(--accent);color:white;border-radius:14px}
+.topbar nav{margin-left:28px;gap:28px}.topbar nav a[aria-current]{text-decoration:none;color:var(--accent);position:relative}
+.topbar nav a[aria-current]:after{content:'';height:3px;border-radius:3px;background:var(--accent);position:absolute;left:0;right:0;bottom:0}
+.topbar #new-chat{font-size:13px;background:white;white-space:nowrap}.connection{font-size:11px}
+.canvas{max-width:1200px;padding:32px 32px 0}.chat-shell{max-width:960px}
+.chat-welcome{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:24px;min-height:390px;padding:4px 20px 12px}
+.eyebrow{display:block;font-size:11px;font-weight:600;letter-spacing:1.8px;color:var(--muted);margin-bottom:18px}
+.welcome-copy h1{font-size:52px;line-height:1.13;letter-spacing:-2.1px;font-weight:600}.welcome-copy h1 em{font-style:normal;color:#367963}
+.welcome-copy>p{font-size:17px;line-height:1.7;color:var(--muted);margin:22px 0 20px}.welcome-note{font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center}.welcome-note>span{color:var(--accent);font-size:20px}
+.mascot-scene{position:relative;display:grid;place-items:center;isolation:isolate;min-width:0}
+.mascot-halo{position:absolute;inset:10% 3% 7%;background:#e9f1e1;border-radius:50%;z-index:-1}
+.welcome-mascot{display:block;width:100%;height:auto;max-width:390px;filter:drop-shadow(0 12px 12px #254e2510)}
+.mascot-caption{position:absolute;bottom:0;left:50%;transform:translateX(-50%);white-space:nowrap;padding:9px 16px;background:#ffffffed;border:1px solid var(--border);border-radius:12px;font-size:11px;box-shadow:0 6px 20px #214b2610}
+.chat-composer{position:static;margin:0;padding:16px 0 0;background:transparent}
+.chat-composer .panel{padding:20px 22px 16px;border-radius:20px;border-color:#c6d9ca;box-shadow:0 3px 12px #1a4b300a}
+#composer label{font-size:15px;font-weight:600;margin:0 0 8px}
+textarea{border:0;padding:4px 0;min-height:64px;border-radius:4px;background:transparent;font-size:16px;resize:vertical}
+textarea:focus-visible{outline-offset:5px}
+.search-bottom{margin-top:8px}.search-bottom p{font-size:11px}.primary{border-radius:12px;padding:10px 18px;gap:20px}.primary span{font-size:22px;line-height:1}.primary:hover:not(:disabled){background:#0e5143}
+.example-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.example-list button{background:#eff4e9;border:1px solid #dce6d6;border-radius:24px;padding:10px 16px;font-size:12px;line-height:1.4;display:flex;align-items:center;gap:18px}.example-list button:hover:not(:disabled){background:#e0eddd}
+.chat-privacy{text-align:center;font-size:11px;margin-top:16px}
+.has-messages{max-width:840px}.has-messages .chat-composer{position:sticky;bottom:0;padding:16px 0 8px;margin-top:20px;background:var(--ground);z-index:3}.has-messages textarea{min-height:48px}.has-messages .chat-privacy{margin-top:8px}
+.messages{gap:32px}.query-heading{background:#e5efe3;border:1px solid #dce6d9;border-radius:18px 18px 4px 18px;padding:14px 20px;font-size:14px}.query-heading small{font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.assistant,.panel{border-radius:18px;padding:28px}.assistant{border-color:#e1e7df;box-shadow:0 4px 18px #1b3f2205}
+.assistant .assistant-brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;margin-bottom:20px;color:var(--muted)}.assistant-brand img{width:44px;height:44px;object-fit:cover;object-position:center;background:#edf3e6;border-radius:50%}
+.drug-heading{font-size:23px;letter-spacing:-.5px}.conclusion{font-size:16px;line-height:1.8}.source-preview-button{background:var(--raised);border-color:#d5e3d4;color:var(--accent);font-size:13px;min-height:44px;margin:0 0 8px}
+.original-quotes{border:0;margin:0;padding:0}.original-quotes>summary{font-size:12px;color:var(--muted)}
+.answer-block>strong{font-size:13px}.answer-block li{font-size:14px}.answer-block ul{padding-left:20px}.scope-note,.notice{font-size:12px;line-height:1.75}.notice{border-left:2px solid #d1ad72;padding-left:12px}
+.answer-foot{font-size:11px;line-height:1.7}.answer-foot>span{flex:1 1 270px}.answer-foot button{font-size:12px;padding:8px 12px;min-height:44px}
+.source-quote{background:#f3f6ed;border-color:#77a28a;border-radius:0 12px 12px 0}.source-quote blockquote{font-size:14px}.source-quote mark,.lab-quote li.lab-used mark{background:#e7edac;color:#213b2c}
+.evidence-row{border-radius:12px}.citation pre{border-radius:8px}.source-links{gap:4px 18px}.source-links a{font-size:12px;text-decoration:underline;text-underline-offset:3px}.lab-reasons{font-size:14px}.lab-reading{background:#f3f6ed;border-radius:12px;padding:16px}.confirm-block{border-radius:12px;background:#f4f7ef}
+footer{font-size:11px;max-width:960px;margin:36px auto 0;padding:20px 0 24px;border-color:#e1e7da}footer strong{font-weight:500}
+#view-sources{padding-top:20px}.page-title h1{font-size:34px;letter-spacing:-1px}.sources-grid{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+.source-dialog{position:fixed;inset:16px 16px 16px auto;width:min(540px,calc(100vw - 32px));max-width:none;max-height:none;height:calc(100dvh - 32px);margin:0;padding:0;border:1px solid var(--border);border-radius:22px;background:var(--surface);color:var(--text);box-shadow:0 16px 80px #0a302830;overflow:hidden}
+.source-dialog[open]{display:flex;flex-direction:column}.source-dialog::backdrop{background:#123e3633}
+.source-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:24px;border-bottom:1px solid var(--border);flex:none}.source-dialog-head .eyebrow{margin-bottom:8px}.source-dialog-head h2{font-size:22px;margin:0;overflow-wrap:anywhere}.source-dialog-head button{flex:none;width:44px;padding:8px;background:var(--ground)}
+.source-dialog-content{padding:8px 24px 28px;overflow:auto;overscroll-behavior:contain}.source-dialog .source-quote{margin:16px 0}.source-dialog .source-quote blockquote{font-size:15px}.source-dialog .hint{font-size:12px}.source-dialog .source-links a{min-height:44px}
+@media(max-width:1000px){.topbar-inner{gap:20px}.topbar nav{margin-left:auto}.connection{display:none}.canvas{padding:24px 24px 0}.chat-welcome{gap:12px;padding:12px 0 16px;min-height:340px}.welcome-copy h1{font-size:44px}.welcome-copy>p{font-size:15px}.welcome-note{font-size:11px}.sources-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.topbar-inner{padding:12px 20px 8px;gap:8px 16px;min-height:100px}.brand{font-size:16px}.brand small{font-size:11px}.brand-mark{width:38px;height:38px;border-radius:12px}.topbar #new-chat{margin-left:auto;font-size:12px;padding:8px 10px}.topbar nav{order:3;width:100%;margin:0;justify-content:center;gap:32px}.topbar nav a{min-height:44px;font-size:13px}.canvas{padding:20px 20px 0}.chat-welcome{display:flex;flex-direction:column;padding:10px 0 0;gap:0;min-height:0;text-align:center}.welcome-copy .eyebrow{font-size:11px;margin-bottom:12px}.welcome-copy h1{font-size:38px;letter-spacing:-1.5px;line-height:1.12}.welcome-copy>p{font-size:14px;margin:14px 0 0}.welcome-copy>p br{display:none}.welcome-note{display:none}.mascot-scene{width:200px;margin-top:0}.welcome-mascot{width:200px}.mascot-caption{display:none}.mascot-halo{inset:12% 2% 4%}.chat-composer{padding-top:4px}.chat-composer .panel{padding:16px;border-radius:18px}#composer label{font-size:14px}textarea{font-size:16px;min-height:72px}.search-bottom p{font-size:11px;max-width:120px}.search-bottom p span{display:none}.primary{font-size:12px;padding:8px 12px;gap:12px}.example-list{gap:8px;margin-top:14px;display:grid;grid-template-columns:1fr}.example-list button{justify-content:space-between;font-size:11px;min-height:44px;padding:10px 14px}.chat-privacy{font-size:11px;margin-top:12px}.has-messages .chat-composer{padding-top:10px}.has-messages textarea{min-height:48px}.assistant{padding:20px 16px;border-radius:16px}.assistant .assistant-brand{margin-bottom:16px}.drug-heading{font-size:21px}.conclusion{font-size:15px}.query-heading{padding:12px 16px}.answer-foot{gap:8px}.answer-foot button{width:auto}.source-dialog{inset:8px;width:calc(100vw - 16px);height:calc(100dvh - 16px);border-radius:18px}.source-dialog-head{padding:20px 16px}.source-dialog-content{padding:0 16px 24px}.source-dialog-head h2{font-size:20px}.page-title h1{font-size:28px}.sources-grid .panel{padding:20px 16px}.turn,.assistant{scroll-margin-top:140px}footer{margin-top:24px;text-align:center;font-size:11px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}

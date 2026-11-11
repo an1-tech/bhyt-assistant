@@ -19,6 +19,18 @@ function quoteBlock(q,status){
  fig.append(row);if(q.highlights?.length)fig.append(node('p',status==='source_condition_not_met'?'Phần tô đậm là điều kiện nguồn yêu cầu; thông tin trong câu hỏi không khớp điều kiện này.':'Phần tô đậm là đoạn câu trả lời dựa vào.','hint'));
  if(q.page_checked)fig.append(node('p',q.page_note||'Số trang đã đối chiếu với ảnh trang PDF (Đỗ Quốc An đọc), chờ Dược xác nhận.','hint'));return fig;}
 function evidenceGroup(parent,title,items){if(!items.length)return;const d=node('details',undefined,'citation');d.append(node('summary',title+' · '+items.length+' đoạn'));for(const c of items)d.append(sourceBlock(c));parent.append(d);}
+// Preview copies the rendered source verbatim; it does not summarize medical evidence.
+function sourcePreview(title,parts){
+ const button=node('button','Xem nguồn ↗','source-preview-button');button.type='button';
+ button.setAttribute('aria-haspopup','dialog');
+ button.addEventListener('click',()=>{
+  $('#source-dialog-title').textContent=title;
+  $('#source-dialog-content').replaceChildren(...parts.map(part=>part.cloneNode(true)));
+  $('#source-dialog').showModal();$('#close-source').focus();
+ });return button;
+}
+$('#close-source').addEventListener('click',()=>$('#source-dialog').close());
+function syncConversation(){const active=!!$('#messages').children.length;$('#welcome').hidden=active;$('#examples').hidden=active;$('#view-lookup').classList.toggle('has-messages',active);}
 // Which source a reply rests on, for the footer and the copied text alike: a medicine answer never names the lab source.
 function sourceStamp(data){const lab=(data.domain==='lab'||data.domain==='mixed')&&data.source_checked_as_of?data.source_checked_as_of.split('-').reverse().join('/'):null;return data.domain==='mixed'?'Nguồn thuốc 06/11/2026 · Nguồn xét nghiệm kiểm tra '+lab:lab?'Nguồn xét nghiệm kiểm tra '+lab:'Theo bộ nguồn BHYT 06/11/2026';}
 function reportText(data,question){const out=['Câu hỏi: '+question,data.answer];for(const r of data.results||[]){const a=r.question_answer;if(!a)continue;out.push(r.ingredient,a.conclusion,...a.conditions);for(const q of a.quotes||[])out.push('TRÍCH NGUYÊN VĂN '+q.document+' · '+q.locator+(q.page_checked?' · trang PDF '+q.pages.join('–'):'')+': “'+(q.empty?'(ô ghi chú trống)':q.text)+'”');out.push(a.scope);}for(const r of data.lab_results||[])out.push(r.name,r.conclusion,...(r.reading||[]).map(x=>'Dữ kiện đã đọc — '+x),...r.reasons,...(r.notes||[]),'NGUYÊN VĂN: '+r.conditions.join(' '),...((r.rate||[]).length?['Tỷ lệ, mức giá thanh toán: '+r.rate.join(' ')]:[]),r.scope,'Vị trí nguồn: '+new URL(r.citation.viewer_url,location.origin).href);for(const c of [...(data.citations||[]),...(data.clinical_references||[])]){out.push('NGUỒN '+(c.document_title||sourceName(c.document_id))+' · '+c.locator+' · '+(c.official_url||c.source_url||c.local_url),c.excerpt);for(const f of c.source_review_flags||[])out.push('Giới hạn: '+f.note);}if(data.notice)out.push(data.notice);for(const t of data.brand_notes||[])out.push(t);for(const t of data.hospital_notes||[])out.push(t);out.push(sourceStamp(data)+'; đối chiếu với nguồn, không phải quyết định thanh toán.'+(data.review_note?' '+data.review_note:''));if(data.domain==='lab'||data.domain==='mixed')out.push('Ngày kiểm tra nguồn xét nghiệm không bảo đảm đã rà soát mọi văn bản mới.');return out.join('\n');}
@@ -36,16 +48,16 @@ function labBlock(r,data){
  block.append(list);if(used.size)block.append(node('p',r.status==='source_condition_not_met'?'Phần tô đậm là nhánh nguồn đang đối chiếu; thông tin đã nêu không khớp nhánh này.':'Phần tô đậm là nhánh đang đối chiếu.','hint'));section.append(block);
  if(r.rate?.length&&!paired){const rate=node('div',undefined,'answer-block lab-rate-block');rate.append(node('strong','Tỷ lệ, mức giá thanh toán (nguyên văn)'));const rl=node('ul');for(const t of r.rate)rl.append(node('li',t));rate.append(rl);section.append(rate);}
  const scan=r.transcription==='scan_read';
- const source=node('div',undefined,'lab-source');source.append(node('p',r.citation.document_title+' · '+r.citation.locator+(scan?' · chép từ bản scan':''),'hint'));const links=node('div',undefined,'source-links');const a=link(r.citation.viewer_url,scan?'Xem ảnh trang nguồn ↗':'Xem vị trí trích dẫn ↗');if(a)links.append(a);const pdf=link(r.citation.local_url+'#page='+r.citation.page,'Mở toàn trang PDF ↗');if(pdf)links.append(pdf);source.append(links);section.append(source,node('p',r.scope+(r.review?' '+r.review.text:''),'scope-note'));return section;
+ const source=node('div',undefined,'lab-source');source.append(node('p',r.citation.document_title+' · '+r.citation.locator+(scan?' · chép từ bản scan':''),'hint'));const links=node('div',undefined,'source-links');const a=link(r.citation.viewer_url,scan?'Xem ảnh trang nguồn ↗':'Xem vị trí trích dẫn ↗');if(a)links.append(a);const pdf=link(r.citation.local_url+'#page='+r.citation.page,'Mở toàn trang PDF ↗');if(pdf)links.append(pdf);source.append(links);section.append(source,node('p',r.scope+(r.review?' '+r.review.text:''),'scope-note'));section.querySelector('.conclusion').after(sourcePreview(r.name,[source,block,...section.querySelectorAll('.lab-rate-block')]));return section;
 }
 function renderReply(data,question){
- const box=node('article',undefined,'assistant');box.tabIndex=-1;box.append(node('h2','Cẩm nang BHYT'));
+ const box=node('article',undefined,'assistant');box.tabIndex=-1;const heading=node('h2',undefined,'assistant-brand');const avatar=node('img');avatar.src='/assets/medical-squirrel.png';avatar.alt='';avatar.width=44;avatar.height=44;heading.append(avatar,node('span','Cẩm nang BHYT'));box.append(heading);
  const rows=data.results||[];
  if(!rows.length&&!data.lab_results?.length)box.append(node('p',data.answer,'conclusion'));
  if(data.lab_links?.length){const links=node('div',undefined,'source-links');for(const l of data.lab_links){const a=link(l.url,l.label+' ↗');if(a)links.append(a);}box.append(links);}
  for(const r of data.lab_results||[])box.append(labBlock(r,data));
  if(data.domain==='mixed'&&!rows.length){const section=node('section',undefined,'drug-result');section.append(node('h3','Thuốc được hỏi','drug-heading'),node('p',data.answer,'conclusion'));box.append(section);}
- for(const r of rows){const a=r.question_answer;const section=node('section',undefined,'drug-result');section.append(node('h3',r.ingredient,'drug-heading'),node('p',a?.conclusion||data.answer,'conclusion'));for(const q of a?.quotes||[])section.append(quoteBlock(q,a.status));
+ for(const r of rows){const a=r.question_answer;const section=node('section',undefined,'drug-result');section.append(node('h3',r.ingredient,'drug-heading'),node('p',a?.conclusion||data.answer,'conclusion'));const quotes=(a?.quotes||[]).map(q=>quoteBlock(q,a.status));if(quotes.length){section.append(sourcePreview(r.ingredient,quotes));const original=node('details',undefined,'citation original-quotes');original.append(node('summary','Đọc nguyên văn tại đây'),...quotes);section.append(original);}
   if(a?.conditions?.length){const conditions=node('div',undefined,'answer-block');conditions.append(node('strong','Điều kiện trong nguồn'));const list=node('ul');for(const text of a.conditions)list.append(node('li',text));conditions.append(list);section.append(conditions);}
   if(a?.confirm?.length){
    // Unclear conditions are confirmed with buttons; the bot never guesses them from free text.
@@ -70,18 +82,18 @@ async function send(text,ctx,confirm){
  // confirm: {key,value} from a confirmation button — a structured fact, not text to parse.
  text=(text??$('#question').value).trim();if(!text||!ready||busy)return;
  busy=true;$('#send').disabled=true;$('#new-chat').disabled=true;$('#loading').hidden=false;$('#error').hidden=true;if(!confirm)$('#question').value='';$('#messages').setAttribute('aria-busy','true');let reply;
- const turn=node('section',undefined,'turn');const user=node('div',undefined,'query-heading');user.append(node('small','Bạn'),node('span',text));turn.append(user);$('#messages').append(turn);$('#welcome').hidden=true;
+ const turn=node('section',undefined,'turn');const user=node('div',undefined,'query-heading');user.append(node('small','Bạn'),node('span',text));turn.append(user);$('#messages').append(turn);syncConversation();
  try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':token},body:JSON.stringify(Object.assign({message:text,state:ctx??state,department:'Tất cả các khoa'},confirm?{confirm}:{}))});const data=await response.json();if(!response.ok)throw new Error(data.error||'Chưa xử lý được câu hỏi.');state=JSON.parse(JSON.stringify(data.state||{}));reply=renderReply(data,text);turn.append(reply);}
- catch(e){turn.remove();$('#welcome').hidden=!!$('#messages').children.length;$('#error').textContent=e.message||'Không kết nối được ứng dụng.';$('#error').hidden=false;if(!confirm&&!$('#question').value)$('#question').value=text;}
+ catch(e){turn.remove();syncConversation();$('#error').textContent=e.message||'Không kết nối được ứng dụng.';$('#error').hidden=false;if(!confirm&&!$('#question').value)$('#question').value=text;}
  finally{busy=false;$('#send').disabled=!ready;$('#new-chat').disabled=false;$('#loading').hidden=true;$('#messages').setAttribute('aria-busy','false');if(reply){reply.focus({preventScroll:true});reply.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});}else $('#error').focus();}
 }
 function showView(name){name=name==='sources'?'sources':'lookup';const changed=currentView!==name;if(changed&&currentView)viewScroll[currentView]=scrollY;for(const n of document.querySelectorAll('.view'))n.hidden=n.id!=='view-'+name;for(const a of document.querySelectorAll('[data-view]')){if(a.dataset.view===name)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');}currentView=name;if(changed)requestAnimationFrame(()=>scrollTo({top:viewScroll[name]||0,behavior:'instant'}));}
 window.addEventListener('hashchange',()=>showView(location.hash.slice(1)));
 // Keyboard focus inside the conversation must never sit under the sticky header or composer.
-document.addEventListener('focusin',e=>{const t=e.target;if(!t.closest||!t.closest('#messages'))return;const r=t.getBoundingClientRect(),c=document.querySelector('.chat-composer')?.getBoundingClientRect(),h=document.querySelector('.topbar')?.getBoundingClientRect();if(c&&r.bottom>c.top)scrollBy({top:r.bottom-c.top+16,behavior:'instant'});else if(h&&r.top<h.bottom)scrollBy({top:r.top-h.bottom-16,behavior:'instant'});});
+document.addEventListener('focusin',e=>{const t=e.target;if(!t.closest||!t.closest('#messages')||t.classList.contains('assistant'))return;const r=t.getBoundingClientRect(),c=document.querySelector('.chat-composer')?.getBoundingClientRect(),h=document.querySelector('.topbar')?.getBoundingClientRect();if(c&&r.bottom>c.top)scrollBy({top:r.bottom-c.top+16,behavior:'instant'});else if(h&&r.top<h.bottom)scrollBy({top:r.top-h.bottom-16,behavior:'instant'});});
 $('#composer').addEventListener('submit',e=>{e.preventDefault();send();});
 $('#question').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();send();}});
-$('#new-chat').addEventListener('click',()=>{if(busy)return;state={};$('#messages').replaceChildren();$('#welcome').hidden=false;$('#question').value='';$('#error').hidden=true;$('#question').focus();});
+$('#new-chat').addEventListener('click',()=>{if(busy)return;state={};$('#source-dialog').close();$('#messages').replaceChildren();syncConversation();$('#question').value='';$('#error').hidden=true;location.hash='lookup';showView('lookup');$('#question').focus();});
 for(const b of document.querySelectorAll('[data-query]'))b.addEventListener('click',()=>send(b.dataset.query));
 document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();location.hash='lookup';showView('lookup');$('#question').focus();}});
 function renderSources(m){

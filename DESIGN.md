@@ -1,5 +1,22 @@
 # Cẩm nang BHYT · Toàn bệnh viện
 
+## Current UI contract · Ux/Ui · 11/11/2026
+
+Người thực hiện: **Đỗ Quốc An**.
+
+This section supersedes the historical visual contracts below. The user approved the mint medical-squirrel mockups and explicitly requested their implementation. The old achromatic palette and no-image restriction therefore no longer apply.
+
+- One chat input, no sidebar or patient form. Welcome uses an original medical-squirrel illustration, two short example questions and a prominent composer. The welcome and examples disappear during conversation.
+- Colours: offwhite `#fafbf5`, white surface, forest ink `#123e36`, teal action `#176756`, mint surface `#e9f3e9`, muted text `#526a62`, border `#dce6dd`. Locally hosted Geist; 16px body, secondary text at least 11px; 12–20px corner radii.
+- The approved welcome title uses 52px on desktop, 44px on tablet and 38px on phones. This is a specific welcome-screen exception to the toolkit's compact app-title preference. No large title inside the working conversation.
+- Desktop welcome is two columns; phones stack text, mascot and composer. Chat uses an 840px reading column and sticky composer. Controls have visible focus and touch targets of at least 44px. Reduced-motion preferences disable smooth scrolling and transitions.
+- Source preview is a native modal dialog: right-side drawer on desktop, near-full-screen on phones; Escape/close returns focus to its trigger. It clones the same verbatim source and highlight spans already displayed in the answer. Original source-page and PDF links remain available.
+- Drug quotations use progressive disclosure; conclusions, conditions, uncertainty, confirmation buttons and review status remain visible. Laboratory conditions remain visible in full. Copy retains the complete original answer and citations, including collapsed material.
+- No changes to clinical rules, payment conclusions, source freshness claims or reviewer identities. Author attribution uses Đỗ Quốc An; attribution is not a hospital review attestation.
+- Check real output at 1440, 768, 390 and 320px, keyboard use, source dialog, failure recovery and conversation reset. Validation details are in `docs/UI_UX_2026-11-11.md`.
+
+## Historical design records
+
 One question: thuốc này có căn cứ BHYT nào và cần đáp ứng điều kiện gì?
 Scope: all departments; the department is context, never a filter excluding medicines.
 Style: Achromatic ledger, seed 1920156577. No redraws.

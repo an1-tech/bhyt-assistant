@@ -1,5 +1,7 @@
 # Chatbot tra cứu BHYT — Toàn bệnh viện · v1.11
 
+**Người thực hiện: Đỗ Quốc An.** Nhánh `Ux/Ui` bổ sung giao diện xanh mint, linh vật sóc y tế và khung đọc nguồn ngay trong cuộc trò chuyện. Nút **Xem nguồn** mở nguyên văn có tô sáng; vẫn có liên kết tới đúng trang PDF hoặc dòng xét nghiệm. Điều kiện, xác nhận dữ kiện và nội dung sao chép đầy đủ được giữ lại. Chi tiết thiết kế và kiểm tra: [UI/UX 11/11/2026](docs/UI_UX_2026-11-11.md).
+
 Giao diện chính là một khung chat để tra thuốc và xét nghiệm. Bác sĩ hỏi điều kiện chung thì bot trả ngay; khi chủ động hỏi một tình huống cụ thể, bot chỉ hỏi thêm dữ kiện cần đối chiếu, không yêu cầu điền hồ sơ bệnh nhân. Bản v1.11 bổ sung HbA1c và xét nghiệm đột biến gen EGFR, với nguồn riêng và nút mở đúng dòng tài liệu.
 
 ## Mở ứng dụng

@@ -86,6 +86,8 @@ def make_server(port=8765,corpus=None):
                 if len(q)>=2:
                     names=[rows[0]['ingredient'] for key,rows in corpus.names.items() if q in key][:10]
                 self.send(200,{'suggestions':names});return
+            if path=='/assets/medical-squirrel.png':
+                self.send(200,(ROOT/'web/assets/medical-squirrel.png').read_bytes(),'image/png');return
             assets={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/case.js':'case.js'}
             if path in assets:
                 file=ROOT/'web'/assets[path];ctype='text/html' if path=='/' else ('text/javascript' if path.endswith('js') else 'text/css')

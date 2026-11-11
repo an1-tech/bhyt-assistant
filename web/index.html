@@ -1,17 +1,36 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Chatbot tra cứu BHYT cho thuốc và xét nghiệm, trả lời kèm điều kiện và nguồn."><title>Chatbot BHYT · Toàn bệnh viện</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
-<body><a class="skip" href="#question">Đến ô chat</a>
-<header class="topbar"><div class="topbar-inner"><a class="brand" href="#lookup" aria-label="Cẩm nang BHYT, mở chatbot"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M4 5h9c3 0 4 2 4 4v15c0-3-2-4-5-4H4V5Z" stroke="currentColor" stroke-width="1.6"/><path d="M24 5h-7v15h7V5Z" stroke="currentColor" stroke-width="1.6"/><path d="M8 10h5M8 14h5" stroke="currentColor" stroke-width="1.6"/></svg><span>Cẩm nang BHYT<small>Toàn bệnh viện</small></span></a><nav aria-label="Chức năng chính"><a href="#lookup" data-view="lookup" aria-current="page">Chatbot</a><a href="#sources" data-view="sources">Nguồn dữ liệu</a></nav><span id="mode" class="connection" role="status">Đang kết nối…</span></div></header>
-<main id="main" class="canvas"><div id="connection-error" class="error" role="alert" hidden></div>
-<section id="view-lookup" class="view chat-shell"><div class="page-title"><div><h1>Tra cứu BHYT</h1><p>Hỏi về thuốc hoặc xét nghiệm. Xem điều kiện và đối chiếu nguồn.</p></div><button id="new-chat" class="secondary" type="button">Chat mới</button></div>
-<section id="welcome" class="chat-welcome" aria-labelledby="quick-title"><h2 id="quick-title">Bắt đầu bằng một câu hỏi</h2><p>Nhập câu hỏi như khi trao đổi với đồng nghiệp.</p><div class="example-list">
-<button type="button" data-query="Trastuzumab điều trị ung thư vú có được BHYT chi trả không?">Trastuzumab điều trị ung thư vú có được BHYT chi trả không?</button>
-<button type="button" data-query="HbA1c theo dõi đái tháo đường có điều kiện BHYT gì?">HbA1c theo dõi đái tháo đường có điều kiện BHYT gì?</button>
-<button type="button" data-query="HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước làm ngày 01/08/2026, BHYT có thanh toán không?">HbA1c hôm nay để đánh giá điều trị đái tháo đường, lần trước làm ngày 01/08/2026, BHYT có thanh toán không?</button>
-<button type="button" data-query="Xét nghiệm đột biến gen EGFR trong điều trị ung thư phổi không tế bào nhỏ có được BHYT chi trả không?">Xét nghiệm đột biến gen EGFR trong ung thư phổi có được BHYT chi trả không?</button>
-</div></section>
-<section id="messages" class="messages" role="log" aria-live="polite" aria-relevant="additions" aria-label="Cuộc trò chuyện"></section>
-<div class="chat-composer"><form id="composer" class="panel"><label for="question">Câu hỏi của bác sĩ</label><textarea id="question" rows="2" maxlength="3000" placeholder="Thuốc hoặc xét nghiệm này, cho bệnh này, có được BHYT thanh toán không?" aria-describedby="question-help" required></textarea><div class="search-bottom"><p id="question-help">Enter để gửi · Shift + Enter để xuống dòng</p><button id="send" class="primary" type="submit" disabled>Gửi câu hỏi <span aria-hidden="true">→</span></button></div><p id="loading" class="loading" role="status" hidden>Đang đọc điều kiện trong nguồn…</p><p id="error" class="error" role="alert" tabindex="-1" hidden></p></form><p class="chat-privacy">Không nhập tên, mã bệnh án hoặc thông tin định danh người bệnh.</p></div>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Chatbot tra cứu BHYT cho thuốc và xét nghiệm, trả lời kèm điều kiện và nguồn.">
+<meta name="theme-color" content="#176756"><title>Cẩm nang BHYT · Toàn bệnh viện</title>
+<link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#question">Đến ô chat</a>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="#lookup" aria-label="Cẩm nang BHYT, mở chatbot"><span class="brand-mark"><svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M4 5h8c2 0 2 2 2 3v15c0-2-2-3-4-3H4V5Zm20 0h-8c-2 0-2 2-2 3v15c0-2 2-3 4-3h6V5Z" stroke="currentColor" stroke-width="1.6"/><path d="M19 9v6m-3-3h6" stroke="currentColor" stroke-width="1.6"/></svg></span><span>Cẩm nang BHYT<small>Đồng hành cùng bác sĩ</small></span></a>
+<nav aria-label="Chức năng chính"><a href="#lookup" data-view="lookup" aria-current="page">Tra cứu</a><a href="#sources" data-view="sources">Nguồn dữ liệu</a></nav>
+<span id="mode" class="connection" role="status">Đang kết nối…</span><button id="new-chat" class="secondary" type="button"><span aria-hidden="true">＋</span> Chat mới</button>
+</div></header>
+<main id="main" class="canvas">
+<div id="connection-error" class="error" role="alert" hidden></div>
+<section id="view-lookup" class="view chat-shell" aria-label="Tra cứu BHYT">
+<section id="welcome" class="chat-welcome" aria-labelledby="quick-title">
+<div class="welcome-copy"><span class="eyebrow">THUỐC & XÉT NGHIỆM</span><h1 id="quick-title">Tra cứu BHYT,<br><em>thật đơn giản.</em></h1><p>Hỏi về thuốc hoặc xét nghiệm.<br> Hiểu điều kiện, tìm đúng nguồn.</p><span class="welcome-note"><span aria-hidden="true">↗</span> Nguồn trích dẫn ngay trong câu trả lời</span></div>
+<div class="mascot-scene"><div class="mascot-halo" aria-hidden="true"></div><img class="welcome-mascot" src="/assets/medical-squirrel.png" width="1024" height="1024" alt="Sóc trợ lý y tế mặc áo blouse trắng, đeo ống nghe và vẫy tay chào"><span class="mascot-caption" aria-hidden="true">Cùng bạn tìm đúng căn cứ</span></div>
 </section>
- <section id="view-sources" class="view" hidden><div class="page-title"><div><h1>Nguồn dữ liệu</h1><p>Kiểm tra văn bản, phiên bản và phần dữ liệu còn thiếu.</p></div></div><div class="sources-grid"><section class="panel"><h2>Hướng dẫn lâm sàng bổ sung</h2><p id="source-update-summary" class="hint">Đang tải thông tin nguồn bổ sung…</p><div id="supplemental-source-list"></div><h2>Văn bản BHYT đang được truy xuất</h2><div id="source-list"></div></section><section class="panel"><h2>Trước khi dùng trong bệnh viện</h2><p id="review-status">Chưa được bệnh viện thẩm định.</p><ul id="missing-data" class="plain-list"></ul><p class="hint">Bộ nguồn BHYT chốt 06/11/2026. Tài liệu bổ sung được kiểm tra riêng ngày 07/11/2026. Ngày kiểm tra không phải ngày ban hành và không chứng minh đã rà soát mọi văn bản mới. Dự thảo không được dùng để trả lời.</p><p class="hint">Mặc định câu hỏi được xử lý trên máy này. Không lưu lịch sử câu hỏi khi đóng trang; không nhập thông tin định danh người bệnh.</p></section></div></section>
-<footer><span>Prototype v1.11 · Tra cứu trên máy</span><span>Nguồn thuốc 06/11/2026 · Nguồn xét nghiệm kiểm tra 10/11/2026</span></footer></main></body></html>
+<section id="messages" class="messages" role="log" aria-live="polite" aria-relevant="additions" aria-label="Cuộc trò chuyện"></section>
+<div class="chat-composer"><form id="composer" class="panel">
+<label for="question">Bác sĩ muốn tra cứu gì?</label><textarea id="question" rows="2" maxlength="3000" placeholder="Hỏi về thuốc, xét nghiệm và điều kiện BHYT…" aria-describedby="question-help" required></textarea>
+<div class="search-bottom"><p id="question-help">Enter để gửi <span>· Shift + Enter để xuống dòng</span></p><button id="send" class="primary" type="submit" disabled>Gửi câu hỏi <span aria-hidden="true">↑</span></button></div>
+<p id="loading" class="loading" role="status" hidden>Đang đọc điều kiện trong nguồn…</p><p id="error" class="error" role="alert" tabindex="-1" hidden></p></form>
+<div id="examples" class="example-list" aria-label="Câu hỏi gợi ý"><button type="button" data-query="Trastuzumab điều trị ung thư vú có được BHYT chi trả không?">Trastuzumab trong ung thư vú <span aria-hidden="true">↗</span></button><button type="button" data-query="HbA1c theo dõi đái tháo đường có điều kiện BHYT gì?">Điều kiện BHYT của HbA1c <span aria-hidden="true">↗</span></button></div>
+<p class="chat-privacy">Không nhập thông tin định danh người bệnh.</p></div>
+</section>
+<section id="view-sources" class="view" hidden><div class="page-title"><div><span class="eyebrow">CĂN CỨ TRA CỨU</span><h1>Nguồn dữ liệu</h1><p>Văn bản, phiên bản và phạm vi dữ liệu đang sử dụng.</p></div></div>
+<div class="sources-grid"><section class="panel"><h2>Hướng dẫn lâm sàng bổ sung</h2><p id="source-update-summary" class="hint">Đang tải thông tin nguồn bổ sung…</p><div id="supplemental-source-list"></div><h2>Văn bản BHYT đang được truy xuất</h2><div id="source-list"></div></section><section class="panel"><h2>Trước khi dùng trong bệnh viện</h2><p id="review-status">Đang tải trạng thái thẩm định…</p><ul id="missing-data" class="plain-list"></ul><p class="hint">Ngày kiểm tra nguồn không phải ngày ban hành và không chứng minh đã rà soát mọi văn bản mới. Dự thảo không được dùng để trả lời.</p><p class="hint">Mặc định câu hỏi được xử lý trên máy này. Không lưu lịch sử câu hỏi khi đóng trang; không nhập thông tin định danh người bệnh.</p></section></div></section>
+<footer><span>Đối chiếu với nguồn, không phải quyết định thanh toán.</span><span>Thực hiện: <strong>Đỗ Quốc An</strong></span></footer>
+</main>
+<dialog id="source-dialog" class="source-dialog" aria-labelledby="source-dialog-title"><div class="source-dialog-head"><div><span class="eyebrow">CĂN CỨ TRÍCH DẪN</span><h2 id="source-dialog-title">Đối chiếu nguồn</h2></div><button id="close-source" type="button" aria-label="Đóng nguồn trích dẫn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div><div id="source-dialog-content" class="source-dialog-content"></div></dialog>
+</body></html>
