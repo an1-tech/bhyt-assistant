@@ -150,6 +150,8 @@ class Corpus:
                     self.aliases[normalize(a['brand'])]=normalize(a['ingredient'])
                     self.alias_sources[normalize(a['brand'])]=a
         self.load_hospital_list()
+        facility=self.data/'hospital'/'facility.json'
+        self.facility=json.loads(facility.read_text(encoding='utf-8')) if facility.exists() else None
         # PDF page of a TT20 row, only where it was checked by eye (tools/build_source_pages.py).
         pages_file=self.data/'source_pages.json'
         self.source_pages=json.loads(pages_file.read_text(encoding='utf-8')) if pages_file.exists() else {'pdf':None,'pages':{}}

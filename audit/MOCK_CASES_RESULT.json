@@ -1,0 +1,254 @@
+{
+ "date": "2026-11-11",
+ "nature": "GIẢ LẬP. Không ca nào là ca thật của bệnh viện. Kết quả mong đợi được suy ra từ nguyên văn văn bản (TT20/2022, TT39/2024), không phải quyết định giám định của BHXH.",
+ "cases": 24,
+ "consistent_with_text": 24,
+ "by_expected": {
+  "khớp": [
+   8,
+   8
+  ],
+  "không khớp": [
+   8,
+   8
+  ],
+  "cần xác nhận": [
+   3,
+   3
+  ],
+  "cần đối chiếu thêm": [
+   1,
+   1
+  ],
+  "chỉ nêu điều kiện/tỷ lệ": [
+   2,
+   2
+  ],
+  "chưa có căn cứ": [
+   1,
+   1
+  ],
+  "ngoài danh mục": [
+   1,
+   1
+  ]
+ },
+ "rows": [
+  {
+   "id": "UB-M01",
+   "kind": "Thuốc",
+   "item": "Trastuzumab",
+   "question": "Trastuzumab ung thư vú HER2 dương tính có được BHYT thanh toán không?",
+   "expected": "khớp",
+   "got": "khớp",
+   "ok": true
+  },
+  {
+   "id": "UB-M02",
+   "kind": "Thuốc",
+   "item": "Trastuzumab",
+   "question": "Trastuzumab ung thư vú HER2 âm tính có được BHYT thanh toán không?",
+   "expected": "không khớp",
+   "got": "không khớp",
+   "ok": true
+  },
+  {
+   "id": "UB-M03",
+   "kind": "Thuốc",
+   "item": "Trastuzumab",
+   "question": "Trastuzumab ung thư vú HER2 IHC 2+ chưa làm FISH có được BHYT thanh toán không?",
+   "expected": "cần xác nhận",
+   "got": "cần xác nhận",
+   "ok": true
+  },
+  {
+   "id": "UB-M04",
+   "kind": "Thuốc",
+   "item": "Trastuzumab",
+   "question": "Trastuzumab ung thư dạ dày giai đoạn sớm chưa di căn, HER2 dương tính có được BHYT thanh toán không?",
+   "expected": "không khớp",
+   "got": "không khớp",
+   "ok": true
+  },
+  {
+   "id": "UB-M05",
+   "kind": "Thuốc",
+   "item": "Erlotinib",
+   "question": "Erlotinib ung thư phổi không tế bào nhỏ EGFR dương tính có được BHYT thanh toán không?",
+   "expected": "khớp",
+   "got": "khớp",
+   "ok": true
+  },
+  {
+   "id": "UB-M06",
+   "kind": "Thuốc",
+   "item": "Erlotinib",
+   "question": "Chưa có kết quả EGFR thì Erlotinib ung thư phổi không tế bào nhỏ có được thanh toán không?",
+   "expected": "cần xác nhận",
+   "got": "cần xác nhận",
+   "ok": true
+  },
+  {
+   "id": "UB-M07",
+   "kind": "Thuốc",
+   "item": "Cetuximab",
+   "question": "Cetuximab ung thư đại trực tràng di căn RAS tự nhiên có được BHYT thanh toán không?",
+   "expected": "khớp",
+   "got": "khớp",
+   "ok": true
+  },
+  {
+   "id": "UB-M08",
+   "kind": "Thuốc",
+   "item": "Cetuximab",
+   "question": "Cetuximab ung thư đại trực tràng di căn KRAS đột biến có được BHYT thanh toán không?",
+   "expected": "không khớp",
+   "got": "không khớp",
+   "ok": true
+  },
+  {
+   "id": "UB-M09",
+   "kind": "Thuốc",
+   "item": "Rituximab",
+   "question": "Rituximab u lympho không Hodgkin tế bào B CD20 dương tính có được BHYT thanh toán không?",
+   "expected": "khớp",
+   "got": "khớp",
+   "ok": true
+  },
+  {
+   "id": "UB-M10",
+   "kind": "Thuốc",
+   "item": "Bevacizumab",
+   "question": "Bevacizumab có được BHYT thanh toán không?",
+   "expected": "chỉ nêu điều kiện/tỷ lệ",
+   "got": "chỉ nêu điều kiện/tỷ lệ",
+   "ok": true
+  },
+  {
+   "id": "UB-M11",
+   "kind": "Thuốc",
+   "item": "Doxorubicin",
+   "question": "Doxorubicin dạng liposome có được BHYT thanh toán không?",
+   "expected": "chỉ nêu điều kiện/tỷ lệ",
+   "got": "chỉ nêu điều kiện/tỷ lệ",
+   "ok": true
+  },
+  {
+   "id": "UB-M12",
+   "kind": "Thuốc",
+   "item": "Trastuzumab",
+   "question": "Trastuzumab ung thư phổi có được BHYT thanh toán không?",
+   "expected": "chưa có căn cứ",
+   "got": "chưa có căn cứ",
+   "ok": true
+  },
+  {
+   "id": "XN-M01",
+   "kind": "Xét nghiệm",
+   "item": "Định lượng HbA1c",
+   "question": "HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước cách 101 ngày, BHYT có thanh toán không?",
+   "expected": "khớp",
+   "got": "khớp",
+   "ok": true
+  },
+  {
+   "id": "XN-M02",
+   "kind": "Xét nghiệm",
+   "item": "Định lượng HbA1c",
+   "question": "HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước cách 60 ngày, BHYT có thanh toán không?",
+   "expected": "không khớp",
+   "got": "không khớp",
+   "ok": true
+  },
+  {
+   "id": "XN-M03",
+   "kind": "Xét nghiệm",
+   "item": "Định lượng HbA1c",
+   "question": "HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước cách 90 ngày, BHYT có thanh toán không?",
+   "expected": "cần đối chiếu thêm",
+   "got": "cần đối chiếu thêm",
+   "ok": true
+  },
+  {
+   "id": "XN-M04",
+   "kind": "Xét nghiệm",
+   "item": "Định lượng HbA1c",
+   "question": "HbA1c hôm nay tầm soát cho người bệnh chưa được chẩn đoán đái tháo đường, BHYT có thanh toán không?",
+   "expected": "không khớp",
+   "got": "không khớp",
+   "ok": true
+  },
+  {
+   "id": "XN-M05",
+   "kind": "Xét nghiệm",
+   "item": "Định lượng HbA1c",
+   "question": "HbA1c hôm nay theo dõi đái tháo đường thai kỳ, đang dùng insulin, lần trước cách 35 ngày",
+   "expected": "khớp",
+   "got": "khớp",
+   "ok": true
+  },
+  {
+   "id": "XN-M06",
+   "kind": "Xét nghiệm",
+   "item": "Định lượng HbA1c",
+   "question": "HbA1c hôm nay theo dõi đái tháo đường thai kỳ, không dùng insulin, lần trước cách 35 ngày",
+   "expected": "không khớp",
+   "got": "không khớp",
+   "ok": true
+  },
+  {
+   "id": "XN-M07",
+   "kind": "Xét nghiệm",
+   "item": "Xét nghiệm đột biến gen EGFR",
+   "question": "Xét nghiệm EGFR hôm nay cho bệnh nhân ung thư phổi không tế bào nhỏ đang điều trị",
+   "expected": "khớp",
+   "got": "khớp",
+   "ok": true
+  },
+  {
+   "id": "XN-M08",
+   "kind": "Xét nghiệm",
+   "item": "Xét nghiệm đột biến gen EGFR",
+   "question": "Xét nghiệm EGFR hôm nay cho bệnh nhân ung thư phổi tế bào nhỏ đang điều trị",
+   "expected": "không khớp",
+   "got": "không khớp",
+   "ok": true
+  },
+  {
+   "id": "XN-M09",
+   "kind": "Xét nghiệm",
+   "item": "Xét nghiệm đột biến gen Her 2",
+   "question": "Xét nghiệm HER2 cho bệnh nhân ung thư đại trực tràng đang điều trị hôm nay có được BHYT không?",
+   "expected": "không khớp",
+   "got": "không khớp",
+   "ok": true
+  },
+  {
+   "id": "XN-M10",
+   "kind": "Xét nghiệm",
+   "item": "Xét nghiệm đột biến gen KRAS",
+   "question": "Xét nghiệm KRAS hôm nay cho bệnh nhân ung thư đại trực tràng giai đoạn IV đang điều trị",
+   "expected": "khớp",
+   "got": "khớp",
+   "ok": true
+  },
+  {
+   "id": "XN-M11",
+   "kind": "Xét nghiệm",
+   "item": "Troponin",
+   "question": "Xét nghiệm troponin có được BHYT không?",
+   "expected": "ngoài danh mục",
+   "got": "ngoài danh mục",
+   "ok": true
+  },
+  {
+   "id": "XN-M12",
+   "kind": "Xét nghiệm",
+   "item": "Định lượng HbA1c",
+   "question": "HbA1c hôm nay theo dõi đái tháo đường thai kỳ, từ chối insulin, lần trước cách 35 ngày",
+   "expected": "cần xác nhận",
+   "got": "cần xác nhận",
+   "ok": true
+  }
+ ]
+}

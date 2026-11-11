@@ -223,6 +223,10 @@ class IndicationChat:
             answer["conclusion"]=(name+" có trong danh mục BHYT. Ô ghi chú không nêu điều kiện riêng, nhưng bộ nguồn hiện chưa đủ căn cứ xác nhận chi trả cho bệnh/chỉ định trong câu hỏi." if has_disease
                 else name+" có trong danh mục BHYT. Ô ghi chú không nêu điều kiện riêng; thông tin này chưa đủ để xác nhận chi trả cho mọi chỉ định.")
             answer["conditions"]=["Không suy ra mức thanh toán 100% từ ô ghi chú trống.","Cần căn cứ về chỉ định trong nhãn/hướng dẫn điều trị/Dược thư và quy định thanh toán chung."]
+        facility=getattr(self.c,"facility",None)
+        if facility and rule and any("hạng" in v for v in rule.get("common_verbatim",[])):
+            # The note limits payment to hospital classes; say what is on record for this facility and that it is unverified.
+            answer["conditions"].append(f"Cơ sở: {facility['name']} — {facility['class_note']} {facility['verification']}")
         if len(row.get("routes",[]))>1:
             answer["conditions"].append("Danh mục có các đường dùng: "+" / ".join(row["routes"])+". Thông tin trên giữ phạm vi của từng dòng nguồn.")
         if rule and rule["kind"]=="rate_only":

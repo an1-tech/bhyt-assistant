@@ -91,7 +91,7 @@ def main():
            "source_file_sha256": hashlib.sha256(RAW.read_bytes()).hexdigest() if RAW.exists() else None,
            "transcription": "Chép tay từ ảnh (tài liệu chỉ có ảnh, không có chữ). Giữ nguyên chính tả và các dòng trùng.",
            "limitations": ["Danh sách tra cứu thông tin thuốc trên website, không phải danh mục trúng thầu: không có biệt dược, hàm lượng, số đăng ký.",
-                           "Không có ảnh cho các chữ J, Q, U, Y; danh sách có thể chưa đầy đủ.",
+                           "24 ảnh là toàn bộ danh sách công khai; website không có thuốc nào bắt đầu bằng J, Q, U, Y (người cung cấp xác nhận ngày 11/11/2026).",
                            "Không có tên trong danh sách này không có nghĩa bệnh viện không dùng thuốc đó."],
            "entries": entries}
     out = ROOT / "data/hospital/hospital_drug_list.json"

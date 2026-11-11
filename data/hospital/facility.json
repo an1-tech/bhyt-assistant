@@ -1,0 +1,9 @@
+{
+ "name": "Hệ thống Y tế Vinmec",
+ "ownership": "Bệnh viện đa khoa tư nhân (ngoài công lập)",
+ "class_note": "Không xếp theo hạng I–IV của bệnh viện công; nhóm dự án ghi nhận được xếp tương đương bệnh viện hạng I.",
+ "provided_by": "Nhóm dự án",
+ "provided_on": "2026-11-11",
+ "verification": "Chưa có văn bản xếp hạng tương đương trong bộ nguồn; cần văn bản của Sở Y tế hoặc BHXH để xác nhận.",
+ "not_used_for": "Các xếp hạng quốc tế (Newsweek/Statista, JCI) không phải căn cứ thanh toán BHYT nên không đưa vào đối chiếu."
+}

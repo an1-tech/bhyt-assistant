@@ -32,7 +32,7 @@ Nguồn: `Doc1.docx` do người dùng cung cấp ngày 08/11/2026. File gồm 2
 - H, O, V: mỗi chữ 3 dòng
 - S, T, X: mỗi chữ 2 dòng
 - K và W: mỗi chữ 1 dòng
-- Không có ảnh cho chữ J, Q, U, Y.
+- Không có thuốc nào bắt đầu bằng chữ J, Q, U, Y; 24 ảnh là toàn bộ danh sách công khai (người cung cấp xác nhận ngày 11/11/2026).
 
 **Theo loại, tính trên 188 tên**
 - 163 hoạt chất đơn.
