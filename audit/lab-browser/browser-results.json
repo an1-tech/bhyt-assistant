@@ -1,0 +1,304 @@
+{
+  "checks": [
+    {
+      "name": "One chat input 1440",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: HbA1c theo dõi đái tháo đường có điều kiện BHYT gì?",
+      "passed": true
+    },
+    {
+      "name": "All branches visible 1440",
+      "passed": true
+    },
+    {
+      "name": "Focus moves to answer 1440",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow in chat 1440",
+      "passed": true
+    },
+    {
+      "name": "Exact service link 1440",
+      "passed": true
+    },
+    {
+      "name": "Keyboard focus visible on source link 1440",
+      "passed": true
+    },
+    {
+      "name": "Enter opens source in separate tab 1440",
+      "passed": true
+    },
+    {
+      "name": "Source crop loaded 1440",
+      "passed": true
+    },
+    {
+      "name": "Anchor opens correct row 1440",
+      "passed": true
+    },
+    {
+      "name": "No overflow in source reader 1440",
+      "passed": true
+    },
+    {
+      "name": "Keyboard opens readable full quotation 1440",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: HbA1c hôm nay theo dõi đái tháo đường",
+      "passed": true
+    },
+    {
+      "name": "Only missing date requested 1440",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Lần trước cách 60 ngày",
+      "passed": true
+    },
+    {
+      "name": "Follow-up uses date 1440",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Cả xét nghiệm EGFR và thuốc Erlotinib trong ung thư phổi không tế bào nhỏ có BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Mixed reply has independent test and drug sections 1440",
+      "passed": true
+    },
+    {
+      "name": "Copy report includes source location 1440",
+      "passed": true
+    },
+    {
+      "name": "New chat clears state 1440",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Lần trước cách 60 ngày",
+      "passed": true
+    },
+    {
+      "name": "New chat has no stale lab context 1440",
+      "passed": true
+    },
+    {
+      "name": "Lab source in source catalogue 1440",
+      "passed": true
+    },
+    {
+      "name": "Reduced motion honored 1440",
+      "passed": true
+    },
+    {
+      "name": "No JS exceptions 1440",
+      "passed": true
+    },
+    {
+      "name": "One chat input 768",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: HbA1c theo dõi đái tháo đường có điều kiện BHYT gì?",
+      "passed": true
+    },
+    {
+      "name": "All branches visible 768",
+      "passed": true
+    },
+    {
+      "name": "Focus moves to answer 768",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow in chat 768",
+      "passed": true
+    },
+    {
+      "name": "Exact service link 768",
+      "passed": true
+    },
+    {
+      "name": "Keyboard focus visible on source link 768",
+      "passed": true
+    },
+    {
+      "name": "Enter opens source in separate tab 768",
+      "passed": true
+    },
+    {
+      "name": "Source crop loaded 768",
+      "passed": true
+    },
+    {
+      "name": "Anchor opens correct row 768",
+      "passed": true
+    },
+    {
+      "name": "No overflow in source reader 768",
+      "passed": true
+    },
+    {
+      "name": "Keyboard opens readable full quotation 768",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: HbA1c hôm nay theo dõi đái tháo đường",
+      "passed": true
+    },
+    {
+      "name": "Only missing date requested 768",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Lần trước cách 60 ngày",
+      "passed": true
+    },
+    {
+      "name": "Follow-up uses date 768",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Cả xét nghiệm EGFR và thuốc Erlotinib trong ung thư phổi không tế bào nhỏ có BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Mixed reply has independent test and drug sections 768",
+      "passed": true
+    },
+    {
+      "name": "Copy report includes source location 768",
+      "passed": true
+    },
+    {
+      "name": "New chat clears state 768",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Lần trước cách 60 ngày",
+      "passed": true
+    },
+    {
+      "name": "New chat has no stale lab context 768",
+      "passed": true
+    },
+    {
+      "name": "Lab source in source catalogue 768",
+      "passed": true
+    },
+    {
+      "name": "Reduced motion honored 768",
+      "passed": true
+    },
+    {
+      "name": "No JS exceptions 768",
+      "passed": true
+    },
+    {
+      "name": "One chat input 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: HbA1c theo dõi đái tháo đường có điều kiện BHYT gì?",
+      "passed": true
+    },
+    {
+      "name": "All branches visible 390",
+      "passed": true
+    },
+    {
+      "name": "Focus moves to answer 390",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow in chat 390",
+      "passed": true
+    },
+    {
+      "name": "Exact service link 390",
+      "passed": true
+    },
+    {
+      "name": "Keyboard focus visible on source link 390",
+      "passed": true
+    },
+    {
+      "name": "Enter opens source in separate tab 390",
+      "passed": true
+    },
+    {
+      "name": "Source crop loaded 390",
+      "passed": true
+    },
+    {
+      "name": "Anchor opens correct row 390",
+      "passed": true
+    },
+    {
+      "name": "No overflow in source reader 390",
+      "passed": true
+    },
+    {
+      "name": "Keyboard opens readable full quotation 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: HbA1c hôm nay theo dõi đái tháo đường",
+      "passed": true
+    },
+    {
+      "name": "Only missing date requested 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Lần trước cách 60 ngày",
+      "passed": true
+    },
+    {
+      "name": "Follow-up uses date 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Cả xét nghiệm EGFR và thuốc Erlotinib trong ung thư phổi không tế bào nhỏ có BHYT không?",
+      "passed": true
+    },
+    {
+      "name": "Mixed reply has independent test and drug sections 390",
+      "passed": true
+    },
+    {
+      "name": "Copy report includes source location 390",
+      "passed": true
+    },
+    {
+      "name": "New chat clears state 390",
+      "passed": true
+    },
+    {
+      "name": "Submitted question: Lần trước cách 60 ngày",
+      "passed": true
+    },
+    {
+      "name": "New chat has no stale lab context 390",
+      "passed": true
+    },
+    {
+      "name": "Lab source in source catalogue 390",
+      "passed": true
+    },
+    {
+      "name": "Reduced motion honored 390",
+      "passed": true
+    },
+    {
+      "name": "No JS exceptions 390",
+      "passed": true
+    }
+  ]
+}

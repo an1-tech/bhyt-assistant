@@ -1,14 +1,18 @@
-# Chatbot tra cứu thuốc BHYT — Toàn bệnh viện · v1.9
+# Chatbot tra cứu BHYT — Toàn bệnh viện · v1.11
 
-Giao diện chính là một khung chat. Bác sĩ hỏi: **“Thuốc X dùng điều trị bệnh Y có được BHYT chi trả không?”** Bot trả lời thông tin chi trả chung, điều kiện và căn cứ, không yêu cầu điền hồ sơ bệnh nhân.
+Giao diện chính là một khung chat để tra thuốc và xét nghiệm. Bác sĩ hỏi điều kiện chung thì bot trả ngay; khi chủ động hỏi một tình huống cụ thể, bot chỉ hỏi thêm dữ kiện cần đối chiếu, không yêu cầu điền hồ sơ bệnh nhân. Bản v1.11 bổ sung HbA1c và xét nghiệm đột biến gen EGFR, với nguồn riêng và nút mở đúng dòng tài liệu.
 
 ## Mở ứng dụng
 
-Dự án: `D:/Vinmec/bhyt-chatbot`. Nhấp đúp `start-windows.bat`, hoặc mở **http://127.0.0.1:8766/?v=1.9#lookup** nếu ứng dụng đang chạy. Bản này dùng Python có sẵn trên máy, không cần khóa API hoặc cài thêm thư viện để chạy.
+Dự án: `D:/Vinmec/bhyt-chatbot`. Nhấp đúp `start-windows.bat`, hoặc mở **http://127.0.0.1:8766/?v=1.11#lookup** nếu ứng dụng đang chạy. Bản này dùng Python có sẵn trên máy, không cần khóa API hoặc cài thêm thư viện để chạy.
 
 Tệp `.python-path.txt` ghi đường dẫn Python đang có trên máy; nếu chuyển máy, thay bằng Python 3.10+ thực tế. Lệnh `python` mặc định của Windows có thể là Store alias. Để dừng bản chạy nền, chạy `stop-windows.ps1` bằng PowerShell; script chỉ dừng đúng tiến trình của dự án.
 
 ## Dùng chatbot
+
+- Thử “HbA1c theo dõi đái tháo đường có điều kiện BHYT gì?”, hoặc “HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước cách 60 ngày”.
+- Thử “Xét nghiệm EGFR trong điều trị ung thư phổi không tế bào nhỏ có BHYT không?” và “Cả xét nghiệm EGFR và thuốc Erlotinib trong ung thư phổi không tế bào nhỏ có BHYT không?”.
+- “Xem vị trí trích dẫn” ở câu trả lời xét nghiệm mở ảnh trọn dòng dịch vụ, bản chữ dễ đọc và liên kết PDF gốc. Không suy ra quy tắc cho xét nghiệm ngoài hai dịch vụ này.
 
 - Gõ tên hoạt chất và bệnh/chỉ định trong một câu, bấm Gửi câu hỏi hoặc Enter. Shift + Enter xuống dòng.
 - Câu trả lời nêu quy định tìm được, điều kiện áp dụng và nguồn. Thiếu dữ liệu để kết luận thì bot nói rõ giới hạn, không yêu cầu biểu mẫu ca bệnh.
@@ -32,8 +36,8 @@ Bộ nguồn BHYT chốt 06/11/2026; nguồn bổ sung được tìm kiếm/ki�
 
 Luồng `/api/chat` dùng `Corpus.converse()` và các nhánh trả lời có gắn nguồn, không gọi OpenAI ngay cả khi cấu hình AI cũ tồn tại. Phần tra cứu nội bộ `Corpus.chat()` và các API ca bệnh cũ còn giữ để tương thích; chúng không xuất hiện thành biểu mẫu trên giao diện. Mã AI cũ (tắt mặc định) nằm riêng trong `ai_explain.py`.
 
-Chạy kiểm thử backend bằng Python thực tế: `python -B -m unittest discover -s tests -q`. Bản này đạt 150 kiểm thử. Kiểm tra giao diện hiện tại: `node tools/check-chat-ui.mjs` (cần Node 22+ và Chrome/Edge cùng toolkit đã cài trên máy), đạt 67 kiểm tra ở 1440/768/390px với bản 1.8 (chưa chạy lại cho 1.9; bản 1.9 đã được kiểm tra tay trên trình duyệt ở desktop và 375px). Những script browser của các bản 1.6/1.7 được giữ để tham khảo lịch sử, không phải bộ kiểm tra giao diện hiện tại.
+Chạy kiểm thử backend bằng Python thực tế: `python -B -m unittest discover -s tests -q`. Kiểm thử xét nghiệm riêng: `python -B -m unittest discover -s tests -p test_lab_lookup.py -q`. Chạy ứng dụng trước khi kiểm tra trình duyệt: `node tools/check-lab-ui.mjs http://127.0.0.1:8766` (cần Node 22+, Chrome/Edge và toolkit design-taste-frontend đã cài trên máy). Kết quả kiểm tra bản v1.11 và giới hạn được ghi trong `docs/LAB_LOOKUP_V1.11.md`. Các script giao diện của phiên bản cũ được giữ để tham khảo lịch sử.
 
 Đã xem ảnh desktop, tablet và mobile. Bộ đo giao diện báo 0 FAIL / 1 WARN: cảnh báo `unused-canvas` do nhận nhầm thanh điều hướng ngang là sidebar; khung chat chủ ý rộng tối đa 840px, căn giữa với hai lề bằng nhau để đọc hội thoại. Đây là lựa chọn cho yêu cầu chỉ có một chatbot, không phải một dashboard nhiều cột.
 
-Xem [thay đổi v1.9](docs/V1.9.md), [thay đổi v1.8](docs/CHAT_ONLY_V1.8.md), [báo cáo nguồn](docs/SOURCE_UPDATE_2026-11-07.md), `audit/CHAT_ONLY_V1.8_VALIDATION.json` và `audit/SOURCE_SEARCH_2026-11-07.json`.
+Xem [tra cứu xét nghiệm v1.11](docs/LAB_LOOKUP_V1.11.md), [thay đổi v1.9](docs/V1.9.md), [thay đổi v1.8](docs/CHAT_ONLY_V1.8.md), [báo cáo nguồn](docs/SOURCE_UPDATE_2026-11-07.md).

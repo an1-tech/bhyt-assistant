@@ -16,3 +16,12 @@
 .source-quote blockquote{margin:0;font-size:15px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
 .source-quote mark{background:#fde68a;color:inherit;padding:0 2px;border-radius:2px}
 .source-quote .source-links{margin-top:4px}.source-quote .hint{margin:0}
+
+/* Laboratory evidence follows the existing chat design contract. */
+.lab-reasons{padding-left:22px;margin:12px 0 18px;font-size:15px}
+.lab-reasons li{margin-bottom:8px}.lab-source{margin:16px 0}.lab-source p{margin-bottom:0}
+.lab-source-page{max-width:980px;padding-bottom:48px}.lab-source-page>h1{margin:20px 0 12px}
+.lab-source-page .panel{margin-top:20px}.lab-source-image{display:block;width:100%;height:auto;border:1px solid var(--border)}
+.lab-source-page summary{cursor:pointer;min-height:44px;padding:10px 0}.lab-verbatim{white-space:pre-wrap;overflow-wrap:anywhere}
+.lab-source-page>a{display:inline-flex;min-height:44px;align-items:center;color:var(--evidence)}
+.lab-source-page .source-links{margin:16px 0}.lab-source-page h1{font-size:24px}

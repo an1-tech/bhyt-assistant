@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "source": {
+    "document_id": "TT39_2024_LABS",
+    "title": "Thông tư 39/2024/TT-BYT",
+    "published_at": "2024-11-17",
+    "effective_from": "2025-01-01",
+    "checked_as_of": "2026-11-10",
+    "official_url": "https://vanban.chinhphu.vn/?docid=211771&pageid=27160",
+    "source_url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/39-byt-kem.pdf",
+    "local_url": "/sources/labs/39-2024-appendix.pdf",
+    "sha256": "0defbcf27dfb8b82b5defa1d8eb2ee7ed72e55366ef589f8f0c9582a6f7db17e",
+    "review_status": "Đã đối chiếu ảnh PDF và văn bản hợp nhất; chờ bệnh viện thẩm định.",
+    "review_limitations": "Tra cứu nguồn ngày 10/11/2026 chưa phát hiện văn bản sửa hai dòng này sau TT39/2024. Trang lịch sử hiệu lực VBPL không truy cập được; không khẳng định đã rà soát đầy đủ mọi văn bản mới.",
+    "related_documents": [
+      {
+        "title": "Thông tư 35/2016/TT-BYT, sửa đổi bởi TT50/2017, TT13/2020 và TT39/2024",
+        "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf",
+        "local_url": "/sources/labs/17-vbhn-2024.pdf",
+        "sha256": "c6505d94f0597416aebcee575d6be4a43917435a660e14cc750c2536519f2658"
+      },
+      {
+        "title": "Thông tư 39/2024/TT-BYT · Nội dung sửa đổi",
+        "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2024/11/39-byt.pdf",
+        "local_url": "/sources/labs/39-2024-main.pdf",
+        "sha256": "d79679b2781609ec85d622571f28041906ad964c5a2880c7246ebdfa2d55da18"
+      }
+    ]
+  },
+  "services": [
+    {
+      "id": "hba1c",
+      "name": "Định lượng HbA1c [Máu]",
+      "official_name": "Định lượng HbA1c [Máu] để xác định phác đồ điều trị hoặc để đánh giá kết quả điều trị bệnh đái tháo đường",
+      "aliases": [
+        "hba1c",
+        "hb a1c",
+        "a1c",
+        "hemoglobin a1c"
+      ],
+      "method": null,
+      "service_code": null,
+      "appendix_row": 38,
+      "original_row": 84,
+      "page": 20,
+      "bbox": [
+        70,
+        243,
+        559,
+        459
+      ],
+      "consolidated_pages": [
+        47,
+        48
+      ],
+      "conditions": [
+        "a) Thanh toán cho xét nghiệm định lượng HbA1c trong máu đối với trường hợp đã được chẩn đoán xác định đái tháo đường để xác định phác đồ điều trị nếu chưa thực hiện xét nghiệm HbA1c trong vòng 90 ± 3 (chín mươi cộng trừ 3) ngày.",
+        "b) Thanh toán cho xét nghiệm từ lần thứ 2 trở đi để đánh giá kết quả điều trị bệnh đái tháo đường tối thiểu sau mỗi 90 ± 3 (chín mươi cộng trừ 3) ngày.",
+        "c) Trường hợp đái tháo đường thai kỳ có điều trị bằng insulin, thực hiện xét nghiệm HbA1C mỗi 30 ngày 01 lần."
+      ],
+      "branches": [
+        {
+          "id": "regimen",
+          "purpose": "Xác định phác đồ điều trị",
+          "requires_confirmed_diabetes": true,
+          "timing": "90 ± 3 ngày"
+        },
+        {
+          "id": "monitoring",
+          "purpose": "Đánh giá kết quả điều trị từ lần thứ 2",
+          "timing": "90 ± 3 ngày"
+        },
+        {
+          "id": "gestational_insulin",
+          "purpose": "Đái tháo đường thai kỳ điều trị bằng insulin",
+          "interval_days": 30
+        }
+      ],
+      "timing_policy": {
+        "below_days": 87,
+        "review_from_days": 87,
+        "review_through_days": 93,
+        "above_days": 93,
+        "note": "87–93 ngày: cần đối chiếu cách áp dụng sai số với bộ phận BHYT; đây là giới hạn tự động hóa của prototype, không phải điều kiện pháp luật bổ sung."
+      },
+      "quote": "a) Thanh toán cho xét nghiệm định lượng HbA1c trong máu đối với trường hợp đã được chẩn đoán xác định đái tháo đường để xác định phác đồ điều trị nếu chưa thực hiện xét nghiệm HbA1c trong vòng 90 ± 3 (chín mươi cộng trừ 3) ngày.\nb) Thanh toán cho xét nghiệm từ lần thứ 2 trở đi để đánh giá kết quả điều trị bệnh đái tháo đường tối thiểu sau mỗi 90 ± 3 (chín mươi cộng trừ 3) ngày.\nc) Trường hợp đái tháo đường thai kỳ có điều trị bằng insulin, thực hiện xét nghiệm HbA1C mỗi 30 ngày 01 lần.",
+      "locator": "Danh mục 2 · STT 38 (STT 84 theo TT35) · trang PDF 20",
+      "viewer_url": "/sources/labs/hba1c.html#source-row",
+      "image_url": "/sources/labs/hba1c-row.png",
+      "image_sha256": "05b4db22434f5bd125ccd2207bdcd0d9acfccddcf2a4206a9b4c694c9571045c"
+    },
+    {
+      "id": "egfr",
+      "name": "Xét nghiệm đột biến gen EGFR",
+      "official_name": "Xét nghiệm đột biến gen EGFR",
+      "aliases": [
+        "egfr",
+        "e gfr",
+        "đột biến gen egfr"
+      ],
+      "method": null,
+      "service_code": null,
+      "appendix_row": 43,
+      "original_row": 98,
+      "page": 21,
+      "bbox": [
+        70,
+        385,
+        559,
+        450
+      ],
+      "consolidated_pages": [
+        50
+      ],
+      "conditions": [
+        "Chẩn đoán đột biến gen EGFR trong điều trị ung thư phổi không tế bào nhỏ."
+      ],
+      "branches": [
+        {
+          "id": "nsclc",
+          "disease": "Ung thư phổi không tế bào nhỏ",
+          "purpose": "Chẩn đoán đột biến gen EGFR trong điều trị"
+        }
+      ],
+      "quote": "Chẩn đoán đột biến gen EGFR trong điều trị ung thư phổi không tế bào nhỏ.",
+      "locator": "Danh mục 2 · STT 43 (STT 98 theo TT35) · trang PDF 21",
+      "viewer_url": "/sources/labs/egfr.html#source-row",
+      "image_url": "/sources/labs/egfr-row.png",
+      "image_sha256": "15f8c594fba1ff780c3b82c7aaa08cc2eca92b489a61cd4ce20e2626f769e2f3"
+    }
+  ]
+}

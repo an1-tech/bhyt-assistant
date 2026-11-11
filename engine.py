@@ -103,6 +103,8 @@ def api_post(endpoint, payload):
 class Corpus:
     def __init__(self, data_dir=None):
         self.data=Path(data_dir or ROOT/'data')
+        from lab_lookup import LabLookup
+        self.labs=LabLookup(self.data)
         from clinical_sources import ClinicalSources
         self.supplemental=ClinicalSources(self.data)
         self.drugs=read_jsonl(self.data/'drugs_appendix_I.jsonl')
@@ -601,7 +603,22 @@ class Corpus:
         elif as_of is not None and as_of!=SNAPSHOT:
             result=self.chat(message,{},as_of,allow_ai=False)          # unsupported_date on every path
         else:
-            result=self._converse(message,trusted,as_of,confirm)
+            lab_route=None
+            if confirm is None and isinstance(message,str) and 0<len(message.strip())<=3000:
+                lab_route=self.labs.route(message,trusted,self.resolve(message))
+            if lab_route:
+                result=self.labs.answer(message,trusted,lab_route)
+                if lab_route['kind']=='mixed':
+                    drug=self._converse(message,{k:v for k,v in trusted.items() if k!='lab'},as_of,confirm)
+                    drug['lab_results']=result['lab_results']
+                    drug['citations']+=result['citations']
+                    drug['domain']='mixed'
+                    drug['source_checked_as_of']=result.get('source_checked_as_of')
+                    drug['state']={**drug.get('state',{}),**result.get('state',{})}
+                    result=drug
+            else:
+                # A switch to medication must not carry laboratory dates or purpose.
+                result=self._converse(message,{k:v for k,v in trusted.items() if k!='lab'},as_of,confirm)
         result["state"]=self.sign_state(result.get("state") or {})
         return result
 

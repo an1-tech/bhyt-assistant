@@ -31,12 +31,13 @@ def metadata(corpus):
             url=docs[0].get('source_url'),official_url=docs[0].get('official_url'),
             local_url='/sources/15-vbhn-byt-2024.pdf' if key=='TT20_2022' else '/sources/37-2024-tt-byt.pdf' if key=='TT37_2024' else None))
     groups=list(dict.fromkeys(group_label(r) for r in corpus.rows))
-    return dict(snapshot=SNAPSHOT,version='1.9-toan-vien',transition_review_date='2026-11-07',departments=DEPARTMENTS,groups=groups,
+    return dict(snapshot=SNAPSHOT,version='1.11-toan-vien',transition_review_date='2026-11-07',departments=DEPARTMENTS,groups=groups,
         drug_entries=len({r['stt'] for r in corpus.drugs}),radio_entries=len({r['stt'] for r in corpus.radio}),
         variants=len(corpus.rows),chunks=len(corpus.chunks),sources=sources,
         source_update=corpus.supplemental.metadata(),
+        lab_source=corpus.labs.metadata(),
         review_status='Chưa được bệnh viện thẩm định',
-        scope='Toàn bộ các khoa; thuốc hóa dược, sinh phẩm, thuốc phóng xạ và chất đánh dấu trong bộ nguồn.',
+        scope='Toàn bộ các khoa; thuốc hóa dược, sinh phẩm, thuốc phóng xạ, chất đánh dấu và hai xét nghiệm HbA1c/đột biến gen EGFR trong bộ nguồn.',
         missing=['Danh mục thuốc, biệt dược và phạm vi hợp đồng BHYT tại bệnh viện.',
                  'Danh mục thuốc y học cổ truyền, dược liệu và vị thuốc chưa có trong gói dữ liệu này.',
                  'Chưa xác minh mức hưởng, chuyển cơ sở, chỉ định lâm sàng của từng người bệnh.'])
