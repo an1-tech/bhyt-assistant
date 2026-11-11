@@ -276,7 +276,7 @@ class LabHTTP(unittest.TestCase):
             self.assertTrue(found, s['id'])
             images.update(found)
             if s['transcription'] == 'scan_read':
-                self.assertIn('AI đọc', page)
+                self.assertIn('Đỗ Quốc An đọc', page)
         for url in images:
             with urlopen(self.base + url) as response:
                 self.assertIn('image/png', response.headers['Content-Type'])

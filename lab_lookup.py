@@ -465,7 +465,7 @@ class LabLookup:
             if sid in route.get('loose', []) and row.get('name_note'):
                 notes.append(row['name_note'])
             if row.get('transcription') == 'scan_read':
-                notes.append('Nguyên văn dòng này được chép từ ảnh trang của bản hợp nhất 17/VBHN-BYT (bản scan, AI đọc), chưa được thẩm định; hãy đối chiếu ảnh trang trước khi dùng.')
+                notes.append('Nguyên văn dòng này được chép từ ảnh trang của bản hợp nhất 17/VBHN-BYT (bản scan, Đỗ Quốc An đọc), chưa được thẩm định; hãy đối chiếu ảnh trang trước khi dùng.')
             if row.get('source_note'):
                 notes.append(row['source_note'])
             base['lab_results'].append({'id': sid, 'name': row['name'], **a, 'conditions': row['conditions'],
@@ -856,7 +856,7 @@ class LabLookup:
             body = ''.join(f'<img class="lab-source-image" src="{e(i["url"])}" alt="Ảnh {"trang " + str(i["page"]) + " của bản hợp nhất, có dòng" if scan else "nguyên văn dòng"} STT {s["original_row"] if scan else s["appendix_row"]}, {e(s["name"])}">' for i in images)
         else:
             body = '<p class="error">Tệp nguồn bị thiếu hoặc thay đổi. Không hiển thị ảnh trích dẫn chưa kiểm chứng.</p>'
-        hint = (f'Ảnh toàn trang của bản scan; dòng STT {s["original_row"]} nằm trên trang này. Phần chữ bên dưới được chép từ ảnh (AI đọc), chưa được thẩm định.' if scan
+        hint = (f'Ảnh toàn trang của bản scan; dòng STT {s["original_row"]} nằm trên trang này. Phần chữ bên dưới được chép từ ảnh (Đỗ Quốc An đọc), chưa được thẩm định.' if scan
                 else 'Ảnh cắt trọn dòng dịch vụ, gồm tất cả nhánh và ngoại lệ.')
         text = s['quote'] + ('\n\nTỷ lệ, mức giá thanh toán:\n' + '\n'.join(s['rate']) if s.get('rate') else '')
         page_link = (f'<a href="{e(d["local_url"])}#page={s["page"]}" target="_blank" rel="noopener noreferrer">Mở trang {s["page"]} của bản hợp nhất</a>' if scan

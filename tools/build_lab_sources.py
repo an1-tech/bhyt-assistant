@@ -266,7 +266,7 @@ def main():
         'official_url': 'https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf',
         'source_url': 'https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf',
         'local_url': '/sources/labs/17-vbhn-2024.pdf', 'sha256': digest(vbhn_pdf),
-        'review_status': 'Chép từ ảnh trang của bản scan (AI đọc, không dùng lớp OCR); chờ bệnh viện thẩm định.',
+        'review_status': 'Chép từ ảnh trang của bản scan (Đỗ Quốc An đọc, không dùng lớp OCR); chờ bệnh viện thẩm định.',
         'review_limitations': 'Các dòng này không bị TT39/2024 sửa nên chỉ có trong bản hợp nhất dạng scan. ' + limitations,
     }
     services = []

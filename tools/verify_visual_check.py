@@ -1,6 +1,6 @@
 """Compare the imported drug rows with a visual transcription of the official PDF.
 
-Input: audit/official-crosscheck/oncology-visual-check.json (human/AI reading of page images).
+Input: audit/official-crosscheck/oncology-visual-check.json (page images read by Đỗ Quốc An).
 Output: audit/official-crosscheck/oncology-visual-result.json and a printed summary.
 Whitespace and hyphen variants (soft hyphen, '--') are normalised; every other
 character difference is reported.

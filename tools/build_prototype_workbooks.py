@@ -263,7 +263,7 @@ def build_review(rows):
         "Các nhánh điều kiện trong sheet \"Duyệt điều kiện\" do nhóm prototype soạn bằng cách tách nguyên văn ghi chú Phụ lục I TT20/2022. Mỗi tỷ lệ % đều có trong nguyên văn; chatbot chỉ dùng nhánh đã được Dược/BHYT đồng ý.",
         "",
         "NGUỒN ĐÃ ĐỐI CHIẾU:",
-        "Ghi chú, đường dùng và cột hạng bệnh viện của 18 thuốc đã được so bằng mắt với bản hợp nhất chính thức 15/VBHN-BYT (datafiles.chinhphu.vn), trang 30–34: 18/18 khớp. Việc đối chiếu do AI thực hiện, cần người duyệt xác nhận lại.",
+        "Ghi chú, đường dùng và cột hạng bệnh viện của 18 thuốc đã được so bằng mắt với bản hợp nhất chính thức 15/VBHN-BYT (datafiles.chinhphu.vn), trang 30–34: 18/18 khớp. Việc đối chiếu do Đỗ Quốc An thực hiện, cần Dược/BHYT xác nhận lại.",
         "",
         "CÁCH DUYỆT (chỉ điền các cột nền vàng, từ cột N):",
         "• Kết luận: chọn Đồng ý / Cần sửa / Không đồng ý.",
@@ -283,7 +283,7 @@ def build_review(rows):
               "Tỷ lệ ghi trong nguồn (%)", "Điều kiện cơ sở", "Câu hỏi gợi ý cho chatbot", "Trạng thái",
               "Kết luận duyệt", "Sửa thành", "Ghi chú người duyệt", "Người duyệt (họ tên, chức danh)", "Ngày duyệt"]
     widths = [10, 20, 8, 11, 14, 50, 9, 36, 30, 10, 26, 28, 14, 14, 30, 30, 22, 12]
-    banner(ws, "Bản nháp do AI tách từ nguyên văn TT20 — chưa có giá trị áp dụng cho đến khi Dược/BHYT duyệt. Chỉ điền các cột nền vàng (N–R).", len(titles), MOCK_FILL)
+    banner(ws, "Bản nháp do Đỗ Quốc An tách từ nguyên văn TT20 — chưa có giá trị áp dụng cho đến khi Dược/BHYT duyệt. Chỉ điền các cột nền vàng (N–R).", len(titles), MOCK_FILL)
     header(ws, 3, titles, widths)
     row = 4
     for r in rows:

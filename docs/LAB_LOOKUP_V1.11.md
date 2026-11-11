@@ -42,7 +42,7 @@ Tìm kiếm ngày 10/11/2026 chưa thấy văn bản sửa các dòng này sau T
 - Hai dòng thí điểm (HbA1c, EGFR) vẫn so với bản đã gõ tay và kiểm bằng mắt.
 
 **Dòng 17/VBHN-BYT (bản scan)**
-- Phần chữ gõ trong công cụ, đọc từ ảnh trang (AI đọc), đánh dấu `scan_read`.
+- Phần chữ gõ trong công cụ, đọc từ ảnh trang (Đỗ Quốc An đọc), đánh dấu `scan_read`.
 - Câu trả lời và trang nguồn luôn ghi “chép từ bản scan, chờ thẩm định” và hiện ảnh nguyên trang để so.
 - Ở ba dòng Danh mục 1 (STT 8, 9, 13), mỗi điều kiện đi với ô tỷ lệ riêng (`rate_mode: paired`).
 
@@ -91,7 +91,7 @@ Chatbot chỉ hỏi dữ kiện còn thiếu, không cần thông tin định da
 
 ## Giới hạn
 
-- 24 dòng bản scan do AI đọc ảnh, cần Dược/BHYT soát lại từng dòng.
+- 24 dòng bản scan do Đỗ Quốc An đọc ảnh, cần Dược/BHYT soát lại từng dòng.
 - Chỉ 6 dịch vụ có đối chiếu ca bệnh; 35 dòng còn lại chỉ trích nguyên văn.
 - Chưa nạp các dòng không phải xét nghiệm (chẩn đoán hình ảnh, thăm dò chức năng, thủ thuật, phục hồi chức năng) của cùng hai danh mục.
 - Mô-đun hiểu các mẫu tiếng Việt đã kiểm thử, không bảo đảm hiểu mọi cách diễn đạt.
@@ -111,7 +111,7 @@ Kết quả kiểm thử: `audit/LAB_V1.11_VALIDATION.json`.
 
 ## Soát lại ngày 11/11/2026
 
-- 24 dòng chép từ bản scan đã được một lượt đọc độc lập thứ hai (cũng do AI) so từng chữ với ảnh trang phóng to: không có khác biệt. Vẫn cần Dược/BHYT thẩm định.
+- 24 dòng chép từ bản scan đã được Đỗ Quốc An đọc lại lần thứ hai, so từng chữ với ảnh trang phóng to: không có khác biệt. Vẫn cần Dược/BHYT thẩm định.
 - Lượt đọc này cũng xác nhận không sót dòng xét nghiệm nào ở các trang 26–28 và 44–50. Dòng STT 81 (thu thập, chiết tách tế bào gốc) là dịch vụ xử lý tế bào, không phải xét nghiệm, nên không nạp.
 - Quét 1.071 tên hoạt chất của danh mục thuốc qua bộ nhận diện xét nghiệm: không tên nào bị chuyển nhầm sang luồng xét nghiệm.
 

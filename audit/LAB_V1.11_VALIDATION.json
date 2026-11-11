@@ -29,11 +29,11 @@
     "effective_from": "2025-01-01",
     "pdf_rows_visually_checked": [
       "TT39 appendix: 17 lab rows extracted from the text layer, names asserted by the build tool",
-      "17/VBHN-BYT pages 26, 28, 44-50: 24 lab rows transcribed by reading the page images (AI)"
+      "17/VBHN-BYT pages 26, 28, 44-50: 24 lab rows transcribed by reading the page images (Đỗ Quốc An)"
     ],
     "source_checked_as_of": "2026-11-11",
     "services": 41,
-    "limitations": "Chưa truy cập được trang lịch sử hiệu lực VBPL; chưa được bệnh viện thẩm định; 24 dòng bản scan do AI đọc ảnh; vùng 87–93 ngày cần đối chiếu thêm; chỉ 6 dịch vụ có đối chiếu ca bệnh.",
+    "limitations": "Chưa truy cập được trang lịch sử hiệu lực VBPL; chưa được bệnh viện thẩm định; 24 dòng bản scan do Đỗ Quốc An đọc ảnh; vùng 87–93 ngày cần đối chiếu thêm; chỉ 6 dịch vụ có đối chiếu ca bệnh.",
     "text_layer_rows": 17,
     "scan_read_rows": 24
   },

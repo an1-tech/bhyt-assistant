@@ -1,7 +1,7 @@
 {
   "version": 1,
   "checked_as_of": "2026-11-07",
-  "method": "Đọc bằng mắt ảnh trang PDF bản hợp nhất chính thức 15/VBHN-BYT (data/sources/15-vbhn-byt-2024.pdf, trang 30–34, render 1,6x), chép lại đường dùng, 4 cột hạng bệnh viện và nguyên văn ghi chú; sau đó tools/verify_visual_check.py so tự động với data/drugs_appendix_I.jsonl. Người đọc: Claude (AI). Cần Dược/BHYT xác nhận lại.",
+  "method": "Đọc bằng mắt ảnh trang PDF bản hợp nhất chính thức 15/VBHN-BYT (data/sources/15-vbhn-byt-2024.pdf, trang 30–34, render 1,6x), chép lại đường dùng, 4 cột hạng bệnh viện và nguyên văn ghi chú; sau đó tools/verify_visual_check.py so tự động với data/drugs_appendix_I.jsonl. Người đọc: Đỗ Quốc An. Cần Dược/BHYT xác nhận lại.",
   "source_pdf": "data/sources/15-vbhn-byt-2024.pdf",
   "columns": ["hospital_special_I", "hospital_II", "hospital_III_IV", "commune"],
   "rows": [

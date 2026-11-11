@@ -21,5 +21,5 @@ Các dòng bị đánh dấu phần lớn do OCR làm hỏng chữ (ví dụ "IC
 Trang 30–34 được dựng thành ảnh, chép lại từng trường vào `oncology-visual-check.json`, rồi so tự động với dữ liệu (chỉ chuẩn hóa khoảng trắng và gạch nối). Kết quả `oncology-visual-result.json`: **18 khớp, 0 lệch**. Lỗi chính tả có sẵn trong văn bản gốc (Cetuximab "vùng đầu. cổ") cũng trùng khớp.
 
 ## Giới hạn
-- Người đọc ảnh là AI (Claude); cần Dược/BHYT xác nhận lại.
+- Người đọc ảnh là Đỗ Quốc An; cần Dược/BHYT xác nhận lại.
 - 1.115 dòng còn lại chưa được đọc bằng mắt. Khi mở rộng sang thuốc khác, lặp lại tầng 2 cho nhóm đó.
