@@ -79,6 +79,8 @@ def governed(clause, start, end, fillers, hedge=HEDGE, stoppable=False):
     m = re.search(hedge, ' '.join(before))
     if m:
         return 'unknown', m.group(0)
+    if stoppable and re.match(r'(?:\w+ ){0,3}(?:nam truoc|nam ngoai|thang truoc|tuan truoc|truoc day|truoc kia|luc truoc|hoi truoc|dot truoc|thai ky truoc|lan mang thai truoc|truoc khi|truoc do)\b', ' '.join(after)):
+        return 'unknown', 'past'                              # "dùng insulin trong năm trước": then, not now
     if re.fullmatch(r'(?:(?:thi|la|hay) )*(?:khong|chua)(?: (?:a|nhi|vay|nua))?', ' '.join(after)):
         return 'unknown', 'question'                          # "… dùng insulin không?"
     neg = [i for i, w in enumerate(before) if w in NEGATORS]
@@ -115,26 +117,44 @@ def verdict(found):
 # other word ("từ chối", "mẹ", "hủy", "hội chẩn" …) means the reading is shown and confirmed
 # first. Kept with diacritics, so that "hội" (hội chẩn) is not "hỏi".
 ACCOUNTED = set("""
-xét nghiệm xn định lượng dịch vụ chỉ định làm lại muốn tôi cần cho bệnh nhân bn người trường hợp ca này hôm nay ngày mai hiện tại đang đã được có không
-bhyt bảo hiểm y tế quỹ thanh toán chi trả điều kiện gì thế nào là thì và với để nhằm trong của ở lúc khi sau trước lần kia đó ạ nhé xin hỏi bác sĩ cả hai đều
-thuốc mới vừa rồi nữa thêm hay hoặc về việc một các những bị mắc nên cũng vậy sao còn nếu vì do mà nhưng chứ loại
+xét nghiệm xn định lượng dịch vụ chỉ định làm lại muốn tôi cần cho bệnh nhân bn người trường hợp ca này hiện tại đang đã được có không
+bhyt bảo hiểm y tế quỹ thanh toán chi trả điều kiện gì thế nào là thì và với để nhằm trong của ở ạ nhé xin hỏi bác sĩ cả hai đều
+thuốc mới vừa rồi nữa thêm về việc một các những bị mắc nên cũng vậy sao còn vì do mà nhưng chứ loại đến tới
 đái tháo đường đtđ tiểu thai kỳ insulin dùng sử dụng tiêm trị bằng theo dõi đánh giá kết quả đáp ứng hiệu kiểm soát huyết xác chọn lập chỉnh thay đổi phác đồ
-tầm sàng lọc chẩn đoán ban đầu đột biến gen gene tìm phát hiện tiên từng thực đo chưa chẳng ko ngừng ngưng dừng hết thôi bỏ trừ phải rõ biết chắc nhớ dự kiến
+tầm sàng lọc chẩn đoán ban đầu đột biến gen gene tìm phát hiện thực đo chưa chẳng ko ngừng ngưng dừng hết thôi bỏ trừ phải rõ biết chắc nhớ dự kiến
 thể sẽ sắp cân nhắc lẽ chờ thấy ghi đây nghi ngờ nguy cơ tiền mục đích type typ tuýp týp tuyp giai đoạn tái tiến triển
 ung thư phổi tế bào nhỏ nsclc sclc utp vú dạ dày đại trực tràng tuyến giáp cổ tử cung vòm mũi họng thanh quản hạ khoang miệng xoang mặt âm hộ dương vật da
-cách tuần tháng năm khoảng gần nhất cũ
 """.split())
 ACCOUNTED_PLAIN = {norm(w) for w in ACCOUNTED}
+# Time words are accounted for only as part of one of these expressions ("lần trước cách 35
+# ngày", "hôm nay", "ngày 01/08/2026"). Left on their own they qualify a fact — "dùng insulin
+# trong năm trước" — and the reading must be confirmed. "hoặc", "hay", "nếu", "khi", "sau",
+# "trước" are never accounted for: they make a statement conditional or a choice.
+TIME_EXPRESSIONS = re.compile(
+    r'\blan truoc(?: (?:lam|thuc hien|xet nghiem|do|la|vao|luc))*(?: ngay)?(?= zzdate| cach|$)|\blan (?:truoc|nay)\b|\blan dau(?: tien)?\b|\blan thu (?:\d+|hai|ba|tu)\b'
+    r'|\b(?:lan )?gan nhat\b|\bhom nay\b|\bngay mai\b|\bhien nay\b|\bnay\b|\b(?:ngay )?zzdate\b|\btruoc (?:day|kia)\b|\bchua tung\b|\blan nao\b'
+    r'|\b(?:cach(?: day)? )?(?:(?:khoang|gan|hon|chua den|chua toi|khong qua|it nhat|toi da|duoi|tren) )?\d+ (?:ngay|tuan|thang)(?: truoc| roi)?\b')
 
 
 def unread_words(message, aliases=()):
     """Words of the question that nothing in this module accounts for, as typed."""
     text = unicodedata.normalize('NFC', str(message).lower())
-    text = re.sub(r'\d{1,4}[/.-]\d{1,2}[/.-]\d{1,4}', ' ', text)
+    text = re.sub(r'\d{1,4}[/.-]\d{1,2}[/.-]\d{1,4}', ' zzdate ', text)
+    tokens = re.findall(r'[^\W_]+', text)
+    plain, starts, at = [], [], 0
+    for w in tokens:
+        n = norm(w) or w
+        starts.append(at); plain.append(n); at += len(n) + 1
+    joined = ' '.join(plain)
+    used = [False] * len(tokens)
+    for m in TIME_EXPRESSIONS.finditer(joined):
+        for i, a in enumerate(starts):
+            if m.start() <= a < m.end():
+                used[i] = True
     known = {w for a in aliases for w in a.split()}
     out = []
-    for w in re.findall(r'[^\W_]+', text):
-        if w.isdigit() or len(w) == 1 or re.fullmatch(r'[ivx]+', w) or norm(w) in known:
+    for w, n, consumed in zip(tokens, plain, used):
+        if consumed or w.isdigit() or len(w) == 1 or re.fullmatch(r'[ivx]+', w) or n in known or w == 'zzdate':
             continue
         if w in ACCOUNTED or (w.isascii() and w in ACCOUNTED_PLAIN):
             continue
@@ -142,6 +162,7 @@ def unread_words(message, aliases=()):
     return list(dict.fromkeys(out))
 
 
+NEW_CASE = r'\b(?:(?:benh nhan|nguoi benh|bn|ca|truong hop|nguoi) (?:khac|thu (?:hai|ba|tu|\d+)|tiep theo|ke tiep)|(?:ca|truong hop) moi|mot (?:benh nhan|ca|truong hop|nguoi) (?:khac|moi))\b'
 CONFIRM_WORDS = r'^(?:dung|dung roi|dung vay|xac nhan|chinh xac|ok|dong y)\b'
 
 F_USE = {'den', 'toi', 'co', 'con', 'can', 'phai', 'duoc', 'chi', 'dinh', 'dung', 'su', 'tiem', 'dieu', 'tri', 'bang', 'voi', 'thuoc', 'them', 'nua', 'tung', 'dang'}
@@ -386,7 +407,7 @@ class LabLookup:
         day = lambda iso: '/'.join(reversed(iso.split('-')))
         out = []
         if row.get('rule') == 'hba1c':
-            out.append('Mục đích: ' + {'regimen': 'xác định phác đồ điều trị', 'monitoring': 'đánh giá kết quả điều trị', 'screening': 'sàng lọc/chẩn đoán ban đầu'}.get(f.get('purpose'), 'chưa nêu'))
+            out.append('Mục đích: ' + {'regimen': 'xác định phác đồ điều trị', 'monitoring': 'đánh giá kết quả điều trị', 'screening': 'sàng lọc/chẩn đoán ban đầu', 'ambiguous': 'chưa rõ (câu hỏi nêu hơn một mục đích)'}.get(f.get('purpose'), 'chưa nêu'))
             out.append('Đã chẩn đoán xác định đái tháo đường: ' + {True: 'có', False: 'chưa'}.get(f.get('diabetes'), 'chưa nêu'))
             if 'gestational' in f:
                 out.append('Đái tháo đường thai kỳ: ' + {True: 'có', False: 'không'}.get(f['gestational'], 'chưa rõ'))
@@ -440,6 +461,7 @@ class LabLookup:
             row = self.services[sid]
             prev = state.get('lab', {}) if single else {}
             confirmed = bool(route.get('confirmed'))
+            self._same_case = False
             if confirmed:      # the user confirmed the reading shown last turn: nothing is read again
                 facts, case, errors = dict(prev.get('facts', {})), bool(prev.get('case')), []
             else:
@@ -450,17 +472,26 @@ class LabLookup:
             a = self.evaluate(sid, facts, case, errors, today)
             if row.get('rule') and facts:
                 a['reading'] = self.reading(row, facts)
-            if a['status'] in ('source_conditions_match', 'source_condition_not_met') and row.get('rule'):
-                # A conclusion straight from free text only when every word was accounted for and
-                # nothing voices doubt. Otherwise the reading is shown and confirmed with one click.
-                unread = [] if confirmed else unread_words(message, [alias for alias, i, _ in self.alias_index if i == sid])
-                doubt = None if confirmed else re.search(DOUBT, ' ; '.join(clause_list(message)))
-                if unread or doubt:
-                    why = ('còn những từ chatbot chưa hiểu chắc: ' + ', '.join('“' + w + '”' for w in unread[:8])) if unread else 'có phần chưa chắc chắn (“' + doubt.group(0).replace('loaitru', 'loại trừ') + '”)'
-                    a = {**a, 'status': 'needs_confirmation', 'pending': 'confirm', 'highlight': [], 'unread': unread,
+            # Words the chatbot could not account for, and voiced doubt, stay with the case over
+            # the following turns: a later "lần trước cách 35 ngày" cannot slip past them. Only
+            # an explicit confirmation of the reading clears them.
+            unread, doubt = [], None
+            if row.get('rule') and not confirmed:
+                carried = prev if self._same_case else {}
+                unread = list(dict.fromkeys(list(carried.get('unread', [])) + unread_words(message, [norm(x) for x in row.get('aliases', []) + [row['name']]])))
+                found = re.search(DOUBT, ' ; '.join(clause_list(message)))
+                doubt = found.group(0).replace('loaitru', 'loại trừ') if found else carried.get('doubt')
+            if unread or doubt:
+                why = ('còn những từ chatbot chưa hiểu chắc: ' + ', '.join('“' + w + '”' for w in unread[:8])) if unread else 'có phần chưa chắc chắn (“' + doubt + '”)'
+                # Nothing that reads like a conclusion is shown while the reading is unconfirmed.
+                a = {**a, 'reasons': [], 'highlight': []}
+                if a['status'] in ('source_conditions_match', 'source_condition_not_met'):
+                    a = {**a, 'status': 'needs_confirmation', 'pending': 'confirm', 'unread': unread,
                          'conclusion': 'Chatbot chưa kết luận vì trong câu hỏi ' + why + '. Hãy xem phần “Chatbot hiểu dữ kiện như sau”: nếu đúng, bấm “Đúng, đối chiếu theo các dữ kiện này”; nếu chưa đúng, hãy nêu lại dữ kiện.'}
-                elif confirmed:
-                    a = {**a, 'conclusion': 'Theo các dữ kiện bạn vừa xác nhận: ' + a['conclusion'][0].lower() + a['conclusion'][1:]}
+                else:
+                    a = {**a, 'unread': unread, 'unconfirmed_note': 'Trong câu hỏi ' + why + '. Chatbot sẽ chờ bạn xác nhận cách hiểu dữ kiện trước khi kết luận.'}
+            elif confirmed and a['status'] in ('source_conditions_match', 'source_condition_not_met'):
+                a = {**a, 'conclusion': 'Theo các dữ kiện bạn vừa xác nhận: ' + a['conclusion'][0].lower() + a['conclusion'][1:]}
             notes = []
             if sid in route.get('loose', []) and row.get('name_note'):
                 notes.append(row['name_note'])
@@ -468,6 +499,8 @@ class LabLookup:
                 notes.append('Nguyên văn dòng này được chép từ ảnh trang của bản hợp nhất 17/VBHN-BYT (bản scan, Đỗ Quốc An đọc), chưa được thẩm định; hãy đối chiếu ảnh trang trước khi dùng.')
             if row.get('source_note'):
                 notes.append(row['source_note'])
+            if a.get('unconfirmed_note'):
+                notes.insert(0, a.pop('unconfirmed_note'))
             base['lab_results'].append({'id': sid, 'name': row['name'], **a, 'conditions': row['conditions'],
                                         'rate': row.get('rate') or [], 'rate_mode': row.get('rate_mode'), 'notes': notes,
                                         'transcription': row.get('transcription', 'text_layer'), 'automatic': bool(row.get('rule')),
@@ -475,7 +508,8 @@ class LabLookup:
                                         'scope': 'Đối chiếu điều kiện riêng của dịch vụ theo nguồn; chưa xác nhận mức hưởng cá nhân, giá hay phạm vi hợp đồng của bệnh viện.'})
             base['citations'].append(self.citation(row))
             if single:
-                base['state'] = {'lab': {'id': sid, 'facts': facts, 'case': case, 'pending': a.get('pending'), 'date': today.isoformat()}}
+                base['state'] = {'lab': {'id': sid, 'facts': facts, 'case': case, 'pending': a.get('pending'), 'date': today.isoformat(),
+                                         'unread': unread, 'doubt': doubt}}
         statuses = [r['status'] for r in base['lab_results']]
         base['status'] = 'needs_info' if 'needs_info' in statuses or 'needs_confirmation' in statuses else 'answered'
         base['answer'] = '\n\n'.join(r['name'] + ': ' + r['conclusion'] for r in base['lab_results'])
@@ -515,7 +549,8 @@ class LabLookup:
         row = self.services[sid]
         named = any(sid == i for i in self.match_services(q, True)[0])
         continuation = not named or has(q, r'^(?:con|vay|neu|the|lan truoc|lan nay)\b')
-        same = prev.get('id') == sid and continuation and not has(q, r'\b(?:ca moi|truong hop khac|benh nhan khac)\b')
+        same = prev.get('id') == sid and continuation and not has(q, NEW_CASE)
+        self._same_case = same
         f = dict(prev.get('facts', {})) if same else {}
         errors = []
         case = bool(prev.get('case')) if same else False
@@ -602,10 +637,14 @@ class LabLookup:
             'monitoring': r'theo doi|danh gia (?:ket qua |dap ung |hieu qua )?dieu tri|kiem soat duong huyet'}
         # A purpose stated plainly once counts ("không theo dõi được tại nhà, đánh giá kết quả điều trị").
         stated = {k: {x[0] for x in mentions(clauses, pattern, F_PURPOSE)} for k, pattern in kinds.items()}
-        for kind in ('screening', 'regimen', 'monitoring'):       # later wins, as before
-            if 'yes' in stated[kind]:
-                f['purpose'] = kind
-        if f.get('purpose') and stated[f['purpose']] and 'yes' not in stated[f['purpose']]:
+        named = [kind for kind in ('screening', 'regimen', 'monitoring') if 'yes' in stated[kind]]
+        if len(named) == 1:
+            f['purpose'] = named[0]
+        elif named:
+            f['purpose'] = 'ambiguous'                             # "để sàng lọc hoặc theo dõi": two purposes, ask which
+            if 'screening' in named:
+                f.pop('diabetes', None)                            # "sàng lọc … đái tháo đường" says nothing sure about the diagnosis
+        if f.get('purpose') in stated and stated[f['purpose']] and 'yes' not in stated[f['purpose']]:
             f.pop('purpose')
         if has(q, r'\b(?:khong|chua) (?:ro|biet|xac dinh) muc dich\b'):
             f.pop('purpose', None)
@@ -756,6 +795,8 @@ class LabLookup:
             return result('conditions_only', 'Có quy định thanh toán HbA1c theo mục đích xét nghiệm và khoảng cách giữa các lần. Xem đủ ba nhánh điều kiện dưới đây.')
         if errors or f.get('date_error'):
             return result('needs_info', f.get('date_error') or ' '.join(errors), 'last_date')
+        if f.get('purpose') == 'ambiguous':
+            return result('needs_info', 'Câu hỏi nêu hơn một mục đích. Lần này để xác định phác đồ điều trị, đánh giá kết quả điều trị, hay sàng lọc/chẩn đoán ban đầu?', 'purpose')
         planned = dt.date.fromisoformat(f.get('planned_date', today.isoformat()))
         if planned < dt.date.fromisoformat(self.source['effective_from']) or planned > today:
             return result('needs_review', 'Ngày xét nghiệm nằm trước ngày áp dụng bộ quy tắc hoặc trong tương lai. Cần kiểm tra văn bản áp dụng ở thời điểm đó; chưa đối chiếu tự động.')

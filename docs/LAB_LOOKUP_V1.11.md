@@ -188,3 +188,16 @@ Cả 8 điểm của lần rà soát thứ hai đều tái hiện được và �
 **Hệ quả cần biết**
 - Câu hỏi có thêm chi tiết lâm sàng ngoài danh sách từ đã biết (ví dụ “bước 2”, “thuốc viên”, “suy thận”) sẽ cần thêm một lần bấm xác nhận. Đây là đánh đổi có chủ ý: thà hỏi thêm còn hơn kết luận sai.
 - Lớp chặn này chỉ bảo đảm chatbot không kết luận khi gặp từ lạ. Một câu chỉ gồm từ đã biết nhưng ghép theo cách chưa lường tới vẫn có thể bị hiểu sai; khi đó phần “Chatbot hiểu dữ kiện như sau” là chỗ để bác sĩ phát hiện.
+
+## Rà soát lần 3 ngày 11/11/2026: 4 lỗi, đã sửa
+
+| # | Lỗi | Sau khi sửa |
+|---|---|---|
+| 1 | Dữ kiện đã xác nhận của bệnh nhân trước vẫn được dùng khi hỏi "bệnh nhân khác" (cả thuốc lẫn xét nghiệm) | Câu có "bệnh nhân khác", "ca mới", "trường hợp khác"… thì xóa mọi dữ kiện, chỉ giữ thuốc hoặc xét nghiệm đang bàn |
+| 2 | Trả lời câu hỏi tiếp theo là bỏ qua được bước xác nhận | Từ chưa hiểu chắc và ý chưa chắc chắn được lưu cùng ca bệnh qua các lượt; chỉ bấm xác nhận mới xóa |
+| 3 | "Dùng insulin trong năm trước" bị hiểu là đang dùng; "để sàng lọc hoặc theo dõi" bị chốt một mục đích | Từ chỉ thời gian chỉ được tính khi nằm trong cụm ngày tháng đã biết; "hoặc", "hay", "nếu", "sau", "trước" luôn cần xác nhận; nêu hai mục đích thì hỏi lại |
+| 4 | Đang chờ xác nhận mà vẫn hiện "Áp dụng nhánh…" | Phần lý do và phần tô đậm chỉ hiện sau khi xác nhận |
+
+Kiểm thử: `tests/test_lab_review8.py` (12 kiểm thử); tổng 408 kiểm thử backend, 123 và 67 kiểm tra giao diện.
+
+Giới hạn vẫn còn: một câu chỉ gồm từ đã biết, ghép theo cách chưa lường tới, vẫn có thể bị hiểu sai. Phần "Chatbot hiểu dữ kiện như sau" là chỗ để bác sĩ kiểm tra trước khi tin kết luận.

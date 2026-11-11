@@ -38,6 +38,13 @@ class Base(unittest.TestCase):
     def lab(self, q, prev=None):
         return self.ask(q, prev)['lab_results'][0]
 
+    def settle(self, q, prev=None):
+        """The conclusion after the one-click confirmation that an unconfirmed reading needs."""
+        r = self.ask(q, prev)
+        if r['lab_results'][0]['status'] == 'needs_confirmation':
+            r = self.ask('Đúng, đối chiếu theo các dữ kiện này', r)
+        return r['lab_results'][0]
+
 
 class Findings(Base):
     def test_1_uncertain_purpose_is_asked(self):
@@ -58,8 +65,10 @@ class Findings(Base):
         self.assertEqual((r['facts']['gestational'], r['status'], r['pending']), ('unknown', 'needs_info', 'gestational'))
         self.assertIs(r['facts']['diabetes'], True)
         a = self.ask('HbA1c hôm nay theo dõi đái tháo đường, chưa xác định có đái tháo đường thai kỳ, đang dùng insulin, lần trước cách 35 ngày')
-        self.assertEqual(self.lab('Có', a)['status'], 'source_conditions_match')          # 35 days, 30-day branch
-        self.assertEqual(self.lab('Không', a)['status'], 'source_condition_not_met')      # 35 days, ordinary branch
+        b = self.lab('Có', a)
+        self.assertEqual((b['facts']['gestational'], b['status']), (True, 'needs_confirmation'))   # the doubt voiced earlier still needs a click
+        self.assertEqual(self.settle('Có', a)['status'], 'source_conditions_match')       # 35 days, 30-day branch
+        self.assertEqual(self.settle('Không', a)['status'], 'source_condition_not_met')   # 35 days, ordinary branch
         for text in ('có thể là đái tháo đường thai kỳ', 'nghi đái tháo đường thai kỳ', 'trước đây đái tháo đường thai kỳ'):
             r = self.lab(f'HbA1c hôm nay theo dõi đái tháo đường, {text}, đang dùng insulin, lần trước cách 35 ngày')
             self.assertNotIn(r['status'], DECIDED, text)
@@ -113,7 +122,7 @@ class Confirmation(Base):
     def test_unread_words(self):
         self.assertEqual(unread_words('HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước làm ngày 01/08/2026, BHYT có thanh toán không?', ['hba1c']), [])
         self.assertEqual(unread_words('theo dõi đái tháo đường thai kỳ, từ chối insulin'), ['từ', 'chối'])
-        self.assertEqual(unread_words('ung thư phổi (chẩn đoán tuyến trước, chưa hội chẩn lại)'), ['hội'])     # "hội" is not "hỏi"
+        self.assertEqual(unread_words('ung thư phổi (chẩn đoán tuyến trước, chưa hội chẩn lại)'), ['trước', 'hội'])     # "hội" is not "hỏi"
         self.assertEqual(unread_words('me benh nhan bi dai thao duong'), ['me'])                                # typed without diacritics
         self.assertEqual(unread_words('NSCLC giai đoạn IV'), [])
 
@@ -126,9 +135,12 @@ class Confirmation(Base):
         self.assertIn('“từ”, “chối”', r['conclusion'])
         self.assertIn('Insulin: đang dùng', r['reading'])            # the misreading is in plain sight
         self.assertEqual(r['highlight'], [])
-        b = self.lab('Không, bệnh nhân không dùng insulin', a)       # corrected instead of confirmed
-        self.assertIs(b['facts']['insulin'], False)
-        self.assertEqual(b['status'], 'source_condition_not_met')
+        b = self.ask('Không, bệnh nhân không dùng insulin', a)       # corrected instead of confirmed
+        r = b['lab_results'][0]
+        self.assertIs(r['facts']['insulin'], False)
+        self.assertEqual(r['status'], 'needs_confirmation')          # the corrected reading is shown, then confirmed
+        self.assertIn('Insulin: không dùng', r['reading'])
+        self.assertEqual(self.lab(CONFIRM, b)['status'], 'source_condition_not_met')
 
     def test_confirming_gives_the_conclusion_without_reading_again(self):
         a = self.ask(E.format('ung thư phổi không tế bào nhỏ tái phát đang điều trị bước 2'))

@@ -598,6 +598,12 @@ class Corpus:
         """One chat turn: verify the signed state, block identifiers on every path,
         answer, then sign the new state."""
         trusted=self.verify_state(state)
+        from lab_lookup import NEW_CASE
+        if isinstance(message,str) and confirm is None and re.search(NEW_CASE,normalize(message)):
+            # "… cho bệnh nhân khác": the medicine or test under discussion stays, but nothing said
+            # or confirmed about the previous patient (facts, turns, dates) is carried over.
+            lab=trusted.get('lab') if isinstance(trusted.get('lab'),dict) else {}
+            trusted={k:v for k,v in (('selected_ids',trusted.get('selected_ids')),('lab',{'id':lab['id']} if lab.get('id') else None)) if v}
         if isinstance(message,str) and private_input(message):
             result=self.chat(message,{},as_of,allow_ai=False)          # private_input reply, nothing stored
         elif as_of is not None and as_of!=SNAPSHOT:
