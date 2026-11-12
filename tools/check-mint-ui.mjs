@@ -21,6 +21,16 @@ try{
   assert(await p.eval(()=>document.querySelector('footer').textContent.includes('Đỗ Quốc An')),'Author attribution '+width);
   await p.screenshot({path:out+'/welcome-'+width+'.jpg',quality:90});
   await ask(p,'Trastuzumab điều trị ung thư vú có được BHYT chi trả không?');
+  assert(await p.eval(()=>{const a=document.querySelector('.assistant');return !a.textContent.includes('Quy định BHYT liên quan')&&!a.textContent.includes('Tài liệu điều trị tham khảo')&&!a.textContent.includes('Căn cứ của thuốc')&&a.querySelectorAll('.source-quote').length===1;}),'Only direct source, no duplicate or background groups '+width);
+  await p.eval(()=>{window.copied='';Object.defineProperty(navigator.clipboard,'writeText',{configurable:true,value:async text=>{window.copied=text;}});document.querySelector('.answer-foot button').click();});
+  await wait(p,()=>!!window.copied);
+  assert(await p.eval(()=>(window.copied.match(/^NGUỒN /gm)||[]).length===1&&window.copied.includes('HER2')&&window.copied.includes('60%')),'Copy keeps direct evidence and conditions only '+width);
+  assert(await p.eval(()=>{
+   const citations=[{id:'drug'},{id:'lab'},{id:'transition'},{id:'effective'},{id:'background'}];
+   const mixed={results:[{record_ids:['drug']}],lab_results:[{citation:{id:'lab'}}],citations};
+   const t={...mixed,transition_review:{article8_ids:['transition'],effective_date_id:'effective'}};
+   return answerCitations(mixed).map(c=>c.id).join(',')==='drug,lab'&&answerCitations(t).map(c=>c.id).join(',')==='drug,lab,transition,effective'&&answerCitations({status:'policy_lookup',citations}).length===5&&answerCitations({status:'unknown',citations}).length===0;
+  }),'Mixed, transition and policy answers retain their own sources '+width);
   assert(await p.eval(()=>document.querySelector('#examples').hidden&&document.querySelector('#welcome').hidden),'Welcome yields to conversation '+width);
   await p.eval(()=>document.querySelector('.assistant').scrollIntoView({block:'start',behavior:'instant'}));
   assert(await p.eval(()=>{const r=document.querySelector('.assistant-brand').getBoundingClientRect();return r.top>=document.querySelector('.topbar').getBoundingClientRect().bottom&&r.bottom<document.querySelector('.chat-composer').getBoundingClientRect().top;}),'Answer starts in readable viewport '+width);
