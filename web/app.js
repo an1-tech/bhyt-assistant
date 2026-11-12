@@ -37,16 +37,26 @@ function sourceStamp(data){const lab=(data.domain==='lab'||data.domain==='mixed'
 // Keep explicitly linked drug/lab rows and any transition rule the answer uses.
 function answerCitations(data){
  const citations=data.citations||[],rows=data.results||[],labs=data.lab_results||[];
- if(!rows.length&&!labs.length)return data.status==='policy_lookup'?citations:[];
+ if(!rows.length&&!labs.length)return data.status==='policy_lookup'?rankSources(citations,data):[];
  const ids=new Set(rows.flatMap(r=>r.question_answer?.source_ids||r.record_ids||[]));
  for(const r of labs)if(r.citation?.id)ids.add(r.citation.id);
  for(const id of data.transition_review?.article8_ids||[])ids.add(id);
  if(data.transition_review?.effective_date_id)ids.add(data.transition_review.effective_date_id);
- return citations.filter(c=>ids.has(c.id));
+ return rankSources(citations.filter(c=>ids.has(c.id)),data);
 }
-function reportText(data,question){const out=['Câu hỏi: '+question,data.answer];for(const r of data.results||[]){const a=r.question_answer;if(!a)continue;out.push(r.ingredient,a.conclusion,...a.conditions);for(const q of a.quotes||[])out.push('TRÍCH NGUYÊN VĂN '+q.document+' · '+q.locator+(q.page_checked?' · trang PDF '+q.pages.join('–'):'')+': “'+(q.empty?'(ô ghi chú trống)':q.text)+'”');out.push(a.scope);}for(const r of data.lab_results||[])out.push(r.name,r.conclusion,...(r.reading||[]).map(x=>'Dữ kiện đã đọc — '+x),...r.reasons,...(r.notes||[]),'NGUYÊN VĂN: '+r.conditions.join(' '),...((r.rate||[]).length?['Tỷ lệ, mức giá thanh toán: '+r.rate.join(' ')]:[]),r.scope,'Vị trí nguồn: '+new URL(r.citation.viewer_url,location.origin).href);for(const c of answerCitations(data)){out.push('NGUỒN '+(c.document_title||sourceName(c.document_id))+' · '+c.locator+' · '+(c.official_url||c.source_url||c.local_url),c.excerpt);for(const f of c.source_review_flags||[])out.push('Giới hạn: '+f.note);}if(data.notice)out.push(data.notice);for(const t of data.brand_notes||[])out.push(t);for(const t of data.hospital_notes||[])out.push(t);out.push(sourceStamp(data)+'; đối chiếu với nguồn, không phải quyết định thanh toán.'+(data.review_note?' '+data.review_note:''));if(data.domain==='lab'||data.domain==='mixed')out.push('Ngày kiểm tra nguồn xét nghiệm không bảo đảm đã rà soát mọi văn bản mới.');return out.join('\n');}
-function labBlock(r,data){
- const section=node('section',undefined,'drug-result lab-result');section.append(node('h3',r.name,'drug-heading'),node('p',r.conclusion,'conclusion'));
+function rankSources(citations,data){const ids=data.ai_presentation?.source_ids||[];return [...citations].sort((a,b)=>{const rank=id=>ids.includes(id)?ids.indexOf(id):ids.length;return rank(a.id)-rank(b.id);});}
+function answerLead(data,key,fallback){return data.ai_presentation?.items?.[key]?.lead||fallback;}
+function conditionBlock(conditions,plan){
+ const block=node('div',undefined,'answer-block');block.append(node('strong','Điều kiện trong nguồn'));
+ const selected=plan?.important_conditions;
+ const compact=Array.isArray(selected)&&selected.length>0&&selected.length<conditions.length;
+ const list=node('ul');for(const [i,text] of conditions.entries())if(!compact||selected.includes(i))list.append(node('li',text));block.append(list);
+ if(compact){block.append(node('p','Cần đáp ứng đầy đủ điều kiện; các ý dưới đây cũng phải được đối chiếu.','hint'));const d=node('details',undefined,'citation full-conditions');d.append(node('summary','Xem '+(conditions.length-selected.length)+' điều kiện còn lại'));const rest=node('ul');for(const [i,text] of conditions.entries())if(!selected.includes(i))rest.append(node('li',text));d.append(rest);block.append(d);}
+ return block;
+}
+function reportText(data,question){const out=['Câu hỏi: '+(data.interpreted_question||question),data.answer];for(const r of data.results||[]){const a=r.question_answer;if(!a)continue;out.push(r.ingredient,a.conclusion,...a.conditions);for(const q of a.quotes||[])out.push('TRÍCH NGUYÊN VĂN '+q.document+' · '+q.locator+(q.page_checked?' · trang PDF '+q.pages.join('–'):'')+': “'+(q.empty?'(ô ghi chú trống)':q.text)+'”');out.push(a.scope);}for(const r of data.lab_results||[])out.push(r.name,r.conclusion,...(r.reading||[]).map(x=>'Dữ kiện đã đọc — '+x),...r.reasons,...(r.notes||[]),'NGUYÊN VĂN: '+r.conditions.join(' '),...((r.rate||[]).length?['Tỷ lệ, mức giá thanh toán: '+r.rate.join(' ')]:[]),r.scope,'Vị trí nguồn: '+new URL(r.citation.viewer_url,location.origin).href);for(const c of answerCitations(data)){out.push('NGUỒN '+(c.document_title||sourceName(c.document_id))+' · '+c.locator+' · '+(c.official_url||c.source_url||c.local_url),c.excerpt);for(const f of c.source_review_flags||[])out.push('Giới hạn: '+f.note);}if(data.notice)out.push(data.notice);for(const t of data.brand_notes||[])out.push(t);for(const t of data.hospital_notes||[])out.push(t);out.push(sourceStamp(data)+'; đối chiếu với nguồn, không phải quyết định thanh toán.'+(data.review_note?' '+data.review_note:''));if(data.domain==='lab'||data.domain==='mixed')out.push('Ngày kiểm tra nguồn xét nghiệm không bảo đảm đã rà soát mọi văn bản mới.');return out.join('\n');}
+function labBlock(r,data,index){
+ const section=node('section',undefined,'drug-result lab-result');section.append(node('h3',r.name,'drug-heading'),node('p',answerLead(data,'lab:'+index,r.conclusion),'conclusion'));
  if(r.reasons?.length){const reasons=node('ul',undefined,'lab-reasons');for(const t of r.reasons)reasons.append(node('li',t));section.append(reasons);}
  if(r.reading?.length){const rd=node('div',undefined,'answer-block lab-reading');rd.append(node('strong','Chatbot hiểu dữ kiện như sau'));const ul=node('ul');for(const t of r.reading)ul.append(node('li',t));rd.append(ul);
   if(r.pending==='confirm'){const snap=JSON.parse(JSON.stringify(data?.state||{}));const act=node('div',undefined,'actions');const b=node('button','Đúng, đối chiếu theo các dữ kiện này');b.type='button';b.addEventListener('click',()=>send('Đúng, đối chiếu theo các dữ kiện này',snap));act.append(b);rd.append(act,node('p','Nếu chưa đúng, hãy gõ lại dữ kiện cần sửa.','hint'));}
@@ -63,13 +73,15 @@ function labBlock(r,data){
 }
 function renderReply(data,question){
  const box=node('article',undefined,'assistant');box.tabIndex=-1;const heading=node('h2',undefined,'assistant-brand');const avatar=node('img');avatar.src='/assets/medical-squirrel.png';avatar.alt='';avatar.width=44;avatar.height=44;heading.append(avatar,node('span','Cẩm nang BHYT'));box.append(heading);
+ if(data.ai_understanding){const p=node('div',undefined,'confirm-block');p.append(node('strong','Tôi hiểu câu hỏi là:'),node('p',data.ai_understanding.question));const actions=node('div',undefined,'actions');const yes=node('button','Đúng, tra cứu câu này');yes.type='button';const snapshot=JSON.parse(JSON.stringify(data.state||{}));yes.addEventListener('click',()=>send('Đúng, tra cứu câu này',snapshot,null,true));const edit=node('button','Sửa câu hỏi');edit.type='button';edit.addEventListener('click',()=>{$('#question').value=data.ai_understanding.question;$('#question').focus();});actions.append(yes,edit);p.append(actions);box.append(p);return box;}
+ if(data.interpreted_question)box.append(node('p','Đang tra cứu: '+data.interpreted_question,'hint'));
  const rows=data.results||[];
  if(!rows.length&&!data.lab_results?.length)box.append(node('p',data.answer,'conclusion'));
  if(data.lab_links?.length){const links=node('div',undefined,'source-links');for(const l of data.lab_links){const a=link(l.url,l.label+' ↗');if(a)links.append(a);}box.append(links);}
- for(const r of data.lab_results||[])box.append(labBlock(r,data));
+ for(const [i,r] of (data.lab_results||[]).entries())box.append(labBlock(r,data,i));
  if(data.domain==='mixed'&&!rows.length){const section=node('section',undefined,'drug-result');section.append(node('h3','Thuốc được hỏi','drug-heading'),node('p',data.answer,'conclusion'));box.append(section);}
- for(const r of rows){const a=r.question_answer;const section=node('section',undefined,'drug-result');section.append(node('h3',r.ingredient,'drug-heading'),node('p',a?.conclusion||data.answer,'conclusion'));const quotes=(a?.quotes||[]).map(q=>quoteBlock(q,a.status));if(quotes.length){section.append(sourcePreview(r.ingredient,quotes));const original=node('details',undefined,'citation original-quotes');original.append(node('summary','Đọc nguyên văn tại đây'),...quotes);section.append(original);}
-  if(a?.conditions?.length){const conditions=node('div',undefined,'answer-block');conditions.append(node('strong','Điều kiện trong nguồn'));const list=node('ul');for(const text of a.conditions)list.append(node('li',text));conditions.append(list);section.append(conditions);}
+ for(const [i,r] of rows.entries()){const a=r.question_answer;const section=node('section',undefined,'drug-result');section.append(node('h3',r.ingredient,'drug-heading'),node('p',answerLead(data,'drug:'+i,a?.conclusion||data.answer),'conclusion'));const quotes=(a?.quotes||[]).map(q=>quoteBlock(q,a.status));if(quotes.length){section.append(sourcePreview(r.ingredient,quotes));const original=node('details',undefined,'citation original-quotes');original.append(node('summary','Đọc nguyên văn tại đây'),...quotes);section.append(original);}
+  if(a?.conditions?.length)section.append(conditionBlock(a.conditions,data.ai_presentation?.items?.['drug:'+i]));
   if(a?.confirm?.length){
    // Unclear conditions are confirmed with buttons; the bot never guesses them from free text.
    const block=node('div',undefined,'confirm-block');block.append(node('strong','Xác nhận để đối chiếu'),node('p','Bấm đúng tình trạng; chọn “Chưa rõ” nếu chưa có kết quả.','hint'));
@@ -86,15 +98,17 @@ function renderReply(data,question){
  if(data.hospital_notes?.length)for(const t of data.hospital_notes)box.append(node('p',t,'notice hospital-note'));
  const legal=answerCitations(data).filter(c=>!rows.some(r=>r.record_ids?.includes(c.id))&&!data.lab_results?.some(r=>r.citation.id===c.id));evidenceGroup(box,'Nguồn của câu trả lời',legal);
  if(data.notice)box.append(node('p',data.notice,'notice'));
+ if(data.ai_note)box.append(node('p',data.ai_note,'hint'));
+ if(data.ai_status==='ready')box.append(node('p','AI hỗ trợ cách trình bày · Điều kiện và số liệu giữ theo nguồn.','hint'));
  const foot=node('div',undefined,'answer-foot');const copy=node('button','Sao chép câu trả lời');copy.type='button';const text=reportText(data,question);copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(text);copy.textContent='Đã sao chép kèm nguồn';}catch{copy.textContent='Chưa sao chép được';}});foot.append(node('span',sourceStamp(data)+(data.review_label?' · '+data.review_label:'')),copy);box.append(foot);return box;
 }
-async function send(text,ctx,confirm){
+async function send(text,ctx,confirm,aiConfirm=false){
  // ctx: a follow-up chip sends the context of the answer it belongs to, not the latest one.
  // confirm: {key,value} from a confirmation button — a structured fact, not text to parse.
  text=(text??$('#question').value).trim();if(!text||!ready||busy)return;
  busy=true;$('#send').disabled=true;$('#new-chat').disabled=true;$('#loading').hidden=false;$('#error').hidden=true;if(!confirm)$('#question').value='';$('#messages').setAttribute('aria-busy','true');let reply;
  const turn=node('section',undefined,'turn');const user=node('div',undefined,'query-heading');user.append(node('small','Bạn'),node('span',text));turn.append(user);$('#messages').append(turn);syncConversation();
- try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':token},body:JSON.stringify(Object.assign({message:text,state:ctx??state,department:'Tất cả các khoa'},confirm?{confirm}:{}))});const data=await response.json();if(!response.ok)throw new Error(data.error||'Chưa xử lý được câu hỏi.');state=JSON.parse(JSON.stringify(data.state||{}));reply=renderReply(data,text);turn.append(reply);}
+ try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':token},body:JSON.stringify(Object.assign({message:text,state:ctx??state,department:'Tất cả các khoa'},confirm?{confirm}:{},aiConfirm?{ai_confirm:true}:{}))});const data=await response.json();if(!response.ok)throw new Error(data.error||'Chưa xử lý được câu hỏi.');state=JSON.parse(JSON.stringify(data.state||{}));reply=renderReply(data,text);turn.append(reply);}
  catch(e){turn.remove();syncConversation();$('#error').textContent=e.message||'Không kết nối được ứng dụng.';$('#error').hidden=false;if(!confirm&&!$('#question').value)$('#question').value=text;}
  finally{busy=false;$('#send').disabled=!ready;$('#new-chat').disabled=false;$('#loading').hidden=true;$('#messages').setAttribute('aria-busy','false');if(reply){reply.focus({preventScroll:true});reply.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});}else $('#error').focus();}
 }
@@ -119,5 +133,5 @@ function renderSources(m){
  $('#source-update-summary').textContent=`Kiểm tra ${date(update.checked_as_of)} · ${update.documents.length} tài liệu / ${update.archived_pages} trang lưu · ${update.reference_pages} trang cho trích đoạn tham khảo. ${update.scope}`;
  for(const s of update.documents){const row=node('article',undefined,'source-row');row.append(node('h3',s.title),node('p',`${s.decision} · Ban hành ${date(s.published_at)} · ${s.pages} trang`),node('p',s.status_label),node('p','Bản đăng tại: '+s.host+' · Kiểm tra '+date(s.checked_as_of),'hint'));if(s.related_documents.length)row.append(node('p','Đọc cùng: '+s.related_documents.map(id=>update.documents.find(d=>d.id===id)?.decision||id).join(', '),'hint'));const d=node('details',undefined,'citation');d.append(node('summary','Phạm vi và giới hạn nguồn'),node('p',s.limitations));row.append(d);addSourceLinks(row,s);$('#supplemental-source-list').append(row);}
 }
-async function init(){try{const [hr,mr]=await Promise.all([fetch('/api/health'),fetch('/api/metadata')]);if(!hr.ok||!mr.ok)throw new Error();const h=await hr.json();metadata=await mr.json();if(h.version!=='1.11')throw new Error();token=h.token;ready=true;$('#send').disabled=false;$('#mode').textContent='Tra cứu theo nguồn';renderSources(metadata);}catch{$('#mode').textContent='Chưa kết nối';$('#connection-error').textContent='Chưa kết nối đúng bản chatbot v1.11. Khởi chạy start-windows.bat trong thư mục dự án rồi tải lại trang.';$('#connection-error').hidden=false;}}
+async function init(){try{const [hr,mr]=await Promise.all([fetch('/api/health'),fetch('/api/metadata')]);if(!hr.ok||!mr.ok)throw new Error();const h=await hr.json();metadata=await mr.json();if(h.version!=='1.11')throw new Error();token=h.token;ready=true;$('#send').disabled=false;$('#mode').textContent=h.ai_configured?'Tra cứu nguồn · Có hỗ trợ AI':'Tra cứu theo nguồn';if(h.ai_configured){$('.chat-privacy').textContent='AI xử lý câu hỏi và trích đoạn liên quan qua OpenAI. Không nhập thông tin định danh.';}renderSources(metadata);}catch{$('#mode').textContent='Chưa kết nối';$('#connection-error').textContent='Chưa kết nối đúng bản chatbot v1.11. Khởi chạy start-windows.bat trong thư mục dự án rồi tải lại trang.';$('#connection-error').hidden=false;}}
 showView(location.hash.slice(1));init();

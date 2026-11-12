@@ -39,7 +39,21 @@ Bộ nguồn BHYT chốt 06/11/2026; nguồn bổ sung được tìm kiếm/ki�
 
 ## Cách chạy và kiểm tra
 
-Luồng `/api/chat` dùng `Corpus.converse()` và các nhánh trả lời có gắn nguồn, không gọi OpenAI ngay cả khi cấu hình AI cũ tồn tại. Phần tra cứu nội bộ `Corpus.chat()` và các API ca bệnh cũ còn giữ để tương thích; chúng không xuất hiện thành biểu mẫu trên giao diện. Mã AI cũ (tắt mặc định) nằm riêng trong `ai_explain.py`.
+Luồng `/api/chat` dùng `ChatAssistant` bọc quanh `Corpus.converse()`. Mặc định lớp hỗ trợ AI tắt; chỉ bật khi có `BHYT_CHAT_AI=1`, key và model. Lõi `Corpus.converse()` tiếp tục đối chiếu hoàn toàn cục bộ. Công tắc AI cũ `BHYT_ENABLE_AI` không bật lớp chat mới; mã legacy trong `ai_explain.py` vẫn tắt mặc định.
+
+## Bật hỗ trợ OpenAI cho ô chat
+
+Người thực hiện: **Đỗ Quốc An**.
+
+Chạy `python configure-openai.py` bằng Python của máy. Cửa sổ nhập key có che ký tự, lưu key vào `.env` đã được loại khỏi Git. Có thể chọn model tài khoản được phép dùng; gợi ý ban đầu là `gpt-4.1-mini`. Khởi động lại ứng dụng sau khi lưu. Không dán key vào ô chat hoặc ghi trong mã giao diện.
+
+- AI đề xuất cách hiểu cho câu viết tắt hoặc thiếu chủ ngữ. Nếu cách hiểu thay đổi, bác sĩ xem lại rồi bấm **Đúng, tra cứu câu này**, gõ một câu xác nhận đầy đủ như “Đúng rồi”, hoặc sửa câu hỏi. Câu có thêm phần sửa dữ kiện không bị coi là xác nhận.
+- AI chọn cách trình bày ngắn từ các câu đã được giới hạn sẵn, ưu tiên điều kiện sát câu hỏi và xếp nguồn liên quan. AI không được tự tạo điều kiện, số liệu hoặc kết luận thanh toán. Điều kiện thuốc còn lại có thể mở rộng; phần sao chép vẫn giữ đầy đủ.
+- Chỉ nguồn trực tiếp và căn cứ phụ thuộc của câu trả lời được gửi để xếp thứ tự; các tài liệu tham khảo không liên quan không tự xuất hiện trở lại.
+- Câu hỏi, ngữ cảnh hợp lệ và trích đoạn liên quan được gửi tới OpenAI khi bật. Yêu cầu dùng `store:false`; đây không phải cam kết không có lưu giữ dữ liệu ở cấp dịch vụ. Không nhập thông tin định danh người bệnh. Có thể phát sinh phí API.
+- Không có key, tắt `BHYT_CHAT_AI`, lỗi mạng, hết hạn mức hoặc đầu ra không hợp lệ: chatbot tiếp tục dùng kết quả cục bộ. Tối đa hai lượt hỗ trợ AI đồng thời, không tự thử lại yêu cầu lỗi.
+
+Chi tiết kiến trúc, giới hạn và kiểm tra: [Tích hợp OpenAI](docs/OPENAI_CHAT_2026-11-12.md).
 
 Chạy kiểm thử backend bằng Python thực tế: `python -B -m unittest discover -s tests -q`. Kiểm thử xét nghiệm riêng: `python -B -m unittest discover -s tests -p "test_lab_*.py" -q`. Chạy ứng dụng trước khi kiểm tra trình duyệt: `node tools/check-lab-ui.mjs http://127.0.0.1:8766` (cần Node 22+, Chrome/Edge và toolkit design-taste-frontend đã cài trên máy). Kết quả kiểm tra bản v1.11 và giới hạn được ghi trong `docs/LAB_LOOKUP_V1.11.md`. Các script giao diện của phiên bản cũ được giữ để tham khảo lịch sử.
 

@@ -6,6 +6,7 @@ import argparse,hashlib,json,secrets,socket,sys
 from engine import Corpus,load_env,ROOT,SNAPSHOT,RETRIEVAL_VERSION
 from catalog import metadata,catalog,DEPARTMENTS
 from case_workbench import CaseWorkbench
+from chat_assist import ChatAssistant, enabled as chat_ai_enabled
 
 APP_VERSION="1.11"
 MAX_BODY=20000               # the longest chat request accepted
@@ -15,6 +16,7 @@ load_env()
 
 def make_server(port=8765,corpus=None):
     corpus=corpus or Corpus();token=secrets.token_urlsafe(24);workbench=CaseWorkbench(corpus)
+    assistant=ChatAssistant(corpus)
     class Handler(BaseHTTPRequestHandler):
         timeout=30                 # a client that stops sending cannot hold a thread for ever
         def log_message(self,*args):pass
@@ -53,7 +55,7 @@ def make_server(port=8765,corpus=None):
                     self.send(200,file.read_bytes(),lab_files[path]);return
             if path=='/api/health':
                 import os
-                self.send(200,dict(ok=True,app_id='bhyt-toan-vien',version=APP_VERSION,instance_id=INSTANCE_ID,retrieval_version=RETRIEVAL_VERSION,snapshot=SNAPSHOT,drug_entries=len({r['stt'] for r in corpus.drugs}),radio_entries=len({r['stt'] for r in corpus.radio}),chunks=len(corpus.chunks),token=token,ai_configured=bool(os.environ.get('BHYT_ENABLE_AI')=='1' and os.environ.get('OPENAI_API_KEY') and os.environ.get('OPENAI_MODEL')),embeddings=corpus.semantic_path.exists(),source_update_date=corpus.supplemental.registry['checked_as_of'],supplemental_documents=len(corpus.supplemental.documents)));return
+                self.send(200,dict(ok=True,app_id='bhyt-toan-vien',version=APP_VERSION,instance_id=INSTANCE_ID,retrieval_version=RETRIEVAL_VERSION,snapshot=SNAPSHOT,drug_entries=len({r['stt'] for r in corpus.drugs}),radio_entries=len({r['stt'] for r in corpus.radio}),chunks=len(corpus.chunks),token=token,ai_configured=chat_ai_enabled(),embeddings=corpus.semantic_path.exists(),source_update_date=corpus.supplemental.registry['checked_as_of'],supplemental_documents=len(corpus.supplemental.documents)));return
             if path=='/api/case/drugs':
                 args=parse_qs(urlparse(self.path).query)
                 self.send(200,{"items":workbench.drugs(args.get("q",[""])[0][:150])});return
@@ -120,7 +122,7 @@ def make_server(port=8765,corpus=None):
                 if not isinstance(payload,dict) or not isinstance(payload.get('message'),str):raise ValueError('Câu hỏi không hợp lệ.')
                 department=payload.get('department','Tất cả các khoa')
                 if department not in DEPARTMENTS:raise ValueError('Khoa không hợp lệ.')
-                result=corpus.converse(payload['message'],payload.get('state'),payload.get('as_of'),payload.get('confirm'))
+                result=assistant.respond(payload['message'],payload.get('state'),payload.get('as_of'),payload.get('confirm'),payload.get('ai_confirm',False))
                 result['department']=department
                 self.send(200,result)
             except (ValueError,TypeError,KeyError) as e:self.send(400,{'error':str(e)[:180]})

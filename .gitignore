@@ -1,4 +1,5 @@
 .env
+.bhyt-key-*
 __pycache__/
 *.pyc
 data/embeddings.sqlite
