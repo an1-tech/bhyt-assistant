@@ -627,6 +627,9 @@ class Corpus:
                     drug['lab_results']=result['lab_results']
                     drug['citations']+=result['citations']
                     drug['domain']='mixed'
+                    if result.get('lab_guidance'):
+                        drug['lab_guidance'] = result['lab_guidance']
+                        drug['lab_guide_lead'] = result['answer']
                     drug['source_checked_as_of']=result.get('source_checked_as_of')
                     drug['state']={**drug.get('state',{}),**result.get('state',{})}
                     # A lab row left out (damaged source) is said in the combined answer too.
@@ -645,6 +648,8 @@ class Corpus:
         itself, so the footer and the copied text can never contradict the notes."""
         items=[((r.get("question_answer") or {}).get("review"),r.get("ingredient")) for r in result.get("results") or []]
         items+=[(r.get("review"),r.get("name")) for r in result.get("lab_results") or []]
+        if items and result.get('lab_guidance'):
+            items.append(({'kind':'unreviewed', 'text':'Phần hướng dẫn chỉ định chưa được Dược/BHYT Vinmec thẩm định.'}, 'Hướng dẫn chỉ định'))
         items=[(review,name) for review,name in items if review]
         if not items:return
         kinds={review["kind"] for review,_ in items}

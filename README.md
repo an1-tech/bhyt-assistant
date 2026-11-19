@@ -17,6 +17,8 @@ Tệp `.python-path.txt` ghi đường dẫn Python đang có trên máy; nếu 
 - Thử câu hỏi một lần của bác sĩ: “HbA1c hôm nay để đánh giá kết quả điều trị đái tháo đường, lần trước làm ngày 01/08/2026, BHYT có thanh toán không?”.
 - Thử các xét nghiệm khác: “Xét nghiệm HER2 cho bệnh nhân ung thư vú đang điều trị hôm nay”, “Định lượng procalcitonin có điều kiện BHYT gì?”, “Định lượng BNP”.
 - Có 41 dòng xét nghiệm có điều kiện riêng (TT39/2024 và 17/VBHN-BYT). Chỉ HbA1c, bốn xét nghiệm gen và SCC được đối chiếu với ca bệnh; các dòng khác chỉ trích nguyên văn.
+- Có thể hỏi “GOT, GPT được BHYT chi trả khi nào?”, “Xét nghiệm nào trong bệnh thận mạn?” hoặc “Các xét nghiệm trong ung thư?” rồi chọn vị trí u và mục đích. Mỗi phần có nguồn chuyên môn hoặc căn cứ BHYT tương ứng. Sáu kỹ thuật bổ sung và các nhóm chỉ định được lưu trong `data/lab_guidance.json`. Phần bổ sung chưa được Dược/BHYT Vinmec thẩm định.
+- Với các câu hỏi theo bệnh cảnh như suy tim, nhiễm trùng nặng hoặc chuẩn bị ghép tạng, chatbot dẫn tới các dòng dịch vụ liên quan, kèm nguyên văn điều kiện và tỷ lệ nếu nguồn có quy định.
 - “Xem vị trí trích dẫn” mở ảnh trọn dòng dịch vụ (hoặc ảnh trang với dòng chép từ bản scan), bản chữ và liên kết PDF gốc. Xét nghiệm ngoài 41 dòng không được mượn quy tắc của dòng khác.
 
 - Gõ tên hoạt chất và bệnh/chỉ định trong một câu, bấm Gửi câu hỏi hoặc Enter. Shift + Enter xuống dòng.

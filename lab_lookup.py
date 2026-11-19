@@ -19,6 +19,7 @@ import json
 import re
 import unicodedata
 from pathlib import Path
+from lab_guidance import GENERAL, LabGuidance
 
 
 def norm(value):
@@ -209,6 +210,7 @@ YES_NO = ('co', 'dung', 'dung roi', 'khong', 'chua', 'chua ro', 'khong ro')
 class LabLookup:
     def __init__(self, data_dir):
         self.data = Path(data_dir)
+        self.guidance = LabGuidance(self.data)
         path = self.data / 'lab_services.json'
         self.bundle = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {'services': [], 'source': {}}
         self.services = {s['id']: s for s in self.bundle['services']}
@@ -315,12 +317,34 @@ class LabLookup:
         return ids, loose, spans
 
     def route(self, message, state, drug_hits, drug_words=()):
+        q = norm(message)
+        matches = self.match_services(q, has(q, r'\b(?:xet nghiem|dinh luong|dich vu|xn)\b'))
+        named = matches[0]
+        row_route = self._row_route(message, state, drug_hits, drug_words, matches)
+        parts = re.split(r'[,;/+]', message)
+        list_items = [norm(part) for part in parts] if len(parts) > 1 else []
+        guide = self.guidance.match(q, state, row_route, drug_hits, named, list_items)
+        if guide:
+            route = dict(row_route or {}, guide=guide)
+            route.setdefault('ids', [])
+            # A prior pending service must not consume a new topic.
+            route['ids'] = [sid for sid in route['ids'] if sid in named]
+            if guide['topic'] == 'payment_topic':
+                route['ids'] = guide['group']['rows']
+            both = drug_hits and has(q, r'\b(?:ca thuoc|va thuoc|va xet nghiem)\b')
+            route['kind'] = 'mixed' if both else 'lab'
+            return route
+        if GENERAL.fullmatch(q) and state.get('lab', {}).get('id') in self.services and not named:
+            return {'ids': [state['lab']['id']], 'kind': 'lab'}
+        return row_route
+
+    def _row_route(self, message, state, drug_hits, drug_words, matches):
         """None means leave the established drug chat path entirely unchanged."""
         q = norm(message)
         lab_state = state.get('lab', {})
         renal = has(q, r'\b(?:do loc cau than|muc loc cau than|creatinin|ckd epi|ml phut|ml min|suy than|benh than man|chuc nang than)\b')
         explicit_test = has(q, r'\b(?:xet nghiem|dinh luong|dich vu|xn)\b')
-        ids, loose, spans = self.match_services(q, explicit_test)
+        ids, loose, spans = matches
         drug_question = has(q, r'\b(?:thuoc nay|thuoc do|bhyt (?:cua|cho) thuoc|thuoc (?:nay |do )?(?:co duoc|duoc|co bhyt))\b')
         marker = has(q, r'\b(?:ket qua|duong tinh|am tinh|chua co|chua xet nghiem|chua lam|cho xet nghiem|cho ket qua|can xet nghiem|de nghi xet nghiem|chi dinh xet nghiem)\b')
         test_focus = has(q, r'\b(?:bhyt (?:cua|cho) (?:xet nghiem|xn)|(?:xet nghiem|dich vu|xn|dinh luong).{0,80}(?:co duoc|co bhyt|thanh toan|chi tra|dieu kien)|chi phi xet nghiem)\b')
@@ -439,6 +463,17 @@ class LabLookup:
         return [{'label': d['title'], 'url': d['local_url']} for d in self.documents.values()]
 
     def answer(self, message, state, route, today=None):
+        if 'guide' in route:
+            result = self.guidance.answer(norm(message), route['guide'], state.get('lab_guide', {}), self)
+            if route['ids']:
+                # Conditions for a second service are shown without attributing case facts to it.
+                row_route = {k:v for k,v in route.items() if k != 'guide'}
+                rows = self.answer('', {}, row_route, today)
+                result['lab_results'] = rows['lab_results']
+                result['citations'] = rows['citations']
+                if rows.get('notice') or rows['status'] == 'source_unavailable':
+                    result['notice'] = rows.get('notice') or rows['answer']
+            return result
         today = today or local_today()
         base = dict(snapshot=self.source.get('checked_as_of'), mode='local', domain='lab',
                     answer='', results=[], lab_results=[], citations=[], suggestions=[], followups=[], state={})
@@ -453,8 +488,9 @@ class LabLookup:
             n = len(self.services)
             return base | {'status': 'unknown', 'lab_links': self.source_links(),
                            'answer': f'Chưa thấy xét nghiệm đang hỏi trong {n} dòng xét nghiệm có điều kiện thanh toán riêng đã nạp (Thông tư 39/2024 và bản hợp nhất 17/VBHN-BYT). '
-                                     'Hai danh mục này chỉ liệt kê dịch vụ có điều kiện riêng; xét nghiệm không có dòng riêng thì áp dụng quy định thanh toán chung. '
-                                     'Chatbot khớp theo tên nên có thể sót tên gọi khác: không tìm thấy ở đây không có nghĩa là BHYT không chi trả, cũng chưa khẳng định xét nghiệm này không có điều kiện.'}
+                                     'Cần đối chiếu đúng tên kỹ thuật, điều kiện chung và các trường hợp loại trừ trong văn bản. '
+                                     'Chatbot khớp theo tên nên có thể sót tên gọi khác: không tìm thấy ở đây không có nghĩa là BHYT không chi trả, cũng chưa khẳng định xét nghiệm này không có điều kiện. '
+                                     'Bác sĩ có thể gửi mã dịch vụ hoặc tên đầy đủ, loại mẫu và phương pháp trên phiếu chỉ định.'}
         # A damaged file stops only the services that cite it, not the whole laboratory module.
         usable = [sid for sid in route['ids'] if self.integrity_ok(sid)]
         broken = [self.services[sid]['name'] for sid in route['ids'] if sid not in usable]

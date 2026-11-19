@@ -54,7 +54,11 @@ function conditionBlock(conditions,plan){
  if(compact){block.append(node('p','Cần đáp ứng đầy đủ điều kiện; các ý dưới đây cũng phải được đối chiếu.','hint'));const d=node('details',undefined,'citation full-conditions');d.append(node('summary','Xem '+(conditions.length-selected.length)+' điều kiện còn lại'));const rest=node('ul');for(const [i,text] of conditions.entries())if(!selected.includes(i))rest.append(node('li',text));d.append(rest);block.append(d);}
  return block;
 }
-function reportText(data,question){const out=['Câu hỏi: '+(data.interpreted_question||question),data.answer];for(const r of data.results||[]){const a=r.question_answer;if(!a)continue;out.push(r.ingredient,a.conclusion,...a.conditions);for(const q of a.quotes||[])out.push('TRÍCH NGUYÊN VĂN '+q.document+' · '+q.locator+(q.page_checked?' · trang PDF '+q.pages.join('–'):'')+': “'+(q.empty?'(ô ghi chú trống)':q.text)+'”');out.push(a.scope);}for(const r of data.lab_results||[])out.push(r.name,r.conclusion,...(r.reading||[]).map(x=>'Dữ kiện đã đọc — '+x),...r.reasons,...(r.notes||[]),'NGUYÊN VĂN: '+r.conditions.join(' '),...((r.rate||[]).length?['Tỷ lệ, mức giá thanh toán: '+r.rate.join(' ')]:[]),r.scope,'Vị trí nguồn: '+new URL(r.citation.viewer_url,location.origin).href);for(const c of answerCitations(data)){out.push('NGUỒN '+(c.document_title||sourceName(c.document_id))+' · '+c.locator+' · '+(c.official_url||c.source_url||c.local_url),c.excerpt);for(const f of c.source_review_flags||[])out.push('Giới hạn: '+f.note);}if(data.notice)out.push(data.notice);for(const t of data.brand_notes||[])out.push(t);for(const t of data.hospital_notes||[])out.push(t);out.push(sourceStamp(data)+'; đối chiếu với nguồn, không phải quyết định thanh toán.'+(data.review_note?' '+data.review_note:''));if(data.domain==='lab'||data.domain==='mixed')out.push('Ngày kiểm tra nguồn xét nghiệm không bảo đảm đã rà soát mọi văn bản mới.');return out.join('\n');}
+function reportText(data,question){const out=['Câu hỏi: '+(data.interpreted_question||question),data.answer];
+ if(data.lab_guide_lead)out.push(data.lab_guide_lead);
+ for(const s of data.lab_guidance||[]){out.push(s.title,s.text);for(const ref of s.links)out.push(ref.label+' '+new URL(ref.url,location.origin).href);}
+ if(data.lab_guidance&&data.review_label)out.push(data.review_label);
+ for(const r of data.results||[]){const a=r.question_answer;if(!a)continue;out.push(r.ingredient,a.conclusion,...a.conditions);for(const q of a.quotes||[])out.push('TRÍCH NGUYÊN VĂN '+q.document+' · '+q.locator+(q.page_checked?' · trang PDF '+q.pages.join('–'):'')+': “'+(q.empty?'(ô ghi chú trống)':q.text)+'”');out.push(a.scope);}for(const r of data.lab_results||[])out.push(r.name,r.conclusion,...(r.reading||[]).map(x=>'Dữ kiện đã đọc — '+x),...r.reasons,...(r.notes||[]),'NGUYÊN VĂN: '+r.conditions.join(' '),...((r.rate||[]).length?['Tỷ lệ, mức giá thanh toán: '+r.rate.join(' ')]:[]),r.scope,'Vị trí nguồn: '+new URL(r.citation.viewer_url,location.origin).href);for(const c of answerCitations(data)){out.push('NGUỒN '+(c.document_title||sourceName(c.document_id))+' · '+c.locator+' · '+(c.official_url||c.source_url||c.local_url),c.excerpt);for(const f of c.source_review_flags||[])out.push('Giới hạn: '+f.note);}if(data.notice)out.push(data.notice);for(const t of data.brand_notes||[])out.push(t);for(const t of data.hospital_notes||[])out.push(t);out.push(sourceStamp(data)+'; đối chiếu với nguồn, không phải quyết định thanh toán.'+(data.review_note?' '+data.review_note:''));if(data.domain==='lab'||data.domain==='mixed')out.push('Ngày kiểm tra nguồn xét nghiệm không bảo đảm đã rà soát mọi văn bản mới.');return out.join('\n');}
 function labBlock(r,data,index){
  const section=node('section',undefined,'drug-result lab-result');section.append(node('h3',r.name,'drug-heading'),node('p',answerLead(data,'lab:'+index,r.conclusion),'conclusion'));
  if(r.reasons?.length){const reasons=node('ul',undefined,'lab-reasons');for(const t of r.reasons)reasons.append(node('li',t));section.append(reasons);}
@@ -76,7 +80,17 @@ function renderReply(data,question){
  if(data.ai_understanding){const p=node('div',undefined,'confirm-block');p.append(node('strong','Tôi hiểu câu hỏi là:'),node('p',data.ai_understanding.question));const actions=node('div',undefined,'actions');const yes=node('button','Đúng, tra cứu câu này');yes.type='button';const snapshot=JSON.parse(JSON.stringify(data.state||{}));yes.addEventListener('click',()=>send('Đúng, tra cứu câu này',snapshot,null,true));const edit=node('button','Sửa câu hỏi');edit.type='button';edit.addEventListener('click',()=>{$('#question').value=data.ai_understanding.question;$('#question').focus();});actions.append(yes,edit);p.append(actions);box.append(p);return box;}
  if(data.interpreted_question)box.append(node('p','Đang tra cứu: '+data.interpreted_question,'hint'));
  const rows=data.results||[];
- if(!rows.length&&!data.lab_results?.length)box.append(node('p',data.answer,'conclusion'));
+ if(!rows.length&&!data.lab_results?.length&&data.domain!=='mixed')box.append(node('p',data.answer,'conclusion'));
+ if(data.lab_guidance){
+  if(rows.length||data.lab_results?.length||data.lab_guide_lead)box.append(node('p',data.lab_guide_lead||data.answer,'conclusion'));
+  for(const section of data.lab_guidance){
+   const block=node('section',undefined,'answer-block');block.append(node('strong',section.title),node('p',section.text));
+   const links=node('div',undefined,'source-links');
+   for(const source of section.links){const a=link(source.url,source.label+' ↗');if(a)links.append(a);}
+   if(links.childElementCount)block.append(links);
+   box.append(block);
+  }
+ }
  if(data.lab_links?.length){const links=node('div',undefined,'source-links');for(const l of data.lab_links){const a=link(l.url,l.label+' ↗');if(a)links.append(a);}box.append(links);}
  for(const [i,r] of (data.lab_results||[]).entries())box.append(labBlock(r,data,i));
  if(data.domain==='mixed'&&!rows.length){const section=node('section',undefined,'drug-result');section.append(node('h3','Thuốc được hỏi','drug-heading'),node('p',data.answer,'conclusion'));box.append(section);}

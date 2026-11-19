@@ -1,0 +1,324 @@
+{
+  "checked_on": "2026-11-20",
+  "sources": {
+    "toxicity": {
+      "label": "AASLD · Tổn thương gan do thuốc",
+      "url": "https://www.aasld.org/liver-fellow-network/core-series/back-basics/when-medicine-turns-toxic-hepatotoxic-potential-common"
+    },
+    "vinmec": {
+      "label": "Vinmec Nha Trang · bảng giá dịch vụ tháng 01/2026, mã 23.19 và 23.20",
+      "url": "https://www.vinmec.com/static/uploads/bang_gia_dich_vu_benh_vien_da_khoa_vinmec_nha_trang_vn_t1_2026_4ff1fca06a.pdf"
+    },
+    "law": {
+      "label": "BHYT · 17/VBHN-BYT, Điều 3 và Điều 4",
+      "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf#page=4"
+    },
+    "catalog": {
+      "label": "Danh mục BHYT của BV Sức khỏe Tâm thần Thái Nguyên, STT 49–52 và 60–65",
+      "url": "https://bvsktt.soyte.thainguyen.gov.vn/hoat-dong-kcb/bang-gia-kham-chua-benh/danh-muc-dich-vu-ky-thuat-bhyt-su-dung-tai-benh-vien/"
+    },
+    "hbv": {
+      "label": "Bộ Y tế · QĐ 1740/QĐ-BYT (2026), mục 3.4.2, bảng 2",
+      "url": "https://kcb.vn/upload/2005611/20260617/BYT__QD_ban_hanh_HDCDT_viem_gan_vi_rut_B_-_final_2_signed_8c1b5.pdf"
+    },
+    "liver": {
+      "label": "AASLD · Đánh giá men gan tăng",
+      "url": "https://www.aasld.org/liver-fellow-network/core-series/back-basics/how-approach-elevated-liver-enzymes"
+    },
+    "renal": {
+      "label": "KDIGO 2024 · chương 1, khuyến cáo 1.1.2.1",
+      "url": "https://kdigo.org/wp-content/uploads/2024/03/KDIGO-2024-CKD-Guideline.pdf"
+    },
+    "sugar": {
+      "label": "ADA 2026 · Chẩn đoán và phân loại đái tháo đường, bảng 2.1",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690183/"
+    },
+    "oncology": {
+      "label": "NCI · Vai trò và giới hạn của dấu ấn khối u",
+      "url": "https://www.cancer.gov/about-cancer/diagnosis-staging/diagnosis/tumor-markers-fact-sheet"
+    },
+    "diagnosis": {
+      "label": "NCI · Các phương pháp chẩn đoán ung thư",
+      "url": "https://www.cancer.gov/about-cancer/diagnosis-staging/diagnosis"
+    },
+    "excluded": {
+      "label": "17/VBHN-BYT · Danh mục 3, STT 6, trang 52",
+      "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf#page=52"
+    }
+  },
+  "tests": {
+    "ast": {
+      "name": "AST (GOT) máu",
+      "aliases": [
+        "ast",
+        "got",
+        "sgot",
+        "aspartate aminotransferase",
+        "aspartat aminotransferase"
+      ],
+      "code": "23.0020.1493",
+      "profile": "liver"
+    },
+    "alt": {
+      "name": "ALT (GPT) máu",
+      "aliases": [
+        "alt",
+        "gpt",
+        "sgpt",
+        "alanine aminotransferase",
+        "alanin aminotransferase"
+      ],
+      "code": "23.0019.1493",
+      "profile": "liver"
+    },
+    "creatinine": {
+      "name": "Creatinin máu",
+      "aliases": [
+        "creatinin",
+        "creatinine"
+      ],
+      "code": "23.0051.1494",
+      "profile": "renal"
+    },
+    "glucose": {
+      "name": "Glucose máu",
+      "aliases": [
+        "glucose",
+        "glucose mau",
+        "glucose huyet tuong",
+        "duong huyet",
+        "duong mau"
+      ],
+      "code": "23.0075.1494",
+      "profile": "sugar"
+    },
+    "ggt": {
+      "name": "GGT máu",
+      "aliases": ["ggt", "gamma gt", "gama glutamyl transferase"],
+      "code": "23.0077.1518",
+      "profile": "cholestasis"
+    },
+    "ana17": {
+      "name": "ANA 17 profile test",
+      "aliases": [
+        "ana 17 profile",
+        "ana17 profile",
+        "ana 17 profile test"
+      ],
+      "profile": "excluded"
+    }
+  },
+  "profiles": {
+    "cholestasis": {
+      "summary": "Khi phosphatase kiềm (ALP) tăng, GGT có thể giúp bác sĩ đánh giá liệu bất thường có nguồn gốc gan mật.",
+      "sources": ["liver"],
+      "question": "Bác sĩ đang làm rõ nguồn gốc ALP tăng hay chỉ định GGT với mục đích khác?"
+    },
+    "liver": {
+      "summary": "Khi đánh giá tổn thương gan hoặc men gan tăng chưa rõ nguyên nhân, AST và ALT giúp xác định kiểu tổn thương cùng các xét nghiệm khác. Ví dụ cụ thể: với viêm gan B cấp, Bộ Y tế dùng AST/ALT để theo dõi diễn biến tổn thương và hồi phục tế bào gan.",
+      "sources": [
+        "liver",
+        "hbv"
+      ],
+      "question": "Bác sĩ đang đánh giá bất thường mới, theo dõi bệnh gan đã xác định hay làm trong gói khám sức khỏe?"
+    },
+    "renal": {
+      "summary": "Ở người lớn có nguy cơ bệnh thận mạn, creatinin máu được dùng để ước tính mức lọc cầu thận. KDIGO còn xem xét albumin niệu khi đánh giá bệnh thận. Creatinin máu và creatinin niệu là hai kỹ thuật khác nhau.",
+      "sources": [
+        "renal"
+      ],
+      "question": "Đây là creatinin máu để đánh giá chức năng thận, theo dõi bệnh đã biết hay xét nghiệm trong gói khám?"
+    },
+    "sugar": {
+      "summary": "Glucose huyết tương lúc đói hoặc nghiệm pháp dung nạp glucose có vai trò trong chẩn đoán đái tháo đường. Glucose ngẫu nhiên được diễn giải theo triệu chứng và bối cảnh. Cần phân biệt lấy máu xét nghiệm, đo mao mạch tại giường và nghiệm pháp nhiều thời điểm.",
+      "sources": [
+        "sugar"
+      ],
+      "question": "Bác sĩ cần glucose máu lúc đói, glucose ngẫu nhiên, đường huyết mao mạch hay nghiệm pháp dung nạp?"
+    }
+  },
+  "payment_topics": [
+    {"title": "Suy tim", "terms": ["suy tim"], "rows": ["bnp", "probnp"],
+     "question": "Bác sĩ muốn tra BNP hay Pro-BNP? Với BNP, dòng thanh toán phân biệt người có và không có suy thận."},
+    {"title": "Nghi nhiễm trùng nặng", "terms": ["nhiem trung nang", "nhiem trung huyet", "nhiem khuan huyet"], "rows": ["crp", "procalcitonin"],
+     "question": "Bác sĩ đang hỏi CRP hay procalcitonin, ở người lớn hay trẻ em? Mỗi dòng có tiêu chí và quy định thanh toán riêng."},
+    {"title": "Chuẩn bị ghép tạng", "terms": ["truoc ghep tang", "chuan bi ghep tang"], "rows": ["hla_sso", "hla_ssp"],
+     "question": "Cần biết phương pháp định type HLA, độ phân giải và đối tượng xét nghiệm để chọn đúng dòng."},
+    {"title": "Tiêu chảy sau dùng kháng sinh", "terms": ["tieu chay sau dung khang sinh", "tieu chay sau khang sinh"], "rows": ["cdiff"],
+     "question": "Dòng nguồn đề cập tiêu chảy nghi do C. difficile sau điều trị kháng sinh. Hãy đối chiếu tên kỹ thuật trên phiếu."},
+    {"title": "Bệnh lý globulin miễn dịch đơn dòng", "terms": ["globulin mien dich don dong", "don dong globulin mien dich", "tang gama globulin"], "rows": ["serum_ife"],
+     "question": "Có thể đối chiếu dòng điện di miễn dịch huyết thanh với chỉ định đã ghi."}
+  ],
+  "indications": [
+    {
+      "terms": ["viem gan b cap"], "title": "Theo dõi viêm gan B cấp",
+      "summary": "Bảng 2 phân biệt từng mục đích. AST và ALT theo dõi tổn thương gan và hồi phục. INR hoặc tỷ lệ PT cùng bilirubin giúp đánh giá chức năng gan. HBsAg và anti-HBs dùng để đánh giá diễn biến huyết thanh học.",
+      "sources": ["hbv"], "followups": ["AST, ALT trong viêm gan B cấp", "Điều kiện BHYT cho HBV DNA"]
+    },
+    {
+      "terms": ["benh than man", "nguy co benh than man"], "title": "Đánh giá bệnh thận mạn ở người lớn",
+      "summary": "KDIGO đánh giá cả mức lọc cầu thận và albumin niệu. Creatinin máu được dùng để ước tính mức lọc cầu thận, còn tỷ số albumin/creatinin dùng mẫu nước tiểu. Cần xác định đúng mẫu trước khi tra BHYT.",
+      "sources": ["renal"], "followups": ["BHYT cho creatinin máu"]
+    },
+    {
+      "terms": ["dai thao duong", "tieu duong"], "title": "Chẩn đoán đái tháo đường ở người không mang thai",
+      "summary": "ADA nêu các phương án gồm HbA1c, glucose huyết tương lúc đói hoặc glucose sau nghiệm pháp dung nạp. Glucose huyết tương ngẫu nhiên có ý nghĩa chẩn đoán trong bối cảnh có triệu chứng tăng đường huyết điển hình hoặc cơn tăng đường huyết.",
+      "sources": ["sugar"], "followups": ["BHYT cho glucose máu lúc đói", "HbA1c có điều kiện BHYT gì?"]
+    }
+  ],
+  "cancer_sites": [
+    {
+      "label": "gan",
+      "terms": ["ung thu gan", "u gan"],
+      "rows": ["pathology", "pivka"]
+    },
+    {
+      "label": "cổ tử cung",
+      "terms": ["co tu cung"],
+      "rows": ["pathology", "scc"]
+    },
+    {
+      "label": "phổi",
+      "marker_terms": ["di căn phổi"],
+      "terms": [
+        "phoi",
+        "nsclc"
+      ],
+      "rows": [
+        "pathology",
+        "egfr",
+        "her2",
+        "tumor_markers",
+        "scc"
+      ]
+    },
+    {
+      "label": "vú",
+      "marker_terms": [": vú"],
+      "terms": [
+        "vu"
+      ],
+      "rows": [
+        "pathology",
+        "her2",
+        "tumor_markers"
+      ]
+    },
+    {
+      "label": "đại trực tràng",
+      "marker_terms": ["sau điều trị ung thư đại trực tràng"],
+      "terms": [
+        "dai truc trang",
+        "dai trang",
+        "truc trang"
+      ],
+      "rows": [
+        "pathology",
+        "kras",
+        "braf",
+        "tumor_markers"
+      ]
+    },
+    {
+      "label": "dạ dày",
+      "marker_terms": [": dạ dày"],
+      "terms": [
+        "da day"
+      ],
+      "rows": [
+        "pathology",
+        "her2",
+        "tumor_markers"
+      ]
+    },
+    {
+      "label": "tuyến giáp",
+      "terms": [
+        "tuyen giap"
+      ],
+      "rows": [
+        "pathology",
+        "braf"
+      ]
+    },
+    {
+      "label": "buồng trứng",
+      "marker_terms": [": buồng trứng"],
+      "terms": [
+        "buong trung"
+      ],
+      "rows": [
+        "pathology",
+        "tumor_markers"
+      ]
+    },
+    {
+      "label": "tụy hoặc đường mật",
+      "marker_terms": [": tụy"],
+      "terms": [
+        "tuy",
+        "duong mat"
+      ],
+      "rows": [
+        "pathology",
+        "tumor_markers"
+      ]
+    }
+  ],
+  "cancer_purposes": [
+    {
+      "label": "sàng lọc",
+      "terms": [
+        "sang loc",
+        "tam soat"
+      ],
+      "note": "Ở người chưa có triệu chứng, cần xác định cơ quan, nguy cơ và chương trình sàng lọc. Phần lớn dấu ấn khối u trong máu có hạn chế khi dùng sàng lọc rộng rãi.",
+      "rows": []
+    },
+    {
+      "label": "chẩn đoán",
+      "terms": [
+        "chan doan",
+        "nghi ngo",
+        "nghi ung thu"
+      ],
+      "note": "Khi nghi ngờ ung thư, lựa chọn xét nghiệm phụ thuộc vị trí tổn thương. Giải phẫu bệnh từ mẫu sinh thiết thường giúp xác định chẩn đoán; cần tra đúng kỹ thuật lấy và đọc mẫu.",
+      "rows": [
+        "pivka",
+        "pathology",
+        "tumor_markers"
+      ]
+    },
+    {
+      "label": "lựa chọn điều trị",
+      "terms": [
+        "chon thuoc",
+        "chon dieu tri",
+        "lua chon dieu tri",
+        "dieu tri dich",
+        "chon phac do"
+      ],
+      "note": "Trước điều trị đích, cần biết vị trí u, mô bệnh học và kỹ thuật xét nghiệm. Hãy đối chiếu đúng dòng cho xét nghiệm đột biến gen hoặc nhuộm hóa mô miễn dịch.",
+      "rows": [
+        "egfr",
+        "her2",
+        "braf",
+        "kras"
+      ]
+    },
+    {
+      "label": "theo dõi",
+      "terms": [
+        "theo doi",
+        "tai phat",
+        "dap ung"
+      ],
+      "note": "Để theo dõi đáp ứng hoặc tái phát, cần tra đúng dấu ấn, loại ung thư và hoàn cảnh ghi ở từng dòng dịch vụ.",
+      "rows": [
+        "pivka",
+        "tumor_markers",
+        "scc"
+      ]
+    }
+  ]
+}
