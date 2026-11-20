@@ -2,11 +2,12 @@
 
 "Xét nghiệm này, cho bệnh này, với mục đích này, ở thời điểm này, BHYT có thanh toán không?"
 Every laboratory row with its own payment condition (TT39/2024 appendix and the rows of
-17/VBHN-BYT that TT39 did not amend) is quoted verbatim. Only three rule kinds are compared
+17/VBHN-BYT that TT39 did not amend) is quoted verbatim. Selected rules are compared
 with the facts of a case, all others return the source text and say so:
   hba1c  purpose, confirmed diabetes, interval since the last test
   gene   disease within the row's scope + "chẩn đoán đột biến gen trong điều trị"
   scope  disease within the row's list (the remaining conditions stay with the reader)
+  CA 125  indication within the shared tumor-marker row, only for this named assay
 Routes service coverage separately from drug-marker conditions. Clinical facts are
 per-turn/per-service and carried only in the engine's signed browser state.
 """
@@ -206,6 +207,97 @@ OTHER_SERVICES = (r'\b(?:sieu am|x quang|xquang|cat lop vi tinh|ct scanner|ct sc
 COVERAGE = r'\b(?:bhyt|bao hiem|thanh toan|chi tra|dieu kien|co duoc|duoc khong)\b'
 YES_NO = ('co', 'dung', 'dung roi', 'khong', 'chua', 'chua ro', 'khong ro')
 
+CA125 = r'\bca ?125\b'
+OTHER_MARKER = r'\b(?:cea|ca ?15 ?3|ca ?19 ?9|ca ?72 ?4|he4|roma|afp)\b'
+CUP = r'(?:ung thu )?di can (?:khong ro|chua ro|chua xac dinh(?: duoc)?) (?:vi tri |vi tri cua )?(?:u |o |nguon )?nguyen phat'
+CA125_PURPOSES = {
+    'screening': ('tầm soát', r'tam soat|sang loc'),
+    'post_treatment': ('giám sát sau điều trị', r'theo doi sau (?:khi )?(?:ket thuc |hoan tat )?(?:dieu tri|hoa tri|xa tri)|(?:tim|phat hien|theo doi) tai phat'),
+    'monitoring': ('theo dõi điều trị', r'theo doi (?:dap ung |ket qua |qua trinh )?dieu tri|danh gia (?:dap ung|ket qua) dieu tri'),
+    'diagnosis': ('chẩn đoán', r'chan doan'),
+}
+CA125_SITES = {'ovarian': 'ung thư buồng trứng', 'cup': 'ung thư di căn chưa rõ u nguyên phát',
+               'other': 'vị trí ung thư khác đã nêu'}
+CA125_INTERVAL = 'Dòng này không nêu khoảng cách tối thiểu giữa hai lần định lượng CA 125.'
+
+
+def extract_ca125(message, facts):
+    # Mask “không rõ” only inside the name of this indication, not genuine uncertainty.
+    clauses = [re.sub(r'\b' + CUP + r'\b', ' cupmarker ', c).strip() for c in clause_list(message)]
+    purpose = []
+    for key, (_, pattern) in CA125_PURPOSES.items():
+        # A prior diagnosis is a fact about the patient, not the purpose of this order.
+        parts = [re.sub(r'\bda (?:duoc )?chan doan\b', 'da mac', c) for c in clauses] if key == 'diagnosis' else clauses
+        status = verdict(mentions(parts, pattern, F_PURPOSE))
+        if status:
+            purpose.append((key, status))
+    if purpose:
+        positive = [key for key, status in purpose if status == 'yes']
+        facts['marker_purpose'] = positive[0] if len(positive) == 1 and all(s != 'unknown' for _, s in purpose) else 'unknown'
+    sites = []
+    for key, pattern in [('ovarian', r'ung thu buong trung|ut buong trung'), ('cup', 'cupmarker')]:
+        status = verdict(mentions(clauses, pattern, F_IS))
+        if status:
+            sites.append((key, status))
+    other_clauses = [c.replace('ung thu buong trung', '') for c in clauses]
+    other_sites = [mention for _, _, pattern in DISEASES for mention in mentions(other_clauses, pattern, F_IS)]
+    if other_sites:
+        sites.append(('other', verdict(other_sites)))
+    if sites:
+        facts['marker_site'] = sites[0][0] if len(sites) == 1 and sites[0][1] == 'yes' else 'unknown'
+    q = norm(message)
+    if has(q, r'\b(?:da ket thuc|da hoan tat|ket thuc dot) dieu tri\b') and facts.get('marker_purpose') == 'monitoring':
+        facts['marker_purpose'] = 'post_treatment'
+    if has(q, r'\b(?:khong|chua) (?:phai |lam |chi dinh |dinh luong |xet nghiem )*ca ?125\b'):
+        facts['assay_unclear'] = True
+    facts['interval'] = has(q, r'\b(?:tan suat|bao lau|bao nhieu (?:ngay|lan)|lan (?:truoc|hai|thu|2)|lam lai|lap lai|dinh ky|\d+ (?:ngay|tuan|thang))\b')
+    facts['price'] = has(q, r'\b(?:ty le|phan tram|muc huong|muc gia|bao nhieu tien|gia bao nhieu|don gia)\b') or '%' in message
+    if has(q, r'\b(?:pcr|ngs|hoa mo mien dich|dich (?:mang|bung)|nuoc tieu)\b') or has(q, OTHER_SERVICES):
+        facts['method_query'] = True
+
+
+def evaluate_ca125(facts, result):
+    purpose, site = facts.get('marker_purpose'), facts.get('marker_site')
+    indication = ('CA 125 có hai nhánh trong dòng nguồn: chẩn đoán ung thư di căn chưa rõ u nguyên phát '
+                  '(điểm a), hoặc chẩn đoán, theo dõi điều trị ung thư buồng trứng (điểm b).')
+    if facts.get('assay_unclear'):
+        return result('needs_info', 'Bác sĩ đang hỏi BHYT cho chính xét nghiệm CA 125 hay một dịch vụ khác? Vui lòng ghi rõ tên dịch vụ cần tra.', 'marker_context')
+    if facts.get('method_query'):
+        return result('needs_review', 'Cần đối chiếu tên kỹ thuật và bệnh phẩm trên phiếu với dịch vụ chỉ điểm khối u trong nguồn.')
+    if purpose == 'screening':
+        return result('source_condition_not_met', 'Tầm soát không thuộc hai chỉ định CA 125 nêu ở điểm a và b. '
+                      'Nếu làm theo chương trình sàng lọc, cần kiểm tra căn cứ riêng của chương trình.'
+                      + (' ' + CA125_INTERVAL if facts.get('interval') else ''), highlight=[0, 1, 2])
+    if site == 'other' and purpose in ('diagnosis', 'monitoring'):
+        return result('source_condition_not_met', 'Vị trí ung thư vừa nêu không khớp nhánh buồng trứng của CA 125. '
+                      'Điểm a áp dụng riêng cho chẩn đoán ung thư di căn chưa rõ u nguyên phát. '
+                      'Chưa đủ căn cứ xác nhận chi trả cho ca này.', highlight=[0, 1, 2])
+    matched = False
+    if site == 'ovarian' and purpose in ('diagnosis', 'monitoring'):
+        text = 'Chỉ định CA 125 để ' + CA125_PURPOSES[purpose][0] + ' ung thư buồng trứng phù hợp điểm b của dòng nguồn.'
+        mark = [1, 2]
+        matched = True
+    elif site == 'cup' and purpose == 'diagnosis':
+        text = 'Chỉ định CA 125 để chẩn đoán ung thư di căn chưa rõ u nguyên phát phù hợp điểm a của dòng nguồn.'
+        mark = [0]
+        matched = True
+    else:
+        text, mark = indication, [0, 1, 2]
+    if facts.get('interval') or facts.get('price') or purpose == 'post_treatment':
+        limits = []
+        if purpose == 'post_treatment':
+            limits.append('Cần làm rõ mục đích giám sát sau điều trị. Điểm c về tái phát sau điều trị là của CA 19-9, không áp sang CA 125.')
+        if facts.get('interval'):
+            limits.append(CA125_INTERVAL)
+        if facts.get('price'):
+            limits.append('Cột giá dẫn tới giá dịch vụ xét nghiệm bằng kỹ thuật hóa sinh, không ấn định tỷ lệ hưởng cá nhân.')
+        return result('needs_review', ' '.join([indication, *limits]), highlight=mark)
+    if matched:
+        return result('source_conditions_match', text + ' Cần đối chiếu các điều kiện chung trước khi xác nhận chi trả.', highlight=mark)
+    if not purpose:
+        return result('needs_info', text + ' Bác sĩ chỉ định để chẩn đoán, theo dõi điều trị hay tầm soát?', 'marker_purpose', mark)
+    return result('needs_info', text + ' Bác sĩ cho biết bệnh cảnh và mục đích cụ thể của lần chỉ định này?', 'marker_context', mark)
+
 
 class LabLookup:
     def __init__(self, data_dir):
@@ -352,6 +444,8 @@ class LabLookup:
         renal = has(q, r'\b(?:do loc cau than|muc loc cau than|creatinin|ckd epi|ml phut|ml min|suy than|benh than man|chuc nang than)\b')
         explicit_test = has(q, r'\b(?:xet nghiem|dinh luong|dich vu|xn)\b')
         ids, loose, spans = matches
+        if ids == ['tumor_markers'] and has(q, CA125) and re.match(r'^(?:chi dinh |dieu kien (?:bhyt )?cho )?(?:chup |sieu am |noi soi |pet ct\b)', q):
+            return {'ids': [], 'kind': 'other_service'}
         drug_question = has(q, r'\b(?:thuoc nay|thuoc do|bhyt (?:cua|cho) thuoc|thuoc (?:nay |do )?(?:co duoc|duoc|co bhyt))\b')
         marker = has(q, r'\b(?:ket qua|duong tinh|am tinh|chua co|chua xet nghiem|chua lam|cho xet nghiem|cho ket qua|can xet nghiem|de nghi xet nghiem|chi dinh xet nghiem)\b')
         test_focus = has(q, r'\b(?:bhyt (?:cua|cho) (?:xet nghiem|xn)|(?:xet nghiem|dich vu|xn|dinh luong).{0,80}(?:co duoc|co bhyt|thanh toan|chi tra|dieu kien)|chi phi xet nghiem)\b')
@@ -422,6 +516,8 @@ class LabLookup:
         followup = has(q, r'\b(?:dieu kien|quy dinh|nguon|ngay|tuan|thang|lan truoc|lan dau|lan thu|dai thao duong|dtd|thai ky|insulin|phac do|theo doi|danh gia|dieu tri|chan doan|ung thu|nsclc|te bao nho|tam soat|sang loc|khong ro|chua ro|khong nho|khong biet|khong dung|chua dung|chua lam|chua tung|da lam|da xet nghiem)\b') or has(message, r'\d{1,4}[/.-]\d{1,2}[/.-]\d{1,4}')
         if lab_state.get('id') in self.services and followup:
             return {'ids': [lab_state['id']], 'kind': 'lab'}
+        if lab_state.get('assay') == 'ca125' and (has(q, NEW_CASE) or has(q, r'\b(?:tan suat|bao lau|phan tram|muc gia|gia bao nhieu|di can|buong trung)\b')):
+            return {'ids': ['tumor_markers'], 'kind': 'lab'}
         if lab_state.get('pending') in ('insulin', 'diabetes', 'disease', 'purpose', 'gestational') and q in YES_NO:
             return {'ids': [lab_state['id']], 'kind': 'lab'}
         return None
@@ -443,6 +539,10 @@ class LabLookup:
         """The facts as the chatbot read them, in plain words, so a misreading is visible."""
         day = lambda iso: '/'.join(reversed(iso.split('-')))
         out = []
+        if f.get('ca125'):
+            purpose = CA125_PURPOSES.get(f.get('marker_purpose'))
+            return ['Xét nghiệm: CA 125', 'Mục đích: ' + (purpose[0] if purpose else 'chưa rõ'),
+                    'Bệnh cảnh: ' + CA125_SITES.get(f.get('marker_site'), 'chưa xác định')]
         if row.get('rule') == 'hba1c':
             out.append('Mục đích: ' + {'regimen': 'xác định phác đồ điều trị', 'monitoring': 'đánh giá kết quả điều trị', 'screening': 'sàng lọc/chẩn đoán ban đầu', 'ambiguous': 'chưa rõ (câu hỏi nêu hơn một mục đích)'}.get(f.get('purpose'), 'chưa nêu'))
             out.append('Đã chẩn đoán xác định đái tháo đường: ' + {True: 'có', False: 'chưa'}.get(f.get('diabetes'), 'chưa nêu'))
@@ -518,16 +618,22 @@ class LabLookup:
                 # Dates/purposes in a multi-service question cannot be attributed safely.
                 facts, case, errors = {k: v for k, v in facts.items() if k == 'foreign_method'}, False, []
             a = self.evaluate(sid, facts, case, errors, today)
-            if row.get('rule') and facts:
+            rule_active = bool(row.get('rule') or facts.get('ca125'))
+            if rule_active and facts:
                 a['reading'] = self.reading(row, facts)
             # Words the chatbot could not account for, and voiced doubt, stay with the case over
             # the following turns: a later "lần trước cách 35 ngày" cannot slip past them. Only
             # an explicit confirmation of the reading clears them.
             unread, doubt = [], None
-            if row.get('rule') and not confirmed:
+            if rule_active and not confirmed:
                 carried = prev if same_case else {}
-                unread = list(dict.fromkeys(list(carried.get('unread', [])) + unread_words(message, [norm(x) for x in row.get('aliases', []) + [row['name']]])))
-                found = re.search(DOUBT, ' ; '.join(clause_list(message)))
+                aliases = [norm(x) for x in row.get('aliases', []) + [row['name']]]
+                doubt_text = ' ; '.join(clause_list(message))
+                if facts.get('ca125'):
+                    aliases.append('buong trung di can nguyen phat u ut')
+                    doubt_text = re.sub(r'\b' + CUP + r'\b', 'cupmarker', doubt_text)
+                unread = list(dict.fromkeys(list(carried.get('unread', [])) + unread_words(message, aliases)))
+                found = re.search(DOUBT, doubt_text)
                 doubt = found.group(0).replace('loaitru', 'loại trừ') if found else carried.get('doubt')
             if unread or doubt:
                 why = ('còn những từ chatbot chưa hiểu chắc: ' + ', '.join('“' + w + '”' for w in unread[:8])) if unread else 'có phần chưa chắc chắn (“' + doubt + '”)'
@@ -553,19 +659,21 @@ class LabLookup:
                 notes.insert(0, a.pop('unconfirmed_note'))
             if row.get('transcription') == 'scan_read':
                 review = {'kind': 'attested' if self.attestation else 'unreviewed', 'text': 'Nguyên văn chép từ bản scan. ' + self.scan_status}
-            elif row.get('rule'):
+            elif rule_active:
                 review = {'kind': 'unreviewed', 'text': 'Nguyên văn lấy từ lớp chữ của phụ lục Thông tư 39/2024. Phần đối chiếu ca bệnh do nhóm dự án xây dựng, chưa nằm trong phạm vi Dược/BHYT thẩm định.'}
             else:
                 review = {'kind': 'source_text', 'text': 'Nguyên văn lấy từ lớp chữ của phụ lục Thông tư 39/2024.'}
-            base['lab_results'].append({'id': sid, 'name': row['name'], **a, 'conditions': row['conditions'],
+            base['lab_results'].append({'id': sid, 'name': 'Định lượng CA 125' if facts.get('ca125') else row['name'], **a, 'conditions': row['conditions'],
                                         'rate': row.get('rate') or [], 'rate_mode': row.get('rate_mode'), 'notes': notes,
-                                        'transcription': row.get('transcription', 'text_layer'), 'automatic': bool(row.get('rule')),
+                                        'transcription': row.get('transcription', 'text_layer'), 'automatic': rule_active,
                                         'citation': self.citation(row), 'facts': facts, 'review': review,
                                         'scope': 'Đối chiếu điều kiện riêng của dịch vụ theo nguồn; chưa xác nhận mức hưởng cá nhân, giá hay phạm vi hợp đồng của bệnh viện.'})
             base['citations'].append(self.citation(row))
             if single:
                 base['state'] = {'lab': {'id': sid, 'facts': facts, 'case': case, 'pending': a.get('pending'), 'date': today.isoformat(),
                                          'unread': unread, 'doubt': doubt}}
+                if facts.get('ca125'):
+                    base['state']['lab']['assay'] = 'ca125'
         statuses = [r['status'] for r in base['lab_results']]
         base['status'] = 'needs_info' if 'needs_info' in statuses or 'needs_confirmation' in statuses else 'answered'
         base['answer'] = '\n\n'.join(r['name'] + ': ' + r['conclusion'] for r in base['lab_results'])
@@ -607,6 +715,14 @@ class LabLookup:
         continuation = not named or has(q, r'^(?:con|vay|neu|the|lan truoc|lan nay)\b')
         same = prev.get('id') == sid and continuation and not has(q, NEW_CASE)
         f = dict(prev.get('facts', {})) if same else {}
+        if sid == 'tumor_markers':
+            if has(q, OTHER_MARKER):
+                return ({'multiple_markers': True} if has(q, CA125) else {}), False, [], False
+            if has(q, CA125) or (not named and prev.get('assay') == 'ca125'):
+                f['ca125'] = True
+                extract_ca125(message, f)
+                return f, True, [], same
+            return {}, False, [], False
         errors = []
         case = bool(prev.get('case')) if same else False
         if same and q in YES_NO:
@@ -841,6 +957,12 @@ class LabLookup:
 
         def result(status, text, pending=None, highlight=()):
             return {'status': status, 'conclusion': text, 'reasons': reasons, 'pending': pending, 'highlight': list(highlight)}
+        if sid == 'tumor_markers':
+            if f.get('ca125'):
+                return evaluate_ca125(f, result)
+            if f.get('multiple_markers'):
+                return result('conditions_only', 'CA 125 có nhánh riêng tại điểm a và b. Khi hỏi nhiều dấu ấn, '
+                              'cần đối chiếu từng xét nghiệm với bệnh cảnh và mục đích tương ứng. Bác sĩ có thể hỏi riêng CA 125.')
         if rule == 'gene':
             return self.evaluate_gene(row, f, case, result, reasons)
         if rule == 'scope':

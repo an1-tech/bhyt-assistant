@@ -20,7 +20,8 @@ Luồng thuốc không đổi. Không cần API key và không gọi mô hình n
 | `hba1c` | Định lượng HbA1c | So mục đích, đã chẩn đoán xác định đái tháo đường hay chưa, và khoảng cách với lần trước. |
 | `gene` | Đột biến gen EGFR, Her 2, BRAF, KRAS | So bệnh với phạm vi của dòng và mục đích “chẩn đoán đột biến gen trong điều trị”. |
 | `scope` | Định lượng SCC | Chỉ so bệnh với danh sách của dòng. Mô bệnh học tế bào vảy và mục đích để người đọc đối chiếu. |
-| không có luật | 35 dòng còn lại | Trích nguyên văn và nói rõ “chưa tự đối chiếu ca bệnh”. Không bao giờ kết luận “khớp”. |
+| CA 125 | Một xét nghiệm trong dòng chung chỉ điểm khối u | So mục đích với bệnh cảnh ở điểm a hoặc b. Khi hỏi riêng về tần suất, nêu giới hạn của dòng nguồn. Các dấu ấn còn lại trong dòng vẫn tra nguyên văn. |
+| không có luật | 34 dòng còn lại | Trích nguyên văn và nói rõ “chưa tự đối chiếu ca bệnh”. Không bao giờ kết luận “khớp”. |
 
 Dòng chép từ bản scan không bao giờ có luật tự động, vì phần chữ chưa được máy kiểm lại.
 
