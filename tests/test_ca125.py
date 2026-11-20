@@ -1,5 +1,7 @@
 import unittest
+from unittest.mock import Mock, patch
 
+from chat_assist import ChatAssistant
 from engine import Corpus
 
 
@@ -37,6 +39,13 @@ class CA125ChatTests(unittest.TestCase):
             row = self.ask(question, case)['lab_results'][0]
             self.assertEqual(row['status'], 'needs_review')
             self.assertIn(phrase, row['conclusion'])
+
+    def test_source_bound_answer_with_ai_enabled(self):
+        provider = Mock(side_effect=AssertionError('Unexpected external call'))
+        with patch('chat_assist.enabled', return_value=True):
+            reply = ChatAssistant(self.corpus, provider).respond('CA125 để chẩn đoán ung thư buồng trứng')
+        provider.assert_not_called()
+        self.assertEqual(reply['lab_results'][0]['status'], 'source_conditions_match')
 
     def test_surveillance_and_uncertain_cases(self):
         row = self.ask('CA 125 theo dõi sau điều trị ung thư buồng trứng, lần trước cách 30 ngày')['lab_results'][0]

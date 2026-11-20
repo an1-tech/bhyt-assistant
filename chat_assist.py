@@ -122,7 +122,8 @@ class ChatAssistant:
         # All validation, privacy gates and structured clinical confirmations
         # run locally before any network request.
         result = self.corpus.converse(message, clean_state, as_of, confirm)
-        if not enabled() or result.get('lab_guidance'):
+        if (not enabled() or result.get('lab_guidance')
+                or any(row.get('facts', {}).get('ca125') for row in result.get('lab_results', []))):
             return result
         if (not isinstance(message, str) or not 0 < len(message.strip()) <= 3000
                 or private_input(message) or (as_of is not None and as_of != SNAPSHOT)
