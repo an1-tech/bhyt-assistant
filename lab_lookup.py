@@ -318,7 +318,8 @@ class LabLookup:
 
     def route(self, message, state, drug_hits, drug_words=()):
         q = norm(message)
-        matches = self.match_services(q, has(q, r'\b(?:xet nghiem|dinh luong|dich vu|xn)\b'))
+        scc_test = not drug_hits and has(q, r'^scc(?:$| (?:co (?:duoc|bhyt)|duoc|bhyt|thanh toan|chi tra)\b)|\b(?:cea|psa|ca ?125)\b.*\bscc\b|\bscc\b.*\b(?:cea|psa|ca ?125)\b')
+        matches = self.match_services(q, scc_test or has(q, r'\b(?:xet nghiem|dinh luong|dich vu|xn)\b'))
         named = matches[0]
         row_route = self._row_route(message, state, drug_hits, drug_words, matches)
         parts = re.split(r'[,;/+]', message)
@@ -331,6 +332,12 @@ class LabLookup:
             route['ids'] = [sid for sid in route['ids'] if sid in named]
             if guide['topic'] == 'payment_topic':
                 route['ids'] = guide['group']['rows']
+            elif guide['topic'] == 'markers':
+                route['ids'] = ['tumor_markers']
+            elif guide['topic'] == 'molecular':
+                route['ids'] = ['egfr', 'kras', 'braf', 'her2']
+            elif guide['topic'] == 'panel':
+                route['ids'] = []
             both = drug_hits and has(q, r'\b(?:ca thuoc|va thuoc|va xet nghiem)\b')
             route['kind'] = 'mixed' if both else 'lab'
             return route
@@ -534,6 +541,8 @@ class LabLookup:
             elif confirmed and a['status'] in ('source_conditions_match', 'source_condition_not_met'):
                 a = {**a, 'conclusion': 'Theo các dữ kiện bạn vừa xác nhận: ' + a['conclusion'][0].lower() + a['conclusion'][1:]}
             notes = []
+            if sid == 'tumor_markers' and has(norm(message), r'\b(?:tam soat|sang loc)\b'):
+                notes.append('Dòng này quy định chẩn đoán và theo dõi theo từng nhánh. Riêng với sàng lọc người chưa có triệu chứng, cần kiểm tra chương trình và căn cứ thanh toán áp dụng.')
             if sid in route.get('loose', []) and row.get('name_note'):
                 notes.append(row['name_note'])
             if row.get('transcription') == 'scan_read':
@@ -623,7 +632,12 @@ class LabLookup:
             case = True
         # The question names a method or test other than the one this row is about.
         foreign = bool(row.get('foreign') and has(q, row['foreign']))
-        if generic and not case_requested and not (row.get('special') and has(q, row['special'])) and not has(q, r'\b(?:tam soat|sang loc|ngs|pcr|panel|gia|ty le|phan tram)\b'):
+        if row.get('rule') == 'gene':
+            if sid == 'her2' and has(q, r'\b(?:ish|cish|sish|fish|ihc|lai tai cho|hoa mo mien dich)\b'):
+                f['non_mutation_method'] = True
+            if has(q, r'\b(?:chi (?:de |nham )?tien luong|tien luong don thuan)\b'):
+                f['prognosis_only'] = True
+        if generic and not case_requested and not (f.get('non_mutation_method') or f.get('prognosis_only')) and not (row.get('special') and has(q, row['special'])) and not has(q, r'\b(?:tam soat|sang loc|ngs|pcr|panel|gia|ty le|phan tram)\b'):
             return ({'foreign_method': True} if foreign else {}), False, [], same
         clauses = clause_list(message)
         if row.get('rule') == 'hba1c':
@@ -896,6 +910,10 @@ class LabLookup:
     @staticmethod
     def evaluate_gene(row, f, case, result, reasons):
         name, scope, label = row['name'], row['scope'], row['scope_label']
+        if f.get('non_mutation_method'):
+            return result('needs_review', 'Dòng HER2 này quy định xét nghiệm đột biến gen. IHC đánh giá biểu hiện protein; ISH/FISH có thể đánh giá khuếch đại gen. Cần tên và mã kỹ thuật ghi trên phiếu để đối chiếu riêng.')
+        if f.get('prognosis_only'):
+            return result('needs_review', 'Mục đích đang hỏi là tiên lượng đơn thuần. Dòng nguồn quy định chẩn đoán đột biến gen trong điều trị; chưa đủ căn cứ xác nhận chi trả cho mục đích này.')
         special = (row.get('special_note') or 'Dòng này không quy định cụ thể phương pháp, bệnh phẩm, số lần lặp lại hay giá/tỷ lệ.') + ' Cần đối chiếu đúng dịch vụ và nguồn bổ sung; chưa kết luận cho chi tiết vừa hỏi.'
         if f.get('special_question'):
             return result('needs_review', special)

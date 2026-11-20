@@ -34,7 +34,16 @@ class LabGuidance:
         ids = [sid for sid, test in self.tests.items() if contains(q, test['aliases'])
                or (test.get('code') and contains(q, [test['code'].replace('.', ' ')]))]
         explicit = contains(q, LAB_WORDS)
-        if ids and re.search(r'\b(?:khong phai|thay vi|khong lam) (?:xet nghiem )?(?:ana|ast|alt|got|gpt|ggt|glucose|creatinin)\b', q):
+        psa_ids = ('psa_total', 'psa_free')
+        previous_psa = prev.get('topic') == 'tests' and bool(set(prev.get('tests', ())) & set(psa_ids))
+        if contains(q, ('psa',)) or (previous_psa and q in ('tu do', 'toan phan')):
+            if contains(q, ('pet ct', 'chup pet')):
+                return None
+            variants = [sid for sid, term in zip(psa_ids, ('toan phan', 'tu do')) if contains(q, (term,))]
+            if not variants and not any(sid in ids for sid in psa_ids):
+                variants = list(psa_ids)
+            ids = list(dict.fromkeys(ids + variants))
+        if ids and re.search(r'\b(?:khong phai|thay vi|khong lam) (?:xet nghiem )?(?:ana|ast|alt|got|gpt|ggt|glucose|creatinin|psa)\b', q):
             return {'topic': 'clarify_test'}
         # Glucose is also an infusion. A laboratory value in a medicine question
         # is context, not another ordered service.
@@ -53,10 +62,23 @@ class LabGuidance:
         if existing and existing['kind'] in ('renal', 'ambiguous_egfr') and 'egfr' in q:
             return None
         listed = any(piece in self.tests[sid]['aliases'] for piece in list_items for sid in ids)
+        listed = listed or any(re.match(r'^psa(?:$| (?:co|bhyt|duoc|toan phan|tu do)\b)', piece) for piece in list_items)
+        if not ids and not drugs and set(named) <= {'gene_sequencing'} and contains(q, ('ngs', 'panel da gen', 'panel nhieu gen')) and contains(q, ('ung thu', 'u dac', 'khoi u')):
+            return {'topic': 'panel'}
+        if not ids and not named and not drugs:
+            molecular = contains(q, ('sinh hoc phan tu', 'xet nghiem gen', 'xet nghiem dot bien gen', 'xet nghiem phan tu'))
+            if molecular and contains(q, ('ung thu', 'ung buou', 'dieu tri dich', 'dot bien gen')):
+                return {'topic': 'molecular'}
+        marker_group = contains(q, ('tumor markers', 'tumor marker', 'dau an khoi u', 'chi diem khoi u', 'dau an ung thu'))
+        if marker_group and not ids and not drugs and set(named) <= {'tumor_markers'}:
+            return {'topic': 'markers'}
         if named and (not ids or not (listed or re.search(r'\b(?:va|kem|cung)\b', q))):
             return None
         if ids:
-            return {'topic': 'tests', 'tests': ids}
+            scope = prev.get('scope') if previous_psa and q in ('tu do', 'toan phan', 'psa tu do', 'psa toan phan') else None
+            return {'topic': 'tests', 'tests': ids, 'scope': scope}
+        if previous_psa and re.fullmatch(r'(?:de )?(?:theo doi sau dieu tri|danh gia nghi ngo ung thu)(?: tuyen tien liet)?', q):
+            return {'topic': 'tests', 'tests': [sid for sid in prev['tests'] if sid in psa_ids]}
         if contains(q, ('men gan',)) and not named:
             return {'topic': 'liver_panel'}
         group_question = re.search(r'\b(?:cac|nhung|nhom) (?:chi dinh )?(?:xet nghiem|xn)\b|\b(?:xet nghiem|xn) (?:gi|nao|can|chi dinh|trong|khi)\b|\bchi dinh xet nghiem (?:cho|trong|ung thu)\b', q)
@@ -92,7 +114,19 @@ class LabGuidance:
         topic = route['topic']
         memory = {'topic': topic}
         followups = []
-        if topic == 'clarify_test':
+        if topic == 'markers':
+            lead = 'Bác sĩ muốn tra dấu ấn nào, cho loại ung thư và mục đích nào?'
+            add('Năm dấu ấn chung một dòng BHYT', 'Dòng dưới đây quy định từng nhánh cho CEA, CA 125, CA 15-3, CA 19-9 và CA 72-4. SCC có dòng riêng. PSA cần tra theo kỹ thuật toàn phần hoặc tự do.')
+            add('Nếu mục đích là tầm soát', 'Việc một dấu ấn được dùng để theo dõi ung thư đã chẩn đoán chưa xác lập quyền lợi sàng lọc cho người chưa có triệu chứng.', ['oncology', 'law'])
+            followups = ['Định lượng SCC', 'PSA để tầm soát có BHYT?', 'CA 19-9 có điều kiện BHYT gì?']
+        elif topic == 'molecular':
+            lead = 'BHYT quy định riêng cho từng xét nghiệm đột biến gen, theo loại ung thư và mục đích trong điều trị.'
+            add('Chọn đúng kỹ thuật', 'Các dòng dưới đây dành cho EGFR, KRAS, BRAF và HER2. Với HER2, cần xác định phiếu chỉ định ghi tìm đột biến, nhuộm IHC hay lai tại chỗ ISH/FISH. Mục đích tiên lượng đơn thuần cần căn cứ riêng.', ['law'])
+            followups = ['Điều kiện xét nghiệm đột biến gen EGFR', 'Xét nghiệm giải trình tự gen', 'Panel NGS cho u đặc có BHYT?']
+        elif topic == 'panel':
+            lead = 'Chưa đủ căn cứ xác nhận BHYT cho cả panel đa gen đang hỏi.'
+            add('Thông tin cần đối chiếu', 'Bác sĩ cho biết tên hoặc mã panel, loại u, mẫu xét nghiệm và mục đích. Dòng thanh toán cho một gen chưa xác lập thanh toán cho cả panel. Dòng giải trình tự gen tại STT 75 của Danh mục 2 quy định các trường hợp huyết học cụ thể.', ['sequencing', 'law'])
+        elif topic == 'clarify_test':
             lead = 'Bác sĩ muốn tra kỹ thuật nào trên phiếu chỉ định?'
             add('Xác nhận tên', 'Hãy gửi riêng tên kỹ thuật cần đối chiếu. Điều kiện của một kỹ thuật có thể khác với kỹ thuật vừa được loại trừ.')
         elif topic == 'liver_panel':
@@ -122,6 +156,8 @@ class LabGuidance:
             profiles = list(dict.fromkeys(t['profile'] for t in tests))
             labels = ', '.join(t['name'] for t in tests)
             lead = 'Có thể được BHYT chi trả có điều kiện: ' + labels + '. Chưa đủ căn cứ xác nhận thanh toán cho ca cụ thể tại Vinmec.'
+            if set(ids) == {'psa_total', 'psa_free'}:
+                lead = 'PSA có thể được BHYT chi trả tùy chỉ định và kỹ thuật. Có hai mã để đối chiếu theo phiếu: PSA toàn phần và PSA tự do. Chưa đủ căn cứ xác nhận chi trả cho lượt khám tại Vinmec.'
             if 'excluded' in profiles:
                 lead = ('Theo Danh mục 3 của 17/VBHN-BYT, quỹ tạm thời chưa thanh toán ANA 17 profile test.'
                         if len(profiles) == 1 else 'Các kỹ thuật được hỏi có quy định khác nhau. Cần đối chiếu riêng từng mục.')
@@ -142,8 +178,9 @@ class LabGuidance:
                     add('Xác nhận kỹ thuật', 'Các mã đã đối chiếu thuộc xét nghiệm máu. Bác sĩ cho biết loại mẫu, phương pháp và tên dịch vụ tại cơ sở để tra đúng mã.')
                     continue
                 codes = ', '.join(t['name'] + ' · ' + t['code'] for t in group)
-                add('Căn cứ nhận diện dịch vụ', codes + '. Danh mục BHYT công khai của một cơ sở tại Thái Nguyên có các mã này. Mã và phạm vi thanh toán tại Vinmec cần xác nhận riêng.', ['catalog'])
                 item = self.data['profiles'][profile]
+                area = item.get('catalog_area', 'Thái Nguyên')
+                add('Căn cứ nhận diện dịch vụ', f'{codes}. Danh mục BHYT công khai tại {area} ghi các mã trên. Mã và phạm vi thanh toán tại Vinmec cần xác nhận riêng.', [item.get('catalog', 'catalog')])
                 if profile == 'liver' and contains(q, ('doc tinh thuoc', 'ton thuong gan do thuoc', 'doc tinh gan')):
                     add('Khi nghi tổn thương gan do thuốc', 'AST và ALT giúp mô tả kiểu tổn thương cùng các chỉ số khác. Cần đối chiếu tên thuốc, thời điểm dùng và hướng dẫn theo dõi của thuốc cụ thể trước khi xác định lịch xét nghiệm.', ['toxicity'])
                 else:
@@ -187,6 +224,9 @@ class LabGuidance:
             candidates = site['rows'] if site else []
             if purpose:
                 candidates = [sid for sid in candidates if sid in purpose['rows']]
+            psa_relevant = site and site.get('related_test') == 'PSA' and (not purpose or purpose['label'] != 'lựa chọn điều trị')
+            if psa_relevant:
+                add('PSA trong máu', 'PSA có thể hỗ trợ đánh giá bệnh tuyến tiền liệt và theo dõi sau điều trị. Cần phân biệt mục đích sàng lọc và xác định kỹ thuật trên phiếu khi tra quyền lợi tại cơ sở.', ['psa_clinical', 'psa_catalog'])
             missing_source = False
             for sid in candidates:
                 row = labs.services.get(sid)
@@ -201,7 +241,7 @@ class LabGuidance:
                     'links':[{'label':row['locator'], 'url':row['viewer_url']}]})
             if missing_source:
                 add('Nguồn cần kiểm tra lại', 'Một hoặc nhiều dòng của nhóm này đang thiếu bản nguồn đã kiểm tra. Chỉ các dòng có nguồn đối chiếu được mới hiển thị.')
-            if site and not candidates and not (purpose and purpose['label'] == 'sàng lọc'):
+            if site and not candidates and not psa_relevant and not (purpose and purpose['label'] == 'sàng lọc'):
                 add('Phạm vi bộ tra cứu','Chưa có mục đã ánh xạ cho tổ hợp loại ung thư và mục đích này. Cần tên kỹ thuật để tra riêng.')
             if not site and not purpose and not ambiguous and q.endswith(('ung thu', 'ung buou')):
                 example = labs.services.get('egfr')
@@ -214,6 +254,8 @@ class LabGuidance:
                 add('Tra theo nhóm ' + site['label'], 'Đây là các dòng nguồn để đối chiếu. Cần kiểm tra mô bệnh học, mục đích và phương pháp của từng kỹ thuật trước khi áp dụng cho ca cụ thể.')
             followups = (['Ung thư phổi', 'Ung thư vú', 'Ung thư đại trực tràng'] if not site else
                          ['Để chọn điều trị', 'Để theo dõi', 'Để sàng lọc'] if not purpose else [])
+            if psa_relevant:
+                followups.append('PSA để tầm soát có BHYT?' if purpose and purpose['label'] == 'sàng lọc' else 'Điều kiện BHYT cho PSA')
         return {'domain':'lab', 'mode':'local', 'status':'lab_guidance', 'answer':lead,
                 'lab_guidance':sections, 'state':{'lab_guide':memory}, 'results':[], 'lab_results':[],
                 'citations':[], 'source_checked_as_of':self.data['checked_on'], 'suggested_followups':followups,

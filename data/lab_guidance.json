@@ -1,6 +1,18 @@
 {
   "checked_on": "2026-11-20",
   "sources": {
+    "sequencing": {
+      "label": "17/VBHN-BYT · Danh mục 2, STT 75, trang 45–46",
+      "url": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/01/17-vbhn-byt.pdf#page=45"
+    },
+    "psa_clinical": {
+      "label": "NCI · PSA trong sàng lọc, đánh giá và theo dõi sau điều trị",
+      "url": "https://www.cancer.gov/types/prostate/psa-fact-sheet"
+    },
+    "psa_catalog": {
+      "label": "An Giang · phụ lục 3 Nghị quyết 78, STT 7395–7396",
+      "url": "https://angiang.gov.vn/sites/default/files/2025/01/tap-tin-dinh-kem/78-nq-signed-pl3kem-theo.pdf#page=746"
+    },
     "toxicity": {
       "label": "AASLD · Tổn thương gan do thuốc",
       "url": "https://www.aasld.org/liver-fellow-network/core-series/back-basics/when-medicine-turns-toxic-hepatotoxic-potential-common"
@@ -47,6 +59,14 @@
     }
   },
   "tests": {
+    "psa_total": {
+      "name": "PSA toàn phần trong máu", "code": "23.0139.1553", "profile": "psa",
+      "aliases": ["psa toan phan", "total psa", "tpsa"]
+    },
+    "psa_free": {
+      "name": "PSA tự do trong máu", "code": "23.0138.1554", "profile": "psa",
+      "aliases": ["psa tu do", "free psa", "fpsa"]
+    },
     "ast": {
       "name": "AST (GOT) máu",
       "aliases": [
@@ -109,6 +129,12 @@
     }
   },
   "profiles": {
+    "psa": {
+      "catalog": "psa_catalog", "catalog_area": "An Giang",
+      "summary": "PSA có thể được dùng để đánh giá bất thường tuyến tiền liệt hoặc theo dõi sau điều trị ung thư tuyến tiền liệt. PSA tăng cũng gặp trong bệnh lành tính. Cần phân biệt với sàng lọc ở người chưa có triệu chứng.",
+      "sources": ["psa_clinical"],
+      "question": "Mục đích là sàng lọc, đánh giá nghi ngờ ung thư hay theo dõi sau điều trị? Phiếu chỉ định ghi PSA toàn phần hay PSA tự do?"
+    },
     "cholestasis": {
       "summary": "Khi phosphatase kiềm (ALP) tăng, GGT có thể giúp bác sĩ đánh giá liệu bất thường có nguồn gốc gan mật.",
       "sources": ["liver"],
@@ -167,6 +193,12 @@
     }
   ],
   "cancer_sites": [
+    {
+      "label": "tuyến tiền liệt",
+      "terms": ["tuyen tien liet", "tien liet tuyen"],
+      "rows": ["pathology"],
+      "related_test": "PSA"
+    },
     {
       "label": "gan",
       "terms": ["ung thu gan", "u gan"],

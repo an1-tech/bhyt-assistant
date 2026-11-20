@@ -26,6 +26,42 @@ class LabGuidanceTests(unittest.TestCase):
                 self.assertIn('Chưa đủ căn cứ', result['answer'])
         self.assertEqual(self.ask('Mã 23.0020.1493 có BHYT?')['state']['lab_guide']['tests'], ['ast'])
 
+    def test_psa_and_other_markers_in_one_question(self):
+        for question in ('CEA, SCC và PSA có BHYT không?', 'CEA, SCC, PSA có BHYT không?'):
+            result = self.ask(question)
+            self.assertEqual(set(result['state']['lab_guide']['tests']), {'psa_total', 'psa_free'})
+            self.assertEqual({r['id'] for r in result['lab_results']}, {'tumor_markers', 'scc'})
+            self.assertIn('angiang.gov.vn', str(result['lab_guidance']))
+        self.assertEqual(self.ask('SCC có BHYT?')['lab_results'][0]['id'], 'scc')
+        screening = self.ask('PSA để tầm soát có BHYT không?')
+        free = self.ask('Tự do', screening)
+        self.assertEqual(free['state']['lab_guide']['tests'], ['psa_free'])
+        self.assertIn('Chưa đủ căn cứ', free['answer'])
+        self.assertIn('23.0138.1554', str(free['lab_guidance']))
+        self.assertNotIn('23.0139.1553', str(free['lab_guidance']))
+        self.assertNotIn('lab_guide', self.ask('PET/CT khi PSA tăng')['state'])
+        prostate = self.ask('Các xét nghiệm trong ung thư tuyến tiền liệt để theo dõi?')
+        self.assertTrue(any('PSA' in text for text in prostate['suggested_followups']))
+
+    def test_molecular_and_marker_navigation(self):
+        result = self.ask('Các xét nghiệm sinh học phân tử và đột biến gen trong ung thư?')
+        self.assertEqual({r['id'] for r in result['lab_results']}, {'egfr', 'kras', 'braf', 'her2'})
+        panel = self.ask('Giải trình tự gen bằng panel NGS cho u đặc được chi trả không?')
+        self.assertIn('Chưa đủ căn cứ', panel['answer'])
+        self.assertFalse(panel['lab_results'])
+        markers = self.ask('Các xét nghiệm chỉ điểm khối u')
+        self.assertEqual(markers['lab_results'][0]['id'], 'tumor_markers')
+        self.assertIn('SCC', str(markers['suggested_followups']))
+        self.assertIn('sàng lọc', str(self.ask('CA 125 để tầm soát ung thư buồng trứng')['lab_results'][0]['notes']))
+
+    def test_method_and_prognostic_purpose(self):
+        cases = [('HER2 bằng ISH cho bệnh nhân ung thư vú đang điều trị hôm nay', 'khuếch đại'),
+                 ('BRAF chỉ để tiên lượng cho người bệnh ung thư đại trực tràng đang điều trị hôm nay', 'tiên lượng')]
+        for question, wording in cases:
+            row = self.ask(question)['lab_results'][0]
+            self.assertEqual(row['status'], 'needs_review')
+            self.assertIn(wording, row['conclusion'])
+
     def test_doctors_general_question_and_followups(self):
         question = 'Điều kiện thanh toán bảo hiểm y tế cho xét nghiệm'
         for suffix in ('', ' : câu trả lời yes or no, và trong những trường hợp nào'):
